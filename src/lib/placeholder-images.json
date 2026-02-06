@@ -1,3 +1,88 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "prod_img_1",
+      "description": "A stylish and modern t-shirt.",
+      "imageUrl": "https://images.unsplash.com/photo-1622445272461-c6580cab8755?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx0c2hpcnQlMjBtb2RlbHxlbnwwfHx8fDE3NzAzODgxMTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tshirt model"
+    },
+    {
+      "id": "prod_img_2",
+      "description": "Side view of a modern t-shirt.",
+      "imageUrl": "https://images.unsplash.com/photo-1769082864453-f44dcd559372?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx0c2hpcnQlMjBzaWRlfGVufDB8fHx8MTc3MDM4ODExOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tshirt side"
+    },
+    {
+      "id": "prod_img_3",
+      "description": "High-performance laptop for professionals.",
+      "imageUrl": "https://images.unsplash.com/photo-1589362281138-e3f7ebe47f1a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bGFwdG9wJTIwZGVza3xlbnwwfHx8fDE3NzAzODgxMTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "laptop desk"
+    },
+    {
+      "id": "prod_img_4",
+      "description": "Open laptop showing keyboard.",
+      "imageUrl": "https://images.unsplash.com/photo-1551533257-19e98f46a429?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxsYXB0b3AlMjBrZXlib2FyZHxlbnwwfHx8fDE3NzAzMTYxMDF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "laptop keyboard"
+    },
+    {
+      "id": "prod_img_5",
+      "description": "A captivating hardcover book.",
+      "imageUrl": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxib29rJTIwY292ZXJ8ZW58MHx8fHwxNzcwMzMxNTk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "book cover"
+    },
+    {
+      "id": "prod_img_6",
+      "description": "An open book showing its pages.",
+      "imageUrl": "https://images.unsplash.com/photo-1513185041617-8ab03f83d6c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxib29rJTIwcGFnZXN8ZW58MHx8fHwxNzcwMzg4MTE4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "book pages"
+    },
+    {
+      "id": "prod_img_7",
+      "description": "An elegant and sophisticated wristwatch.",
+      "imageUrl": "https://images.unsplash.com/photo-1610230099906-7ad016cf5cf9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx3YXRjaCUyMGNsb3NldXB8ZW58MHx8fHwxNzcwMzg4MTE4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "watch closeup"
+    },
+    {
+      "id": "prod_img_8",
+      "description": "A comfortable and stylish sofa.",
+      "imageUrl": "https://images.unsplash.com/photo-1653340908569-b7b4af7353d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzb2ZhJTIwbGl2aW5ncm9vbXxlbnwwfHx8fDE3NzAzODgxMTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sofa livingroom"
+    },
+    {
+      "id": "prod_img_9",
+      "description": "Detail of the fabric on a modern sofa.",
+      "imageUrl": "https://images.unsplash.com/photo-1528459105426-b9548367069b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxmYWJyaWMlMjB0ZXh0dXJlfGVufDB8fHx8MTc3MDM2NTgwMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "fabric texture"
+    },
+    {
+      "id": "prod_img_10",
+      "description": "Wireless over-ear headphones.",
+      "imageUrl": "https://images.unsplash.com/photo-1667597366964-99fc56754b81?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxoZWFkcGhvbmVzJTIwcHJvZHVjdHxlbnwwfHx8fDE3NzAzODgxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "headphones product"
+    },
+    {
+      "id": "prod_img_11",
+      "description": "A sleek and modern coffee maker.",
+      "imageUrl": "https://images.unsplash.com/photo-1515442094343-9a10f85a4b79?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxjb2ZmZWUlMjBtYWtlcnxlbnwwfHx8fDE3NzAzMDY2NDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coffee maker"
+    },
+    {
+      "id": "prod_img_12",
+      "description": "A durable and spacious backpack.",
+      "imageUrl": "https://images.unsplash.com/photo-1673505705687-dffbfd02b613?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxiYWNrcGFjayUyMHRyYXZlbHxlbnwwfHx8fDE3NzAzNzg5MDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "backpack travel"
+    },
+    {
+      "id": "prod_img_13",
+      "description": "Classic denim jeans.",
+      "imageUrl": "https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxkZW5pbSUyMGplYW5zfGVufDB8fHx8MTc3MDMyMTk2NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "denim jeans"
+    },
+    {
+      "id": "prod_img_14",
+      "description": "A pair of stylish sneakers.",
+      "imageUrl": "https://images.unsplash.com/photo-1607615730926-ac8b276ef46e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzbmVha2VycyUyMGxpZmVzdHlsZXxlbnwwfHx8fDE3NzAzODgxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sneakers lifestyle"
+    }
+  ]
 }
