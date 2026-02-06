@@ -4,12 +4,11 @@ import {
   useFirestore,
   useCollection,
   useMemoFirebase,
-  setDocumentNonBlocking,
   updateDocumentNonBlocking,
   useDoc,
 } from '@/firebase';
 import { collection, doc, writeBatch } from 'firebase/firestore';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import type { Task } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
@@ -63,9 +62,9 @@ export default function TaskList() {
   }, [tasks]);
 
   const allTasksCompletedToday = useMemo(() => sortedTasks.every(t => t.completed), [sortedTasks]);
+  
   const lastCompletedTask = useMemo(() => {
       if (!allTasksCompletedToday || !sortedTasks.length) return null;
-      // Find the task with the most recent unlock time
       return sortedTasks.reduce((latest, current) => {
           if (!latest.nextTaskUnlockTime || (current.nextTaskUnlockTime && new Date(current.nextTaskUnlockTime) > new Date(latest.nextTaskUnlockTime))) {
               return current;
@@ -74,21 +73,69 @@ export default function TaskList() {
       });
   }, [allTasksCompletedToday, sortedTasks]);
 
-  useEffect(() => {
-    if (allTasksCompletedToday && lastCompletedTask?.nextTaskUnlockTime) {
-      setUnlockTimeMessage(`Next tasks unlock at: ${new Date(lastCompletedTask.nextTaskUnlockTime).toLocaleString()}`);
+  const handleCompleteTask = useCallback((taskId: string) => {
+    if (!user || !userData || !firestore) return;
+    
+    const task = sortedTasks.find(t => t.id === taskId);
+    if (!task || task.completed) return; // Already completed or doesn't exist
+
+    const timeElapsed = task.taskStartTime ? (new Date().getTime() - new Date(task.taskStartTime).getTime()) / 1000 : 0;
+    if (timeElapsed < TASK_DURATION_SECONDS) {
+        toast({
+            variant: "destructive",
+            title: "Timer Not Finished",
+            description: "Please wait for the countdown to complete.",
+        });
+        return;
     }
-  }, [allTasksCompletedToday, lastCompletedTask]);
+
+    const taskRef = doc(firestore, 'users', user.uid, 'tasks', taskId);
+    
+    const currentTaskIndex = sortedTasks.findIndex(t => t.id === taskId);
+    const isLastTask = currentTaskIndex === sortedTasks.length - 1;
+
+    const updates: Partial<Task> = { completed: true };
+    
+    if (isLastTask) {
+        const unlockTime = new Date();
+        unlockTime.setHours(unlockTime.getHours() + 24);
+        const batch = writeBatch(firestore);
+        sortedTasks.forEach(t => {
+            const singleTaskRef = doc(firestore, 'users', user.uid, 'tasks', t.id);
+            batch.update(singleTaskRef, { nextTaskUnlockTime: unlockTime.toISOString() });
+        });
+        batch.commit().catch(e => console.error("Failed to set unlock times", e));
+    }
+
+    updateDocumentNonBlocking(taskRef, updates);
+
+    const newBalance = (userData.walletBalance || 0) + task.reward;
+    const completedTasksCount = sortedTasks.filter(t => t.completed).length + 1;
+    const newTaskProgress = (completedTasksCount / sortedTasks.length) * 100;
+    
+    if(userDocRef) {
+        updateDocumentNonBlocking(userDocRef, { walletBalance: newBalance, taskProgress: newTaskProgress });
+    }
+    
+    toast({
+        title: "Task Completed!",
+        description: `You've earned $${task.reward.toFixed(2)}!`,
+    });
+    
+    setActiveTimerTaskId(null);
+
+  }, [user, userData, firestore, sortedTasks, toast, userDocRef]);
 
 
-  // Initialize tasks for a new user
+  // Initialize or reset tasks
   useEffect(() => {
-    if (user && !areTasksLoading && tasks?.length === 0) {
+    if (!user || !firestore || areTasksLoading) return;
+
+    if (tasks?.length === 0) {
       const batch = writeBatch(firestore);
       TASK_DEFINITIONS.forEach(taskDef => {
         const taskRef = doc(firestore, 'users', user.uid, 'tasks', taskDef.id);
-        const newTask: Task = {
-          id: taskDef.id,
+        const newTask: Omit<Task, 'id'> = {
           userId: user.uid,
           name: taskDef.name,
           completed: false,
@@ -97,28 +144,41 @@ export default function TaskList() {
         batch.set(taskRef, newTask);
       });
       batch.commit().catch(e => console.error("Failed to initialize tasks", e));
+    } else if (allTasksCompletedToday && lastCompletedTask?.nextTaskUnlockTime && new Date() > new Date(lastCompletedTask.nextTaskUnlockTime)) {
+        const batch = writeBatch(firestore);
+        sortedTasks.forEach(task => {
+            const taskRef = doc(firestore, 'users', user.uid, 'tasks', task.id);
+            batch.update(taskRef, { completed: false, nextTaskUnlockTime: null, taskStartTime: null });
+        });
+        batch.commit().catch(e => console.error("Failed to reset tasks", e));
     }
-  }, [user, tasks, areTasksLoading, firestore]);
-  
-  // Reset daily tasks if they are unlocked
+  }, [user, tasks, areTasksLoading, firestore, allTasksCompletedToday, lastCompletedTask, sortedTasks]);
+
+  // Check for in-progress task on load
   useEffect(() => {
-      if(allTasksCompletedToday && lastCompletedTask?.nextTaskUnlockTime && new Date() > new Date(lastCompletedTask.nextTaskUnlockTime)){
-          const batch = writeBatch(firestore);
-          sortedTasks.forEach(task => {
-              const taskRef = doc(firestore, 'users', user.uid, 'tasks', task.id);
-              batch.update(taskRef, { completed: false, nextTaskUnlockTime: null, taskStartTime: null });
-          });
-          batch.commit().catch(e => console.error("Failed to reset tasks", e));
-      }
-  }, [allTasksCompletedToday, lastCompletedTask, firestore, user, sortedTasks]);
+    if (areTasksLoading || !tasks || activeTimerTaskId) return;
 
+    const inProgressTask = sortedTasks.find(t => t.taskStartTime && !t.completed);
+    if (inProgressTask) {
+        const startTime = new Date(inProgressTask.taskStartTime!).getTime();
+        const timeElapsed = (new Date().getTime() - startTime) / 1000;
+        const remainingTime = TASK_DURATION_SECONDS - timeElapsed;
 
-  // Timer countdown effect
+        if (remainingTime <= 0) {
+            handleCompleteTask(inProgressTask.id);
+        } else {
+            setActiveTimerTaskId(inProgressTask.id);
+            setCountdown(Math.ceil(remainingTime));
+        }
+    }
+  }, [tasks, areTasksLoading, handleCompleteTask, activeTimerTaskId, sortedTasks]);
+
+  // Timer countdown effect, triggers auto-completion
   useEffect(() => {
     if (!activeTimerTaskId) return;
 
     if (countdown <= 0) {
-      setActiveTimerTaskId(null); // Timer finished, but don't auto-complete
+      handleCompleteTask(activeTimerTaskId);
       return;
     }
 
@@ -127,10 +187,31 @@ export default function TaskList() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [activeTimerTaskId, countdown]);
+  }, [activeTimerTaskId, countdown, handleCompleteTask]);
+
+  // Daily completion message effect
+  useEffect(() => {
+    if (allTasksCompletedToday && lastCompletedTask?.nextTaskUnlockTime) {
+      setUnlockTimeMessage(`Next tasks unlock at: ${new Date(lastCompletedTask.nextTaskUnlockTime).toLocaleString()}`);
+    }
+  }, [allTasksCompletedToday, lastCompletedTask]);
+
+  // Anti-tab-switch notification
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && activeTimerTaskId) {
+        toast({
+          title: 'Timer is still running',
+          description: "Your progress is saved, no need to stay on this tab.",
+        });
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [activeTimerTaskId, toast]);
 
   const handleStartTask = (task: Task) => {
-    if (activeTimerTaskId || allTasksCompletedToday) return;
+    if (activeTimerTaskId || allTasksCompletedToday || !user || !firestore) return;
 
     const currentTaskIndex = TASK_DEFINITIONS.findIndex(t => t.id === task.id);
     const previousTask = currentTaskIndex > 0 ? sortedTasks[currentTaskIndex - 1] : null;
@@ -150,45 +231,8 @@ export default function TaskList() {
     
     setCountdown(TASK_DURATION_SECONDS);
     setActiveTimerTaskId(task.id);
-    const taskRef = doc(firestore, 'users', user!.uid, 'tasks', task.id);
+    const taskRef = doc(firestore, 'users', user.uid, 'tasks', task.id);
     updateDocumentNonBlocking(taskRef, { taskStartTime: new Date().toISOString() });
-  };
-  
-  const handleCompleteTask = (task: Task) => {
-      if (!user || !userData) return;
-      
-      const taskRef = doc(firestore, 'users', user.uid, 'tasks', task.id);
-      
-      // Determine if this is the last task
-      const currentTaskIndex = sortedTasks.findIndex(t => t.id === task.id);
-      const isLastTask = currentTaskIndex === sortedTasks.length - 1;
-
-      const updates: Partial<Task> = { completed: true };
-      
-      if (isLastTask) {
-        const unlockTime = new Date();
-        unlockTime.setHours(unlockTime.getHours() + 24);
-        // Apply unlock time to all tasks
-         const batch = writeBatch(firestore);
-         sortedTasks.forEach(t => {
-             const singleTaskRef = doc(firestore, 'users', user.uid, 'tasks', t.id);
-             batch.update(singleTaskRef, { nextTaskUnlockTime: unlockTime.toISOString() });
-         });
-         batch.commit().catch(e => console.error("Failed to set unlock times", e));
-      }
-
-      updateDocumentNonBlocking(taskRef, updates);
-
-      const newBalance = (userData.walletBalance || 0) + task.reward;
-      const completedTasksCount = sortedTasks.filter(t => t.completed).length + 1;
-      const newTaskProgress = (completedTasksCount / sortedTasks.length) * 100;
-      
-      updateDocumentNonBlocking(userDocRef!, { walletBalance: newBalance, taskProgress: newTaskProgress });
-      
-      toast({
-          title: "Task Completed!",
-          description: `You've earned $${task.reward.toFixed(2)}!`,
-      });
   };
 
   if (isUserLoading || areTasksLoading || isUserDataLoading) {
@@ -219,9 +263,9 @@ export default function TaskList() {
   return (
     <Tabs defaultValue={sortedTasks[firstIncompleteTaskIndex]?.id || TASK_DEFINITIONS[0].id} className="w-full">
       <TabsList className="grid w-full grid-cols-4">
-        {TASK_DEFINITIONS.map(taskDef => {
+        {TASK_DEFINITIONS.map((taskDef, index) => {
           const taskData = sortedTasks.find(t => t.id === taskDef.id);
-          const isLocked = !taskData || (firstIncompleteTaskIndex !== -1 && TASK_DEFINITIONS.findIndex(t => t.id === taskDef.id) > firstIncompleteTaskIndex);
+          const isLocked = !taskData || (firstIncompleteTaskIndex !== -1 && index > firstIncompleteTaskIndex);
 
           return (
             <TabsTrigger key={taskDef.id} value={taskDef.id} disabled={isLocked}>
@@ -236,8 +280,8 @@ export default function TaskList() {
           if (!task) return null;
 
           const isTimerActiveForThisTask = activeTimerTaskId === task.id;
-          const isButtonDisabled = !!activeTimerTaskId || task.completed;
           const isTaskUnlocked = firstIncompleteTaskIndex === TASK_DEFINITIONS.findIndex(t => t.id === taskDef.id);
+          const isButtonDisabled = !!activeTimerTaskId || task.completed || !isTaskUnlocked;
 
           return (
              <TabsContent key={taskDef.id} value={taskDef.id}>
@@ -253,27 +297,26 @@ export default function TaskList() {
                                 <div className="space-y-2">
                                     <Progress value={( (TASK_DURATION_SECONDS - countdown) / TASK_DURATION_SECONDS) * 100} className="w-full"/>
                                     <p className="text-2xl font-mono font-bold">{countdown}s</p>
-                                    <p className="text-muted-foreground text-sm">Please wait for the timer to finish.</p>
+                                    <p className="text-muted-foreground text-sm">You can now switch tabs. Your reward will be claimed automatically.</p>
                                 </div>
                             </>
                         ) : task.completed ? (
-                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> Task Completed!</div>
+                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> Task Completed! You earned ${task.reward.toFixed(2)}.</div>
                         ) : (
-                             <p className="text-muted-foreground">Start the task to earn your reward.</p>
+                             <p className="text-muted-foreground">{isTaskUnlocked ? 'Start the task to earn your reward.' : 'Complete the previous task to unlock this one.'}</p>
                         )}
                     </CardContent>
                     <CardFooter>
-                         {isTimerActiveForThisTask ? (
-                            <Button className="w-full" disabled={countdown > 0} onClick={() => handleCompleteTask(task)}>
-                                {countdown > 0 ? `Complete in ${countdown}s` : 'Claim Reward!'}
-                            </Button>
-                         ) : task.completed ? (
-                            <Button className="w-full" disabled>Completed</Button>
-                         ) : (
-                             <Button className="w-full" disabled={isButtonDisabled || !isTaskUnlocked} onClick={() => handleStartTask(task)}>
-                                { !isTaskUnlocked ? <><Lock className="mr-2 h-4 w-4"/> Locked</> : `Start Task (Earn $${task.reward})`}
-                            </Button>
-                         )}
+                        <Button 
+                            className="w-full" 
+                            disabled={isButtonDisabled} 
+                            onClick={() => handleStartTask(task)}
+                        >
+                            {task.completed ? <><CheckCircle className="mr-2 h-4 w-4"/> Completed</> 
+                            : !isTaskUnlocked ? <><Lock className="mr-2 h-4 w-4"/> Locked</> 
+                            : isTimerActiveForThisTask ? 'Timer Active' 
+                            : `Start Task (Earn $${task.reward.toFixed(2)})`}
+                        </Button>
                     </CardFooter>
                 </Card>
              </TabsContent>
