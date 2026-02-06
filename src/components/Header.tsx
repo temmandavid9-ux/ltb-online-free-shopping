@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { ShoppingCart, User, Search, Package2 } from 'lucide-react';
+import { ShoppingCart, User, Search, Package2, ListChecks, Wallet } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useCart } from '@/context/CartContext';
@@ -24,11 +24,11 @@ export default function Header() {
               <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
                 Home
               </Link>
-              <Link href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-                New Arrivals
+              <Link href="/tasks" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center">
+                <ListChecks className="mr-1 h-4 w-4"/> Tasks
               </Link>
-              <Link href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-                Best Sellers
+              <Link href="/wallet" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center">
+                 <Wallet className="mr-1 h-4 w-4"/> Wallet
               </Link>
             </nav>
           </div>

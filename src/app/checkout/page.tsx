@@ -18,10 +18,11 @@ import {
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
-import { CreditCard, Lock } from 'lucide-react';
-import { useUser, useFirestore, setDocumentNonBlocking, updateDocumentNonBlocking } from '@/firebase';
+import { CreditCard, Lock, Wallet } from 'lucide-react';
+import { useUser, useFirestore, setDocumentNonBlocking, updateDocumentNonBlocking, useDoc, useMemoFirebase } from '@/firebase';
 import { collection, doc, arrayUnion } from 'firebase/firestore';
 import { useEffect } from 'react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 const shippingSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -31,13 +32,14 @@ const shippingSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email.' }),
 });
 
-const paymentSchema = z.object({
-  cardNumber: z.string().regex(/^\d{16}$/, 'Card number must be 16 digits.'),
-  expiry: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, 'Expiry must be in MM/YY format.'),
-  cvc: z.string().regex(/^\d{3,4}$/, 'CVC must be 3 or 4 digits.'),
-});
+// We remove payment schema as we are now using wallet balance
+// const paymentSchema = z.object({
+//   cardNumber: z.string().regex(/^\d{16}$/, 'Card number must be 16 digits.'),
+//   expiry: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, 'Expiry must be in MM/YY format.'),
+//   cvc: z.string().regex(/^\d{3,4}$/, 'CVC must be 3 or 4 digits.'),
+// });
 
-const checkoutSchema = shippingSchema.merge(paymentSchema);
+const checkoutSchema = shippingSchema;
 
 export default function CheckoutPage() {
   const { cart, cartTotal, clearCart } = useCart();
@@ -45,6 +47,9 @@ export default function CheckoutPage() {
   const { toast } = useToast();
   const { user, isUserLoading } = useUser();
   const firestore = useFirestore();
+
+  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
+  const { data: userData, isLoading: isUserDocLoading } = useDoc<any>(userDocRef);
 
   const form = useForm<z.infer<typeof checkoutSchema>>({
     resolver: zodResolver(checkoutSchema),
@@ -54,9 +59,6 @@ export default function CheckoutPage() {
       city: '',
       zip: '',
       email: '',
-      cardNumber: '',
-      expiry: '',
-      cvc: '',
     },
   });
 
@@ -65,12 +67,25 @@ export default function CheckoutPage() {
       toast({ title: "Please login to proceed", variant: "destructive"});
       router.push('/login');
     }
-  }, [user, isUserLoading, router, toast]);
+     if (user && !isUserDocLoading && userData) {
+      form.setValue('name', userData.username || '');
+      form.setValue('email', userData.email || '');
+    }
+  }, [user, isUserLoading, router, toast, userData, isUserDocLoading, form]);
 
   const onSubmit = (values: z.infer<typeof checkoutSchema>) => {
-    if (!user) {
+    if (!user || !userData) {
         toast({ variant: 'destructive', title: 'You must be logged in to place an order.'});
         return;
+    }
+
+    if (userData.walletBalance < cartTotal) {
+      toast({
+        variant: "destructive",
+        title: "Insufficient Funds",
+        description: `Your wallet balance is $${userData.walletBalance.toFixed(2)}, but the order total is $${cartTotal.toFixed(2)}.`,
+      });
+      return;
     }
 
     const ordersCollection = collection(firestore, 'orders');
@@ -90,24 +105,27 @@ export default function CheckoutPage() {
             date: new Date().toISOString(),
             image: item.product.images[0].url,
         };
-        setDocumentNonBlocking(orderRef, newOrder, {});
+        setDocumentNonBlocking(orderRef, newOrder, { merge: false });
         newOrderIds.push(orderId);
     });
     
+    // Deduct from wallet and update order history
+    const newBalance = userData.walletBalance - cartTotal;
     updateDocumentNonBlocking(userRef, {
-        orderIds: arrayUnion(...newOrderIds)
+        orderIds: arrayUnion(...newOrderIds),
+        walletBalance: newBalance,
     });
     
     toast({
         title: "Order Placed!",
-        description: "Thank you for your purchase. Your order is pending approval.",
+        description: "Thank you! Your order has been placed and paid for with your wallet balance.",
     });
 
     clearCart();
     router.push(`/order-confirmation/${genericOrderId}`);
   };
   
-  if (isUserLoading || !user) {
+  if (isUserLoading || !user || isUserDocLoading) {
     return <div className="container text-center p-8">Loading...</div>;
   }
   
@@ -115,6 +133,9 @@ export default function CheckoutPage() {
     router.replace('/');
     return null;
   }
+
+  const walletBalance = userData?.walletBalance || 0;
+  const canAfford = walletBalance >= cartTotal;
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -164,35 +185,6 @@ export default function CheckoutPage() {
                 )} />
               </CardContent>
             </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2"><CreditCard className="w-5 h-5"/>Payment Details</CardTitle>
-              </CardHeader>
-              <CardContent className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <FormField name="cardNumber" control={form.control} render={({ field }) => (
-                  <FormItem className="md:col-span-4">
-                    <FormLabel>Card Number</FormLabel>
-                    <FormControl><Input {...field} placeholder="0000 0000 0000 0000" /></FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )} />
-                 <FormField name="expiry" control={form.control} render={({ field }) => (
-                  <FormItem className="md:col-span-2">
-                    <FormLabel>Expiry Date</FormLabel>
-                    <FormControl><Input {...field} placeholder="MM/YY" /></FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )} />
-                 <FormField name="cvc" control={form.control} render={({ field }) => (
-                  <FormItem className="md:col-span-2">
-                    <FormLabel>CVC</FormLabel>
-                    <FormControl><Input {...field} placeholder="123" /></FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )} />
-              </CardContent>
-            </Card>
           </div>
 
           <Card className="lg:col-span-1 sticky top-24">
@@ -211,10 +203,31 @@ export default function CheckoutPage() {
                 <span>Total</span>
                 <span>${cartTotal.toFixed(2)}</span>
               </div>
+               <Separator />
+               <div className="space-y-2">
+                 <div className="flex justify-between">
+                    <span>Your Wallet Balance</span>
+                    <span>${walletBalance.toFixed(2)}</span>
+                 </div>
+                 <div className={`flex justify-between font-medium ${canAfford ? 'text-green-600' : 'text-red-600'}`}>
+                    <span>Remaining Balance</span>
+                    <span>${(walletBalance - cartTotal).toFixed(2)}</span>
+                 </div>
+               </div>
+
             </CardContent>
             <CardContent>
-                <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" disabled={form.formState.isSubmitting}>
-                    {form.formState.isSubmitting ? "Placing Order..." : <><Lock className="w-4 h-4 mr-2" />Place Order</>}
+                {!canAfford && (
+                    <Alert variant="destructive" className="mb-4">
+                        <Wallet className="h-4 w-4" />
+                        <AlertTitle>Insufficient Funds</AlertTitle>
+                        <AlertDescription>
+                           You do not have enough money in your wallet to complete this purchase.
+                        </AlertDescription>
+                    </Alert>
+                )}
+                <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" disabled={form.formState.isSubmitting || !canAfford}>
+                    {form.formState.isSubmitting ? "Placing Order..." : <><Lock className="w-4 h-4 mr-2" />Place Order with Wallet</>}
                 </Button>
             </CardContent>
           </Card>

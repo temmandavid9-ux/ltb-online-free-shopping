@@ -25,6 +25,7 @@ import { doc, collection, query, where } from 'firebase/firestore';
 import { useCollection } from "@/firebase/firestore/use-collection";
 import { signOut } from "firebase/auth";
 import type { Order } from "@/lib/types";
+import { ArrowRight, DollarSign, ListChecks } from "lucide-react";
 
 export default function AccountPage() {
     const { user, isUserLoading } = useUser();
@@ -45,6 +46,7 @@ export default function AccountPage() {
     }, [user, isUserLoading, router]);
 
     const handleLogout = async () => {
+        if (!auth) return;
         await signOut(auth);
         router.push('/login');
     };
@@ -64,7 +66,7 @@ export default function AccountPage() {
             <Button onClick={handleLogout} variant="outline">Logout</Button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="md:col-span-1">
+            <div className="md:col-span-1 space-y-8">
                 <Card>
                     <CardHeader>
                         <CardTitle>Profile</CardTitle>
@@ -76,12 +78,30 @@ export default function AccountPage() {
                         <Button variant="outline" size="sm" className="mt-2" disabled>Edit Profile</Button>
                     </CardContent>
                 </Card>
-                 <Card className="mt-8">
-                    <CardHeader>
-                        <CardTitle>Wallet</CardTitle>
+                 <Card>
+                    <CardHeader className="flex flex-row items-center justify-between pb-2">
+                        <CardTitle className="text-sm font-medium">Wallet Balance</CardTitle>
+                        <DollarSign className="w-4 h-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                        <p className="text-3xl font-bold">${userData.walletBalance?.toFixed(2) || '0.00'}</p>
+                        <div className="text-2xl font-bold">${userData.walletBalance?.toFixed(2) || '0.00'}</div>
+                        <p className="text-xs text-muted-foreground">Your current earnings</p>
+                         <Button size="sm" className="mt-4 w-full" asChild>
+                            <Link href="/wallet">Manage Wallet <ArrowRight className="ml-2 h-4 w-4"/></Link>
+                        </Button>
+                    </CardContent>
+                </Card>
+                 <Card>
+                    <CardHeader className="flex flex-row items-center justify-between pb-2">
+                        <CardTitle className="text-sm font-medium">Daily Tasks</CardTitle>
+                        <ListChecks className="w-4 h-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-2xl font-bold">{userData.taskProgress || 0}% Complete</div>
+                        <p className="text-xs text-muted-foreground">Your progress on today's tasks</p>
+                        <Button size="sm" variant="outline" className="mt-4 w-full" asChild>
+                            <Link href="/tasks">View Tasks <ArrowRight className="ml-2 h-4 w-4"/></Link>
+                        </Button>
                     </CardContent>
                 </Card>
             </div>
@@ -95,7 +115,7 @@ export default function AccountPage() {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                <TableHead>Order ID</TableHead>
+                                <TableHead>Product</TableHead>
                                 <TableHead>Date</TableHead>
                                 <TableHead>Status</TableHead>
                                 <TableHead className="text-right">Total</TableHead>
@@ -105,7 +125,7 @@ export default function AccountPage() {
                             <TableBody>
                                 {ordersData && ordersData.length > 0 ? ordersData.map(order => (
                                     <TableRow key={order.id}>
-                                        <TableCell className="font-mono text-sm">{order.id.slice(-6)}</TableCell>
+                                        <TableCell className="font-medium">{order.product}</TableCell>
                                         <TableCell>{new Date(order.date).toLocaleDateString()}</TableCell>
                                         <TableCell>
                                             <Badge variant={order.status === 'Completed' || order.status === 'Approved' ? 'default' : 'secondary'} className={
@@ -119,7 +139,7 @@ export default function AccountPage() {
                                         <TableCell className="text-right">${order.price.toFixed(2)}</TableCell>
                                         <TableCell className="text-right">
                                             <Button variant="ghost" size="sm" asChild>
-                                                <Link href={`/order-confirmation/${order.id}`}>View</Link>
+                                                <Link href={`/order-confirmation/${order.id.split('_')[0]}`}>View</Link>
                                             </Button>
                                         </TableCell>
                                     </TableRow>

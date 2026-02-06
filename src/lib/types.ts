@@ -21,16 +21,35 @@ export type CartItem = {
   quantity: number;
 };
 
+// This matches docs/backend.json Order
 export type Order = {
-  id: string;
-  date: string;
-  total: number;
-  status: 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
-  items: CartItem[];
-  shippingAddress: {
+    id: string;
+    userId: string;
+    product: string;
+    price: number;
+    status: string; // 'Pending', 'Approved', 'Rejected', 'Completed'
+    date: string; // ISO String
+    image: string;
+};
+
+// This matches docs/backend.json Withdrawal
+export type Withdrawal = {
+    id: string;
+    userId: string;
+    amount: number;
+    paymentMethod: string;
+    accountDetails: string;
+    status: string; // 'Pending', 'Approved', 'Rejected'
+    date: string; // ISO String
+};
+
+// This matches docs/backend.json Task
+export type Task = {
+    id: string; // e.g. 'facebook'
+    userId: string;
     name: string;
-    address: string;
-    city: string;
-    zip: string;
-  }
+    completed: boolean;
+    reward: number;
+    taskStartTime?: string; // ISO String
+    nextTaskUnlockTime?: string; // ISO String
 };
