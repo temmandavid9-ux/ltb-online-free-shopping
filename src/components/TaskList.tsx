@@ -31,8 +31,8 @@ const TASK_LINKS = {
   twitch: "https://twitch.tv"
 };
 
-// NOTE: Timer is set to 20 seconds for prototype testing. Change to 1200 for 20 minutes.
-const TASK_DURATION_SECONDS = 20;
+// NOTE: Timer is set to 600 seconds (10 minutes).
+const TASK_DURATION_SECONDS = 600;
 const TASK_REWARD = 400; // Approx $1 in NGN
 
 export default function TaskList() {
@@ -230,6 +230,11 @@ export default function TaskList() {
     if (taskLink) {
         window.open(taskLink, '_blank', 'noopener,noreferrer');
     }
+
+    toast({
+        title: "Task In Progress",
+        description: "Please interact with the page for at least 10 minutes. Your timer is running in the background.",
+    });
     
     setCountdown(TASK_DURATION_SECONDS);
     setActiveTimerTaskId(task.id);
@@ -261,6 +266,10 @@ export default function TaskList() {
   }
 
   const firstIncompleteTaskIndex = sortedTasks.findIndex(t => !t.completed);
+
+  const minutes = Math.floor(countdown / 60);
+  const seconds = countdown % 60;
+  const countdownText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
   return (
     <Tabs defaultValue={sortedTasks[firstIncompleteTaskIndex]?.id || TASK_DEFINITIONS[0].id} className="w-full">
@@ -298,7 +307,7 @@ export default function TaskList() {
                                 <p className="text-lg font-semibold">Task in progress...</p>
                                 <div className="space-y-2">
                                     <Progress value={( (TASK_DURATION_SECONDS - countdown) / TASK_DURATION_SECONDS) * 100} className="w-full"/>
-                                    <p className="text-2xl font-mono font-bold">{countdown}s</p>
+                                    <p className="text-2xl font-mono font-bold">{countdownText}</p>
                                     <p className="text-muted-foreground text-sm">You can now switch tabs. Your reward will be claimed automatically.</p>
                                 </div>
                             </>
