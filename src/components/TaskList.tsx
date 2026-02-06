@@ -28,7 +28,7 @@ const TASK_LINKS = {
   facebook: "https://facebook.com",
   instagram: "https://instagram.com",
   youtube: "https://youtube.com/@Eden-s8u",
-  twitch: "https://twitch.tv"
+  twitch: "https://twitch.tv/edenonlineshoppingstore"
 };
 
 // NOTE: Timer is set to 600 seconds (10 minutes).
