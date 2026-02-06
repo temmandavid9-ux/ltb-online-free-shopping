@@ -26,7 +26,7 @@ const TASK_DEFINITIONS = [
 
 const TASK_LINKS = {
   facebook: "https://facebook.com",
-  instagram: "https://instagram.com",
+  instagram: "https://instagram.com/eden02",
   youtube: "https://youtube.com/@Eden-s8u",
   twitch: "https://twitch.tv/edenonlineshoppingstore"
 };
