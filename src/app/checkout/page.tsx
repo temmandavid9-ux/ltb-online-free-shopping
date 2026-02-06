@@ -19,6 +19,9 @@ import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 import { CreditCard, Lock } from 'lucide-react';
+import { useUser, useFirestore, setDocumentNonBlocking, updateDocumentNonBlocking } from '@/firebase';
+import { collection, doc, arrayUnion } from 'firebase/firestore';
+import { useEffect } from 'react';
 
 const shippingSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -40,6 +43,8 @@ export default function CheckoutPage() {
   const { cart, cartTotal, clearCart } = useCart();
   const router = useRouter();
   const { toast } = useToast();
+  const { user, isUserLoading } = useUser();
+  const firestore = useFirestore();
 
   const form = useForm<z.infer<typeof checkoutSchema>>({
     resolver: zodResolver(checkoutSchema),
@@ -55,22 +60,59 @@ export default function CheckoutPage() {
     },
   });
 
+  useEffect(() => {
+    if (!isUserLoading && !user) {
+      toast({ title: "Please login to proceed", variant: "destructive"});
+      router.push('/login');
+    }
+  }, [user, isUserLoading, router, toast]);
+
   const onSubmit = (values: z.infer<typeof checkoutSchema>) => {
-    console.log('Order submitted:', values);
-    const orderId = `order_${new Date().getTime()}`;
-    // In a real app, you would save the order to a database.
+    if (!user) {
+        toast({ variant: 'destructive', title: 'You must be logged in to place an order.'});
+        return;
+    }
+
+    const ordersCollection = collection(firestore, 'orders');
+    const userRef = doc(firestore, 'users', user.uid);
+    const newOrderIds: string[] = [];
+    const genericOrderId = `order_${new Date().getTime()}`;
+
+    cart.forEach((item, index) => {
+        const orderId = `${genericOrderId}_${index}`;
+        const orderRef = doc(ordersCollection, orderId);
+        const newOrder = {
+            id: orderId,
+            userId: user.uid,
+            product: item.product.name,
+            price: item.product.price * item.quantity,
+            status: 'Pending',
+            date: new Date().toISOString(),
+            image: item.product.images[0].url,
+        };
+        setDocumentNonBlocking(orderRef, newOrder, {});
+        newOrderIds.push(orderId);
+    });
+    
+    updateDocumentNonBlocking(userRef, {
+        orderIds: arrayUnion(...newOrderIds)
+    });
     
     toast({
         title: "Order Placed!",
-        description: "Thank you for your purchase.",
+        description: "Thank you for your purchase. Your order is pending approval.",
     });
 
     clearCart();
-    router.push(`/order-confirmation/${orderId}`);
+    router.push(`/order-confirmation/${genericOrderId}`);
   };
   
+  if (isUserLoading || !user) {
+    return <div className="container text-center p-8">Loading...</div>;
+  }
+  
   if (cart.length === 0 && typeof window !== 'undefined') {
-    router.push('/cart');
+    router.replace('/');
     return null;
   }
 
@@ -171,8 +213,8 @@ export default function CheckoutPage() {
               </div>
             </CardContent>
             <CardContent>
-                <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
-                    <Lock className="w-4 h-4 mr-2" />Place Order
+                <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" disabled={form.formState.isSubmitting}>
+                    {form.formState.isSubmitting ? "Placing Order..." : <><Lock className="w-4 h-4 mr-2" />Place Order</>}
                 </Button>
             </CardContent>
           </Card>

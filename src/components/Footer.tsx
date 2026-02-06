@@ -20,7 +20,7 @@ export default function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center space-x-2 mb-4">
               <Package2 className="h-6 w-6 text-primary" />
-              <span className="font-bold text-xl font-headline">ShopSphere</span>
+              <span className="font-bold text-xl font-headline">Eden 0²</span>
             </Link>
             <p className="text-sm text-muted-foreground">Your ultimate online shopping destination.</p>
           </div>
@@ -55,7 +55,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} ShopSphere. All rights reserved.</p>
+          <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Eden 0². All rights reserved.</p>
           <div className="flex space-x-4 mt-4 sm:mt-0">
             <Link href="#" className="text-muted-foreground hover:text-primary"><TwitterIcon className="h-5 w-5" /></Link>
             <Link href="#" className="text-muted-foreground hover:text-primary"><FacebookIcon className="h-5 w-5" /></Link>

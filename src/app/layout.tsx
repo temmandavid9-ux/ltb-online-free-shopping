@@ -4,10 +4,11 @@ import { Toaster } from '@/components/ui/toaster';
 import { CartProvider } from '@/context/CartContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { FirebaseClientProvider } from '@/firebase';
 
 export const metadata: Metadata = {
-  title: 'ShopSphere - Your Ultimate Online Shopping Destination',
-  description: 'Browse, search, and buy from a wide range of products on ShopSphere.',
+  title: 'Eden 0² - Professional Reward-Based Ecommerce Platform',
+  description: 'A professional reward-based ecommerce web platform.',
 };
 
 export default function RootLayout({
@@ -23,11 +24,13 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased flex flex-col min-h-screen">
-        <CartProvider>
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </CartProvider>
+        <FirebaseClientProvider>
+          <CartProvider>
+            <Header />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </CartProvider>
+        </FirebaseClientProvider>
         <Toaster />
       </body>
     </html>

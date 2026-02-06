@@ -5,9 +5,11 @@ import { ShoppingCart, User, Search, Package2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useCart } from '@/context/CartContext';
+import { useUser } from '@/firebase';
 
 export default function Header() {
   const { itemCount } = useCart();
+  const { user, isUserLoading } = useUser();
 
   return (
     <header className="bg-card border-b sticky top-0 z-40">
@@ -16,7 +18,7 @@ export default function Header() {
           <div className="flex items-center space-x-8">
             <Link href="/" className="flex items-center space-x-2">
               <Package2 className="h-6 w-6 text-primary" />
-              <span className="font-bold text-xl font-headline">ShopSphere</span>
+              <span className="font-bold text-xl font-headline">Eden 0²</span>
             </Link>
             <nav className="hidden md:flex space-x-6">
               <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
@@ -45,11 +47,19 @@ export default function Header() {
                 )}
               </Button>
             </Link>
-            <Link href="/login">
-              <Button variant="ghost" size="icon">
-                <User className="h-5 w-5" />
-              </Button>
-            </Link>
+             {isUserLoading ? (
+              <div className="h-8 w-16 bg-muted rounded-md animate-pulse" />
+            ) : user ? (
+                <Link href="/account">
+                    <Button variant="ghost" size="icon">
+                        <User className="h-5 w-5" />
+                    </Button>
+                </Link>
+            ) : (
+                <Link href="/login">
+                  <Button variant="ghost">Login</Button>
+                </Link>
+            )}
           </div>
         </div>
       </div>
