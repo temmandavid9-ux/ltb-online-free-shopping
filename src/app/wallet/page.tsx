@@ -38,6 +38,19 @@ export default function WalletPage() {
   const withdrawalsQuery = useMemoFirebase(() => user ? query(collection(firestore, 'withdrawals'), where('userId', '==', user.uid)) : null, [firestore, user]);
   const { data: withdrawalsData, isLoading: areWithdrawalsLoading } = useCollection<Withdrawal>(withdrawalsQuery);
 
+  const [clientWithdrawals, setClientWithdrawals] = useState<(Withdrawal & { formattedDate: string })[]>([]);
+
+  useEffect(() => {
+    if (withdrawalsData) {
+        setClientWithdrawals(
+            withdrawalsData.map(w => ({
+                ...w,
+                formattedDate: new Date(w.date).toLocaleDateString()
+            }))
+        );
+    }
+  }, [withdrawalsData]);
+
   const form = useForm<z.infer<typeof withdrawalSchema>>({
     resolver: zodResolver(withdrawalSchema),
     defaultValues: { amount: 0, paymentMethod: 'Bank Transfer', accountDetails: '' },
@@ -169,9 +182,9 @@ export default function WalletPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {withdrawalsData && withdrawalsData.length > 0 ? withdrawalsData.map(w => (
+                  {clientWithdrawals.length > 0 ? clientWithdrawals.map(w => (
                     <TableRow key={w.id}>
-                      <TableCell>{new Date(w.date).toLocaleDateString()}</TableCell>
+                      <TableCell>{w.formattedDate}</TableCell>
                       <TableCell className="font-medium">${w.amount.toFixed(2)}</TableCell>
                       <TableCell>{w.paymentMethod}</TableCell>
                       <TableCell>
@@ -189,7 +202,7 @@ export default function WalletPage() {
                       <TableCell colSpan={4} className="text-center">No withdrawal history.</TableCell>
                     </TableRow>
                   )}
-                </TableBody>
+                </Body>
               </Table>
             </CardContent>
           </Card>

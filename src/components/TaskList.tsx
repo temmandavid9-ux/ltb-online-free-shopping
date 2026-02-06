@@ -51,6 +51,7 @@ export default function TaskList() {
 
   const [activeTimerTaskId, setActiveTimerTaskId] = useState<string | null>(null);
   const [countdown, setCountdown] = useState(TASK_DURATION_SECONDS);
+  const [unlockTimeMessage, setUnlockTimeMessage] = useState<string>('');
 
   const sortedTasks = useMemo(() => {
     if (!tasks) return [];
@@ -72,6 +73,13 @@ export default function TaskList() {
           return latest;
       });
   }, [allTasksCompletedToday, sortedTasks]);
+
+  useEffect(() => {
+    if (allTasksCompletedToday && lastCompletedTask?.nextTaskUnlockTime) {
+      setUnlockTimeMessage(`Next tasks unlock at: ${new Date(lastCompletedTask.nextTaskUnlockTime).toLocaleString()}`);
+    }
+  }, [allTasksCompletedToday, lastCompletedTask]);
+
 
   // Initialize tasks for a new user
   useEffect(() => {
@@ -200,7 +208,7 @@ export default function TaskList() {
               </CardHeader>
               <CardContent>
                   <p className="text-muted-foreground">Come back tomorrow to earn more rewards.</p>
-                  <p className="font-bold mt-2">Next tasks unlock at: {new Date(lastCompletedTask.nextTaskUnlockTime!).toLocaleString()}</p>
+                  <p className="font-bold mt-2">{unlockTimeMessage}</p>
               </CardContent>
           </Card>
       )

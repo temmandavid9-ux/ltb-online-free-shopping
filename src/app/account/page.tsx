@@ -19,7 +19,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useUser, useFirestore, useDoc, useMemoFirebase, useAuth } from "@/firebase";
 import { doc, collection, query, where } from 'firebase/firestore';
 import { useCollection } from "@/firebase/firestore/use-collection";
@@ -38,6 +38,20 @@ export default function AccountPage() {
 
     const ordersQuery = useMemoFirebase(() => user ? query(collection(firestore, 'orders'), where('userId', '==', user.uid)) : null, [firestore, user]);
     const { data: ordersData, isLoading: areOrdersLoading } = useCollection<Order>(ordersQuery);
+
+    const [clientOrders, setClientOrders] = useState<(Order & { formattedDate: string })[]>([]);
+
+    useEffect(() => {
+        if (ordersData) {
+            setClientOrders(
+                ordersData.map(order => ({
+                    ...order,
+                    formattedDate: new Date(order.date).toLocaleDateString()
+                }))
+            );
+        }
+    }, [ordersData]);
+
 
     useEffect(() => {
         if (!isUserLoading && !user) {
@@ -123,10 +137,10 @@ export default function AccountPage() {
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {ordersData && ordersData.length > 0 ? ordersData.map(order => (
+                                {clientOrders.length > 0 ? clientOrders.map(order => (
                                     <TableRow key={order.id}>
                                         <TableCell className="font-medium">{order.product}</TableCell>
-                                        <TableCell>{new Date(order.date).toLocaleDateString()}</TableCell>
+                                        <TableCell>{order.formattedDate}</TableCell>
                                         <TableCell>
                                             <Badge variant={order.status === 'Completed' || order.status === 'Approved' ? 'default' : 'secondary'} className={
                                                 order.status === 'Completed' || order.status === 'Approved' ? 'bg-green-100 text-green-800' : 
