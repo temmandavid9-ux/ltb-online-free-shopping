@@ -1,6 +1,6 @@
 "use client";
 
-import { useCart } from '@/context/CartContext';
+import { useRedeem } from '@/context/CartContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -32,17 +32,10 @@ const shippingSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email.' }),
 });
 
-// We remove payment schema as we are now using wallet balance
-// const paymentSchema = z.object({
-//   cardNumber: z.string().regex(/^\d{16}$/, 'Card number must be 16 digits.'),
-//   expiry: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, 'Expiry must be in MM/YY format.'),
-//   cvc: z.string().regex(/^\d{3,4}$/, 'CVC must be 3 or 4 digits.'),
-// });
-
 const checkoutSchema = shippingSchema;
 
 export default function CheckoutPage() {
-  const { cart, cartTotal, clearCart } = useCart();
+  const { basket, basketTotal, clearBasket } = useRedeem();
   const router = useRouter();
   const { toast } = useToast();
   const { user, isUserLoading } = useUser();
@@ -79,11 +72,11 @@ export default function CheckoutPage() {
         return;
     }
 
-    if (userData.walletBalance < cartTotal) {
+    if (userData.walletBalance < basketTotal) {
       toast({
         variant: "destructive",
         title: "Insufficient Funds",
-        description: `Your wallet balance is $${userData.walletBalance.toFixed(2)}, but the order total is $${cartTotal.toFixed(2)}.`,
+        description: `Your wallet balance is ₦${userData.walletBalance.toLocaleString()}, but the order total is ₦${basketTotal.toLocaleString()}.`,
       });
       return;
     }
@@ -93,7 +86,7 @@ export default function CheckoutPage() {
     const newOrderIds: string[] = [];
     const genericOrderId = `order_${new Date().getTime()}`;
 
-    cart.forEach((item, index) => {
+    basket.forEach((item, index) => {
         const orderId = `${genericOrderId}_${index}`;
         const orderRef = doc(ordersCollection, orderId);
         const newOrder = {
@@ -110,7 +103,7 @@ export default function CheckoutPage() {
     });
     
     // Deduct from wallet and update order history
-    const newBalance = userData.walletBalance - cartTotal;
+    const newBalance = userData.walletBalance - basketTotal;
     updateDocumentNonBlocking(userRef, {
         orderIds: arrayUnion(...newOrderIds),
         walletBalance: newBalance,
@@ -121,7 +114,7 @@ export default function CheckoutPage() {
         description: "Thank you! Your order has been placed and paid for with your wallet balance.",
     });
 
-    clearCart();
+    clearBasket();
     router.push(`/order-confirmation/${genericOrderId}`);
   };
   
@@ -129,13 +122,13 @@ export default function CheckoutPage() {
     return <div className="container text-center p-8">Loading...</div>;
   }
   
-  if (cart.length === 0 && typeof window !== 'undefined') {
+  if (basket.length === 0 && typeof window !== 'undefined') {
     router.replace('/');
     return null;
   }
 
   const walletBalance = userData?.walletBalance || 0;
-  const canAfford = walletBalance >= cartTotal;
+  const canAfford = walletBalance >= basketTotal;
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -192,26 +185,26 @@ export default function CheckoutPage() {
               <CardTitle>Your Order</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {cart.map(item => (
+              {basket.map(item => (
                 <div key={item.product.id} className="flex justify-between items-center text-sm">
                   <span>{item.product.name} x {item.quantity}</span>
-                  <span className="font-medium">${(item.product.price * item.quantity).toFixed(2)}</span>
+                  <span className="font-medium">₦{(item.product.price * item.quantity).toLocaleString()}</span>
                 </div>
               ))}
               <Separator />
               <div className="flex justify-between font-bold text-lg">
                 <span>Total</span>
-                <span>${cartTotal.toFixed(2)}</span>
+                <span>₦{basketTotal.toLocaleString()}</span>
               </div>
                <Separator />
                <div className="space-y-2">
                  <div className="flex justify-between">
                     <span>Your Wallet Balance</span>
-                    <span>${walletBalance.toFixed(2)}</span>
+                    <span>₦{walletBalance.toLocaleString()}</span>
                  </div>
                  <div className={`flex justify-between font-medium ${canAfford ? 'text-green-600' : 'text-red-600'}`}>
                     <span>Remaining Balance</span>
-                    <span>${(walletBalance - cartTotal).toFixed(2)}</span>
+                    <span>₦{(walletBalance - basketTotal).toLocaleString()}</span>
                  </div>
                </div>
 

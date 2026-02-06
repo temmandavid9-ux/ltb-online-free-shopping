@@ -98,7 +98,7 @@ export default function AccountPage() {
                         <DollarSign className="w-4 h-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">${userData.walletBalance?.toFixed(2) || '0.00'}</div>
+                        <div className="text-2xl font-bold">₦{userData.walletBalance?.toLocaleString() || '0.00'}</div>
                         <p className="text-xs text-muted-foreground">Your current earnings</p>
                          <Button size="sm" className="mt-4 w-full" asChild>
                             <Link href="/wallet">Manage Wallet <ArrowRight className="ml-2 h-4 w-4"/></Link>
@@ -150,7 +150,7 @@ export default function AccountPage() {
                                                 {order.status}
                                             </Badge>
                                         </TableCell>
-                                        <TableCell className="text-right">${order.price.toFixed(2)}</TableCell>
+                                        <TableCell className="text-right">₦{order.price.toLocaleString()}</TableCell>
                                         <TableCell className="text-right">
                                             <Button variant="ghost" size="sm" asChild>
                                                 <Link href={`/order-confirmation/${order.id.split('_')[0]}`}>View</Link>

@@ -83,6 +83,18 @@
       "description": "A pair of stylish sneakers.",
       "imageUrl": "https://images.unsplash.com/photo-1607615730926-ac8b276ef46e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzbmVha2VycyUyMGxpZmVzdHlsZXxlbnwwfHx8fDE3NzAzODgxMTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "sneakers lifestyle"
+    },
+    {
+      "id": "prod_img_15",
+      "description": "Basket full of fresh apples.",
+      "imageUrl": "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhcHBsZXN8ZW58MHx8fHwxNzcxMjI1ODU2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "fresh apples"
+    },
+    {
+      "id": "prod_img_16",
+      "description": "Container of whey protein powder.",
+      "imageUrl": "https://images.unsplash.com/photo-1632213123880-a6142c343e5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwcm90ZWluJTIwcG93ZGVyfGVufDB8fHx8MTc3MTIyNTg4MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "protein powder"
     }
   ]
 }

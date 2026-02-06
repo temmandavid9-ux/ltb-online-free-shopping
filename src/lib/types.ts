@@ -8,6 +8,8 @@ export type Product = {
   brand: string;
   images: { url: string; hint: string }[];
   stock: number;
+  rating: number;
+  reviewCount: number;
 };
 
 export type Category = {
@@ -16,7 +18,7 @@ export type Category = {
   icon: React.ElementType;
 };
 
-export type CartItem = {
+export type RedeemItem = {
   product: Product;
   quantity: number;
 };

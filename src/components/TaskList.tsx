@@ -33,6 +33,7 @@ const TASK_LINKS = {
 
 // NOTE: Timer is set to 20 seconds for prototype testing. Change to 1200 for 20 minutes.
 const TASK_DURATION_SECONDS = 20;
+const TASK_REWARD = 400; // Approx $1 in NGN
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
@@ -119,7 +120,7 @@ export default function TaskList() {
     
     toast({
         title: "Task Completed!",
-        description: `You've earned $${task.reward.toFixed(2)}!`,
+        description: `You've earned ₦${task.reward.toLocaleString()}!`,
     });
     
     setActiveTimerTaskId(null);
@@ -139,7 +140,7 @@ export default function TaskList() {
           userId: user.uid,
           name: taskDef.name,
           completed: false,
-          reward: 1,
+          reward: TASK_REWARD,
         };
         batch.set(taskRef, newTask);
       });
@@ -302,7 +303,7 @@ export default function TaskList() {
                                 </div>
                             </>
                         ) : task.completed ? (
-                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> Task Completed! You earned ${task.reward.toFixed(2)}.</div>
+                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> Task Completed! You earned ₦{task.reward.toLocaleString()}.</div>
                         ) : (
                              <p className="text-muted-foreground">{isTaskUnlocked ? 'Start the task to earn your reward.' : 'Complete the previous task to unlock this one.'}</p>
                         )}
@@ -316,7 +317,7 @@ export default function TaskList() {
                             {task.completed ? <><CheckCircle className="mr-2 h-4 w-4"/> Completed</> 
                             : !isTaskUnlocked ? <><Lock className="mr-2 h-4 w-4"/> Locked</> 
                             : isTimerActiveForThisTask ? 'Timer Active' 
-                            : `Start Task (Earn $${task.reward.toFixed(2)})`}
+                            : `Start Task (Earn ₦${task.reward.toLocaleString()})`}
                         </Button>
                     </CardFooter>
                 </Card>

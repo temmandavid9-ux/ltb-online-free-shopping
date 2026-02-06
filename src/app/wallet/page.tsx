@@ -69,7 +69,7 @@ export default function WalletPage() {
         return;
     }
     if (values.amount < 1) {
-        toast({ variant: 'destructive', title: 'Invalid Amount', description: 'Withdrawal amount must be at least $1.' });
+        toast({ variant: 'destructive', title: 'Invalid Amount', description: 'Withdrawal amount must be at least ₦1.' });
         return;
     }
 
@@ -119,7 +119,7 @@ export default function WalletPage() {
                 <DollarSign className="w-4 h-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-                <div className="text-4xl font-bold">${walletBalance.toFixed(2)}</div>
+                <div className="text-4xl font-bold">₦{walletBalance.toLocaleString()}</div>
             </CardContent>
           </Card>
           <Card>
@@ -132,7 +132,7 @@ export default function WalletPage() {
                 <Alert>
                   <WalletCards className="h-4 w-4"/>
                   <AlertTitle>Minimum Balance Required</AlertTitle>
-                  <AlertDescription>You need at least ${MIN_WITHDRAWAL_AMOUNT.toFixed(2)} in your wallet to make a withdrawal.</AlertDescription>
+                  <AlertDescription>You need at least ₦{MIN_WITHDRAWAL_AMOUNT.toLocaleString()} in your wallet to make a withdrawal.</AlertDescription>
                 </Alert>
               )}
               <Form {...form}>
@@ -185,7 +185,7 @@ export default function WalletPage() {
                   {clientWithdrawals.length > 0 ? clientWithdrawals.map(w => (
                     <TableRow key={w.id}>
                       <TableCell>{w.formattedDate}</TableCell>
-                      <TableCell className="font-medium">${w.amount.toFixed(2)}</TableCell>
+                      <TableCell className="font-medium">₦{w.amount.toLocaleString()}</TableCell>
                       <TableCell>{w.paymentMethod}</TableCell>
                       <TableCell>
                          <Badge variant={w.status === 'Approved' ? 'default' : 'secondary'} className={
@@ -202,7 +202,7 @@ export default function WalletPage() {
                       <TableCell colSpan={4} className="text-center">No withdrawal history.</TableCell>
                     </TableRow>
                   )}
-                </Body>
+                </TableBody>
               </Table>
             </CardContent>
           </Card>

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-import { CartProvider } from '@/context/CartContext';
+import { RedeemProvider } from '@/context/CartContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { FirebaseClientProvider } from '@/firebase';
@@ -25,11 +25,11 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased flex flex-col min-h-screen">
         <FirebaseClientProvider>
-          <CartProvider>
+          <RedeemProvider>
             <Header />
             <main className="flex-grow">{children}</main>
             <Footer />
-          </CartProvider>
+          </RedeemProvider>
         </FirebaseClientProvider>
         <Toaster />
       </body>
