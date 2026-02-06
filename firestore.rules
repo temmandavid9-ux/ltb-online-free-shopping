@@ -163,8 +163,7 @@ service cloud.firestore {
      * @principle Segregates user creation from admin modification for a secure workflow.
      */
     match /orders/{orderId} {
-      allow get: if isAdmin() || isOwner(resource.data.userId);
-      allow list: if isAdmin();
+      allow read: if isAdmin() || isOwner(resource.data.userId);
       allow create: if isCreatingOwnRequest(request.resource.data);
       allow update: if isAdmin() && isExistingDoc();
       allow delete: if isAdmin() && isExistingDoc();
@@ -180,8 +179,7 @@ service cloud.firestore {
      * @principle Secures financial transactions by enforcing an admin-approval workflow.
      */
     match /withdrawals/{withdrawalId} {
-      allow get: if isAdmin() || isOwner(resource.data.userId);
-      allow list: if isAdmin();
+      allow read: if isAdmin() || isOwner(resource.data.userId);
       allow create: if isCreatingOwnRequest(request.resource.data);
       allow update: if isAdmin() && isExistingDoc();
       allow delete: if isAdmin() && isExistingDoc();
