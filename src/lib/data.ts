@@ -19,7 +19,7 @@ export const categories: Category[] = [
   { id: 'cat6', name: 'Gaming', icon: Gamepad2 },
 ];
 
-export const brands: string[] = ['Zenco', 'Stellar', 'Nexa', 'Orion', 'Helios', 'iDino'];
+export const brands: string[] = ['Zenco', 'Stellar', 'Nexa', 'Orion', 'Helios'];
 
 export const products: Product[] = [
   {
@@ -83,7 +83,7 @@ export const products: Product[] = [
     price: 180000,
     brand: 'Helios',
     images: [findImage('prod_img_11')],
-    stock: 40,
+    stock: 200,
     rating: 4.7,
     reviewCount: 98,
   },
@@ -96,7 +96,7 @@ export const products: Product[] = [
     price: 45000,
     brand: 'Orion',
     images: [findImage('prod_img_14')],
-    stock: 110,
+    stock: 150,
     rating: 4.6,
     reviewCount: 230,
   },
@@ -320,18 +320,5 @@ export const products: Product[] = [
     stock: 150,
     rating: 4.7,
     reviewCount: 290,
-  },
-  {
-    id: 'prod_28',
-    slug: 'idino-notebook-core',
-    name: 'iDino Notebook Core',
-    description: 'The iDino Notebook Core is a versatile 2-in-1 device, featuring AI capabilities and blazing-fast 5G connectivity. It comes with a detachable keyboard, transforming from a tablet to a notebook in seconds. Perfect for work, study, and entertainment on the go.',
-    category: 'Gadgets',
-    price: 150000,
-    brand: 'iDino',
-    images: [findImage('prod_img_30')],
-    stock: 75,
-    rating: 4.6,
-    reviewCount: 120,
   },
 ];
