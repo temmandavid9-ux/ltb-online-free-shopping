@@ -25,6 +25,13 @@ const TASK_DEFINITIONS = [
   { id: 'twitch', name: 'Twitch', icon: Twitch, description: 'Join our stream on Twitch.' },
 ];
 
+const TASK_LINKS = {
+  facebook: "https://facebook.com",
+  instagram: "https://instagram.com",
+  youtube: "https://youtube.com/@Eden-s8u",
+  twitch: "https://twitch.tv"
+};
+
 // NOTE: Timer is set to 20 seconds for prototype testing. Change to 1200 for 20 minutes.
 const TASK_DURATION_SECONDS = 20;
 
@@ -126,6 +133,11 @@ export default function TaskList() {
             title: "Tasks must be completed in order",
         });
         return;
+    }
+    
+    const taskLink = TASK_LINKS[task.id as keyof typeof TASK_LINKS];
+    if (taskLink) {
+        window.open(taskLink, '_blank', 'noopener,noreferrer');
     }
     
     setCountdown(TASK_DURATION_SECONDS);
