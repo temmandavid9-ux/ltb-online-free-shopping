@@ -198,19 +198,31 @@ export default function TaskList() {
     }
   }, [allTasksCompletedToday, lastCompletedTask]);
 
-  // Anti-tab-switch notification
+  // Anti-tab-switch: Reset task if user navigates away
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden && activeTimerTaskId) {
+        const activeTask = sortedTasks.find(t => t.id === activeTimerTaskId);
+        if (!activeTask || !user || !firestore) return;
+
+        setActiveTimerTaskId(null);
+        setCountdown(TASK_DURATION_SECONDS);
+
+        const taskRef = doc(firestore, 'users', user.uid, 'tasks', activeTimerTaskId);
+        updateDocumentNonBlocking(taskRef, { taskStartTime: null });
+
         toast({
-          title: 'Timer is still running',
-          description: "Your progress is saved, no need to stay on this tab.",
+          variant: "destructive",
+          title: "Task Cancelled",
+          description: "You must remain on the page for the task to complete. Progress has been reset.",
         });
       }
     };
+
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, [activeTimerTaskId, toast]);
+  }, [activeTimerTaskId, user, firestore, sortedTasks, toast]);
+
 
   const handleStartTask = (task: Task) => {
     if (activeTimerTaskId || allTasksCompletedToday || !user || !firestore) return;
@@ -308,7 +320,7 @@ export default function TaskList() {
                                 <div className="space-y-2">
                                     <Progress value={( (TASK_DURATION_SECONDS - countdown) / TASK_DURATION_SECONDS) * 100} className="w-full"/>
                                     <p className="text-2xl font-mono font-bold">{countdownText}</p>
-                                    <p className="text-muted-foreground text-sm">You can now switch tabs. Your reward will be claimed automatically.</p>
+                                    <p className="text-muted-foreground text-sm">You must stay on the page. Your reward will be claimed automatically upon completion.</p>
                                 </div>
                             </>
                         ) : task.completed ? (
