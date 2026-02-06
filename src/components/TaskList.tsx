@@ -192,7 +192,8 @@ export default function TaskList() {
   // Daily completion message effect
   useEffect(() => {
     if (allTasksCompletedToday && lastCompletedTask?.nextTaskUnlockTime) {
-      setUnlockTimeMessage(`Next tasks unlock at: ${new Date(lastCompletedTask.nextTaskUnlockTime).toLocaleString()}`);
+      const date = new Date(lastCompletedTask.nextTaskUnlockTime);
+      setUnlockTimeMessage(`Next tasks unlock at: ${date.toLocaleString()}`);
     }
   }, [allTasksCompletedToday, lastCompletedTask]);
 
