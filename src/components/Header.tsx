@@ -43,7 +43,7 @@ export default function Header() {
               <>
                 <div className="flex items-center space-x-2">
                     <UserIcon className="h-5 w-5 text-muted-foreground" />
-                    <span className="text-sm font-medium">Hi, CEO</span>
+                    <span className="text-sm font-medium">CEO, {userData.username}</span>
                 </div>
                  <div className="h-8 w-px bg-border" />
                  <Link href="/wallet" className="flex items-center space-x-2 hover:text-primary transition-colors">
