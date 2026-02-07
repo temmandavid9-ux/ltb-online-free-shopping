@@ -368,7 +368,7 @@ export const products: Product[] = [
     category: 'Gaming',
     price: 150000,
     brand: 'Orion',
-    images: [findImage('prod_img_33'), findImage('prod_img_34'), findImage('prod_img_35'), findImage('prod_img_36')],
+    images: [findImage('prod_img_33'), findImage('prod_img_34'), findImage('prod_img_35'), findImage('prod_img_36'), findImage('prod_img_37'), findImage('prod_img_38'), findImage('prod_img_39'), findImage('prod_img_40')],
     stock: 75,
     rating: 4.9,
     reviewCount: 180,

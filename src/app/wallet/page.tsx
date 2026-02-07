@@ -18,7 +18,7 @@ import { useToast } from "@/hooks/use-toast";
 import { DollarSign, WalletCards, Landmark } from "lucide-react";
 import type { Withdrawal } from "@/lib/types";
 
-const MIN_WITHDRAWAL_AMOUNT = 100;
+const MIN_WITHDRAWAL_AMOUNT = 100000;
 
 const withdrawalSchema = z.object({
   amount: z.coerce.number().min(1, { message: 'Amount must be greater than 0.' }),
@@ -68,8 +68,8 @@ export default function WalletPage() {
         toast({ variant: 'destructive', title: 'Insufficient Funds', description: 'You cannot withdraw more than your wallet balance.' });
         return;
     }
-    if (values.amount < 1) {
-        toast({ variant: 'destructive', title: 'Invalid Amount', description: 'Withdrawal amount must be at least ₦1.' });
+    if (values.amount < MIN_WITHDRAWAL_AMOUNT) {
+        toast({ variant: 'destructive', title: 'Invalid Amount', description: `Withdrawal amount must be at least ₦${MIN_WITHDRAWAL_AMOUNT.toLocaleString()}.` });
         return;
     }
 
