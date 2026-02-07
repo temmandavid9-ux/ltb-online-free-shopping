@@ -12,7 +12,7 @@ type ProductGridProps = {
 
 export default function ProductGrid({ products }: ProductGridProps) {
   const [filters, setFilters] = useState({
-    category: 'Gadgets',
+    category: 'Clothes',
     search: '',
   });
 
