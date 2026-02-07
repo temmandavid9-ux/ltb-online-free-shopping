@@ -360,4 +360,17 @@ export const products: Product[] = [
     rating: 4.5,
     reviewCount: 95,
   },
+  {
+    id: 'prod_33',
+    slug: 'ergonomic-gaming-chair',
+    name: 'Ergonomic Gaming Chair',
+    description: 'Experience ultimate comfort and support with our ergonomic gaming chair. Designed for long gaming sessions, it features adjustable armrests, lumbar support, and a reclining back.',
+    category: 'Gaming',
+    price: 150000,
+    brand: 'Orion',
+    images: [findImage('prod_img_33'), findImage('prod_img_34'), findImage('prod_img_35'), findImage('prod_img_36')],
+    stock: 75,
+    rating: 4.9,
+    reviewCount: 180,
+  },
 ];

@@ -191,6 +191,30 @@
       "description": "A 2-piece set of men's chain and hip-hop style pendant.",
       "imageUrl": "https://image2url.com/r2/default/files/1770462612450-718589f9-5f4e-473d-978c-fe4b82c6f57a.avif",
       "imageHint": "men chain"
+    },
+    {
+      "id": "prod_img_33",
+      "description": "An ergonomic gaming chair from the front.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770478023169-23fb63c8-f437-41ab-b337-3fbfe18b1dc7.jpg",
+      "imageHint": "gaming chair"
+    },
+    {
+      "id": "prod_img_34",
+      "description": "An ergonomic gaming chair from the side.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770478056344-a1c46173-ef2c-4e66-badb-f92b666cfcba.jpg",
+      "imageHint": "gaming chair"
+    },
+    {
+      "id": "prod_img_35",
+      "description": "An ergonomic gaming chair from the back.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770478083765-de22db17-5d08-4848-abc8-21f674e5b6b6.jpg",
+      "imageHint": "gaming chair"
+    },
+    {
+      "id": "prod_img_36",
+      "description": "A closeup of the gaming chair's features.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770478115190-54653309-dac1-4d9c-9871-2d72152bb1e5.jpg",
+      "imageHint": "gaming chair"
     }
   ]
 }
