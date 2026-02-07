@@ -179,6 +179,18 @@
       "description": "A modern tablet with an attached keyboard.",
       "imageUrl": "https://images.unsplash.com/photo-1561154464-82e99647785a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0YWJsZXQlMjBrZXlib2FyZHxlbnwwfHx8fDE3NzEyMjYyNTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "tablet keyboard"
+    },
+    {
+      "id": "prod_img_31",
+      "description": "A hip-hop style Game Boy pendant with a big square chain.",
+      "imageUrl": "https://image2url.com/r2/default/files/1770462568985-dc2a3b81-4ca1-4b45-b94d-901d677f1aae.avif",
+      "imageHint": "gameboy pendant"
+    },
+    {
+      "id": "prod_img_32",
+      "description": "A 2-piece set of men's chain and hip-hop style pendant.",
+      "imageUrl": "https://image2url.com/r2/default/files/1770462612450-718589f9-5f4e-473d-978c-fe4b82c6f57a.avif",
+      "imageHint": "men chain"
     }
   ]
 }

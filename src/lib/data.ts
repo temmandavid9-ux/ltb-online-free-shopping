@@ -19,7 +19,7 @@ export const categories: Category[] = [
   { id: 'cat6', name: 'Gaming', icon: Gamepad2 },
 ];
 
-export const brands: string[] = ['Zenco', 'Stellar', 'Nexa', 'Orion', 'Helios'];
+export const brands: string[] = ['Zenco', 'Stellar', 'Nexa', 'Orion', 'Helios', 'iDino'];
 
 export const products: Product[] = [
   {
@@ -320,5 +320,44 @@ export const products: Product[] = [
     stock: 150,
     rating: 4.7,
     reviewCount: 290,
+  },
+  {
+    id: 'prod_30',
+    slug: 'idino-notebook-core',
+    name: 'iDino Notebook Core i9',
+    description: 'AI-powered notebook with 5G connectivity and a sleek design.',
+    category: 'Gadgets',
+    price: 750000,
+    brand: 'iDino',
+    images: [findImage('prod_img_30')],
+    stock: 100,
+    rating: 4.8,
+    reviewCount: 120,
+  },
+  {
+    id: 'prod_31',
+    slug: 'hip-hop-gameboy-pendant',
+    name: 'Hip-Hop Game Boy Pendant',
+    description: 'Iced out bling Game Boy pendant with a big square chain for a hip-hop look.',
+    category: 'Fashion',
+    price: 32000,
+    brand: 'Orion',
+    images: [findImage('prod_img_31')],
+    stock: 50,
+    rating: 4.7,
+    reviewCount: 110,
+  },
+  {
+    id: 'prod_32',
+    slug: 'mens-chain-pendant-set',
+    name: "Men's Chain & Pendant Set",
+    description: 'A 2-piece set including a stylish chain and a hip-hop pendant.',
+    category: 'Fashion',
+    price: 28000,
+    brand: 'Zenco',
+    images: [findImage('prod_img_32')],
+    stock: 80,
+    rating: 4.5,
+    reviewCount: 95,
   },
 ];
