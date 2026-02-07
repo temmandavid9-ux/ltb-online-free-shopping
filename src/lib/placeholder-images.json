@@ -239,6 +239,114 @@
       "description": "A full view of the ergonomic gaming chair.",
       "imageUrl": "https://image2url.com/r2/default/images/1770489128638-93f6f2a1-3d2f-4c7a-993b-669eeb663e37.avif",
       "imageHint": "gaming chair"
+    },
+    {
+      "id": "prod_img_41",
+      "description": "Futuristic trench coat, front view.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770488660475-a6a94b0c-58a4-4f51-8453-e602db8657b6.avif",
+      "imageHint": "cyberpunk coat"
+    },
+    {
+      "id": "prod_img_42",
+      "description": "Futuristic trench coat, side view.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770488694307-6cb58a26-90b7-4abb-99cf-0e42e8d171bc.webp",
+      "imageHint": "cyberpunk coat"
+    },
+    {
+      "id": "prod_img_43",
+      "description": "Futuristic trench coat, back view.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770488725407-163bbbf9-dbe4-49ae-bf75-6140a8cdb970.avif",
+      "imageHint": "cyberpunk coat"
+    },
+    {
+      "id": "prod_img_44",
+      "description": "Close-up of the trench coat's fabric.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770488760577-a050ae42-7793-4e72-96bf-7669872356db.avif",
+      "imageHint": "cyberpunk coat"
+    },
+    {
+      "id": "prod_img_45",
+      "description": "Holographic display unit in a dark room.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770488796812-4331350b-e4c7-4e4c-a7f4-72f9a651bf88.avif",
+      "imageHint": "hologram display"
+    },
+    {
+      "id": "prod_img_46",
+      "description": "Holographic unit displaying a globe.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770488834217-6873441a-faaa-44a8-8e40-34a0512d4b7c.avif",
+      "imageHint": "hologram globe"
+    },
+    {
+      "id": "prod_img_47",
+      "description": "Side view of the holographic display unit.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770488897606-43d0bfe7-d647-464d-9b31-493d81b836c7.avif",
+      "imageHint": "hologram device"
+    },
+    {
+      "id": "prod_img_48",
+      "description": "The holographic display projecting a car.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770488931046-b79ea896-3fc8-46c5-97ce-a5ba44a7aaf1.avif",
+      "imageHint": "hologram car"
+    },
+    {
+      "id": "prod_img_49",
+      "description": "A pair of white sneakers with smart soles.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770486852576-4eb33fef-1570-49a5-bfdf-6cc1c135bf39.jpg",
+      "imageHint": "smart sneakers"
+    },
+    {
+      "id": "prod_img_50",
+      "description": "Side profile of the smart-sole sneakers.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770486878057-f467a0ff-dc9c-4eb4-808e-c2c958aecda7.jpg",
+      "imageHint": "sneakers side"
+    },
+    {
+      "id": "prod_img_51",
+      "description": "Top-down view of the smart sneakers.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770486903238-95703118-2f57-4cfa-894f-1a472c237d8a.jpg",
+      "imageHint": "sneakers top"
+    },
+    {
+      "id": "prod_img_52",
+      "description": "Close-up on the sole of the smart sneakers.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770486928468-b9b2d5d9-0737-427b-a466-b152dff5831f.jpg",
+      "imageHint": "sneakers sole"
+    },
+    {
+      "id": "prod_img_53",
+      "description": "Lifestyle shot of someone wearing the smart sneakers.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770486986859-fd34f942-6a24-4d78-89b4-75d42cf64bcb.jpg",
+      "imageHint": "sneakers lifestyle"
+    },
+    {
+      "id": "prod_img_54",
+      "description": "A sleek, modern drone in flight.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770487014963-79cf9a1a-173b-4ec5-a311-0096823b9640.jpg",
+      "imageHint": "drone flying"
+    },
+    {
+      "id": "prod_img_55",
+      "description": "Top-down view of the Quantum Drone X.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770487037981-5d0ed6c2-fa11-4d69-982c-2002aa39e35b.jpg",
+      "imageHint": "drone top"
+    },
+    {
+      "id": "prod_img_56",
+      "description": "The drone's controller.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770487069960-e85ffd9c-337c-4643-9ae4-94118fbc6577.jpeg",
+      "imageHint": "drone controller"
+    },
+    {
+      "id": "prod_img_57",
+      "description": "A rolled-up yoga mat.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770487098215-72114185-cc0d-4542-b751-a50eb593e11e.jpg",
+      "imageHint": "yoga mat"
+    },
+    {
+      "id": "prod_img_58",
+      "description": "A person using the Zen Yoga Mat.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770487125122-a1e18b54-63be-4ef0-b331-dba1c4decf9f.webp",
+      "imageHint": "yoga pose"
     }
   ]
 }
