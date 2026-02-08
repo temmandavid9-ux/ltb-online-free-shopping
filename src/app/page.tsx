@@ -22,11 +22,11 @@ export default function Home() {
               <Card className="bg-primary text-primary-foreground overflow-hidden">
                 <div className="flex items-center justify-between p-8">
                     <div className="z-10 max-w-md">
-                        <h2 className="text-3xl font-bold mb-2">Upgrade Your Tech</h2>
-                        <p className="mb-4 text-primary-foreground/80">Get the latest gadgets at unbeatable prices. Redeem with your earnings!</p>
-                        <Button variant="secondary" asChild><Link href="#">Shop Gadgets</Link></Button>
+                        <h2 className="text-3xl font-bold mb-2">High-Tech Laptops</h2>
+                        <p className="mb-4 text-primary-foreground/80">Powerful laptops for work and play. Redeem yours today!</p>
+                        <Button variant="secondary" asChild><Link href="#">Shop Laptops</Link></Button>
                     </div>
-                    <Image src="https://picsum.photos/seed/gadget/400/250" data-ai-hint="gadgets tech" alt="Gadgets" width={400} height={250} className="rounded-lg z-10" />
+                    <Image src="https://cdn.phototourl.com/uploads/2026-02-07-d223f37a-d7bf-4d3b-9782-154f265de79e.jpg" data-ai-hint="silver laptop" alt="Laptops" width={400} height={250} className="rounded-lg z-10" />
                 </div>
               </Card>
             </CarouselItem>
@@ -34,11 +34,11 @@ export default function Home() {
               <Card className="bg-accent text-accent-foreground overflow-hidden">
                 <div className="flex items-center justify-between p-8">
                     <div className="z-10 max-w-md">
-                        <h2 className="text-3xl font-bold mb-2">Fresh Groceries Delivered</h2>
-                        <p className="mb-4 text-accent-foreground/80">Stock up your pantry with fresh produce and essentials.</p>
-                        <Button variant="secondary" asChild><Link href="#">Shop Groceries</Link></Button>
+                        <h2 className="text-3xl font-bold mb-2">Luxury Watches</h2>
+                        <p className="mb-4 text-accent-foreground/80">Discover our collection of stylish and elegant watches.</p>
+                        <Button variant="secondary" asChild><Link href="#">Shop Watches</Link></Button>
                     </div>
-                    <Image src="https://picsum.photos/seed/grocery/400/250" data-ai-hint="groceries food" alt="Groceries" width={400} height={250} className="rounded-lg z-10" />
+                    <Image src="https://image2url.com/r2/default/files/1770462568985-dc2a3b81-4ca1-4b45-b94d-901d677f1aae.avif" data-ai-hint="gold watch" alt="Watches" width={400} height={250} className="rounded-lg z-10" />
                 </div>
               </Card>
             </CarouselItem>
