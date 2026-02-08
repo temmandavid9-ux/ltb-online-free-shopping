@@ -1,7 +1,7 @@
 
 import type { Product, Category } from './types';
 import { PlaceHolderImages } from './placeholder-images';
-import { Shirt, Laptop, Watch, Headphones, Dna, Gamepad2, Dumbbell, Apple, CookingPot, Footprints, Layers } from 'lucide-react';
+import { Shirt, Laptop, Watch, Dna, Footprints, Layers } from 'lucide-react';
 
 const findImage = (id: string) => {
   const image = PlaceHolderImages.find(img => img.id === id);
@@ -18,11 +18,6 @@ export const categories: Category[] = [
   { id: 'cat4', name: 'Shoes', icon: Footprints },
   { id: 'cat5', name: 'Watches', icon: Watch },
   { id: 'cat6', name: 'Underwear', icon: Layers },
-  { id: 'cat7', name: 'Gadgets', icon: Headphones },
-  { id: 'cat8', name: 'Gaming', icon: Gamepad2 },
-  { id: 'cat9', name: 'Appliances', icon: CookingPot },
-  { id: 'cat10', name: 'Groceries', icon: Apple },
-  { id: 'cat11', name: 'Health', icon: Dumbbell },
 ];
 
 
