@@ -345,5 +345,83 @@ export const products: Product[] = [
     stock: 180,
     rating: 4.8,
     reviewCount: 380
+  },
+  {
+    id: 'prod_25',
+    slug: 'nexa-gaming-chair',
+    name: 'Nexa Ergonomic Gaming Chair',
+    description: 'Game in comfort and style with the Nexa gaming chair. Fully adjustable with lumbar support.',
+    category: 'Gaming',
+    price: 150000,
+    brand: 'Nexa',
+    images: [findImage('prod_img_25')],
+    stock: 50,
+    rating: 4.9,
+    reviewCount: 180
+  },
+  {
+    id: 'prod_26',
+    slug: 'orion-pro-gaming-headset',
+    name: 'Orion Pro Gaming Headset',
+    description: 'Immersive sound and crystal-clear communication with the Orion Pro headset.',
+    category: 'Gaming',
+    price: 65000,
+    brand: 'Orion',
+    images: [findImage('prod_img_26')],
+    stock: 75,
+    rating: 4.7,
+    reviewCount: 220
+  },
+  {
+    id: 'prod_27',
+    slug: 'zenco-mechanical-keyboard',
+    name: 'Zenco Mechanical Keyboard',
+    description: 'RGB backlit mechanical keyboard for the ultimate gaming experience.',
+    category: 'Gaming',
+    price: 80000,
+    brand: 'Zenco',
+    images: [findImage('prod_img_27')],
+    stock: 60,
+    rating: 4.8,
+    reviewCount: 190
+  },
+  {
+    id: 'prod_28',
+    slug: 'helios-fitness-tracker',
+    name: 'Helios Fitness Tracker',
+    description: 'Track your steps, heart rate, and workouts with the sleek Helios fitness band.',
+    category: 'Health',
+    price: 45000,
+    brand: 'Helios',
+    images: [findImage('prod_img_28')],
+    stock: 110,
+    rating: 4.6,
+    reviewCount: 350
+  },
+  {
+    id: 'prod_29',
+    slug: 'aperture-power-blender',
+    name: 'Aperture Power Blender',
+    description: 'High-speed blender perfect for smoothies, soups, and more. A kitchen essential.',
+    category: 'Appliances',
+    price: 55000,
+    brand: 'Aperture',
+    images: [findImage('prod_img_29')],
+    stock: 90,
+    rating: 4.9,
+    reviewCount: 400
+  },
+  {
+    id: 'prod_30',
+    slug: 'stellar-denim-jacket',
+    name: 'Stellar Denim Jacket',
+    description: 'A timeless denim jacket from Stellar. Perfect for layering in any season.',
+    category: 'Clothes',
+    price: 48000,
+    brand: 'Stellar',
+    images: [findImage('prod_img_30')],
+    stock: 70,
+    rating: 4.8,
+    reviewCount: 310
   }
 ];
