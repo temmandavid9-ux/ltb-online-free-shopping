@@ -1,5 +1,4 @@
 import { products } from '@/lib/data';
-import { AiRecommendations } from '@/components/AiRecommendations';
 import {
   Carousel,
   CarouselContent,
@@ -51,7 +50,6 @@ export default function Home() {
       
       <ProductGrid products={products} />
       
-      <AiRecommendations />
     </div>
   );
 }
