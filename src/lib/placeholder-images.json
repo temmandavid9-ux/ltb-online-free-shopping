@@ -1,3 +1,148 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "prod_img_1",
+      "description": "Image for product 1",
+      "imageUrl": "https://image2url.com/r2/default/files/1770462568985-dc2a3b81-4ca1-4b45-b94d-901d677f1aae.avif",
+      "imageHint": "watch"
+    },
+    {
+      "id": "prod_img_2",
+      "description": "Image for product 2",
+      "imageUrl": "https://image2url.com/r2/default/files/1770462612450-718589f9-5f4e-473d-978c-fe4b82c6f57a.avif",
+      "imageHint": "watch"
+    },
+    {
+      "id": "prod_img_3",
+      "description": "Image for product 3",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-d223f37a-d7bf-4d3b-9782-154f265de79e.jpg",
+      "imageHint": "laptop"
+    },
+    {
+      "id": "prod_img_4",
+      "description": "Image for product 4",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-7bd8b30e-4f5e-4c90-a6a8-5d641a006f77.jpg",
+      "imageHint": "laptop"
+    },
+    {
+      "id": "prod_img_5",
+      "description": "Image for product 5",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-32a17242-6e52-457b-8c7a-12006e96ec42.webp",
+      "imageHint": "watch"
+    },
+    {
+      "id": "prod_img_6",
+      "description": "Image for product 6",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-2792b545-afe3-43c9-8a35-3d5d6fa72699.jpg",
+      "imageHint": "shoes"
+    },
+    {
+      "id": "prod_img_7",
+      "description": "Image for product 7",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-1412b7be-0c88-495e-b501-4412dfc205dd.webp",
+      "imageHint": "shoes"
+    },
+    {
+      "id": "prod_img_8",
+      "description": "Image for product 8",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-f27f2046-a204-4920-b05b-6bf759253f24.jpg",
+      "imageHint": "wig"
+    },
+    {
+      "id": "prod_img_9",
+      "description": "Image for product 9",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-fd4d687e-fedd-45f4-a082-222e19a9fb8b.jpg",
+      "imageHint": "wig"
+    },
+    {
+      "id": "prod_img_10",
+      "description": "Image for product 10",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-256b81cd-7ab3-4640-b1e2-f01fa2634065.jpg",
+      "imageHint": "clothes"
+    },
+    {
+      "id": "prod_img_11",
+      "description": "Image for product 11",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-00399e10-cd3f-48fe-bde8-008582d90f05.jpg",
+      "imageHint": "clothes"
+    },
+    {
+      "id": "prod_img_12",
+      "description": "Image for product 12",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-7ff1bddc-0fa0-4068-96d5-98ad6e3e0e91.jpg",
+      "imageHint": "clothes"
+    },
+    {
+      "id": "prod_img_13",
+      "description": "Image for product 13",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-0fafac94-c472-4dbd-aa27-eaa653a4f675.jpg",
+      "imageHint": "clothes"
+    },
+    {
+      "id": "prod_img_14",
+      "description": "Image for product 14",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-48862d90-df21-4cca-b21d-4e7faf0ac4c0.webp",
+      "imageHint": "underwear"
+    },
+    {
+      "id": "prod_img_15",
+      "description": "Image for product 15",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-7e4a7257-8d43-450f-96c3-f872a143d854.jpg",
+      "imageHint": "underwear"
+    },
+    {
+      "id": "prod_img_16",
+      "description": "Image for product 16",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-087b2dd3-8028-4c75-b203-6545e3869208.webp",
+      "imageHint": "watch"
+    },
+    {
+      "id": "prod_img_17",
+      "description": "Image for product 17",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-01e12df0-afb6-4314-a096-5ee6bb279aa2.webp",
+      "imageHint": "watch"
+    },
+    {
+      "id": "prod_img_18",
+      "description": "Image for product 18",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-f92fc1c7-1aba-44f7-af64-1280d2715ef1.webp",
+      "imageHint": "watch"
+    },
+    {
+      "id": "prod_img_19",
+      "description": "Image for product 19",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-8f774bd2-d428-4006-9c17-6b0a2c4c5fa4.jpg",
+      "imageHint": "shoes"
+    },
+    {
+      "id": "prod_img_20",
+      "description": "Image for product 20",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-8f147a4b-8d95-4b5f-8643-0c1a0ff3c719.jpg",
+      "imageHint": "shoes"
+    },
+    {
+      "id": "prod_img_21",
+      "description": "Image for product 21",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-26ec56c2-54a4-4e1a-a7cb-ae5389d465cd.jpg",
+      "imageHint": "watch"
+    },
+    {
+      "id": "prod_img_22",
+      "description": "Image for product 22",
+      "imageUrl": "https://pub-141831e61e69445289222976a15b6fb3.r2.dev/Image_to_url_V2/Chains-Moissanite-Diamond-Cuban-Necklace-imagetourl.cloud-1770467706548-s2em96.webp",
+      "imageHint": "watch"
+    },
+    {
+      "id": "prod_img_23",
+      "description": "Image for product 23",
+      "imageUrl": "https://image2url.com/r2/default/images/1770467871575-52c0c2a1-8e6c-43bb-90c6-6a755b62bca3.avif",
+      "imageHint": "watch"
+    },
+    {
+      "id": "prod_img_24",
+      "description": "Image for product 24",
+      "imageUrl": "https://image2url.com/r2/default/images/1770467914636-de2975cf-1b03-41cd-8197-71b9731d3e04.avif",
+      "imageHint": "watch"
+    }
+  ]
 }
