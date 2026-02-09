@@ -48,7 +48,7 @@ export default function Header() {
                  <div className="h-8 w-px bg-border" />
                  <Link href="/wallet" className="flex items-center space-x-2 hover:text-primary transition-colors">
                     <Wallet className="h-5 w-5" />
-                    <span className="text-sm font-bold">₦{userData.walletBalance?.toLocaleString() || '0.00'}</span>
+                    <span className="text-sm font-bold">${userData.walletBalance?.toLocaleString() || '0.00'}</span>
                  </Link>
                 {isAdmin && <Link href="/admin"><Button variant="ghost" size="sm">Admin</Button></Link>}
                 <Link href="/account"><Button variant="outline" size="sm">Account</Button></Link>

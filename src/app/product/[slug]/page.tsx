@@ -93,7 +93,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           <Badge variant="outline">{product.brand}</Badge>
           <h1 className="text-4xl font-bold font-headline">{product.name}</h1>
           <StarRating rating={product.rating} reviewCount={product.reviewCount} />
-          <p className="text-3xl font-bold text-primary">₦{product.price.toLocaleString()}</p>
+          <p className="text-3xl font-bold text-primary">${product.price.toLocaleString()}</p>
           <p className="text-muted-foreground leading-relaxed">{product.description}</p>
           
           <div className="flex items-center space-x-4">

@@ -45,7 +45,7 @@ export default function RedeemPage() {
                 <div className="flex-grow">
                   <Link href={`/product/${item.product.slug}`} className="font-semibold hover:text-primary">{item.product.name}</Link>
                   <p className="text-sm text-muted-foreground">{item.product.brand}</p>
-                  <p className="text-lg font-bold text-primary mt-1">₦{item.product.price.toLocaleString()}</p>
+                  <p className="text-lg font-bold text-primary mt-1">${item.product.price.toLocaleString()}</p>
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="flex items-center border rounded-md">
@@ -68,7 +68,7 @@ export default function RedeemPage() {
             <CardContent className="space-y-4">
               <div className="flex justify-between">
                 <span>Subtotal ({itemCount} items)</span>
-                <span>₦{basketTotal.toLocaleString()}</span>
+                <span>${basketTotal.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
                 <span>Shipping</span>
@@ -77,7 +77,7 @@ export default function RedeemPage() {
               <Separator />
               <div className="flex justify-between font-bold text-lg">
                 <span>Total</span>
-                <span>₦{basketTotal.toLocaleString()}</span>
+                <span>${basketTotal.toLocaleString()}</span>
               </div>
             </CardContent>
             <CardFooter>

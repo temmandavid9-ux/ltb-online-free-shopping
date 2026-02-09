@@ -54,7 +54,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <span className="text-xs text-muted-foreground">({product.reviewCount})</span>
           </div>
           <p className="text-lg font-bold text-primary mb-3">
-            ₦{product.price.toLocaleString()}
+            ${product.price.toLocaleString()}
           </p>
           <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold" onClick={() => addToBasket(product)}>
             Redeem

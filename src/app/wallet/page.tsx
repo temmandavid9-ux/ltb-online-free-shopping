@@ -18,7 +18,7 @@ import { useToast } from "@/hooks/use-toast";
 import { DollarSign, WalletCards, Landmark } from "lucide-react";
 import type { Withdrawal } from "@/lib/types";
 
-const MIN_WITHDRAWAL_AMOUNT = 100000;
+const MIN_WITHDRAWAL_AMOUNT = 50;
 
 const withdrawalSchema = z.object({
   amount: z.coerce.number().min(1, { message: 'Amount must be greater than 0.' }),
@@ -69,7 +69,7 @@ export default function WalletPage() {
         return;
     }
     if (values.amount < MIN_WITHDRAWAL_AMOUNT) {
-        toast({ variant: 'destructive', title: 'Invalid Amount', description: `Withdrawal amount must be at least ₦${MIN_WITHDRAWAL_AMOUNT.toLocaleString()}.` });
+        toast({ variant: 'destructive', title: 'Invalid Amount', description: `Withdrawal amount must be at least $${MIN_WITHDRAWAL_AMOUNT.toLocaleString()}.` });
         return;
     }
 
@@ -119,7 +119,7 @@ export default function WalletPage() {
                 <DollarSign className="w-4 h-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-                <div className="text-4xl font-bold">₦{walletBalance.toLocaleString()}</div>
+                <div className="text-4xl font-bold">${walletBalance.toLocaleString()}</div>
             </CardContent>
           </Card>
           <Card>
@@ -132,7 +132,7 @@ export default function WalletPage() {
                 <Alert>
                   <WalletCards className="h-4 w-4"/>
                   <AlertTitle>Minimum Balance Required</AlertTitle>
-                  <AlertDescription>You need at least ₦{MIN_WITHDRAWAL_AMOUNT.toLocaleString()} in your wallet to make a withdrawal.</AlertDescription>
+                  <AlertDescription>You need at least ${MIN_WITHDRAWAL_AMOUNT.toLocaleString()} in your wallet to make a withdrawal.</AlertDescription>
                 </Alert>
               )}
               <Form {...form}>
@@ -185,7 +185,7 @@ export default function WalletPage() {
                   {clientWithdrawals.length > 0 ? clientWithdrawals.map(w => (
                     <TableRow key={w.id}>
                       <TableCell>{w.formattedDate}</TableCell>
-                      <TableCell className="font-medium">₦{w.amount.toLocaleString()}</TableCell>
+                      <TableCell className="font-medium">${w.amount.toLocaleString()}</TableCell>
                       <TableCell>{w.paymentMethod}</TableCell>
                       <TableCell>
                          <Badge variant={w.status === 'Approved' ? 'default' : 'secondary'} className={

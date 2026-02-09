@@ -76,7 +76,7 @@ export default function CheckoutPage() {
       toast({
         variant: "destructive",
         title: "Insufficient Funds",
-        description: `Your wallet balance is ₦${userData.walletBalance.toLocaleString()}, but the order total is ₦${basketTotal.toLocaleString()}.`,
+        description: `Your wallet balance is $${userData.walletBalance.toLocaleString()}, but the order total is $${basketTotal.toLocaleString()}.`,
       });
       return;
     }
@@ -188,23 +188,23 @@ export default function CheckoutPage() {
               {basket.map(item => (
                 <div key={item.product.id} className="flex justify-between items-center text-sm">
                   <span>{item.product.name} x {item.quantity}</span>
-                  <span className="font-medium">₦{(item.product.price * item.quantity).toLocaleString()}</span>
+                  <span className="font-medium">${(item.product.price * item.quantity).toLocaleString()}</span>
                 </div>
               ))}
               <Separator />
               <div className="flex justify-between font-bold text-lg">
                 <span>Total</span>
-                <span>₦{basketTotal.toLocaleString()}</span>
+                <span>${basketTotal.toLocaleString()}</span>
               </div>
                <Separator />
                <div className="space-y-2">
                  <div className="flex justify-between">
                     <span>Your Wallet Balance</span>
-                    <span>₦{walletBalance.toLocaleString()}</span>
+                    <span>${walletBalance.toLocaleString()}</span>
                  </div>
                  <div className={`flex justify-between font-medium ${canAfford ? 'text-green-600' : 'text-red-600'}`}>
                     <span>Remaining Balance</span>
-                    <span>₦{(walletBalance - basketTotal).toLocaleString()}</span>
+                    <span>${(walletBalance - basketTotal).toLocaleString()}</span>
                  </div>
                </div>
 
