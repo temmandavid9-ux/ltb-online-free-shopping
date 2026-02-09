@@ -302,123 +302,243 @@
     },
     {
       "id": "prod_img_51",
-      "description": "A stylish accessory.",
+      "description": "Nexa V-Neck Shirt",
       "imageUrl": "https://image2url.com/r2/default/images/1770468563828-4853039c-03b4-4767-8974-96121f12c531.webp",
       "imageHint": "fashion accessory"
     },
     {
       "id": "prod_img_52",
-      "description": "A modern gadget.",
+      "description": "Aperture Curly Wig",
       "imageUrl": "https://image2url.com/r2/default/images/1770468589367-a114e03b-ed3a-4a34-9549-a38c87d6c842.webp",
       "imageHint": "modern gadget"
     },
     {
       "id": "prod_img_53",
-      "description": "A sleek electronic device.",
+      "description": "iDino Convertible Laptop",
       "imageUrl": "https://image2url.com/r2/default/images/1770468622087-e0695458-81a0-453b-a9c0-eed6caee78d1.webp",
       "imageHint": "electronic device"
     },
     {
       "id": "prod_img_54",
-      "description": "A fashionable item.",
+      "description": "Orion Hiking Boots",
       "imageUrl": "https://image2url.com/r2/default/images/1770468648936-a29e7442-1336-460b-9a82-ee37e9c5c301.webp",
       "imageHint": "fashion item"
     },
     {
       "id": "prod_img_55",
-      "description": "A unique product.",
+      "description": "Stellar Digital Watch",
       "imageUrl": "https://image2url.com/r2/default/images/1770468691698-78fd3667-7c38-4c7a-bde1-c571702ff63d.webp",
       "imageHint": "unique product"
     },
     {
       "id": "prod_img_56",
-      "description": "A personal care item.",
+      "description": "Zenco Boxer Briefs",
       "imageUrl": "https://image2url.com/r2/default/images/1770468712368-05fd740d-5eb6-4866-8790-b822e30c8e00.webp",
       "imageHint": "personal care"
     },
     {
       "id": "prod_img_57",
-      "description": "A stylish wearable.",
+      "description": "Helios Rope Chain",
       "imageUrl": "https://image2url.com/r2/default/images/1770468731109-47413a52-d8bf-411b-aac2-0fad4a6f0b0e.jpg",
       "imageHint": "stylish wearable"
     },
     {
       "id": "prod_img_58",
-      "description": "An everyday essential.",
+      "description": "Nexa Phone Z2",
       "imageUrl": "https://image2url.com/r2/default/images/1770468753675-d6656c13-1053-45f7-b693-2e65699cdbb9.webp",
       "imageHint": "everyday essential"
     },
     {
       "id": "prod_img_59",
-      "description": "A luxury item.",
+      "description": "Aperture Polo Shirt",
       "imageUrl": "https://image2url.com/r2/default/images/1770468775550-8864e948-29a2-43c3-ac47-1d71bd5f63b2.jpg",
       "imageHint": "luxury item"
     },
     {
       "id": "prod_img_60",
-      "description": "A tech gadget.",
+      "description": "Orion Long Wig",
       "imageUrl": "https://image2url.com/r2/default/images/1770468811230-54d36cba-51bc-4935-a7fd-574d98bdc8c4.jpg",
       "imageHint": "tech gadget"
     },
     {
       "id": "prod_img_61",
-      "description": "A piece of clothing.",
+      "description": "Zenco Notebook Pro",
       "imageUrl": "https://image2url.com/r2/default/images/1770468833787-e8abc983-63c1-4864-ad50-14d296865c5d.jpg",
       "imageHint": "clothing item"
     },
     {
       "id": "prod_img_62",
-      "description": "A modern accessory.",
+      "description": "Stellar Sandals",
       "imageUrl": "https://image2url.com/r2/default/images/1770468863552-69045a6a-b5cc-4ef0-b477-686dac0e4a80.avif",
       "imageHint": "modern accessory"
     },
     {
       "id": "prod_img_63",
-      "description": "A stylish product.",
+      "description": "Helios Minimalist Watch",
       "imageUrl": "https://image2url.com/r2/default/images/1770468886249-6f203a10-f99a-48b0-8924-80feaded2a24.avif",
       "imageHint": "stylish product"
     },
     {
       "id": "prod_img_64",
-      "description": "A digital device.",
+      "description": "Nexa Comfort Thong",
       "imageUrl": "https://image2url.com/r2/default/images/1770468911685-f5e1e337-5c24-4381-91de-c862979f371b.avif",
       "imageHint": "digital device"
     },
     {
       "id": "prod_img_65",
-      "description": "A fashion piece.",
+      "description": "Aperture Cuban Link",
       "imageUrl": "https://image2url.com/r2/default/images/1770468935032-1a3b9960-a33d-41d5-8485-1611b45987fd.avif",
       "imageHint": "fashion piece"
     },
     {
       "id": "prod_img_66",
-      "description": "A personal gadget.",
+      "description": "iDino Phone Lite",
       "imageUrl": "https://image2url.com/r2/default/images/1770468955721-6e90ae28-041d-4462-bc6b-f96ef6494040.avif",
       "imageHint": "personal gadget"
     },
     {
       "id": "prod_img_67",
-      "description": "An electronic item.",
+      "description": "Orion Denim Jacket",
       "imageUrl": "https://image2url.com/r2/default/images/1770468981878-6bf15b0f-66a2-4efc-ad46-f550c65be02c.avif",
       "imageHint": "electronic item"
     },
     {
       "id": "prod_img_68",
-      "description": "A stylish item.",
+      "description": "Zenco Straight Wig",
       "imageUrl": "https://image2url.com/r2/default/images/1770469053863-db4e664a-6e2c-4ee2-b048-25611440c1ae.avif",
       "imageHint": "stylish item"
     },
     {
       "id": "prod_img_69",
-      "description": "A cool gadget.",
+      "description": "Nexa Ultrabook Air",
       "imageUrl": "https://image2url.com/r2/default/images/1770469077823-f8634de3-af0b-4b29-ba64-87356434ec07.avif",
       "imageHint": "cool gadget"
     },
     {
       "id": "prod_img_70",
-      "description": "A unique find.",
+      "description": "Aperture Dress Shoes",
       "imageUrl": "https://image2url.com/r2/default/images/1770469109462-8899b7e2-a0fb-43c5-bd04-bbcef5c654b1.avif",
       "imageHint": "unique find"
+    },
+    {
+      "id": "prod_img_71",
+      "description": "Product 71",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469130852-e55e6a3b-c181-4242-afa5-d625506924e1.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_72",
+      "description": "Product 72",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469153031-f2287282-c0b4-4509-91e2-86907dc353e7.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_73",
+      "description": "Product 73",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469174990-a323722d-e43f-41dc-a06c-5be19d40dc11.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_74",
+      "description": "Product 74",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469196520-0fb4553a-d764-49f8-aa8c-a7fd036f747d.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_75",
+      "description": "Product 75",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469213827-73f57bac-7956-4af2-a4fd-ddf24bb2bfbc.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_76",
+      "description": "Product 76",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469248836-fe92c370-b708-4d5f-8356-19a03ca72f48.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_77",
+      "description": "Product 77",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469272536-06c83049-7700-47f4-971d-745434cecbc0.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_78",
+      "description": "Product 78",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469291273-75a1b791-19a4-41c8-bbc5-15d5b1c1abee.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_79",
+      "description": "Product 79",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469338263-11ee4b4c-5ba3-437f-b0d9-37f4b2f03e28.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_80",
+      "description": "Product 80",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469359925-c1a4dcfb-9720-4922-bc61-1c2e28ca5b28.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_81",
+      "description": "Product 81",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469379884-58567d34-8b50-4804-8b5f-335633589e6d.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_82",
+      "description": "Product 82",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469405543-cabf62bc-ae34-4ea7-9c81-f9c018eb1095.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_83",
+      "description": "Product 83",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469432056-5a5fd897-8898-40de-9494-e920155a984f.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_84",
+      "description": "Product 84",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469457787-460f2086-5018-4d48-bac7-c9830022cf8d.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_85",
+      "description": "Product 85",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469478634-247456a2-91b3-42ea-aadd-e9c8a8844812.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_86",
+      "description": "Product 86",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469500078-0c4d7527-070b-46c3-90f3-4a35f9f01598.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_87",
+      "description": "Product 87",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469522306-46bc24c9-a3ad-40f5-aa99-daad9bc13777.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_88",
+      "description": "Product 88",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469544887-34eae694-c0dd-4429-9ffe-f376feaf53b8.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_89",
+      "description": "Product 89",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469566686-19acb97b-3d6c-4ff6-9129-ae3a5e398d1f.avif",
+      "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_90",
+      "description": "Product 90",
+      "imageUrl": "https://image2url.com/r2/default/images/1770469586249-7e32f882-cbc2-4db3-ab3d-814e09139d59.avif",
+      "imageHint": "new product"
     }
   ]
 }
