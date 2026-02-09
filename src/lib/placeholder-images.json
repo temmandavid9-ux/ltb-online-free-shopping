@@ -179,6 +179,126 @@
       "description": "A sleek modern smartphone in white.",
       "imageUrl": "https://image2url.com/r2/default/images/1770468053586-bcc2cc7c-fd48-4ca5-94f1-35a46bd0fd1a.avif",
       "imageHint": "white smartphone"
+    },
+    {
+      "id": "prod_img_31",
+      "description": "iDino Tablet Ultra",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468073610-93cfe92b-39ec-4ea9-b3b0-1e3f4c91367a.avif",
+      "imageHint": "tablet device"
+    },
+    {
+      "id": "prod_img_32",
+      "description": "Aperture Leather Wallet",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468092626-4c451d81-6784-417a-b2fb-d5f5d448dbdc.avif",
+      "imageHint": "leather wallet"
+    },
+    {
+      "id": "prod_img_33",
+      "description": "Zenco Wireless Earbuds",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468115712-2c6a7af7-84a3-4c8f-b353-6d6643ed4e62.avif",
+      "imageHint": "wireless earbuds"
+    },
+    {
+      "id": "prod_img_34",
+      "description": "Orion Silk Scarf",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468137485-9c5091e0-d3ba-4f7c-a4a2-86d28dd3469c.avif",
+      "imageHint": "silk scarf"
+    },
+    {
+      "id": "prod_img_35",
+      "description": "Stellar Sunglasses",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468155156-52775d91-7f88-4a26-b7cf-c31781ffc92d.jpg",
+      "imageHint": "sunglasses"
+    },
+    {
+      "id": "prod_img_36",
+      "description": "Nexa Fitness Tracker",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468181342-df84afd4-e928-4717-a128-61bb71f44cba.webp",
+      "imageHint": "fitness tracker"
+    },
+    {
+      "id": "prod_img_37",
+      "description": "Helios Messenger Bag",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468205961-bd36e426-f3f1-401b-8212-dd7dd47fecd6.avif",
+      "imageHint": "messenger bag"
+    },
+    {
+      "id": "prod_img_38",
+      "description": "iDino Portable Speaker",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468227478-da020457-4e99-447a-bb61-3c0537d82acd.avif",
+      "imageHint": "portable speaker"
+    },
+    {
+      "id": "prod_img_39",
+      "description": "Aperture Bob Wig",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468248598-ad76f8fa-fe95-45eb-9e49-7ab007c86b8e.avif",
+      "imageHint": "bob wig"
+    },
+    {
+      "id": "prod_img_40",
+      "description": "Zenco Canvas Sneakers",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468296800-d30eca6a-9fca-4438-a0cd-d0523bac28ae.avif",
+      "imageHint": "canvas sneakers"
+    },
+    {
+      "id": "prod_img_41",
+      "description": "Orion Diamond Ring",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468321722-d8080553-7905-467e-8e31-e8cd31e9b9e2.webp",
+      "imageHint": "diamond ring"
+    },
+    {
+      "id": "prod_img_42",
+      "description": "Stellar Performance Leggings",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468343722-4e717e62-6940-4c29-822f-3141b4343da9.avif",
+      "imageHint": "leggings"
+    },
+    {
+      "id": "prod_img_43",
+      "description": "Nexa Smart Thermostat",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468364402-f57f7854-f71b-4dd5-88db-210944d82bd1.avif",
+      "imageHint": "smart home device"
+    },
+    {
+      "id": "prod_img_44",
+      "description": "Helios Cashmere Sweater",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468388806-3dca3125-5cf4-4733-a47b-2f24b91b3408.avif",
+      "imageHint": "cashmere sweater"
+    },
+    {
+      "id": "prod_img_45",
+      "description": "iDino Drone",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468414284-4a9b5136-0183-42fe-8f89-5c5454adcad5.avif",
+      "imageHint": "drone"
+    },
+    {
+      "id": "prod_img_46",
+      "description": "Aperture Pearl Necklace",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468436244-0dcdee93-9818-4625-950b-73c860f9adad.jpg",
+      "imageHint": "pearl necklace"
+    },
+    {
+      "id": "prod_img_47",
+      "description": "Zenco Graphic Tee",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468469921-bee4928f-0d6d-4972-93f6-5dcc0ecc9551.webp",
+      "imageHint": "graphic tee"
+    },
+    {
+      "id": "prod_img_48",
+      "description": "Orion Crossbody Bag",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468495816-d1ba6e21-cc23-4722-ad2d-6d0c4585758a.webp",
+      "imageHint": "crossbody bag"
+    },
+    {
+      "id": "prod_img_49",
+      "description": "Stellar Wool Coat",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468520112-4d7cb3c7-d82e-41df-a59c-16a074f9eb2c.webp",
+      "imageHint": "wool coat"
+    },
+    {
+      "id": "prod_img_50",
+      "description": "Nexa Smart Lock",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468540910-00f0dc38-e5af-418c-b024-94610a0c950d.webp",
+      "imageHint": "smart lock"
     }
   ]
 }
