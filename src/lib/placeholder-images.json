@@ -1,3 +1,184 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "prod_img_1",
+      "description": "A gold watch on a dark background.",
+      "imageUrl": "https://image2url.com/r2/default/files/1770462568985-dc2a3b81-4ca1-4b45-b94d-901d677f1aae.avif",
+      "imageHint": "gold watch"
+    },
+    {
+      "id": "prod_img_2",
+      "description": "A stylish chronograph watch.",
+      "imageUrl": "https://image2url.com/r2/default/files/1770462612450-718589f9-5f4e-473d-978c-fe4b82c6f57a.avif",
+      "imageHint": "chronograph watch"
+    },
+    {
+      "id": "prod_img_3",
+      "description": "A sleek silver ultrabook laptop.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-d223f37a-d7bf-4d3b-9782-154f265de79e.jpg",
+      "imageHint": "silver laptop"
+    },
+    {
+      "id": "prod_img_4",
+      "description": "A professional black laptop.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-7bd8b30e-4f5e-4c90-a6a8-5d641a006f77.jpg",
+      "imageHint": "black laptop"
+    },
+    {
+      "id": "prod_img_5",
+      "description": "A plain white cotton t-shirt.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-32a17242-6e52-457b-8c7a-12006e96ec42.webp",
+      "imageHint": "white t-shirt"
+    },
+    {
+      "id": "prod_img_6",
+      "description": "A pair of white running sneakers.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-2792b545-afe3-43c9-8a35-3d5d6fa72699.jpg",
+      "imageHint": "white sneakers"
+    },
+    {
+      "id": "prod_img_7",
+      "description": "A pair of blue denim jeans.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-1412b7be-0c88-495e-b501-4412dfc205dd.webp",
+      "imageHint": "blue jeans"
+    },
+    {
+      "id": "prod_img_8",
+      "description": "A pair of brown leather loafers.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-f27f2046-a204-4920-b05b-6bf759253f24.jpg",
+      "imageHint": "brown loafers"
+    },
+    {
+      "id": "prod_img_9",
+      "description": "A modern black smartphone.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-fd4d687e-fedd-45f4-a082-222e19a9fb8b.jpg",
+      "imageHint": "black smartphone"
+    },
+    {
+      "id": "prod_img_10",
+      "description": "A stylish blonde wig.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-256b81cd-7ab3-4640-b1e2-f01fa2634065.jpg",
+      "imageHint": "blonde wig"
+    },
+    {
+      "id": "prod_img_11",
+      "description": "An elegant black evening gown.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-00399e10-cd3f-48fe-bde8-008582d90f05.jpg",
+      "imageHint": "black gown"
+    },
+    {
+      "id": "prod_img_12",
+      "description": "A pair of vibrant red high heels.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-7ff1bddc-0fa0-4068-96d5-98ad6e3e0e91.jpg",
+      "imageHint": "red heels"
+    },
+    {
+      "id": "prod_img_13",
+      "description": "A delicate silver chain necklace.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-0fafac94-c472-4dbd-aa27-eaa653a4f675.jpg",
+      "imageHint": "silver chain"
+    },
+    {
+      "id": "prod_img_14",
+      "description": "A set of comfortable white briefs.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-48862d90-df21-4cca-b21d-4e7faf0ac4c0.webp",
+      "imageHint": "white underwear"
+    },
+    {
+      "id": "prod_img_15",
+      "description": "A natural-looking brunette wig.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-7e4a7257-8d43-450f-96c3-f872a143d854.jpg",
+      "imageHint": "brunette wig"
+    },
+    {
+      "id": "prod_img_16",
+      "description": "A high-performance gaming laptop.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-087b2dd3-8028-4c75-b203-6545e3869208.webp",
+      "imageHint": "gaming laptop"
+    },
+    {
+      "id": "prod_img_17",
+      "description": "A cozy white fleece hoodie.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-01e12df0-afb6-4314-a096-5ee6bb279aa2.webp",
+      "imageHint": "white hoodie"
+    },
+    {
+      "id": "prod_img_18",
+      "description": "A classic silver wristwatch.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-f92fc1c7-1aba-44f7-af64-1280d2715ef1.webp",
+      "imageHint": "silver watch"
+    },
+    {
+      "id": "prod_img_19",
+      "description": "A pair of sturdy black leather boots.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-8f774bd2-d428-4006-9c17-6b0a2c4c5fa4.jpg",
+      "imageHint": "black boots"
+    },
+    {
+      "id": "prod_img_20",
+      "description": "A thick gold chain necklace.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-8f147a4b-8d95-4b5f-8643-0c1a0ff3c719.jpg",
+      "imageHint": "gold chain"
+    },
+    {
+      "id": "prod_img_21",
+      "description": "A modern smartwatch with a black band.",
+      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-26ec56c2-54a4-4e1a-a7cb-ae5389d465cd.jpg",
+      "imageHint": "smart watch"
+    },
+    {
+      "id": "prod_img_22",
+      "description": "A sparkling moissanite diamond cuban necklace.",
+      "imageUrl": "https://pub-141831e61e69445289222976a15b6fb3.r2.dev/Image_to_url_V2/Chains-Moissanite-Diamond-Cuban-Necklace-imagetourl.cloud-1770467706548-s2em96.webp",
+      "imageHint": "diamond necklace"
+    },
+    {
+      "id": "prod_img_23",
+      "description": "A basic black t-shirt.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770467871575-52c0c2a1-8e6c-43bb-90c6-6a755b62bca3.avif",
+      "imageHint": "black t-shirt"
+    },
+    {
+      "id": "prod_img_24",
+      "description": "A comfortable blue pullover hoodie.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770467914636-de2975cf-1b03-41cd-8197-71b9731d3e04.avif",
+      "imageHint": "blue hoodie"
+    },
+    {
+      "id": "prod_img_25",
+      "description": "A professional white smartphone.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770467946848-58c223b1-4b49-4578-8d05-112900efdb52.avif",
+      "imageHint": "white phone"
+    },
+    {
+      "id": "prod_img_26",
+      "description": "A pair of soft black modal trunks.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770467971374-460bfa4a-4e9c-4fc4-ab15-4b551b3db24b.avif",
+      "imageHint": "black underwear"
+    },
+    {
+      "id": "prod_img_27",
+      "description": "A stylish black and red ombre wig.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770467991427-1ce7704c-699f-4daa-a0a7-760c7e2403c8.avif",
+      "imageHint": "ombre wig"
+    },
+    {
+      "id": "prod_img_28",
+      "description": "A pair of classic black oxford dress shoes.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468015872-370ce609-fdab-4f7a-ab29-4fbb8457b9d2.avif",
+      "imageHint": "oxford shoes"
+    },
+    {
+      "id": "prod_img_29",
+      "description": "A delicate rose gold link necklace.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468034319-a8b35251-f672-448f-bd5a-ad4431c33991.avif",
+      "imageHint": "rose gold necklace"
+    },
+    {
+      "id": "prod_img_30",
+      "description": "A sleek modern smartphone in white.",
+      "imageUrl": "https://image2url.com/r2/default/images/1770468053586-bcc2cc7c-fd48-4ca5-94f1-35a46bd0fd1a.avif",
+      "imageHint": "white smartphone"
+    }
+  ]
 }
