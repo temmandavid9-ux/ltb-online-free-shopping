@@ -4960,34 +4960,10 @@ export const products: Product[] = [
     description: 'A high-quality product from our latest collection.',
     category: 'Clothes',
     price: 125000,
-    brand: 'Stellar',
+    brand: 'iDino',
     images: [findImage('prod_img_380')],
-    stock: 50,
-    rating: 4.5,
-    reviewCount: 100
-  },
-  {
-    id: 'prod_381',
-    slug: 'product-381',
-    name: 'Product 381',
-    description: 'A high-quality product from our latest collection.',
-    category: 'Wigs',
-    price: 125000,
-    brand: 'Nexa',
-    images: [findImage('prod_img_381')],
     stock: 50,
     rating: 4.5,
     reviewCount: 100
   }
 ];
-
-    
-
-    
-
-
-    
-    
-
-    
-
