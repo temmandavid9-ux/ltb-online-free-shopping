@@ -1,3 +1,4 @@
+
 'use client';
 import {
   useUser,
@@ -33,7 +34,7 @@ const TASK_LINKS = {
 
 // NOTE: Timer is set to 600 seconds (10 minutes).
 const TASK_DURATION_SECONDS = 600;
-const TASK_REWARD = 1;
+const TASK_REWARD = 0.0025;
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
