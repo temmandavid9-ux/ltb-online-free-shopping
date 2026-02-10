@@ -190,16 +190,10 @@ service cloud.firestore {
      *              their own document to claim admin rights. This is a temporary measure
      *              for the first user and will be secured further.
      * @path /roles_admin/{userId}
-     * @allow (write) A user can create or update their own admin role document if data is valid.
      * @principle Protects the integrity of the admin role system while allowing a user to claim admin rights.
      */
     match /roles_admin/{userId} {
-      allow get: if isOwner(userId);
-      allow list: if false;
-      // A user can write to their own admin document.
-      // This is secure because the path is user-specific.
-      allow create, update: if isOwner(userId);
-      allow delete: if false;
+      allow read, write: if isOwner(userId);
     }
   }
 }
