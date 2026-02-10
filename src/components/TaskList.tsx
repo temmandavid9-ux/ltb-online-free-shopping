@@ -14,19 +14,17 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Facebook, Instagram, Youtube, Twitch, CheckCircle, Lock } from 'lucide-react';
+import { Instagram, Youtube, Twitch, CheckCircle, Lock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
 const TASK_DEFINITIONS = [
-  { id: 'facebook', name: 'Facebook', icon: Facebook, description: 'Engage with our Facebook page.' },
   { id: 'instagram', name: 'Instagram', icon: Instagram, description: 'Check out our latest Instagram posts.' },
   { id: 'youtube', name: 'YouTube', icon: Youtube, description: 'Watch our new YouTube video.' },
   { id: 'twitch', name: 'Twitch', icon: Twitch, description: 'Join our stream on Twitch.' },
 ];
 
 const TASK_LINKS = {
-  facebook: "https://facebook.com",
   instagram: "https://instagram.com/eden022026",
   youtube: "https://youtube.com/@Eden-s8u",
   twitch: "https://twitch.tv/edenonlineshoppingstore"
@@ -348,7 +346,7 @@ export default function TaskList() {
 
   return (
     <Tabs defaultValue={sortedTasks[firstIncompleteTaskIndex]?.id || TASK_DEFINITIONS[0].id} className="w-full">
-      <TabsList className="grid w-full grid-cols-4">
+      <TabsList className="grid w-full grid-cols-3">
         {TASK_DEFINITIONS.map((taskDef, index) => {
           const taskData = sortedTasks.find(t => t.id === taskDef.id);
           const isLocked = !taskData || (firstIncompleteTaskIndex !== -1 && index > firstIncompleteTaskIndex);
