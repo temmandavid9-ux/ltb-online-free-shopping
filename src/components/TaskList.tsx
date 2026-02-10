@@ -131,16 +131,6 @@ export default function TaskList() {
     const task = sortedTasks.find(t => t.id === taskId);
     if (!task || task.completed) return;
 
-    const timeElapsed = task.taskStartTime ? (new Date().getTime() - new Date(task.taskStartTime).getTime()) / 1000 : 0;
-    if (timeElapsed < TASK_DURATION_SECONDS) {
-        toast({
-            variant: "destructive",
-            title: t('tasks.toast.timerNotFinishedTitle'),
-            description: t('tasks.toast.timerNotFinishedDescription'),
-        });
-        return;
-    }
-
     const taskRef = doc(firestore, 'users', user.uid, 'tasks', taskId);
     
     const currentTaskIndex = sortedTasks.findIndex(t => t.id === taskId);
