@@ -18,7 +18,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
-import { CreditCard, Lock, Wallet } from 'lucide-react';
+import { Lock, Wallet } from 'lucide-react';
 import { useUser, useFirestore, setDocumentNonBlocking, updateDocumentNonBlocking, useDoc, useMemoFirebase } from '@/firebase';
 import { collection, doc, arrayUnion } from 'firebase/firestore';
 import { useEffect } from 'react';
