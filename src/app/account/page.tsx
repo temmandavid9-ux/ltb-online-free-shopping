@@ -74,7 +74,7 @@ export default function AccountPage() {
         if (!user || !firestore) return;
         const adminRoleRef = doc(firestore, 'roles_admin', user.uid);
         
-        const adminData = { role: 'admin' };
+        const adminData = { uid: user.uid, role: 'admin' };
         
         try {
             await setDoc(adminRoleRef, adminData, { merge: true });
