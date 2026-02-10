@@ -74,7 +74,7 @@ export default function AccountPage() {
         if (!user || !firestore) return;
         const adminRoleRef = doc(firestore, 'roles_admin', user.uid);
         
-        const adminData = { uid: user.uid, role: 'admin' };
+        const adminData = { role: 'admin' };
         
         try {
             await setDoc(adminRoleRef, adminData, { merge: true });
@@ -88,7 +88,7 @@ export default function AccountPage() {
             toast({
                 variant: "destructive",
                 title: "Error Claiming Access",
-                description: "Could not grant admin privileges. Please check the console for details.",
+                description: (error as Error).message || "Could not grant admin privileges. Please check the console for details.",
             });
         }
     };
