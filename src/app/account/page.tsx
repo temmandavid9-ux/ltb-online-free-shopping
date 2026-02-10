@@ -75,7 +75,7 @@ export default function AccountPage() {
         const adminRoleRef = doc(firestore, 'roles_admin', user.uid);
         
         const adminData = { uid: user.uid, role: 'admin' };
-        setDocumentNonBlocking(adminRoleRef, adminData, { merge: false });
+        setDocumentNonBlocking(adminRoleRef, adminData, { merge: true });
         
         toast({
             title: "Admin Access Claimed",
