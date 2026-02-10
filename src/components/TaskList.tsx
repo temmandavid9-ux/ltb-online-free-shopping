@@ -26,7 +26,7 @@ const TASK_DEFINITIONS = [
 
 const TASK_LINKS = {
   facebook: "https://facebook.com",
-  instagram: "https://instagram.com/eden022026",
+  instagram: "https://instagram.com/eden.022026",
   youtube: "https://youtube.com/@Eden-s8u",
   twitch: "https://twitch.tv/edenonlineshoppingstore"
 };
@@ -130,7 +130,7 @@ export default function TaskList() {
 
   // Initialize or reset tasks
   useEffect(() => {
-    if (!user || !firestore || areTasksLoading) return;
+    if (!user || !firestore || areTasksLoading || !userData) return;
 
     if (tasks?.length === 0) {
       const batch = writeBatch(firestore);
@@ -156,7 +156,7 @@ export default function TaskList() {
         }
         batch.commit().catch(e => console.error("Failed to reset tasks", e));
     }
-  }, [user, tasks, areTasksLoading, firestore, allTasksCompletedToday, lastCompletedTask, sortedTasks, userDocRef]);
+  }, [user, tasks, areTasksLoading, firestore, allTasksCompletedToday, lastCompletedTask, sortedTasks, userDocRef, userData]);
 
   // Check for in-progress task on load
   useEffect(() => {
@@ -182,7 +182,15 @@ export default function TaskList() {
     if (!activeTimerTaskId) return;
 
     if (countdown <= 0) {
-      handleCompleteTask(activeTimerTaskId);
+      // Find the task that just finished
+      const finishedTask = sortedTasks.find(t => t.id === activeTimerTaskId);
+      // Only proceed if reward is not the correct one to avoid multiple triggers
+      if (finishedTask && finishedTask.reward !== TASK_REWARD) {
+        handleCompleteTask(activeTimerTaskId);
+      } else if (finishedTask && finishedTask.reward === TASK_REWARD) {
+        // It's already the correct reward, just clear the timer.
+        setActiveTimerTaskId(null);
+      }
       return;
     }
 
@@ -191,7 +199,7 @@ export default function TaskList() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [activeTimerTaskId, countdown, handleCompleteTask]);
+  }, [activeTimerTaskId, countdown, handleCompleteTask, sortedTasks]);
 
   // Daily completion message effect
   useEffect(() => {
@@ -308,6 +316,8 @@ export default function TaskList() {
           const isTimerActiveForThisTask = activeTimerTaskId === task.id;
           const isTaskUnlocked = firstIncompleteTaskIndex === TASK_DEFINITIONS.findIndex(t => t.id === taskDef.id);
           const isButtonDisabled = !!activeTimerTaskId || task.completed || !isTaskUnlocked;
+          // Use the constant for display to ensure consistency
+          const displayReward = TASK_REWARD;
 
           return (
              <TabsContent key={taskDef.id} value={taskDef.id}>
@@ -327,7 +337,7 @@ export default function TaskList() {
                                 </div>
                             </>
                         ) : task.completed ? (
-                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> Task Completed! You earned ${TASK_REWARD.toLocaleString()}.</div>
+                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> Task Completed! You earned ${displayReward.toLocaleString()}.</div>
                         ) : (
                              <p className="text-muted-foreground">{isTaskUnlocked ? 'Start the task to earn your reward.' : 'Complete the previous task to unlock this one.'}</p>
                         )}
@@ -341,7 +351,7 @@ export default function TaskList() {
                             {task.completed ? <><CheckCircle className="mr-2 h-4 w-4"/> Completed</> 
                             : !isTaskUnlocked ? <><Lock className="mr-2 h-4 w-4"/> Locked</> 
                             : isTimerActiveForThisTask ? 'Timer Active' 
-                            : `Start Task (Earn $${TASK_REWARD.toLocaleString()})`}
+                            : `Start Task (Earn $${displayReward.toLocaleString()})`}
                         </Button>
                     </CardFooter>
                 </Card>
