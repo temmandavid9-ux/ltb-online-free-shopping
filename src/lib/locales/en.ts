@@ -145,6 +145,14 @@ export const en = {
   "tasks.toast.inProgressDescription": "Please interact with the page for at least 10 minutes. Your timer is running in the background.",
   "tasks.toast.cancelledTitle": "Task Cancelled",
   "tasks.toast.cancelledDescription": "You must remain on the page for the task to complete. Progress has been reset.",
+  "tasks.initialFollow.title": "First, Follow Our Socials",
+  "tasks.initialFollow.description": "To unlock daily earning tasks, you must first follow all of our social media channels. Click the buttons below to visit each page.",
+  "tasks.initialFollow.followButton": "Follow",
+  "tasks.initialFollow.confirmationPrompt": "After you have followed all accounts, click the button below to confirm.",
+  "tasks.initialFollow.confirmButton": "I Have Followed All Accounts",
+  "tasks.initialFollow.toast.successTitle": "Thank You!",
+  "tasks.initialFollow.toast.successDescription": "You have unlocked daily tasks. You can now start earning.",
+
 
   // Wallet Page
   "wallet.title": "My Wallet",

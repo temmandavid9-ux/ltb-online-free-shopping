@@ -36,6 +36,57 @@ const TASK_LINKS = {
 const TASK_DURATION_SECONDS = 600;
 const TASK_REWARD = 0.25;
 
+
+function InitialSocialFollow() {
+    const { user } = useUser();
+    const firestore = useFirestore();
+    const { toast } = useToast();
+    const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
+    const { t } = useLanguage();
+
+    const handleConfirmation = () => {
+        if (userDocRef) {
+            updateDocumentNonBlocking(userDocRef, { socialsFollowed: true });
+            toast({
+                title: t('tasks.initialFollow.toast.successTitle'),
+                description: t('tasks.initialFollow.toast.successDescription'),
+            });
+        }
+    };
+
+    return (
+        <Card>
+            <CardHeader>
+                <CardTitle>{t('tasks.initialFollow.title')}</CardTitle>
+                <CardDescription>{t('tasks.initialFollow.description')}</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {TASK_DEFINITIONS.map(task => (
+                        <Card key={task.id} className="flex items-center justify-between p-4">
+                            <div className="flex items-center gap-4">
+                                <task.icon className="w-8 h-8 text-primary" />
+                                <span className="font-semibold">{task.name}</span>
+                            </div>
+                            <Button asChild variant="outline">
+                                <a href={TASK_LINKS[task.id as keyof typeof TASK_LINKS]} target="_blank" rel="noopener noreferrer">
+                                    {t('tasks.initialFollow.followButton')}
+                                </a>
+                            </Button>
+                        </Card>
+                    ))}
+                </div>
+            </CardContent>
+            <CardFooter className="flex-col items-stretch gap-4">
+                 <p className="text-sm text-center text-muted-foreground">{t('tasks.initialFollow.confirmationPrompt')}</p>
+                <Button onClick={handleConfirmation} size="lg">
+                    {t('tasks.initialFollow.confirmButton')}
+                </Button>
+            </CardFooter>
+        </Card>
+    );
+}
+
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
   const firestore = useFirestore();
@@ -135,6 +186,7 @@ export default function TaskList() {
   // Initialize or reset tasks
   useEffect(() => {
     if (!user || !firestore || areTasksLoading || !userData) return;
+    if (!userData.socialsFollowed) return;
 
     if (tasks?.length === 0) {
       const batch = writeBatch(firestore);
@@ -261,12 +313,16 @@ export default function TaskList() {
     updateDocumentNonBlocking(taskRef, { taskStartTime: new Date().toISOString() });
   };
 
-  if (isUserLoading || areTasksLoading || isUserDataLoading) {
+  if (isUserLoading || isUserDataLoading) {
     return <div>{t('tasks.loading')}</div>;
   }
   
-  if (!user) {
+  if (!user || !userData) {
     return <p>{t('tasks.loginPrompt')}</p>
+  }
+  
+  if (!userData.socialsFollowed) {
+      return <InitialSocialFollow />;
   }
 
   if (allTasksCompletedToday && lastCompletedTask) {

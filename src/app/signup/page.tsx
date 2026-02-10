@@ -59,6 +59,7 @@ export default function SignupPage() {
           email: values.email,
           walletBalance: 0,
           taskProgress: 0,
+          socialsFollowed: false,
           orderIds: [],
           withdrawalIds: [],
           tasks: [],

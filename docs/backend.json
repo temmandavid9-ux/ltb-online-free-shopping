@@ -27,6 +27,10 @@
           "type": "number",
           "description": "The user's overall task completion progress (percentage)."
         },
+        "socialsFollowed": {
+          "type": "boolean",
+          "description": "Indicates if the user has followed all the required social media handles."
+        },
         "orderIds": {
           "type": "array",
           "description": "References to Orders. (Relationship: User 1:N Order)",

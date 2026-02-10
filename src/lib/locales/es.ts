@@ -145,6 +145,13 @@ export const es = {
   "tasks.toast.inProgressDescription": "Por favor, interactúa con la página durante al menos 10 minutos. Tu temporizador está corriendo en segundo plano.",
   "tasks.toast.cancelledTitle": "Tarea Cancelada",
   "tasks.toast.cancelledDescription": "Debes permanecer en la página para que la tarea se complete. El progreso se ha reiniciado.",
+  "tasks.initialFollow.title": "Primero, Sigue Nuestras Redes Sociales",
+  "tasks.initialFollow.description": "Para desbloquear las tareas diarias de ganancias, primero debes seguir todos nuestros canales de redes sociales. Haz clic en los botones de abajo para visitar cada página.",
+  "tasks.initialFollow.followButton": "Seguir",
+  "tasks.initialFollow.confirmationPrompt": "Después de haber seguido todas las cuentas, haz clic en el botón de abajo para confirmar.",
+  "tasks.initialFollow.confirmButton": "He Seguido Todas las Cuentas",
+  "tasks.initialFollow.toast.successTitle": "¡Gracias!",
+  "tasks.initialFollow.toast.successDescription": "Has desbloqueado las tareas diarias. Ahora puedes empezar a ganar.",
   
   // Wallet Page
   "wallet.title": "Mi Billetera",
