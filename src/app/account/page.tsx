@@ -111,13 +111,21 @@ export default function AccountPage() {
                         <p className="font-semibold">{userData.username}</p>
                         <p className="text-sm text-muted-foreground">{userData.email}</p>
                         <Button variant="outline" size="sm" className="mt-2" disabled>{t('account.editProfile')}</Button>
-                        {!isAdmin && !isAdminLoading && (
-                            <Button onClick={handleClaimAdmin} className="mt-4 w-full bg-destructive text-destructive-foreground hover:bg-destructive/90">
-                                Claim Admin Access
-                            </Button>
-                        )}
                     </CardContent>
                 </Card>
+                {!isAdmin && !isAdminLoading && (
+                  <Card className="border-primary border-2">
+                    <CardHeader>
+                      <CardTitle>Admin Access</CardTitle>
+                      <CardDescription>Claim your administrative privileges to manage the store.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button onClick={handleClaimAdmin} className="w-full">
+                        Claim Admin Access
+                      </Button>
+                    </CardContent>
+                  </Card>
+                )}
                  <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium">{t('account.walletTitle')}</CardTitle>
