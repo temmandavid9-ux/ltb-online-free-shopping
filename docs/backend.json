@@ -192,24 +192,6 @@
         "completed",
         "reward"
       ]
-    },
-    "AdminRole": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "Admin Role",
-      "type": "object",
-      "description": "Represents an administrative role grant for a user. The existence of a document with the user's UID at /roles_admin/{userId} grants admin rights.",
-      "properties": {
-        "role": {
-          "type": "string",
-          "description": "The role being granted, must be 'admin'.",
-          "enum": [
-            "admin"
-          ]
-        }
-      },
-      "required": [
-        "role"
-      ]
     }
   },
   "auth": {
@@ -227,7 +209,7 @@
           "schema": {
             "$ref": "#/backend/entities/User"
           },
-          "description": "Stores user profile information.  Path-based ownership ensures only the user (or an admin) can access their own data.",
+          "description": "Stores user profile information.  Path-based ownership ensures only the user can access their own data.",
           "params": [
             {
               "name": "userId",
@@ -243,7 +225,7 @@
           "schema": {
             "$ref": "#/backend/entities/Task"
           },
-          "description": "Stores tasks assigned to each user. Path-based ownership ensures only the user (or an admin) can access their tasks.",
+          "description": "Stores tasks assigned to each user. Path-based ownership ensures only the user can access their tasks.",
           "params": [
             {
               "name": "userId",
@@ -263,7 +245,7 @@
           "schema": {
             "$ref": "#/backend/entities/Order"
           },
-          "description": "Stores order information. Access is restricted to admins for approval/rejection and read access for the ordering user after order creation.",
+          "description": "Stores order information. Access is restricted for read access for the ordering user after order creation.",
           "params": [
             {
               "name": "orderId",
@@ -279,7 +261,7 @@
           "schema": {
             "$ref": "#/backend/entities/Withdrawal"
           },
-          "description": "Stores withdrawal requests. Access is restricted to admins for approval/rejection and read access for the requesting user after creation.",
+          "description": "Stores withdrawal requests. Access is restricted for read access for the requesting user after creation.",
           "params": [
             {
               "name": "withdrawalId",
@@ -287,24 +269,8 @@
             }
           ]
         }
-      },
-      {
-        "path": "/roles_admin/{userId}",
-        "definition": {
-          "entityName": "AdminRole",
-          "schema": {
-            "$ref": "#/backend/entities/AdminRole"
-          },
-          "description": "Indicates admin privileges. Existence of a document at this path grants admin rights.",
-          "params": [
-            {
-              "name": "userId",
-              "description": "The unique identifier for the user who is an admin."
-            }
-          ]
-        }
       }
     ],
-    "reasoning": "The Firestore data structure is designed to ensure authorization independence, clarity, and scalability for the Eden 0² platform. It leverages denormalization and structural segregation to simplify security rules and optimize data access.  User-owned data is stored under `/users/{userId}`, and collaborative data (orders, withdrawals) uses membership maps or dedicated collections for admin roles.\n\nAuthorization Independence:\nAuthorization independence is achieved primarily through path-based ownership and, where necessary, denormalization. For example, user-specific data like tasks is located directly under the `/users/{userId}` collection, eliminating the need for complex `get()` calls to determine ownership. Orders and Withdrawals are secured via an 'admin' role check, handled by the `/roles_admin/{userId}` collection. This ensures atomic operations and simplifies security rule logic.\n\nQAPs Support:\nThe structure supports secure `list` operations (QAPs) through:\n\n1.  Structural Segregation: Placing public vs. private data in separate collections, such as user profiles under `/users/{userId}` vs. admin-controlled data, allows targeted security rules.\n2.  Path-Based Ownership: Using hierarchical paths like `/users/{userId}/tasks/{taskId}` enables listing operations restricted to a specific user's tasks.\n3.  Admin Roles: The use of `/roles_admin/{userId}` makes admin roles easy to check, securing global operations such as order and withdrawal approvals."
+    "reasoning": "The Firestore data structure is designed to ensure authorization independence, clarity, and scalability for the Eden 0² platform. It leverages denormalization and structural segregation to simplify security rules and optimize data access.  User-owned data is stored under `/users/{userId}`.\n\nAuthorization Independence:\nAuthorization independence is achieved primarily through path-based ownership. For example, user-specific data like tasks is located directly under the `/users/{userId}` collection, eliminating the need for complex `get()` calls to determine ownership.\n\nQAPs Support:\nThe structure supports secure `list` operations (QAPs) through:\n\n1.  Structural Segregation: Placing public vs. private data in separate collections, such as user profiles under `/users/{userId}`, allows targeted security rules.\n2.  Path-Based Ownership: Using hierarchical paths like `/users/{userId}/tasks/{taskId}` enables listing operations restricted to a specific user's tasks."
   }
 }

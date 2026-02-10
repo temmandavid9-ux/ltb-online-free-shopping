@@ -20,13 +20,12 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useUser, useFirestore, useDoc, useMemoFirebase, useAuth, useCollection, setDocumentNonBlocking } from "@/firebase";
-import { doc, collection, query, where, setDoc } from 'firebase/firestore';
+import { useUser, useFirestore, useDoc, useMemoFirebase, useAuth, useCollection } from "@/firebase";
+import { doc, collection, query, where } from 'firebase/firestore';
 import { signOut } from "firebase/auth";
 import type { Order } from "@/lib/types";
 import { ArrowRight, DollarSign, ListChecks } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { useAdminStatus } from "@/hooks/useAdminStatus";
 import { useToast } from "@/hooks/use-toast";
 
 export default function AccountPage() {
@@ -36,7 +35,6 @@ export default function AccountPage() {
     const auth = useAuth();
     const { t } = useLanguage();
     const { toast } = useToast();
-    const { isAdmin, isAdminLoading } = useAdminStatus();
     
     const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
     const { data: userData, isLoading: isUserDocLoading } = useDoc<any>(userDocRef);
@@ -70,32 +68,7 @@ export default function AccountPage() {
         router.push('/login');
     };
 
-    const handleClaimAdmin = async () => {
-        if (!user || !firestore) return;
-        const adminRoleRef = doc(firestore, 'roles_admin', user.uid);
-        
-        // This payload must exactly match the firestore.rules validation.
-        const adminData = { role: 'admin' };
-        
-        try {
-            // Use setDoc without merge to ensure the document is exactly as specified.
-            await setDoc(adminRoleRef, adminData);
-            toast({
-                title: "Admin Access Confirmed",
-                description: "Privileges granted. The page will now reload to activate your admin status.",
-            });
-            setTimeout(() => window.location.reload(), 2500);
-        } catch (error) {
-            console.error("Error claiming admin access:", error);
-            toast({
-                variant: "destructive",
-                title: "Error Claiming Access",
-                description: (error as Error).message || "Could not grant admin privileges. Please consult the console for details.",
-            });
-        }
-    };
-
-    if (isUserLoading || isUserDocLoading || areOrdersLoading || isAdminLoading) {
+    if (isUserLoading || isUserDocLoading || areOrdersLoading) {
         return <div className="container text-center p-8">{t('general.loading')}</div>; // Or a skeleton loader
     }
 
@@ -122,19 +95,6 @@ export default function AccountPage() {
                         <Button variant="outline" size="sm" className="mt-2" disabled>{t('account.editProfile')}</Button>
                     </CardContent>
                 </Card>
-                {!isAdmin && !isAdminLoading && (
-                  <Card className="border-primary border-2">
-                    <CardHeader>
-                      <CardTitle>Admin Access</CardTitle>
-                      <CardDescription>Claim your administrative privileges to manage the store.</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <Button onClick={handleClaimAdmin} className="w-full">
-                        Claim Admin Access
-                      </Button>
-                    </CardContent>
-                  </Card>
-                )}
                  <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium">{t('account.walletTitle')}</CardTitle>

@@ -2,44 +2,26 @@
  * This ruleset defines the security model for the Eden 0² platform.
  *
  * Core Philosophy:
- * The security model is built on two primary principles: strict user ownership for
- * personal data and centralized administrative control for platform-wide data.
+ * The security model is built on strict user ownership for personal data.
  * Users have complete control over their own profiles and associated data (like tasks),
- * while shared resources like orders and withdrawals are managed exclusively by admins.
+ * while shared resources like orders and withdrawals are created by users but would
+ * typically be managed by admins (admin functionality is currently disabled).
  *
  * Data Structure:
  * - /users/{userId}: Each user's core data is stored in a dedicated document.
  * - /users/{userId}/tasks/{taskId}: User-specific tasks are nested within their user document,
  *   inheriting ownership permissions.
- * - /orders/{orderId}: A top-level collection for all user orders, managed by admins.
- * - /withdrawals/{withdrawalId}: A top-level collection for all withdrawal requests,
- *   managed by admins.
- * - /roles_admin/{userId}: A separate collection that acts as an access control list (ACL).
- *   The existence of a document here grants a user administrative privileges across the platform.
+ * - /orders/{orderId}: A top-level collection for all user orders.
+ * - /withdrawals/{withdrawalId}: A top-level collection for all withdrawal requests.
  *
  * Key Security Decisions:
- * - Admin Supremacy: Users with a document in `/roles_admin` have read and write access
- *   to all data for management purposes.
  * - Strict Data Segregation: Users can only access their own data tree under `/users/{userId}`.
  *   They cannot see or interact with other users' data.
  * - No User Enumeration: Listing documents in the top-level `/users` collection is
  *   explicitly forbidden to prevent scraping of user information.
- * - Admin-Gated Workflows: Users can create orders and withdrawals, but these documents
- *   can only be modified (e.g., approved/rejected) or deleted by an admin.
+ * - User-Gated Workflows: Users can create orders and withdrawals, but these documents
+ *   cannot be modified by them after creation.
  * - Default Secure: Access is denied by default. All permissions must be explicitly granted.
- *
- * Denormalization for Authorization:
- * The `/roles_admin/{userId}` collection is a key denormalization strategy. Instead of
- * placing an `isAdmin` flag on each user document (which would require a costly `get`
- * operation for every rule check), we use a fast `exists()` call on the roles collection.
- * Additionally, `Order` and `Withdrawal` documents contain a denormalized `userId` field,
- * allowing for direct ownership checks without needing to read the user's document.
- *
- * Structural Segregation:
- * User-private data (like tasks) is structurally separated into a user-owned subcollection,
- * while globally managed data (like orders) resides in top-level collections. This makes
- * it simple and performant to write rules that grant owners list access to their own
- * private data while restricting list access on global collections to admins only.
  */
 rules_version = '2';
 service cloud.firestore {
@@ -54,14 +36,6 @@ service cloud.firestore {
      */
     function isSignedIn() {
       return request.auth != null;
-    }
-
-    /**
-     * Checks if the authenticated user has an admin role by verifying
-     * the existence of a document in the admin roles collection.
-     */
-    function isAdmin() {
-      return exists(/databases/$(database)/documents/roles_admin/$(request.auth.uid));
     }
 
     /**
@@ -123,38 +97,38 @@ service cloud.firestore {
     // --------------------------------
 
     /**
-     * @description Users can read and write their own profile data. Admins can read/write any profile.
+     * @description Users can read and write their own profile data.
      * @path /users/{userId}
      * @allow (get, update) A user with auth.uid 'user123' can get or update '/users/user123'.
      * @allow (create) A user with auth.uid 'user123' can create '/users/user123'.
-     * @deny (list) No user, including admins, can list all documents in the '/users' collection.
+     * @deny (list) No user can list all documents in the '/users' collection.
      * @deny (get) A user with auth.uid 'user123' cannot get '/users/user456'.
      * @principle Restricts access to a user's own data tree and prevents user enumeration.
      */
     match /users/{userId} {
-      allow get: if isOwner(userId) || isAdmin();
+      allow get: if isOwner(userId);
       allow list: if false;
       allow create: if isOwner(userId) && newUserDataIsValid(userId);
-      allow update: if (isOwner(userId) || isAdmin()) && isExistingDoc() && userDataIsImmutable();
-      allow delete: if (isOwner(userId) || isAdmin()) && isExistingDoc();
+      allow update: if isOwner(userId) && isExistingDoc() && userDataIsImmutable();
+      allow delete: if isOwner(userId) && isExistingDoc();
     }
 
     /**
-     * @description Users can manage tasks within their own profile. Admins have full access.
+     * @description Users can manage tasks within their own profile.
      * @path /users/{userId}/tasks/{taskId}
      * @allow (list, create) A user with auth.uid 'user123' can list or create tasks under '/users/user123/tasks'.
      * @deny (get) A user with auth.uid 'user123' cannot get a task under '/users/user456/tasks'.
      * @principle Enforces hierarchical ownership from the parent document.
      */
     match /users/{userId}/tasks/{taskId} {
-      allow get, list: if isOwner(userId) || isAdmin();
+      allow get, list: if isOwner(userId);
       allow create: if isOwner(userId) && userSubcollectionDataIsValid(userId);
-      allow update: if (isOwner(userId) || isAdmin()) && isExistingDoc() && userSubcollectionDataIsImmutable();
-      allow delete: if (isOwner(userId) || isAdmin()) && isExistingDoc();
+      allow update: if isOwner(userId) && isExistingDoc() && userSubcollectionDataIsImmutable();
+      allow delete: if isOwner(userId) && isExistingDoc();
     }
 
     /**
-     * @description Users can create orders and read their own. Only admins can list, update, or delete orders.
+     * @description Users can create orders and read their own.
      * @path /orders/{orderId}
      * @allow (create) Any signed-in user can create an order for themselves with 'Pending' status.
      * @allow (get) User 'user123' can get an order where `resource.data.userId == 'user123'`.
@@ -163,14 +137,13 @@ service cloud.firestore {
      * @principle Segregates user creation from admin modification for a secure workflow.
      */
     match /orders/{orderId} {
-      allow read: if isAdmin() || isOwner(resource.data.userId);
+      allow read: if isOwner(resource.data.userId);
       allow create: if isCreatingOwnRequest(request.resource.data);
-      allow update: if isAdmin() && isExistingDoc();
-      allow delete: if isAdmin() && isExistingDoc();
+      allow update, delete: if false;
     }
 
     /**
-     * @description Users can create withdrawal requests and read their own. Only admins can manage them.
+     * @description Users can create withdrawal requests and read their own.
      * @path /withdrawals/{withdrawalId}
      * @allow (create) Any signed-in user can create a withdrawal request for themselves.
      * @allow (get) An admin can get any withdrawal request to review it.
@@ -179,26 +152,9 @@ service cloud.firestore {
      * @principle Secures financial transactions by enforcing an admin-approval workflow.
      */
     match /withdrawals/{withdrawalId} {
-      allow read: if isAdmin() || isOwner(resource.data.userId);
+      allow read: if isOwner(resource.data.userId);
       allow create: if isCreatingOwnRequest(request.resource.data);
-      allow update: if isAdmin() && isExistingDoc();
-      allow delete: if isAdmin() && isExistingDoc();
-    }
-
-    /**
-     * @description Manages admin roles. A user can create/update their own admin role document.
-     * @path /roles_admin/{userId}
-     * @allow (read) A user can check if they have an admin role.
-     * @allow (write) A user can create or update their own role document, but only to set `{role: 'admin'}`.
-     * @deny (write) A user cannot write any other data to their role document.
-     * @principle Secures the admin-claiming process by restricting writes to a specific, predefined data structure,
-     *            ensuring that users can only grant themselves the 'admin' role and nothing else.
-     */
-    match /roles_admin/{userId} {
-      allow read: if isOwner(userId);
-      allow write: if isOwner(userId)
-                    && request.resource.data.keys().hasOnly(['role'])
-                    && request.resource.data.role == 'admin';
+      allow update, delete: if false;
     }
   }
 }
