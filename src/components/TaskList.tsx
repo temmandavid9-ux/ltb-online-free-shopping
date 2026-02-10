@@ -26,7 +26,7 @@ const TASK_DEFINITIONS = [
 
 const TASK_LINKS = {
   facebook: "https://facebook.com",
-  instagram: "https://instagram.com/eden.022026",
+  instagram: "https://instagram.com/eden022026",
   youtube: "https://youtube.com/@Eden-s8u",
   twitch: "https://twitch.tv/edenonlineshoppingstore"
 };
@@ -78,7 +78,7 @@ export default function TaskList() {
     if (!user || !userData || !firestore) return;
     
     const task = sortedTasks.find(t => t.id === taskId);
-    if (!task || task.completed) return; // Already completed or doesn't exist
+    if (!task || task.completed || task.reward === TASK_REWARD) return;
 
     const timeElapsed = task.taskStartTime ? (new Date().getTime() - new Date(task.taskStartTime).getTime()) / 1000 : 0;
     if (timeElapsed < TASK_DURATION_SECONDS) {
@@ -105,6 +105,9 @@ export default function TaskList() {
             const singleTaskRef = doc(firestore, 'users', user.uid, 'tasks', t.id);
             batch.update(singleTaskRef, { nextTaskUnlockTime: unlockTime.toISOString() });
         });
+        if (userDocRef) {
+            batch.update(userDocRef, { taskProgress: 100 });
+        }
         batch.commit().catch(e => console.error("Failed to set unlock times", e));
     }
 
@@ -115,7 +118,7 @@ export default function TaskList() {
     const newTaskProgress = (completedTasksCount / sortedTasks.length) * 100;
     
     if(userDocRef) {
-        updateDocumentNonBlocking(userDocRef, { walletBalance: newBalance, taskProgress: newTaskProgress });
+        updateDocumentNonBlocking(userDocRef, { walletBalance: newBalance, taskProgress: isLastTask ? 100 : newTaskProgress });
     }
     
     toast({
@@ -182,15 +185,7 @@ export default function TaskList() {
     if (!activeTimerTaskId) return;
 
     if (countdown <= 0) {
-      // Find the task that just finished
-      const finishedTask = sortedTasks.find(t => t.id === activeTimerTaskId);
-      // Only proceed if reward is not the correct one to avoid multiple triggers
-      if (finishedTask && finishedTask.reward !== TASK_REWARD) {
-        handleCompleteTask(activeTimerTaskId);
-      } else if (finishedTask && finishedTask.reward === TASK_REWARD) {
-        // It's already the correct reward, just clear the timer.
-        setActiveTimerTaskId(null);
-      }
+      handleCompleteTask(activeTimerTaskId);
       return;
     }
 
@@ -199,7 +194,7 @@ export default function TaskList() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [activeTimerTaskId, countdown, handleCompleteTask, sortedTasks]);
+  }, [activeTimerTaskId, countdown, handleCompleteTask]);
 
   // Daily completion message effect
   useEffect(() => {
