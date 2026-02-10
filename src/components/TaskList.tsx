@@ -95,7 +95,7 @@ export default function TaskList() {
     const currentTaskIndex = sortedTasks.findIndex(t => t.id === taskId);
     const isLastTask = currentTaskIndex === sortedTasks.length - 1;
 
-    const updates: Partial<Task> = { completed: true };
+    const updates: Partial<Task> = { completed: true, reward: TASK_REWARD };
     
     if (isLastTask) {
         const unlockTime = new Date();
@@ -110,7 +110,7 @@ export default function TaskList() {
 
     updateDocumentNonBlocking(taskRef, updates);
 
-    const newBalance = (userData.walletBalance || 0) + task.reward;
+    const newBalance = (userData.walletBalance || 0) + TASK_REWARD;
     const completedTasksCount = sortedTasks.filter(t => t.completed).length + 1;
     const newTaskProgress = (completedTasksCount / sortedTasks.length) * 100;
     
@@ -120,7 +120,7 @@ export default function TaskList() {
     
     toast({
         title: "Task Completed!",
-        description: `You've earned $${task.reward.toLocaleString()}!`,
+        description: `You've earned $${TASK_REWARD.toLocaleString()}!`,
     });
     
     setActiveTimerTaskId(null);
@@ -149,7 +149,7 @@ export default function TaskList() {
         const batch = writeBatch(firestore);
         sortedTasks.forEach(task => {
             const taskRef = doc(firestore, 'users', user.uid, 'tasks', task.id);
-            batch.update(taskRef, { completed: false, nextTaskUnlockTime: null, taskStartTime: null });
+            batch.update(taskRef, { completed: false, nextTaskUnlockTime: null, taskStartTime: null, reward: TASK_REWARD });
         });
         if(userDocRef) {
           updateDocumentNonBlocking(userDocRef, { taskProgress: 0 });
@@ -327,7 +327,7 @@ export default function TaskList() {
                                 </div>
                             </>
                         ) : task.completed ? (
-                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> Task Completed! You earned ${task.reward.toLocaleString()}.</div>
+                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> Task Completed! You earned ${TASK_REWARD.toLocaleString()}.</div>
                         ) : (
                              <p className="text-muted-foreground">{isTaskUnlocked ? 'Start the task to earn your reward.' : 'Complete the previous task to unlock this one.'}</p>
                         )}
@@ -341,7 +341,7 @@ export default function TaskList() {
                             {task.completed ? <><CheckCircle className="mr-2 h-4 w-4"/> Completed</> 
                             : !isTaskUnlocked ? <><Lock className="mr-2 h-4 w-4"/> Locked</> 
                             : isTimerActiveForThisTask ? 'Timer Active' 
-                            : `Start Task (Earn $${task.reward.toLocaleString()})`}
+                            : `Start Task (Earn $${TASK_REWARD.toLocaleString()})`}
                         </Button>
                     </CardFooter>
                 </Card>
