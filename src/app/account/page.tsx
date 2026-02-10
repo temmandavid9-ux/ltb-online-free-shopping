@@ -74,8 +74,7 @@ export default function AccountPage() {
         if (!user || !firestore) return;
         const adminRoleRef = doc(firestore, 'roles_admin', user.uid);
         
-        // The existence of this document grants admin rights. The content can be simple.
-        const adminData = { uid: user.uid, role: 'admin', grantedAt: new Date().toISOString() };
+        const adminData = { uid: user.uid, role: 'admin' };
         setDocumentNonBlocking(adminRoleRef, adminData, { merge: false });
         
         toast({

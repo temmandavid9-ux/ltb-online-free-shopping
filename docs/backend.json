@@ -218,8 +218,7 @@
       },
       "required": [
         "uid",
-        "role",
-        "grantedAt"
+        "role"
       ]
     }
   },
