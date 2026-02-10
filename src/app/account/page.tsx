@@ -20,8 +20,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useUser, useFirestore, useDoc, useMemoFirebase, useAuth, useCollection, setDocumentNonBlocking } from "@/firebase";
-import { doc, collection, query, where } from 'firebase/firestore';
+import { useUser, useFirestore, useDoc, useMemoFirebase, useAuth, useCollection } from "@/firebase";
+import { doc, collection, query, where, setDoc } from 'firebase/firestore';
 import { signOut } from "firebase/auth";
 import type { Order } from "@/lib/types";
 import { ArrowRight, DollarSign, ListChecks } from "lucide-react";
@@ -70,19 +70,27 @@ export default function AccountPage() {
         router.push('/login');
     };
 
-    const handleClaimAdmin = () => {
+    const handleClaimAdmin = async () => {
         if (!user || !firestore) return;
         const adminRoleRef = doc(firestore, 'roles_admin', user.uid);
         
         const adminData = { uid: user.uid, role: 'admin' };
-        setDocumentNonBlocking(adminRoleRef, adminData, { merge: true });
         
-        toast({
-            title: "Admin Access Claimed",
-            description: "You have been granted admin privileges. The page will now reload.",
-        });
-
-        setTimeout(() => window.location.reload(), 2500);
+        try {
+            await setDoc(adminRoleRef, adminData, { merge: true });
+            toast({
+                title: "Admin Access Claimed",
+                description: "You have been granted admin privileges. The page will now reload.",
+            });
+            setTimeout(() => window.location.reload(), 2500);
+        } catch (error) {
+            console.error("Error claiming admin access:", error);
+            toast({
+                variant: "destructive",
+                title: "Error Claiming Access",
+                description: "Could not grant admin privileges. Please check the console for details.",
+            });
+        }
     };
 
     if (isUserLoading || isUserDocLoading || areOrdersLoading || isAdminLoading) {
