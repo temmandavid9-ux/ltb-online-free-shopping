@@ -75,7 +75,6 @@ export default function Header() {
                     <Wallet className="h-5 w-5" />
                     <span className="text-sm font-bold">${userData.walletBalance?.toLocaleString() || '0.00'}</span>
                  </Link>
-                {isAdmin && <Link href="/admin"><Button variant="ghost" size="sm">Admin</Button></Link>}
                 <Link href="/account"><Button variant="outline" size="sm">{t('header.account')}</Button></Link>
               </>
             ) : (
