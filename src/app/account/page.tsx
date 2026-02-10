@@ -77,7 +77,7 @@ export default function AccountPage() {
         const adminData = { uid: user.uid, role: 'admin' };
         
         try {
-            await setDoc(adminRoleRef, adminData, { merge: true });
+            await setDoc(adminRoleRef, adminData);
             toast({
                 title: "Admin Access Claimed",
                 description: "You have been granted admin privileges. The page will now reload.",

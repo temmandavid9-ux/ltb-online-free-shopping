@@ -186,19 +186,17 @@ service cloud.firestore {
     }
 
     /**
-     * @description This collection manages admin roles. A user can write to their own
-     *              document to claim admin rights. This operation is locked down to
-     *              ensure data integrity.
+     * @description This collection manages admin roles. This rule allows a user to write to
+     *              their own document to claim admin rights. This is a temporary measure
+     *              for the first user and will be secured further.
      * @path /roles_admin/{userId}
-     * @allow (get) A user can check their own admin status.
-     * @allow (write) A user can create or update their own admin role document.
-     * @deny (list, delete) All other client-side operations are forbidden.
+     * @allow (write) A user can create or update their own admin role document if data is valid.
      * @principle Protects the integrity of the admin role system while allowing a user to claim admin rights.
      */
     match /roles_admin/{userId} {
       allow get: if isOwner(userId);
       allow list: if false;
-      allow write: if isOwner(userId); // TEMPORARY: Allow user to claim admin role. Will be secured.
+      allow write: if isOwner(userId) && request.resource.data.uid == userId && request.resource.data.role == 'admin' && request.resource.data.keys().hasOnly(['uid', 'role']);
       allow delete: if false;
     }
   }
