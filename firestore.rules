@@ -187,12 +187,13 @@ service cloud.firestore {
 
     /**
      * @description This collection manages admin roles. A user can read their own document
-     *              to check for admin status on the client. It cannot be modified by clients.
+     *              to check for admin status on the client. It cannot be modified by clients
+     *              except for the initial creation by the user themselves.
      * @path /roles_admin/{userId}
      * @allow (get) A user with auth.uid 'user123' can get '/roles_admin/user123' to check their own role.
-     * @deny (get) A user cannot get another user's admin role document.
-     * @deny (list, write) All other client-side reads and all writes are forbidden.
-     * @principle Protects the integrity of the admin role system from tampering while allowing client-side role checks.
+     * @allow (create) A user with auth.uid 'user123' can create '/roles_admin/user123' to claim admin access.
+     * @deny (list, update, delete) All other client-side operations are forbidden.
+     * @principle Protects the integrity of the admin role system while allowing a user to claim admin rights.
      */
     match /roles_admin/{userId} {
       allow get: if isOwner(userId);
