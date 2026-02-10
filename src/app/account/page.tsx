@@ -20,13 +20,14 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useUser, useFirestore, useDoc, useMemoFirebase, useAuth } from "@/firebase";
+import { useUser, useFirestore, useDoc, useMemoFirebase, useAuth, useCollection, setDocumentNonBlocking } from "@/firebase";
 import { doc, collection, query, where } from 'firebase/firestore';
-import { useCollection } from "@/firebase/firestore/use-collection";
 import { signOut } from "firebase/auth";
 import type { Order } from "@/lib/types";
 import { ArrowRight, DollarSign, ListChecks } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useAdminStatus } from "@/hooks/useAdminStatus";
+import { useToast } from "@/hooks/use-toast";
 
 export default function AccountPage() {
     const { user, isUserLoading } = useUser();
@@ -34,6 +35,8 @@ export default function AccountPage() {
     const firestore = useFirestore();
     const auth = useAuth();
     const { t } = useLanguage();
+    const { toast } = useToast();
+    const { isAdmin, isAdminLoading } = useAdminStatus();
     
     const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
     const { data: userData, isLoading: isUserDocLoading } = useDoc<any>(userDocRef);
@@ -67,7 +70,23 @@ export default function AccountPage() {
         router.push('/login');
     };
 
-    if (isUserLoading || isUserDocLoading || areOrdersLoading) {
+    const handleClaimAdmin = () => {
+        if (!user || !firestore) return;
+        const adminRoleRef = doc(firestore, 'roles_admin', user.uid);
+        
+        // The existence of this document grants admin rights. The content can be simple.
+        const adminData = { uid: user.uid, role: 'admin', grantedAt: new Date().toISOString() };
+        setDocumentNonBlocking(adminRoleRef, adminData, { merge: false });
+        
+        toast({
+            title: "Admin Access Claimed",
+            description: "You have been granted admin privileges. The page will now reload.",
+        });
+
+        setTimeout(() => window.location.reload(), 2500);
+    };
+
+    if (isUserLoading || isUserDocLoading || areOrdersLoading || isAdminLoading) {
         return <div className="container text-center p-8">{t('general.loading')}</div>; // Or a skeleton loader
     }
 
@@ -92,6 +111,11 @@ export default function AccountPage() {
                         <p className="font-semibold">{userData.username}</p>
                         <p className="text-sm text-muted-foreground">{userData.email}</p>
                         <Button variant="outline" size="sm" className="mt-2" disabled>{t('account.editProfile')}</Button>
+                        {!isAdmin && !isAdminLoading && (
+                            <Button onClick={handleClaimAdmin} className="mt-4 w-full bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                                Claim Admin Access
+                            </Button>
+                        )}
                     </CardContent>
                 </Card>
                  <Card>
