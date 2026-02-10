@@ -5,6 +5,7 @@ import { RedeemProvider } from '@/context/CartContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { FirebaseClientProvider } from '@/firebase';
+import { LanguageProvider } from '@/context/LanguageContext';
 
 export const metadata: Metadata = {
   title: 'Eden 0² - Professional Reward-Based Ecommerce Platform',
@@ -25,11 +26,13 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased flex flex-col min-h-screen">
         <FirebaseClientProvider>
-          <RedeemProvider>
-            <Header />
-            <main className="flex-grow">{children}</main>
-            <Footer />
-          </RedeemProvider>
+          <LanguageProvider>
+            <RedeemProvider>
+              <Header />
+              <main className="flex-grow">{children}</main>
+              <Footer />
+            </RedeemProvider>
+          </LanguageProvider>
         </FirebaseClientProvider>
         <Toaster />
       </body>

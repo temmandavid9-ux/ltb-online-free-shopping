@@ -1,0 +1,30 @@
+export const es = {
+  // Header
+  "header.home": "Inicio",
+  "header.dailyTasks": "Tareas Diarias",
+  "header.redeemBasket": "Canasta de Canje",
+  "header.login": "Iniciar Sesión",
+  "header.signUp": "Registrarse",
+  "header.account": "Cuenta",
+  "header.searchPlaceholder": "Buscar productos...",
+  "header.greeting": "CEO, {username}",
+
+  // Footer
+  "footer.companyLine": "Tu destino de compras en línea definitivo.",
+  "footer.shop": "Tienda",
+  "footer.newArrivals": "Novedades",
+  "footer.bestSellers": "Más Vendidos",
+  "footer.categories": "Categorías",
+  "footer.onSale": "En Oferta",
+  "footer.support": "Soporte",
+  "footer.contactUs": "Contáctanos",
+  "footer.faq": "Preguntas Frecuentes",
+  "footer.shippingReturns": "Envíos y Devoluciones",
+  "footer.orderTracking": "Seguimiento de Pedidos",
+  "footer.company": "Empresa",
+  "footer.aboutUs": "Sobre Nosotros",
+  "footer.careers": "Carreras",
+  "footer.privacyPolicy": "Política de Privacidad",
+  "footer.termsOfService": "Términos de Servicio",
+  "footer.copyright": "© {year} Eden 0². Todos los derechos reservados.",
+};

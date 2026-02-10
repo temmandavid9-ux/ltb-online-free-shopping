@@ -1,0 +1,30 @@
+export const en = {
+  // Header
+  "header.home": "Home",
+  "header.dailyTasks": "Daily Tasks",
+  "header.redeemBasket": "Redeem Basket",
+  "header.login": "Login",
+  "header.signUp": "Sign Up",
+  "header.account": "Account",
+  "header.searchPlaceholder": "Search products...",
+  "header.greeting": "CEO, {username}",
+
+  // Footer
+  "footer.companyLine": "Your ultimate online shopping destination.",
+  "footer.shop": "Shop",
+  "footer.newArrivals": "New Arrivals",
+  "footer.bestSellers": "Best Sellers",
+  "footer.categories": "Categories",
+  "footer.onSale": "On Sale",
+  "footer.support": "Support",
+  "footer.contactUs": "Contact Us",
+  "footer.faq": "FAQ",
+  "footer.shippingReturns": "Shipping & Returns",
+  "footer.orderTracking": "Order Tracking",
+  "footer.company": "Company",
+  "footer.aboutUs": "About Us",
+  "footer.careers": "Careers",
+  "footer.privacyPolicy": "Privacy Policy",
+  "footer.termsOfService": "Terms of Service",
+  "footer.copyright": "© {year} Eden 0². All rights reserved.",
+};
