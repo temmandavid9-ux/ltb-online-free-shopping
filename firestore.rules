@@ -198,11 +198,8 @@ service cloud.firestore {
     match /roles_admin/{userId} {
       allow get: if isOwner(userId);
       allow list: if false;
-      // A user can write to their own admin role document.
-      // The client sends the validated data structure.
-      // This is simplified to ensure CEO can gain access.
-      allow write: if isOwner(userId);
-      allow delete: if false; // Deleting roles should be a server-side/console action.
+      allow create, update: if isOwner(userId) && request.resource.data.role == 'admin' && request.resource.data.uid == userId;
+      allow delete: if false;
     }
   }
 }
