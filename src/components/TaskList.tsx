@@ -33,7 +33,7 @@ const TASK_LINKS = {
 
 // NOTE: Timer is set to 600 seconds (10 minutes).
 const TASK_DURATION_SECONDS = 600;
-const TASK_REWARD = 0.0025;
+const TASK_REWARD = 0.25;
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
@@ -151,9 +151,12 @@ export default function TaskList() {
             const taskRef = doc(firestore, 'users', user.uid, 'tasks', task.id);
             batch.update(taskRef, { completed: false, nextTaskUnlockTime: null, taskStartTime: null });
         });
+        if(userDocRef) {
+          updateDocumentNonBlocking(userDocRef, { taskProgress: 0 });
+        }
         batch.commit().catch(e => console.error("Failed to reset tasks", e));
     }
-  }, [user, tasks, areTasksLoading, firestore, allTasksCompletedToday, lastCompletedTask, sortedTasks]);
+  }, [user, tasks, areTasksLoading, firestore, allTasksCompletedToday, lastCompletedTask, sortedTasks, userDocRef]);
 
   // Check for in-progress task on load
   useEffect(() => {
