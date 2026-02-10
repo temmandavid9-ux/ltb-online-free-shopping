@@ -1,3 +1,5 @@
+'use client';
+
 import TaskList from "@/components/TaskList";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "@/context/LanguageContext";
