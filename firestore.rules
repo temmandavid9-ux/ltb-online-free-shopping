@@ -198,9 +198,7 @@ service cloud.firestore {
     match /roles_admin/{userId} {
       allow get: if isOwner(userId);
       allow list: if false;
-      allow write: if isOwner(userId)
-                    && request.resource.data.uid == userId
-                    && request.resource.data.role == 'admin';
+      allow write: if isOwner(userId); // TEMPORARY: Allow user to claim admin role. Will be secured.
       allow delete: if false;
     }
   }
