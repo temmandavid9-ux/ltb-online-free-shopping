@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useUser, useFirestore, useDoc, useMemoFirebase, updateDocumentNonBlocking, setDocumentNonBlocking, useCollection } from "@/firebase";
@@ -19,7 +18,7 @@ import { useToast } from "@/hooks/use-toast";
 import { DollarSign, WalletCards, Landmark } from "lucide-react";
 import type { Withdrawal } from "@/lib/types";
 
-const MIN_WITHDRAWAL_AMOUNT = 0.125;
+const MIN_WITHDRAWAL_AMOUNT = 80;
 
 const withdrawalSchema = z.object({
   amount: z.coerce.number().min(1, { message: 'Amount must be greater than 0.' }),
