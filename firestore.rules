@@ -191,16 +191,14 @@ service cloud.firestore {
      *              except for the initial creation by the user themselves.
      * @path /roles_admin/{userId}
      * @allow (get) A user with auth.uid 'user123' can get '/roles_admin/user123' to check their own role.
-     * @allow (create, update) A user can write to their own admin document, but only to set the role as 'admin'.
+     * @allow (create, update) A user can write to their own admin document.
      * @deny (list, delete) All other client-side operations are forbidden.
      * @principle Protects the integrity of the admin role system while allowing a user to claim admin rights.
      */
     match /roles_admin/{userId} {
       allow get: if isOwner(userId);
       allow list: if false;
-      allow create, update: if isOwner(userId) 
-                                && request.resource.data.role == 'admin'
-                                && request.resource.data.keys().size() == 1;
+      allow create, update: if isOwner(userId);
       allow delete: if false;
     }
   }
