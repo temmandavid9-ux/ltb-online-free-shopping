@@ -4,26 +4,27 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRedeem } from '@/context/CartContext';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Trash2, ShoppingBag } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function RedeemPage() {
   const { basket, updateQuantity, removeFromBasket, basketTotal, itemCount } = useRedeem();
+  const { t } = useLanguage();
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-3xl font-bold font-headline mb-8">Your Redemption Basket</h1>
+      <h1 className="text-3xl font-bold font-headline mb-8">{t('redeem.title')}</h1>
       
       {basket.length === 0 ? (
         <Card className="text-center py-20">
             <CardContent className="flex flex-col items-center">
                 <ShoppingBag className="h-16 w-16 text-muted-foreground mb-4" />
-                <h2 className="text-2xl font-semibold mb-2">Your basket is empty</h2>
-                <p className="text-muted-foreground mb-6">Looks like you haven't added anything to your basket yet.</p>
+                <h2 className="text-2xl font-semibold mb-2">{t('redeem.emptyTitle')}</h2>
+                <p className="text-muted-foreground mb-6">{t('redeem.emptyDescription')}</p>
                 <Button asChild>
-                    <Link href="/">Start Shopping</Link>
+                    <Link href="/">{t('redeem.startShopping')}</Link>
                 </Button>
             </CardContent>
         </Card>
@@ -63,26 +64,26 @@ export default function RedeemPage() {
 
           <Card className="lg:col-span-1 sticky top-24">
             <CardHeader>
-              <CardTitle className="font-headline">Order Summary</CardTitle>
+              <CardTitle className="font-headline">{t('redeem.summaryTitle')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex justify-between">
-                <span>Subtotal ({itemCount} items)</span>
+                <span>{t('redeem.subtotal', { itemCount })}</span>
                 <span>${basketTotal.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
-                <span>Shipping</span>
-                <span>Free</span>
+                <span>{t('redeem.shipping')}</span>
+                <span>{t('redeem.shippingFree')}</span>
               </div>
               <Separator />
               <div className="flex justify-between font-bold text-lg">
-                <span>Total</span>
+                <span>{t('redeem.total')}</span>
                 <span>${basketTotal.toLocaleString()}</span>
               </div>
             </CardContent>
             <CardFooter>
               <Button size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
-                <Link href="/checkout">Proceed to Checkout</Link>
+                <Link href="/checkout">{t('redeem.checkoutButton')}</Link>
               </Button>
             </CardFooter>
           </Card>

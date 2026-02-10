@@ -16,6 +16,7 @@ import { Button } from './ui/button';
 import { Progress } from './ui/progress';
 import { Facebook, Instagram, Youtube, Twitch, CheckCircle, Lock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/context/LanguageContext';
 
 const TASK_DEFINITIONS = [
   { id: 'facebook', name: 'Facebook', icon: Facebook, description: 'Engage with our Facebook page.' },
@@ -39,6 +40,7 @@ export default function TaskList() {
   const { user, isUserLoading } = useUser();
   const firestore = useFirestore();
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const tasksCollectionRef = useMemoFirebase(
     () => (user ? collection(firestore, 'users', user.uid, 'tasks') : null),
@@ -84,8 +86,8 @@ export default function TaskList() {
     if (timeElapsed < TASK_DURATION_SECONDS) {
         toast({
             variant: "destructive",
-            title: "Timer Not Finished",
-            description: "Please wait for the countdown to complete.",
+            title: t('tasks.toast.timerNotFinishedTitle'),
+            description: t('tasks.toast.timerNotFinishedDescription'),
         });
         return;
     }
@@ -122,13 +124,12 @@ export default function TaskList() {
     }
     
     toast({
-        title: "Task Completed!",
-        description: `You've earned $${TASK_REWARD.toLocaleString()}!`,
+        title: t('tasks.taskCompleted', { reward: `$${TASK_REWARD.toLocaleString()}` }),
     });
     
     setActiveTimerTaskId(null);
 
-  }, [user, userData, firestore, sortedTasks, toast, userDocRef]);
+  }, [user, userData, firestore, sortedTasks, toast, userDocRef, t]);
 
 
   // Initialize or reset tasks
@@ -200,9 +201,9 @@ export default function TaskList() {
   useEffect(() => {
     if (allTasksCompletedToday && lastCompletedTask?.nextTaskUnlockTime) {
       const date = new Date(lastCompletedTask.nextTaskUnlockTime);
-      setUnlockTimeMessage(`Next tasks unlock at: ${date.toLocaleString()}`);
+      setUnlockTimeMessage(t('tasks.unlockTime', { date: date.toLocaleString() }));
     }
-  }, [allTasksCompletedToday, lastCompletedTask]);
+  }, [allTasksCompletedToday, lastCompletedTask, t]);
 
   // Anti-tab-switch: Reset task if user navigates away
   useEffect(() => {
@@ -219,15 +220,15 @@ export default function TaskList() {
 
         toast({
           variant: "destructive",
-          title: "Task Cancelled",
-          description: "You must remain on the page for the task to complete. Progress has been reset.",
+          title: t('tasks.toast.cancelledTitle'),
+          description: t('tasks.toast.cancelledDescription'),
         });
       }
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, [activeTimerTaskId, user, firestore, sortedTasks, toast]);
+  }, [activeTimerTaskId, user, firestore, sortedTasks, toast, t]);
 
 
   const handleStartTask = (task: Task) => {
@@ -239,7 +240,7 @@ export default function TaskList() {
     if (previousTask && !previousTask.completed) {
         toast({
             variant: "destructive",
-            title: "Tasks must be completed in order",
+            title: t('tasks.toast.orderRequired'),
         });
         return;
     }
@@ -250,8 +251,8 @@ export default function TaskList() {
     }
 
     toast({
-        title: "Task In Progress",
-        description: "Please interact with the page for at least 10 minutes. Your timer is running in the background.",
+        title: t('tasks.toast.inProgressTitle'),
+        description: t('tasks.toast.inProgressDescription'),
     });
     
     setCountdown(TASK_DURATION_SECONDS);
@@ -261,11 +262,11 @@ export default function TaskList() {
   };
 
   if (isUserLoading || areTasksLoading || isUserDataLoading) {
-    return <div>Loading tasks...</div>;
+    return <div>{t('tasks.loading')}</div>;
   }
   
   if (!user) {
-    return <p>Please log in to see your tasks.</p>
+    return <p>{t('tasks.loginPrompt')}</p>
   }
 
   if (allTasksCompletedToday && lastCompletedTask) {
@@ -273,10 +274,10 @@ export default function TaskList() {
           <Card className="text-center p-8">
               <CardHeader>
                   <CheckCircle className="mx-auto h-12 w-12 text-green-500"/>
-                  <CardTitle className="mt-4">All tasks completed for today!</CardTitle>
+                  <CardTitle className="mt-4">{t('tasks.allCompletedTitle')}</CardTitle>
               </CardHeader>
               <CardContent>
-                  <p className="text-muted-foreground">Come back tomorrow to earn more rewards.</p>
+                  <p className="text-muted-foreground">{t('tasks.allCompletedDescription')}</p>
                   <p className="font-bold mt-2">{unlockTimeMessage}</p>
               </CardContent>
           </Card>
@@ -324,17 +325,17 @@ export default function TaskList() {
                     <CardContent className="space-y-4 text-center">
                         {isTimerActiveForThisTask ? (
                             <>
-                                <p className="text-lg font-semibold">Task in progress...</p>
+                                <p className="text-lg font-semibold">{t('tasks.inProgress')}</p>
                                 <div className="space-y-2">
                                     <Progress value={( (TASK_DURATION_SECONDS - countdown) / TASK_DURATION_SECONDS) * 100} className="w-full"/>
                                     <p className="text-2xl font-mono font-bold">{countdownText}</p>
-                                    <p className="text-muted-foreground text-sm">You must stay on the page. Your reward will be claimed automatically upon completion.</p>
+                                    <p className="text-muted-foreground text-sm">{t('tasks.stayOnPage')}</p>
                                 </div>
                             </>
                         ) : task.completed ? (
-                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> Task Completed! You earned ${displayReward.toLocaleString()}.</div>
+                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> {t('tasks.taskCompleted', { reward: displayReward.toLocaleString() })}</div>
                         ) : (
-                             <p className="text-muted-foreground">{isTaskUnlocked ? 'Start the task to earn your reward.' : 'Complete the previous task to unlock this one.'}</p>
+                             <p className="text-muted-foreground">{isTaskUnlocked ? t('tasks.startPrompt') : t('tasks.unlockPrompt')}</p>
                         )}
                     </CardContent>
                     <CardFooter>
@@ -343,10 +344,10 @@ export default function TaskList() {
                             disabled={isButtonDisabled} 
                             onClick={() => handleStartTask(task)}
                         >
-                            {task.completed ? <><CheckCircle className="mr-2 h-4 w-4"/> Completed</> 
-                            : !isTaskUnlocked ? <><Lock className="mr-2 h-4 w-4"/> Locked</> 
-                            : isTimerActiveForThisTask ? 'Timer Active' 
-                            : `Start Task (Earn $${displayReward.toLocaleString()})`}
+                            {task.completed ? <><CheckCircle className="mr-2 h-4 w-4"/> {t('tasks.completed')}</> 
+                            : !isTaskUnlocked ? <><Lock className="mr-2 h-4 w-4"/> {t('tasks.locked')}</> 
+                            : isTimerActiveForThisTask ? t('tasks.timerActive')
+                            : t('tasks.startButton', { reward: `$${displayReward.toLocaleString()}`})}
                         </Button>
                     </CardFooter>
                 </Card>

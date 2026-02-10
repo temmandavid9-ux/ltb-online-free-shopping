@@ -20,6 +20,7 @@ import { useAuth, useFirestore, useUser, setDocumentNonBlocking } from "@/fireba
 import { doc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useEffect } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const signupSchema = z.object({
   username: z.string().min(3, { message: "Username must be at least 3 characters." }),
@@ -33,6 +34,7 @@ export default function SignupPage() {
   const { user, isUserLoading } = useUser();
   const router = useRouter();
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
@@ -44,6 +46,7 @@ export default function SignupPage() {
   });
 
   async function onSubmit(values: z.infer<typeof signupSchema>) {
+    if (!auth || !firestore) return;
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
       const newUser = userCredential.user;
@@ -64,19 +67,19 @@ export default function SignupPage() {
         setDocumentNonBlocking(userRef, newUserDoc, { merge: false });
 
         toast({
-          title: "Account created",
-          description: "You have been successfully signed up.",
+          title: t('signup.toast.successTitle'),
+          description: t('signup.toast.successDescription'),
         });
         router.push("/account");
       }
     } catch (error: any) {
-      let description = "An unexpected error occurred."
+      let description = t('login.toast.errorDescription')
       if (error.code === 'auth/email-already-in-use') {
-        description = "This email is already in use. Please try another one.";
+        description = t('signup.toast.emailInUse');
       }
       toast({
         variant: "destructive",
-        title: "Signup failed",
+        title: t('signup.toast.errorTitle'),
         description,
       });
     }
@@ -89,16 +92,16 @@ export default function SignupPage() {
   }, [user, isUserLoading, router]);
 
   if (isUserLoading || user) {
-    return <div className="container text-center p-8">Loading...</div>;
+    return <div className="container text-center p-8">{t('general.loading')}</div>;
   }
 
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-8rem)] py-12">
       <Card className="mx-auto max-w-sm w-full">
         <CardHeader>
-          <CardTitle className="text-xl font-headline">Sign Up</CardTitle>
+          <CardTitle className="text-xl font-headline">{t('signup.title')}</CardTitle>
           <CardDescription>
-            Enter your information to create an account
+            {t('signup.description')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -109,9 +112,9 @@ export default function SignupPage() {
                 name="username"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>{t('signup.usernameLabel')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="maxrobinson" {...field} />
+                      <Input placeholder={t('signup.usernamePlaceholder')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -122,12 +125,12 @@ export default function SignupPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t('signup.emailLabel')}</FormLabel>
                     <FormControl>
                       <Input
                         id="email"
                         type="email"
-                        placeholder="m@example.com"
+                        placeholder={t('signup.emailPlaceholder')}
                         {...field}
                       />
                     </FormControl>
@@ -140,7 +143,7 @@ export default function SignupPage() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>{t('signup.passwordLabel')}</FormLabel>
                     <FormControl>
                         <Input id="password" type="password" {...field} />
                     </FormControl>
@@ -149,17 +152,17 @@ export default function SignupPage() {
                 )}
               />
               <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? "Creating Account..." : "Create an account"}
+                {form.formState.isSubmitting ? t('signup.buttonLoading') : t('signup.button')}
               </Button>
               <Button variant="outline" className="w-full" disabled>
-                Sign up with Google
+                {t('signup.googleButton')}
               </Button>
             </form>
           </Form>
           <div className="mt-4 text-center text-sm">
-            Already have an account?{" "}
+            {t('signup.hasAccount')}{" "}
             <Link href="/login" className="underline">
-              Login
+              {t('signup.loginLink')}
             </Link>
           </div>
         </CardContent>

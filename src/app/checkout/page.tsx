@@ -23,6 +23,7 @@ import { useUser, useFirestore, setDocumentNonBlocking, updateDocumentNonBlockin
 import { collection, doc, arrayUnion } from 'firebase/firestore';
 import { useEffect } from 'react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { useLanguage } from '@/context/LanguageContext';
 
 const shippingSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -40,6 +41,7 @@ export default function CheckoutPage() {
   const { toast } = useToast();
   const { user, isUserLoading } = useUser();
   const firestore = useFirestore();
+  const { t } = useLanguage();
 
   const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
   const { data: userData, isLoading: isUserDocLoading } = useDoc<any>(userDocRef);
@@ -57,26 +59,26 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     if (!isUserLoading && !user) {
-      toast({ title: "Please login to proceed", variant: "destructive"});
+      toast({ title: t('checkout.toast.loginRequired'), variant: "destructive"});
       router.push('/login');
     }
      if (user && !isUserDocLoading && userData) {
       form.setValue('name', userData.username || '');
       form.setValue('email', userData.email || '');
     }
-  }, [user, isUserLoading, router, toast, userData, isUserDocLoading, form]);
+  }, [user, isUserLoading, router, toast, userData, isUserDocLoading, form, t]);
 
   const onSubmit = (values: z.infer<typeof checkoutSchema>) => {
     if (!user || !userData) {
-        toast({ variant: 'destructive', title: 'You must be logged in to place an order.'});
+        toast({ variant: 'destructive', title: t('checkout.toast.loggedInRequired')});
         return;
     }
 
     if (userData.walletBalance < basketTotal) {
       toast({
         variant: "destructive",
-        title: "Insufficient Funds",
-        description: `Your wallet balance is $${userData.walletBalance.toLocaleString()}, but the order total is $${basketTotal.toLocaleString()}.`,
+        title: t('checkout.insufficientFundsTitle'),
+        description: t('checkout.toast.insufficientFunds', { balance: userData.walletBalance.toLocaleString(), total: basketTotal.toLocaleString() }),
       });
       return;
     }
@@ -110,8 +112,8 @@ export default function CheckoutPage() {
     });
     
     toast({
-        title: "Order Placed!",
-        description: "Thank you! Your order has been placed and paid for with your wallet balance.",
+        title: t('checkout.toast.successTitle'),
+        description: t('checkout.toast.successDescription'),
     });
 
     clearBasket();
@@ -119,7 +121,7 @@ export default function CheckoutPage() {
   };
   
   if (isUserLoading || !user || isUserDocLoading) {
-    return <div className="container text-center p-8">Loading...</div>;
+    return <div className="container text-center p-8">{t('general.loading')}</div>;
   }
   
   if (basket.length === 0 && typeof window !== 'undefined') {
@@ -132,46 +134,46 @@ export default function CheckoutPage() {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-3xl font-bold font-headline mb-8">Checkout</h1>
+      <h1 className="text-3xl font-bold font-headline mb-8">{t('checkout.title')}</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           <div className="lg:col-span-2 space-y-8">
             <Card>
               <CardHeader>
-                <CardTitle>Shipping Information</CardTitle>
+                <CardTitle>{t('checkout.shippingTitle')}</CardTitle>
               </CardHeader>
               <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField name="name" control={form.control} render={({ field }) => (
                   <FormItem className="md:col-span-2">
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>{t('checkout.nameLabel')}</FormLabel>
                     <FormControl><Input {...field} /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
                 <FormField name="email" control={form.control} render={({ field }) => (
                   <FormItem className="md:col-span-2">
-                    <FormLabel>Email Address</FormLabel>
+                    <FormLabel>{t('checkout.emailLabel')}</FormLabel>
                     <FormControl><Input {...field} type="email"/></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
                 <FormField name="address" control={form.control} render={({ field }) => (
                   <FormItem className="md:col-span-2">
-                    <FormLabel>Street Address</FormLabel>
+                    <FormLabel>{t('checkout.addressLabel')}</FormLabel>
                     <FormControl><Input {...field} /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
                 <FormField name="city" control={form.control} render={({ field }) => (
                   <FormItem>
-                    <FormLabel>City</FormLabel>
+                    <FormLabel>{t('checkout.cityLabel')}</FormLabel>
                     <FormControl><Input {...field} /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />
                 <FormField name="zip" control={form.control} render={({ field }) => (
                   <FormItem>
-                    <FormLabel>ZIP Code</FormLabel>
+                    <FormLabel>{t('checkout.zipLabel')}</FormLabel>
                     <FormControl><Input {...field} /></FormControl>
                     <FormMessage />
                   </FormItem>
@@ -182,7 +184,7 @@ export default function CheckoutPage() {
 
           <Card className="lg:col-span-1 sticky top-24">
             <CardHeader>
-              <CardTitle>Your Order</CardTitle>
+              <CardTitle>{t('checkout.orderSummaryTitle')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {basket.map(item => (
@@ -193,17 +195,17 @@ export default function CheckoutPage() {
               ))}
               <Separator />
               <div className="flex justify-between font-bold text-lg">
-                <span>Total</span>
+                <span>{t('general.total')}</span>
                 <span>${basketTotal.toLocaleString()}</span>
               </div>
                <Separator />
                <div className="space-y-2">
                  <div className="flex justify-between">
-                    <span>Your Wallet Balance</span>
+                    <span>{t('checkout.walletBalance')}</span>
                     <span>${walletBalance.toLocaleString()}</span>
                  </div>
                  <div className={`flex justify-between font-medium ${canAfford ? 'text-green-600' : 'text-red-600'}`}>
-                    <span>Remaining Balance</span>
+                    <span>{t('checkout.remainingBalance')}</span>
                     <span>${(walletBalance - basketTotal).toLocaleString()}</span>
                  </div>
                </div>
@@ -213,14 +215,14 @@ export default function CheckoutPage() {
                 {!canAfford && (
                     <Alert variant="destructive" className="mb-4">
                         <Wallet className="h-4 w-4" />
-                        <AlertTitle>Insufficient Funds</AlertTitle>
+                        <AlertTitle>{t('checkout.insufficientFundsTitle')}</AlertTitle>
                         <AlertDescription>
-                           You do not have enough money in your wallet to complete this purchase.
+                           {t('checkout.insufficientFundsDescription')}
                         </AlertDescription>
                     </Alert>
                 )}
                 <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" disabled={form.formState.isSubmitting || !canAfford}>
-                    {form.formState.isSubmitting ? "Placing Order..." : <><Lock className="w-4 h-4 mr-2" />Place Order with Wallet</>}
+                    {form.formState.isSubmitting ? t('checkout.buttonLoading') : <><Lock className="w-4 h-4 mr-2" />{t('checkout.button')}</>}
                 </Button>
             </CardContent>
           </Card>

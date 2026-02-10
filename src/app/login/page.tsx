@@ -19,6 +19,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useToast } from "@/hooks/use-toast";
 import { useAuth, useUser } from "@/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useLanguage } from "@/context/LanguageContext";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email." }),
@@ -30,6 +31,7 @@ export default function LoginPage() {
   const { user, isUserLoading } = useUser();
   const router = useRouter();
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -40,21 +42,22 @@ export default function LoginPage() {
   });
 
   async function onSubmit(values: z.infer<typeof loginSchema>) {
+    if (!auth) return;
     try {
       await signInWithEmailAndPassword(auth, values.email, values.password);
       toast({
-        title: "Login Successful",
-        description: "Welcome back!",
+        title: t('login.toast.successTitle'),
+        description: t('login.toast.successDescription'),
       });
       router.push("/account");
     } catch (error: any) {
-      let description = "An unexpected error occurred.";
+      let description = t('login.toast.errorDescription');
       if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
-        description = "Invalid email or password. Please try again.";
+        description = t('login.toast.invalidCredentials');
       }
       toast({
         variant: "destructive",
-        title: "Login failed",
+        title: t('login.toast.errorTitle'),
         description: description,
       });
     }
@@ -67,16 +70,16 @@ export default function LoginPage() {
   }, [user, isUserLoading, router]);
 
   if (isUserLoading || user) {
-    return <div className="container text-center p-8">Loading...</div>;
+    return <div className="container text-center p-8">{t('general.loading')}</div>;
   }
 
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-8rem)] py-12">
       <Card className="mx-auto max-w-sm w-full">
         <CardHeader>
-          <CardTitle className="text-2xl font-headline">Login</CardTitle>
+          <CardTitle className="text-2xl font-headline">{t('login.title')}</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            {t('login.description')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -87,11 +90,11 @@ export default function LoginPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t('login.emailLabel')}</FormLabel>
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="m@example.com"
+                        placeholder={t('login.emailPlaceholder')}
                         {...field}
                       />
                     </FormControl>
@@ -105,9 +108,9 @@ export default function LoginPage() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center">
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>{t('login.passwordLabel')}</FormLabel>
                         <Link href="#" className="ml-auto inline-block text-sm underline">
-                        Forgot your password?
+                        {t('login.forgotPassword')}
                         </Link>
                     </div>
                     <FormControl>
@@ -118,17 +121,17 @@ export default function LoginPage() {
                 )}
               />
               <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? 'Logging in...' : 'Login'}
+                {form.formState.isSubmitting ? t('login.buttonLoading') : t('login.button')}
               </Button>
               <Button variant="outline" className="w-full" disabled>
-                Login with Google
+                {t('login.googleButton')}
               </Button>
             </form>
           </Form>
           <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{" "}
+            {t('login.noAccount')}{" "}
             <Link href="/signup" className="underline">
-              Sign up
+              {t('login.signUpLink')}
             </Link>
           </div>
         </CardContent>

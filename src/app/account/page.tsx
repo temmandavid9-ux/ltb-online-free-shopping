@@ -26,12 +26,14 @@ import { useCollection } from "@/firebase/firestore/use-collection";
 import { signOut } from "firebase/auth";
 import type { Order } from "@/lib/types";
 import { ArrowRight, DollarSign, ListChecks } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function AccountPage() {
     const { user, isUserLoading } = useUser();
     const router = useRouter();
     const firestore = useFirestore();
     const auth = useAuth();
+    const { t } = useLanguage();
     
     const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
     const { data: userData, isLoading: isUserDocLoading } = useDoc<any>(userDocRef);
@@ -66,7 +68,7 @@ export default function AccountPage() {
     };
 
     if (isUserLoading || isUserDocLoading || areOrdersLoading) {
-        return <div className="container text-center p-8">Loading...</div>; // Or a skeleton loader
+        return <div className="container text-center p-8">{t('general.loading')}</div>; // Or a skeleton loader
     }
 
     if (!user || !userData) {
@@ -76,45 +78,45 @@ export default function AccountPage() {
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-bold font-headline">My Account</h1>
-            <Button onClick={handleLogout} variant="outline">Logout</Button>
+            <h1 className="text-3xl font-bold font-headline">{t('account.title')}</h1>
+            <Button onClick={handleLogout} variant="outline">{t('account.logout')}</Button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="md:col-span-1 space-y-8">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Profile</CardTitle>
-                        <CardDescription>Manage your personal information.</CardDescription>
+                        <CardTitle>{t('account.profileTitle')}</CardTitle>
+                        <CardDescription>{t('account.profileDescription')}</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-2">
                         <p className="font-semibold">{userData.username}</p>
                         <p className="text-sm text-muted-foreground">{userData.email}</p>
-                        <Button variant="outline" size="sm" className="mt-2" disabled>Edit Profile</Button>
+                        <Button variant="outline" size="sm" className="mt-2" disabled>{t('account.editProfile')}</Button>
                     </CardContent>
                 </Card>
                  <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
-                        <CardTitle className="text-sm font-medium">Wallet Balance</CardTitle>
+                        <CardTitle className="text-sm font-medium">{t('account.walletTitle')}</CardTitle>
                         <DollarSign className="w-4 h-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-2xl font-bold">${userData.walletBalance?.toLocaleString() || '0.00'}</div>
-                        <p className="text-xs text-muted-foreground">Your current earnings</p>
+                        <p className="text-xs text-muted-foreground">{t('account.walletDescription')}</p>
                          <Button size="sm" className="mt-4 w-full" asChild>
-                            <Link href="/wallet">Manage Wallet <ArrowRight className="ml-2 h-4 w-4"/></Link>
+                            <Link href="/wallet">{t('account.manageWallet')} <ArrowRight className="ml-2 h-4 w-4"/></Link>
                         </Button>
                     </CardContent>
                 </Card>
                  <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
-                        <CardTitle className="text-sm font-medium">Daily Tasks</CardTitle>
+                        <CardTitle className="text-sm font-medium">{t('account.tasksTitle')}</CardTitle>
                         <ListChecks className="w-4 h-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-2xl font-bold">{userData.taskProgress || 0}% Complete</div>
-                        <p className="text-xs text-muted-foreground">Your progress on today's tasks</p>
+                        <p className="text-xs text-muted-foreground">{t('account.tasksDescription')}</p>
                         <Button size="sm" variant="outline" className="mt-4 w-full" asChild>
-                            <Link href="/tasks">View Tasks <ArrowRight className="ml-2 h-4 w-4"/></Link>
+                            <Link href="/tasks">{t('account.viewTasks')} <ArrowRight className="ml-2 h-4 w-4"/></Link>
                         </Button>
                     </CardContent>
                 </Card>
@@ -122,17 +124,17 @@ export default function AccountPage() {
             <div className="md:col-span-2">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Order History</CardTitle>
-                        <CardDescription>View your past orders and their status.</CardDescription>
+                        <CardTitle>{t('account.orderHistoryTitle')}</CardTitle>
+                        <CardDescription>{t('account.orderHistoryDescription')}</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                <TableHead>Product</TableHead>
-                                <TableHead>Date</TableHead>
-                                <TableHead>Status</TableHead>
-                                <TableHead className="text-right">Total</TableHead>
+                                <TableHead>{t('general.product')}</TableHead>
+                                <TableHead>{t('general.date')}</TableHead>
+                                <TableHead>{t('general.status')}</TableHead>
+                                <TableHead className="text-right">{t('general.total')}</TableHead>
                                 <TableHead></TableHead>
                                 </TableRow>
                             </TableHeader>
@@ -153,13 +155,13 @@ export default function AccountPage() {
                                         <TableCell className="text-right">${order.price.toLocaleString()}</TableCell>
                                         <TableCell className="text-right">
                                             <Button variant="ghost" size="sm" asChild>
-                                                <Link href={`/order-confirmation/${order.id.split('_')[0]}`}>View</Link>
+                                                <Link href={`/order-confirmation/${order.id.split('_')[0]}`}>{t('general.view')}</Link>
                                             </Button>
                                         </TableCell>
                                     </TableRow>
                                 )) : (
                                     <TableRow>
-                                        <TableCell colSpan={5} className="text-center">You have no orders yet.</TableCell>
+                                        <TableCell colSpan={5} className="text-center">{t('account.noOrders')}</TableCell>
                                     </TableRow>
                                 )}
                             </TableBody>

@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { DollarSign, WalletCards, Landmark } from "lucide-react";
 import type { Withdrawal } from "@/lib/types";
+import { useLanguage } from "@/context/LanguageContext";
 
 const MIN_WITHDRAWAL_AMOUNT = 80;
 
@@ -31,6 +32,7 @@ export default function WalletPage() {
   const firestore = useFirestore();
   const router = useRouter();
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
   const { data: userData, isLoading: isUserDocLoading } = useDoc<any>(userDocRef);
@@ -65,11 +67,11 @@ export default function WalletPage() {
   const onSubmit = (values: z.infer<typeof withdrawalSchema>) => {
     if (!user || !userData) return;
     if (userData.walletBalance < values.amount) {
-        toast({ variant: 'destructive', title: 'Insufficient Funds', description: 'You cannot withdraw more than your wallet balance.' });
+        toast({ variant: 'destructive', title: t('wallet.toast.insufficientFundsTitle'), description: t('wallet.toast.insufficientFundsDescription') });
         return;
     }
     if (values.amount < MIN_WITHDRAWAL_AMOUNT) {
-        toast({ variant: 'destructive', title: 'Invalid Amount', description: `Withdrawal amount must be at least $${MIN_WITHDRAWAL_AMOUNT.toLocaleString()}.` });
+        toast({ variant: 'destructive', title: t('wallet.toast.invalidAmountTitle'), description: t('wallet.toast.invalidAmountDescription', { amount: MIN_WITHDRAWAL_AMOUNT.toLocaleString() }) });
         return;
     }
 
@@ -90,14 +92,16 @@ export default function WalletPage() {
     setDocumentNonBlocking(withdrawalRef, newWithdrawal, { merge: false });
 
     // Update user's balance
-    updateDocumentNonBlocking(userDocRef!, { walletBalance: newBalance });
+    if(userDocRef) {
+        updateDocumentNonBlocking(userDocRef, { walletBalance: newBalance });
+    }
 
-    toast({ title: 'Withdrawal Request Submitted', description: 'Your request is pending approval.' });
+    toast({ title: t('wallet.toast.successTitle'), description: t('wallet.toast.successDescription') });
     form.reset();
   };
 
   if (isUserLoading || isUserDocLoading || areWithdrawalsLoading) {
-    return <div className="container text-center p-8">Loading...</div>;
+    return <div className="container text-center p-8">{t('general.loading')}</div>;
   }
   
   if (!user) return null;
@@ -108,14 +112,14 @@ export default function WalletPage() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold font-headline">My Wallet</h1>
-        <p className="text-muted-foreground">Manage your funds and view your transaction history.</p>
+        <h1 className="text-3xl font-bold font-headline">{t('wallet.title')}</h1>
+        <p className="text-muted-foreground">{t('wallet.description')}</p>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-1 space-y-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">Available Balance</CardTitle>
+                <CardTitle className="text-sm font-medium">{t('wallet.balanceTitle')}</CardTitle>
                 <DollarSign className="w-4 h-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -124,42 +128,42 @@ export default function WalletPage() {
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Landmark/> Request Withdrawal</CardTitle>
-              <CardDescription>Transfer funds to your account.</CardDescription>
+              <CardTitle className="flex items-center gap-2"><Landmark/> {t('wallet.withdrawalTitle')}</CardTitle>
+              <CardDescription>{t('wallet.withdrawalDescription')}</CardDescription>
             </CardHeader>
             <CardContent>
               {!canWithdraw && (
                 <Alert>
                   <WalletCards className="h-4 w-4"/>
-                  <AlertTitle>Minimum Balance Required</AlertTitle>
-                  <AlertDescription>You need at least ${MIN_WITHDRAWAL_AMOUNT.toLocaleString()} in your wallet to make a withdrawal.</AlertDescription>
+                  <AlertTitle>{t('wallet.minBalanceTitle')}</AlertTitle>
+                  <AlertDescription>{t('wallet.minBalanceDescription', { amount: MIN_WITHDRAWAL_AMOUNT.toLocaleString() })}</AlertDescription>
                 </Alert>
               )}
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className={`space-y-4 mt-4 ${!canWithdraw ? 'opacity-50' : ''}`}>
                     <FormField name="amount" control={form.control} render={({ field }) => (
                         <FormItem>
-                        <FormLabel>Amount</FormLabel>
+                        <FormLabel>{t('wallet.amountLabel')}</FormLabel>
                         <FormControl><Input type="number" {...field} disabled={!canWithdraw} /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )} />
                     <FormField name="paymentMethod" control={form.control} render={({ field }) => (
                         <FormItem>
-                        <FormLabel>Payment Method</FormLabel>
-                        <FormControl><Input {...field} placeholder="e.g. Bank Transfer, PayPal" disabled={!canWithdraw} /></FormControl>
+                        <FormLabel>{t('wallet.methodLabel')}</FormLabel>
+                        <FormControl><Input {...field} placeholder={t('wallet.methodPlaceholder')} disabled={!canWithdraw} /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )} />
                     <FormField name="accountDetails" control={form.control} render={({ field }) => (
                         <FormItem>
-                        <FormLabel>Account Details</FormLabel>
-                        <FormControl><Input {...field} placeholder="Account number, email, etc." disabled={!canWithdraw} /></FormControl>
+                        <FormLabel>{t('wallet.detailsLabel')}</FormLabel>
+                        <FormControl><Input {...field} placeholder={t('wallet.detailsPlaceholder')} disabled={!canWithdraw} /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )} />
                     <Button type="submit" className="w-full" disabled={!canWithdraw || form.formState.isSubmitting}>
-                        {form.formState.isSubmitting ? 'Submitting...' : 'Request Withdrawal'}
+                        {form.formState.isSubmitting ? t('wallet.buttonLoading') : t('wallet.button')}
                     </Button>
                 </form>
               </Form>
@@ -169,16 +173,16 @@ export default function WalletPage() {
         <div className="lg:col-span-2">
           <Card>
             <CardHeader>
-              <CardTitle>Withdrawal History</CardTitle>
+              <CardTitle>{t('wallet.historyTitle')}</CardTitle>
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Date</TableHead>
-                    <TableHead>Amount</TableHead>
-                    <TableHead>Method</TableHead>
-                    <TableHead>Status</TableHead>
+                    <TableHead>{t('general.date')}</TableHead>
+                    <TableHead>{t('general.amount')}</TableHead>
+                    <TableHead>{t('wallet.methodLabel')}</TableHead>
+                    <TableHead>{t('general.status')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -199,7 +203,7 @@ export default function WalletPage() {
                     </TableRow>
                   )) : (
                     <TableRow>
-                      <TableCell colSpan={4} className="text-center">No withdrawal history.</TableCell>
+                      <TableCell colSpan={4} className="text-center">{t('wallet.noHistory')}</TableCell>
                     </TableRow>
                   )}
                 </TableBody>
