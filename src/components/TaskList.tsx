@@ -129,7 +129,7 @@ export default function TaskList() {
     if (!user || !userData || !firestore) return;
     
     const task = sortedTasks.find(t => t.id === taskId);
-    if (!task || task.completed || task.reward === TASK_REWARD) return;
+    if (!task || task.completed) return;
 
     const timeElapsed = task.taskStartTime ? (new Date().getTime() - new Date(task.taskStartTime).getTime()) / 1000 : 0;
     if (timeElapsed < TASK_DURATION_SECONDS) {
@@ -146,7 +146,7 @@ export default function TaskList() {
     const currentTaskIndex = sortedTasks.findIndex(t => t.id === taskId);
     const isLastTask = currentTaskIndex === sortedTasks.length - 1;
 
-    const updates: Partial<Task> = { completed: true, reward: TASK_REWARD };
+    const updates: Partial<Task> = { completed: true };
     
     if (isLastTask) {
         const unlockTime = new Date();
@@ -164,7 +164,7 @@ export default function TaskList() {
 
     updateDocumentNonBlocking(taskRef, updates);
 
-    const newBalance = (userData.walletBalance || 0) + TASK_REWARD;
+    const newBalance = (userData.walletBalance || 0) + task.reward;
     const completedTasksCount = sortedTasks.filter(t => t.completed).length + 1;
     const newTaskProgress = (completedTasksCount / sortedTasks.length) * 100;
     
@@ -173,7 +173,7 @@ export default function TaskList() {
     }
     
     toast({
-        title: t('tasks.taskCompleted', { reward: `$${TASK_REWARD.toLocaleString()}` }),
+        title: t('tasks.taskCompleted', { reward: `$${task.reward.toLocaleString()}` }),
     });
     
     setActiveTimerTaskId(null);
@@ -222,14 +222,10 @@ export default function TaskList() {
         const timeElapsed = (new Date().getTime() - startTime) / 1000;
         const remainingTime = TASK_DURATION_SECONDS - timeElapsed;
 
-        if (remainingTime <= 0) {
-            handleCompleteTask(inProgressTask.id);
-        } else {
-            setActiveTimerTaskId(inProgressTask.id);
-            setCountdown(Math.ceil(remainingTime));
-        }
+        setActiveTimerTaskId(inProgressTask.id);
+        setCountdown(Math.ceil(remainingTime > 0 ? remainingTime : 0));
     }
-  }, [tasks, areTasksLoading, handleCompleteTask, activeTimerTaskId, sortedTasks]);
+  }, [tasks, areTasksLoading, sortedTasks, activeTimerTaskId]);
 
   // Timer countdown effect, triggers auto-completion
   useEffect(() => {
