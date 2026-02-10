@@ -74,13 +74,15 @@ export default function AccountPage() {
         if (!user || !firestore) return;
         const adminRoleRef = doc(firestore, 'roles_admin', user.uid);
         
-        const adminData = { uid: user.uid, role: 'admin' };
+        // This payload must exactly match the firestore.rules validation.
+        const adminData = { role: 'admin' };
         
         try {
+            // Use setDoc without merge to ensure the document is exactly as specified.
             await setDoc(adminRoleRef, adminData);
             toast({
-                title: "Admin Access Claimed",
-                description: "You have been granted admin privileges. The page will now reload.",
+                title: "Admin Access Confirmed",
+                description: "Privileges granted. The page will now reload to activate your admin status.",
             });
             setTimeout(() => window.location.reload(), 2500);
         } catch (error) {
@@ -88,7 +90,7 @@ export default function AccountPage() {
             toast({
                 variant: "destructive",
                 title: "Error Claiming Access",
-                description: (error as Error).message || "Could not grant admin privileges. Please check the console for details.",
+                description: (error as Error).message || "Could not grant admin privileges. Please consult the console for details.",
             });
         }
     };

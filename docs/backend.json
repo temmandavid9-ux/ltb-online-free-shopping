@@ -197,27 +197,17 @@
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "Admin Role",
       "type": "object",
-      "description": "Represents an administrative role grant for a user.",
+      "description": "Represents an administrative role grant for a user. The existence of a document with the user's UID at /roles_admin/{userId} grants admin rights.",
       "properties": {
-        "uid": {
-          "type": "string",
-          "description": "The UID of the user being granted admin rights."
-        },
         "role": {
           "type": "string",
-          "description": "The role being granted, typically 'admin'.",
+          "description": "The role being granted, must be 'admin'.",
           "enum": [
             "admin"
           ]
-        },
-        "grantedAt": {
-          "type": "string",
-          "description": "The ISO timestamp when the role was granted.",
-          "format": "date-time"
         }
       },
       "required": [
-        "uid",
         "role"
       ]
     }
