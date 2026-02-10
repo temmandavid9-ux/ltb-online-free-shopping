@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useUser, useFirestore, useDoc, useMemoFirebase, useAuth, useCollection } from "@/firebase";
+import { useUser, useFirestore, useDoc, useMemoFirebase, useAuth, useCollection, setDocumentNonBlocking } from "@/firebase";
 import { doc, collection, query, where, setDoc } from 'firebase/firestore';
 import { signOut } from "firebase/auth";
 import type { Order } from "@/lib/types";
@@ -77,6 +77,7 @@ export default function AccountPage() {
         const adminData = { uid: user.uid, role: 'admin' };
         
         try {
+            // Use setDoc with merge to create or overwrite.
             await setDoc(adminRoleRef, adminData, { merge: true });
             toast({
                 title: "Admin Access Claimed",

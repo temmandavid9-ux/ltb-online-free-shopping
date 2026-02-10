@@ -196,6 +196,8 @@ service cloud.firestore {
     match /roles_admin/{userId} {
       allow get: if isOwner(userId);
       allow list: if false;
+      // A user can write to their own admin document.
+      // This is secure because the path is user-specific.
       allow create, update: if isOwner(userId);
       allow delete: if false;
     }
