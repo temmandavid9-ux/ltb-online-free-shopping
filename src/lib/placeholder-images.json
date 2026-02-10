@@ -2279,6 +2279,12 @@
       "description": "Product 380",
       "imageUrl": "https://image2url.com/r2/default/images/1770484068661-8db89e44-10ef-4c37-b24c-b428f9ff4b9d.webp",
       "imageHint": "new product"
+    },
+    {
+      "id": "prod_img_381",
+      "description": "Product 381",
+      "imageUrl": "https://image2url.com/r2/default/images/1770711044741-323b0efb-17c6-4cbd-9345-8cd12ec9d3b6.avif",
+      "imageHint": "new product"
     }
   ]
 }

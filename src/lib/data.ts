@@ -4965,6 +4965,22 @@ export const products: Product[] = [
     stock: 50,
     rating: 4.5,
     reviewCount: 100
+  },
+  {
+    id: 'prod_381',
+    slug: 'product-381',
+    name: 'Product 381',
+    description: 'A high-quality product from our latest collection.',
+    category: 'Clothes',
+    price: 0.7825,
+    brand: 'Zenco',
+    images: [findImage('prod_img_381')],
+    stock: 50,
+    rating: 4.5,
+    reviewCount: 100
   }
 ];
 
+
+
+    
