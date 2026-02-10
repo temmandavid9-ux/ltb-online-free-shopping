@@ -198,11 +198,10 @@ service cloud.firestore {
     match /roles_admin/{userId} {
       allow get: if isOwner(userId);
       allow list: if false;
-      allow create: if isOwner(userId)
+      allow create, update: if isOwner(userId)
                     && request.resource.data.uid == userId
                     && request.resource.data.role == 'admin'
                     && request.resource.data.size() == 2;
-      allow update: if false;
       allow delete: if false;
     }
   }
