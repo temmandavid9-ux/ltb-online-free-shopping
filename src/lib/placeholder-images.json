@@ -647,6 +647,78 @@
       "description": "Signature Perfume",
       "imageUrl": "https://image2url.com/r2/default/images/1770827466145-60f95598-8b1f-4ecd-be85-8ae745150779.webp",
       "imageHint": "perfume bottle"
+    },
+    {
+      "id": "prod_img_109",
+      "description": "Orion Eyeshadow Palette",
+      "imageUrl": "https://image2url.com/r2/default/images/1770827655927-b964c635-f649-4912-93bf-69a5b9fec060.webp",
+      "imageHint": "eyeshadow palette"
+    },
+    {
+      "id": "prod_img_110",
+      "description": "Nexa Luminous Primer",
+      "imageUrl": "https://image2url.com/r2/default/images/1770827683089-5f3e82be-1f71-4572-8e08-63198eeb8b75.webp",
+      "imageHint": "makeup primer"
+    },
+    {
+      "id": "prod_img_111",
+      "description": "Zenco Velvet Lipstick",
+      "imageUrl": "https://image2url.com/r2/default/images/1770827714302-7c74a149-6cc5-4153-8d5b-a57b01b8e8c8.webp",
+      "imageHint": "red lipstick"
+    },
+    {
+      "id": "prod_img_112",
+      "description": "Stellar Precision Eyeliner",
+      "imageUrl": "https://image2url.com/r2/default/images/1770827746755-131aa283-5e98-4668-b2ee-7ced45a28bb8.jpg",
+      "imageHint": "liquid eyeliner"
+    },
+    {
+      "id": "prod_img_113",
+      "description": "Helios Volumizing Mascara",
+      "imageUrl": "https://image2url.com/r2/default/images/1770827772331-eb51494d-afa4-4b27-aa0a-3e495f6b51f4.jpg",
+      "imageHint": "mascara wand"
+    },
+    {
+      "id": "prod_img_114",
+      "description": "Aperture Brow Pencil",
+      "imageUrl": "https://image2url.com/r2/default/images/1770827797328-5100d4d2-cf14-43e4-bb3e-442745859021.avif",
+      "imageHint": "brow pencil"
+    },
+    {
+      "id": "prod_img_115",
+      "description": "iDino Setting Spray",
+      "imageUrl": "https://image2url.com/r2/default/images/1770827823008-dd3a3b4e-54de-4358-bb34-a267416e2147.avif",
+      "imageHint": "setting spray"
+    },
+    {
+      "id": "prod_img_116",
+      "description": "Orion Blush Compact",
+      "imageUrl": "https://image2url.com/r2/default/images/1770827845080-e437c0dd-1e8a-4395-80c3-2e4a8919069d.avif",
+      "imageHint": "blush compact"
+    },
+    {
+      "id": "prod_img_117",
+      "description": "Nexa Bronzer Powder",
+      "imageUrl": "https://image2url.com/r2/default/images/1770827878620-4865f697-0bc7-4f5b-bc1b-9ba143c0f466.avif",
+      "imageHint": "bronzer powder"
+    },
+    {
+      "id": "prod_img_118",
+      "description": "Zenco Lip Liner",
+      "imageUrl": "https://image2url.com/r2/default/images/1770827911355-420cad1d-415c-45dc-8d8b-ed189e55d2cf.avif",
+      "imageHint": "lip liner"
+    },
+    {
+      "id": "prod_img_119",
+      "description": "Stellar Nail Polish",
+      "imageUrl": "https://image2url.com/r2/default/images/1770827950292-266dbbc3-f116-4308-b6ef-a7bbaf8a07f8.avif",
+      "imageHint": "nail polish"
+    },
+    {
+      "id": "prod_img_120",
+      "description": "Helios Makeup Brush Set",
+      "imageUrl": "https://image2url.com/r2/default/images/1770827992396-6450ffb4-70a7-4661-9b69-078c15e69dfc.webp",
+      "imageHint": "makeup brushes"
     }
   ]
 }
