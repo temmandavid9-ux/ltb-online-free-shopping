@@ -103,7 +103,7 @@ export default function TaskList() {
   const [activeTimerTaskId, setActiveTimerTaskId] = useState<string | null>(null);
   const [countdown, setCountdown] = useState(TASK_DURATION_SECONDS);
   const [unlockTimeMessage, setUnlockTimeMessage] = useState<string>('');
-
+  
   const sortedTasks = useMemo(() => {
     if (!tasks) return [];
     return [...tasks].sort((a, b) => {
@@ -112,6 +112,19 @@ export default function TaskList() {
         return aIndex - bIndex;
     });
   }, [tasks]);
+
+  const firstIncompleteTaskIndex = useMemo(() => {
+      return sortedTasks.findIndex(t => !t.completed);
+  }, [sortedTasks]);
+
+  const [activeTab, setActiveTab] = useState<string>(TASK_DEFINITIONS[0].id);
+
+  useEffect(() => {
+    if (sortedTasks.length > 0 && firstIncompleteTaskIndex !== -1) {
+        const firstIncompleteTaskId = sortedTasks[firstIncompleteTaskIndex].id;
+        setActiveTab(firstIncompleteTaskId);
+    }
+  }, [sortedTasks, firstIncompleteTaskIndex]);
 
   const allTasksCompletedToday = useMemo(() => sortedTasks.length > 0 && sortedTasks.every(t => t.completed), [sortedTasks]);
   
@@ -129,7 +142,7 @@ export default function TaskList() {
     if (!user || !userData || !firestore) return;
     
     const task = sortedTasks.find(t => t.id === taskId);
-    if (!task || task.completed) return;
+    if (!task) return;
 
     const taskRef = doc(firestore, 'users', user.uid, 'tasks', taskId);
     
@@ -188,6 +201,9 @@ export default function TaskList() {
         };
         batch.set(taskRef, newTask);
       });
+      if (userDocRef) {
+        batch.update(userDocRef, { taskProgress: 0 });
+      }
       batch.commit().catch(e => console.error("Failed to initialize tasks", e));
     } else if (allTasksCompletedToday && lastCompletedTask?.nextTaskUnlockTime && new Date() > new Date(lastCompletedTask.nextTaskUnlockTime)) {
         const batch = writeBatch(firestore);
@@ -221,7 +237,7 @@ export default function TaskList() {
     }
   }, [tasks, areTasksLoading, sortedTasks, activeTimerTaskId, handleCompleteTask]);
 
-  // Timer countdown effect, triggers auto-completion if user stays on page
+  // Timer countdown effect
   useEffect(() => {
     if (!activeTimerTaskId) return;
 
@@ -249,9 +265,7 @@ export default function TaskList() {
     if (activeTimerTaskId || allTasksCompletedToday || !user || !firestore) return;
 
     const currentTaskIndex = sortedTasks.findIndex(t => t.id === task.id);
-    const previousTask = currentTaskIndex > 0 ? sortedTasks[currentTaskIndex - 1] : null;
-
-    if (previousTask && !previousTask.completed) {
+    if (currentTaskIndex !== firstIncompleteTaskIndex) {
         toast({
             variant: "destructive",
             title: t('tasks.toast.orderRequired'),
@@ -274,8 +288,8 @@ export default function TaskList() {
     const taskRef = doc(firestore, 'users', user.uid, 'tasks', task.id);
     updateDocumentNonBlocking(taskRef, { taskStartTime: new Date().toISOString() });
   };
-
-  if (isUserLoading || isUserDataLoading) {
+  
+  if (isUserLoading || isUserDataLoading || areTasksLoading) {
     return <div>{t('tasks.loading')}</div>;
   }
   
@@ -302,14 +316,12 @@ export default function TaskList() {
       )
   }
 
-  const firstIncompleteTaskIndex = sortedTasks.findIndex(t => !t.completed);
-
   const minutes = Math.floor(countdown / 60);
   const seconds = countdown % 60;
   const countdownText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
   return (
-    <Tabs defaultValue={sortedTasks[firstIncompleteTaskIndex]?.id || TASK_DEFINITIONS[0].id} className="w-full">
+    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
       <TabsList className="grid w-full grid-cols-3">
         {TASK_DEFINITIONS.map((taskDef, index) => {
           const taskData = sortedTasks.find(t => t.name.toLowerCase() === taskDef.id);
@@ -323,12 +335,12 @@ export default function TaskList() {
           );
         })}
       </TabsList>
-      {TASK_DEFINITIONS.map(taskDef => {
+      {TASK_DEFINITIONS.map((taskDef, index) => {
           const task = sortedTasks.find(t => t.name.toLowerCase() === taskDef.id);
           if (!task) return null;
 
           const isTimerActiveForThisTask = activeTimerTaskId === task.id;
-          const isTaskUnlocked = firstIncompleteTaskIndex === TASK_DEFINITIONS.findIndex(t => t.id === taskDef.id);
+          const isTaskUnlocked = firstIncompleteTaskIndex === index;
           const isButtonDisabled = !!activeTimerTaskId || task.completed || !isTaskUnlocked;
           // Use the constant for display to ensure consistency
           const displayReward = TASK_REWARD;
@@ -351,7 +363,7 @@ export default function TaskList() {
                                 </div>
                             </>
                         ) : task.completed ? (
-                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> {t('tasks.taskCompleted', { reward: displayReward.toLocaleString() })}</div>
+                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> {t('tasks.taskCompleted', { reward: `$${displayReward.toLocaleString()}` })}</div>
                         ) : (
                              <p className="text-muted-foreground">{isTaskUnlocked ? t('tasks.startPrompt') : t('tasks.unlockPrompt')}</p>
                         )}
