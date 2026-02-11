@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Leaf } from 'lucide-react';
+import { Gem } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
 const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -23,7 +23,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center space-x-2 mb-4">
-              <Leaf className="h-6 w-6 text-primary" />
+              <Gem className="h-6 w-6 text-primary" />
               <span className="font-bold text-xl font-headline">Eden 0²</span>
             </Link>
             <p className="text-sm text-muted-foreground">{t('footer.companyLine')}</p>

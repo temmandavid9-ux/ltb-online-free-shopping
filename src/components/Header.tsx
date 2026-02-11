@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { Search, Leaf, ListChecks, Wallet, User as UserIcon, Globe } from 'lucide-react';
+import { Search, Gem, ListChecks, Wallet, User as UserIcon, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRedeem } from '@/context/CartContext';
 import { useUser, useFirestore, useDoc, useMemoFirebase } from '@/firebase';
@@ -32,7 +32,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center space-x-8">
             <Link href="/" className="flex items-center space-x-2">
-              <Leaf className="h-7 w-7 text-primary" />
+              <Gem className="h-7 w-7 text-primary" />
               <span className="font-bold text-2xl font-headline text-primary">Eden 0²</span>
             </Link>
           </div>

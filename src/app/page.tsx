@@ -11,13 +11,11 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import ProductGrid from '@/components/ProductGrid';
-import LogoShowcase from '@/components/LogoShowcase';
+import { AiRecommendations } from '@/components/AiRecommendations';
 
 export default function Home() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <LogoShowcase />
-
       <section className="mb-12">
         <Carousel className="w-full" opts={{ loop: true }}>
           <CarouselContent>
@@ -53,6 +51,7 @@ export default function Home() {
       
       <ProductGrid products={products} />
       
+      <AiRecommendations />
     </div>
   );
 }
