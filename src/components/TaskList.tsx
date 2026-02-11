@@ -19,9 +19,9 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
 const TASK_DEFINITIONS = [
-  { id: 'youtube', name: 'YouTube', icon: Youtube, description: 'Watch our new YouTube video.' },
-  { id: 'instagram', name: 'Instagram', icon: Instagram, description: 'Check out our latest Instagram posts.' },
-  { id: 'twitch', name: 'Twitch', icon: Twitch, description: 'Join our stream on Twitch.' },
+  { id: 'youtube', name: 'YouTube', icon: Youtube, description: 'Watch our new YouTube video.', reward: 0.33 },
+  { id: 'instagram', name: 'Instagram', icon: Instagram, description: 'Check out our latest Instagram posts.', reward: 0.33 },
+  { id: 'twitch', name: 'Twitch', icon: Twitch, description: 'Join our stream on Twitch.', reward: 0.34 },
 ];
 
 const TASK_LINKS = {
@@ -32,7 +32,6 @@ const TASK_LINKS = {
 
 // NOTE: Timer is set to 600 seconds (10 minutes).
 const TASK_DURATION_SECONDS = 600;
-const TASK_REWARD = 0.25;
 
 
 function InitialSocialFollow() {
@@ -189,37 +188,55 @@ export default function TaskList() {
 
   // Initialize or reset tasks
   useEffect(() => {
-    if (!user || !firestore || areTasksLoading || !userData) return;
+    if (!user || !firestore || areTasksLoading || !userData || !tasks) return;
     if (!userData.socialsFollowed) return;
 
-    if (tasks?.length === 0) {
-      const batch = writeBatch(firestore);
-      TASK_DEFINITIONS.forEach(taskDef => {
-        const taskRef = doc(firestore, 'users', user.uid, 'tasks', taskDef.id);
-        const newTask: Omit<Task, 'id'> = {
-          userId: user.uid,
-          name: taskDef.name,
-          completed: false,
-          reward: TASK_REWARD,
-        };
-        batch.set(taskRef, newTask);
-      });
-      if (userDocRef) {
-        batch.update(userDocRef, { taskProgress: 0 });
-      }
-      batch.commit().catch(e => console.error("Failed to initialize tasks", e));
-    } else if (allTasksCompletedToday && lastCompletedTask?.nextTaskUnlockTime && new Date() > new Date(lastCompletedTask.nextTaskUnlockTime)) {
+    const definitionTaskIds = new Set(TASK_DEFINITIONS.map(d => d.id));
+    const firestoreTaskIds = new Set(tasks.map(t => t.id));
+
+    const setsAreEqual = definitionTaskIds.size === firestoreTaskIds.size && [...definitionTaskIds].every(id => firestoreTaskIds.has(id));
+
+    if (!setsAreEqual) {
+        // Mismatch found, re-initialize. This will wipe old tasks (like 'facebook') and create the correct ones with correct rewards.
         const batch = writeBatch(firestore);
-        sortedTasks.forEach(task => {
-            const taskRef = doc(firestore, 'users', user.uid, 'tasks', task.id);
-            batch.update(taskRef, { completed: false, nextTaskUnlockTime: null, taskStartTime: null });
+        tasks.forEach(task => batch.delete(doc(firestore, 'users', user.uid, 'tasks', task.id)));
+        TASK_DEFINITIONS.forEach(taskDef => {
+            const taskRef = doc(firestore, 'users', user.uid, 'tasks', taskDef.id);
+            const newTask: Omit<Task, 'id'> = {
+              userId: user.uid,
+              name: taskDef.name,
+              completed: false,
+              reward: taskDef.reward,
+            };
+            batch.set(taskRef, newTask);
         });
-        if(userDocRef) {
-          updateDocumentNonBlocking(userDocRef, { taskProgress: 0 });
+        if (userDocRef) {
+            batch.update(userDocRef, { taskProgress: 0 });
         }
-        batch.commit().catch(e => console.error("Failed to reset tasks", e));
+        batch.commit().catch(e => console.error("Failed to reinitialize tasks", e));
+        return; // Exit after re-initializing
     }
-  }, [user, tasks, areTasksLoading, firestore, allTasksCompletedToday, lastCompletedTask, sortedTasks, userDocRef, userData]);
+
+    // Daily reset logic
+    const allTasksCompleted = tasks.length > 0 && tasks.every(t => t.completed);
+    if (allTasksCompleted) {
+        const lastTask = tasks.reduce((latest, current) => 
+            !latest.nextTaskUnlockTime || (current.nextTaskUnlockTime && new Date(current.nextTaskUnlockTime) > new Date(latest.nextTaskUnlockTime)) ? current : latest
+        );
+
+        if (lastTask?.nextTaskUnlockTime && new Date() > new Date(lastTask.nextTaskUnlockTime)) {
+            const batch = writeBatch(firestore);
+            tasks.forEach(task => {
+                const taskRef = doc(firestore, 'users', user.uid, 'tasks', task.id);
+                batch.update(taskRef, { completed: false, nextTaskUnlockTime: null, taskStartTime: null });
+            });
+            if(userDocRef) {
+                batch.update(userDocRef, { taskProgress: 0 });
+            }
+            batch.commit().catch(e => console.error("Failed to reset tasks", e));
+        }
+    }
+}, [user, firestore, areTasksLoading, userData, tasks, userDocRef]);
 
   // Check for in-progress task on load or when tasks data changes.
   useEffect(() => {
@@ -345,8 +362,6 @@ export default function TaskList() {
           const isTimerActiveForThisTask = activeTimerTaskId === task.id;
           const isTaskUnlocked = firstIncompleteTaskIndex === index;
           const isButtonDisabled = !!activeTimerTaskId || task.completed || !isTaskUnlocked;
-          // Use the constant for display to ensure consistency
-          const displayReward = TASK_REWARD;
 
           return (
              <TabsContent key={taskDef.id} value={taskDef.id}>
@@ -366,7 +381,7 @@ export default function TaskList() {
                                 </div>
                             </>
                         ) : task.completed ? (
-                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> {t('tasks.taskCompleted', { reward: `$${displayReward.toLocaleString()}` })}</div>
+                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> {t('tasks.taskCompleted', { reward: `$${task.reward.toLocaleString()}` })}</div>
                         ) : (
                              <p className="text-muted-foreground">{isTaskUnlocked ? t('tasks.startPrompt') : t('tasks.unlockPrompt')}</p>
                         )}
@@ -380,7 +395,7 @@ export default function TaskList() {
                             {task.completed ? <><CheckCircle className="mr-2 h-4 w-4"/> {t('tasks.completed')}</> 
                             : !isTaskUnlocked ? <><Lock className="mr-2 h-4 w-4"/> {t('tasks.locked')}</> 
                             : isTimerActiveForThisTask ? t('tasks.timerActive')
-                            : t('tasks.startButton', { reward: `$${displayReward.toLocaleString()}`})}
+                            : t('tasks.startButton', { reward: `$${task.reward.toLocaleString()}`})}
                         </Button>
                     </CardFooter>
                 </Card>
