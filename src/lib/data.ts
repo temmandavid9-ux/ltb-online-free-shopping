@@ -1677,7 +1677,126 @@ export const products: Product[] = [
     stock: 30,
     rating: 4.9,
     reviewCount: 105
+  },
+  {
+    id: 'prod_128',
+    slug: 'product-128',
+    name: 'Stellar Luxe Perfume',
+    description: 'A captivating scent for the modern individual. This luxurious perfume combines floral notes with a hint of musk to create an unforgettable fragrance experience.',
+    category: 'Beauty',
+    price: 185,
+    brand: 'Stellar',
+    images: [findImage('prod_img_128')],
+    stock: 40,
+    rating: 4.9,
+    reviewCount: 90
+  },
+  {
+    id: 'prod_129',
+    slug: 'product-129',
+    name: 'Orion Rejuvenating Cream',
+    description: 'Turn back the clock with this powerful rejuvenating cream. Its advanced formula helps to reduce the appearance of fine lines and wrinkles, leaving your skin looking youthful and radiant.',
+    category: 'Beauty',
+    price: 85,
+    brand: 'Orion',
+    images: [findImage('prod_img_129')],
+    stock: 60,
+    rating: 4.8,
+    reviewCount: 110
+  },
+  {
+    id: 'prod_130',
+    slug: 'product-130',
+    name: 'Nexa Hydrating Lip Balm',
+    description: 'Keep your lips soft and supple with this ultra-hydrating lip balm. Enriched with natural oils, it provides long-lasting moisture and a subtle, healthy-looking sheen.',
+    category: 'Beauty',
+    price: 18,
+    brand: 'Nexa',
+    images: [findImage('prod_img_130')],
+    stock: 150,
+    rating: 4.7,
+    reviewCount: 200
+  },
+  {
+    id: 'prod_131',
+    slug: 'product-131',
+    name: 'Zenco Balancing Toner',
+    description: 'Restore your skin’s natural balance with this gentle toner. It helps to clarify your skin, tighten pores, and prepare it for the next steps in your skincare routine.',
+    category: 'Beauty',
+    price: 32,
+    brand: 'Zenco',
+    images: [findImage('prod_img_131')],
+    stock: 90,
+    rating: 4.6,
+    reviewCount: 130
+  },
+  {
+    id: 'prod_132',
+    slug: 'product-132',
+    name: 'Aperture Purifying Clay Mask',
+    description: 'Detoxify your skin with this purifying clay mask. It draws out impurities and excess oil to leave your skin feeling clean, refreshed, and incredibly smooth.',
+    category: 'Beauty',
+    price: 48,
+    brand: 'Aperture',
+    images: [findImage('prod_img_132')],
+    stock: 70,
+    rating: 4.8,
+    reviewCount: 95
+  },
+  {
+    id: 'prod_133',
+    slug: 'product-133',
+    name: 'Helios Enchanting Fragrance',
+    description: 'A magical scent that will transport you to another world. This enchanting fragrance features a blend of exotic flowers and rare spices for a truly unique aroma.',
+    category: 'Beauty',
+    price: 110,
+    brand: 'Helios',
+    images: [findImage('prod_img_133')],
+    stock: 50,
+    rating: 4.9,
+    reviewCount: 105
+  },
+  {
+    id: 'prod_134',
+    slug: 'product-134',
+    name: 'iDino Complete Skincare Set',
+    description: 'Everything you need for perfect skin. This complete set includes a cleanser, toner, serum, and moisturizer, all formulated to work together for a healthy, glowing complexion.',
+    category: 'Beauty',
+    price: 160,
+    brand: 'iDino',
+    images: [findImage('prod_img_134')],
+    stock: 35,
+    rating: 4.9,
+    reviewCount: 115
+  },
+  {
+    id: 'prod_135',
+    slug: 'product-135',
+    name: 'Stellar Nourishing Face Cream',
+    description: 'Give your skin the nourishment it deserves. This rich face cream is packed with vitamins and antioxidants to hydrate, protect, and revitalize your skin.',
+    category: 'Beauty',
+    price: 70,
+    brand: 'Stellar',
+    images: [findImage('prod_img_135')],
+    stock: 65,
+    rating: 4.8,
+    reviewCount: 125
+  },
+  {
+    id: 'prod_136',
+    slug: 'product-136',
+    name: 'Orion Age-Defying Cream',
+    description: 'A luxurious cream that helps to fight the signs of aging. It visibly reduces wrinkles and firms the skin, giving you a more youthful and radiant appearance.',
+    category: 'Beauty',
+    price: 95,
+    brand: 'Orion',
+    images: [findImage('prod_img_136')],
+    stock: 55,
+    rating: 4.9,
+    reviewCount: 100
   }
 ];
+
+    
 
     

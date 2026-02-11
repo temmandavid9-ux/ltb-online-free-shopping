@@ -761,6 +761,60 @@
       "description": "iDino Skincare Essentials Kit",
       "imageUrl": "https://image2url.com/r2/default/images/1770828521005-12ddf70d-6cbf-4c0e-9ebf-86a13c45fb48.webp",
       "imageHint": "skincare set"
+    },
+    {
+      "id": "prod_img_128",
+      "description": "Luxe Perfume Bottle",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828601479-a04c3a02-6739-4d0b-83d7-977a6526ccf1.webp",
+      "imageHint": "perfume bottle"
+    },
+    {
+      "id": "prod_img_129",
+      "description": "Rejuvenating Cream",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828760530-5a541bfe-67b2-44c3-923d-f91caaef9c3c.webp",
+      "imageHint": "cream jar"
+    },
+    {
+      "id": "prod_img_130",
+      "description": "Hydrating Lip Balm",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828787291-b688e011-016b-4df5-ac25-ddbaaca4ca55.webp",
+      "imageHint": "lip balm"
+    },
+    {
+      "id": "prod_img_131",
+      "description": "Balancing Toner",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828809061-ca2fda4f-f622-4246-885b-4f6e3b6c3b46.webp",
+      "imageHint": "toner bottle"
+    },
+    {
+      "id": "prod_img_132",
+      "description": "Purifying Clay Mask",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828832965-e52feee7-dde7-4b39-873b-84b7fcac786c.webp",
+      "imageHint": "clay mask"
+    },
+    {
+      "id": "prod_img_133",
+      "description": "Enchanting Fragrance",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828863004-d06417e7-d6fc-4b43-83a0-dfe8960f4179.webp",
+      "imageHint": "fragrance bottle"
+    },
+    {
+      "id": "prod_img_134",
+      "description": "Complete Skincare Set",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828894008-c5c3d82b-99d8-49d4-8af2-11f74a5fb4cf.webp",
+      "imageHint": "skincare kit"
+    },
+    {
+      "id": "prod_img_135",
+      "description": "Nourishing Face Cream",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828933188-cb507edb-748b-494b-b797-3bfd190a0dc0.webp",
+      "imageHint": "face cream"
+    },
+    {
+      "id": "prod_img_136",
+      "description": "Age-defying Cream",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828963074-266df52e-020e-40fb-8e38-d2e56ffc1fa9.webp",
+      "imageHint": "beauty cream"
     }
   ]
 }
