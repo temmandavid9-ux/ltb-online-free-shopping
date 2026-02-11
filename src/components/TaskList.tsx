@@ -19,8 +19,8 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
 const TASK_DEFINITIONS = [
-  { id: 'instagram', name: 'Instagram', icon: Instagram, description: 'Check out our latest Instagram posts.' },
   { id: 'youtube', name: 'YouTube', icon: Youtube, description: 'Watch our new YouTube video.' },
+  { id: 'instagram', name: 'Instagram', icon: Instagram, description: 'Check out our latest Instagram posts.' },
   { id: 'twitch', name: 'Twitch', icon: Twitch, description: 'Join our stream on Twitch.' },
 ];
 
@@ -107,13 +107,13 @@ export default function TaskList() {
   const sortedTasks = useMemo(() => {
     if (!tasks) return [];
     return [...tasks].sort((a, b) => {
-        const aIndex = TASK_DEFINITIONS.findIndex(t => t.id === a.id);
-        const bIndex = TASK_DEFINITIONS.findIndex(t => t.id === b.id);
+        const aIndex = TASK_DEFINITIONS.findIndex(t => t.id === a.name.toLowerCase());
+        const bIndex = TASK_DEFINITIONS.findIndex(t => t.id === b.name.toLowerCase());
         return aIndex - bIndex;
     });
   }, [tasks]);
 
-  const allTasksCompletedToday = useMemo(() => sortedTasks.every(t => t.completed), [sortedTasks]);
+  const allTasksCompletedToday = useMemo(() => sortedTasks.length > 0 && sortedTasks.every(t => t.completed), [sortedTasks]);
   
   const lastCompletedTask = useMemo(() => {
       if (!allTasksCompletedToday || !sortedTasks.length) return null;
@@ -193,7 +193,7 @@ export default function TaskList() {
         const batch = writeBatch(firestore);
         sortedTasks.forEach(task => {
             const taskRef = doc(firestore, 'users', user.uid, 'tasks', task.id);
-            batch.update(taskRef, { completed: false, nextTaskUnlockTime: null, taskStartTime: null, reward: TASK_REWARD });
+            batch.update(taskRef, { completed: false, nextTaskUnlockTime: null, taskStartTime: null });
         });
         if(userDocRef) {
           updateDocumentNonBlocking(userDocRef, { taskProgress: 0 });
@@ -202,7 +202,7 @@ export default function TaskList() {
     }
   }, [user, tasks, areTasksLoading, firestore, allTasksCompletedToday, lastCompletedTask, sortedTasks, userDocRef, userData]);
 
-  // Check for in-progress task on load
+  // Check for in-progress task on load or when tasks data changes.
   useEffect(() => {
     if (areTasksLoading || !tasks || activeTimerTaskId) return;
 
@@ -210,14 +210,18 @@ export default function TaskList() {
     if (inProgressTask) {
         const startTime = new Date(inProgressTask.taskStartTime!).getTime();
         const timeElapsed = (new Date().getTime() - startTime) / 1000;
-        const remainingTime = TASK_DURATION_SECONDS - timeElapsed;
-
-        setActiveTimerTaskId(inProgressTask.id);
-        setCountdown(Math.ceil(remainingTime > 0 ? remainingTime : 0));
+        
+        if (timeElapsed >= TASK_DURATION_SECONDS) {
+            handleCompleteTask(inProgressTask.id);
+        } else {
+            const remainingTime = TASK_DURATION_SECONDS - timeElapsed;
+            setActiveTimerTaskId(inProgressTask.id);
+            setCountdown(Math.ceil(remainingTime));
+        }
     }
-  }, [tasks, areTasksLoading, sortedTasks, activeTimerTaskId]);
+  }, [tasks, areTasksLoading, sortedTasks, activeTimerTaskId, handleCompleteTask]);
 
-  // Timer countdown effect, triggers auto-completion
+  // Timer countdown effect, triggers auto-completion if user stays on page
   useEffect(() => {
     if (!activeTimerTaskId) return;
 
@@ -241,36 +245,10 @@ export default function TaskList() {
     }
   }, [allTasksCompletedToday, lastCompletedTask, t]);
 
-  // Anti-tab-switch: Reset task if user navigates away
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.hidden && activeTimerTaskId) {
-        const activeTask = sortedTasks.find(t => t.id === activeTimerTaskId);
-        if (!activeTask || !user || !firestore) return;
-
-        setActiveTimerTaskId(null);
-        setCountdown(TASK_DURATION_SECONDS);
-
-        const taskRef = doc(firestore, 'users', user.uid, 'tasks', activeTimerTaskId);
-        updateDocumentNonBlocking(taskRef, { taskStartTime: null });
-
-        toast({
-          variant: "destructive",
-          title: t('tasks.toast.cancelledTitle'),
-          description: t('tasks.toast.cancelledDescription'),
-        });
-      }
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, [activeTimerTaskId, user, firestore, sortedTasks, toast, t]);
-
-
   const handleStartTask = (task: Task) => {
     if (activeTimerTaskId || allTasksCompletedToday || !user || !firestore) return;
 
-    const currentTaskIndex = TASK_DEFINITIONS.findIndex(t => t.id === task.id);
+    const currentTaskIndex = sortedTasks.findIndex(t => t.id === task.id);
     const previousTask = currentTaskIndex > 0 ? sortedTasks[currentTaskIndex - 1] : null;
 
     if (previousTask && !previousTask.completed) {
@@ -281,7 +259,7 @@ export default function TaskList() {
         return;
     }
     
-    const taskLink = TASK_LINKS[task.id as keyof typeof TASK_LINKS];
+    const taskLink = TASK_LINKS[task.name.toLowerCase() as keyof typeof TASK_LINKS];
     if (taskLink) {
         window.open(taskLink, '_blank', 'noopener,noreferrer');
     }
@@ -334,7 +312,7 @@ export default function TaskList() {
     <Tabs defaultValue={sortedTasks[firstIncompleteTaskIndex]?.id || TASK_DEFINITIONS[0].id} className="w-full">
       <TabsList className="grid w-full grid-cols-3">
         {TASK_DEFINITIONS.map((taskDef, index) => {
-          const taskData = sortedTasks.find(t => t.id === taskDef.id);
+          const taskData = sortedTasks.find(t => t.name.toLowerCase() === taskDef.id);
           const isLocked = !taskData || (firstIncompleteTaskIndex !== -1 && index > firstIncompleteTaskIndex);
 
           return (
@@ -346,7 +324,7 @@ export default function TaskList() {
         })}
       </TabsList>
       {TASK_DEFINITIONS.map(taskDef => {
-          const task = sortedTasks.find(t => t.id === taskDef.id);
+          const task = sortedTasks.find(t => t.name.toLowerCase() === taskDef.id);
           if (!task) return null;
 
           const isTimerActiveForThisTask = activeTimerTaskId === task.id;
