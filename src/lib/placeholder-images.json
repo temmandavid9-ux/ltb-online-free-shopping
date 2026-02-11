@@ -998,37 +998,37 @@
     },
     {
       "id": "prod_img_167",
-      "description": "Face Moisturizer",
+      "description": "Nexa Daily Moisturizer",
       "imageUrl": "https://image2url.com/r2/default/images/1770829928744-2f938888-68db-4e33-981f-e2a8c1ec44b6.webp",
       "imageHint": "face moisturizer"
     },
     {
       "id": "prod_img_168",
-      "description": "Night Cream",
+      "description": "Stellar Night Repair Cream",
       "imageUrl": "https://image2url.com/r2/default/images/1770829953930-80854f05-d6cf-418a-b912-48818e684aba.webp",
       "imageHint": "night cream"
     },
     {
       "id": "prod_img_169",
-      "description": "Lip Balm",
+      "description": "Orion Tinted Lip Balm",
       "imageUrl": "https://image2url.com/r2/default/images/1770830007219-24720834-6ebc-4a75-99a1-f2558f6259b4.webp",
       "imageHint": "lip balm"
     },
     {
       "id": "prod_img_170",
-      "description": "Facial Toner",
+      "description": "Zenco Purifying Toner",
       "imageUrl": "https://image2url.com/r2/default/images/1770830031747-072335f9-9ca5-4dcc-a82b-e6406181891a.webp",
       "imageHint": "facial toner"
     },
     {
       "id": "prod_img_171",
-      "description": "Clay Mask",
+      "description": "Aperture Detox Clay Mask",
       "imageUrl": "https://image2url.com/r2/default/images/1770830058838-fff4cecc-98b2-4aa4-9577-c8c20f2c7e5f.webp",
       "imageHint": "clay mask"
     },
     {
       "id": "prod_img_172",
-      "description": "Fragrance Bottle",
+      "description": "Helios Aura Fragrance",
       "imageUrl": "https://image2url.com/r2/default/images/1770830082238-982ff5ce-08f6-4ee9-a1a9-5752b661522b.webp",
       "imageHint": "fragrance bottle"
     },
@@ -1277,6 +1277,180 @@
       "description": "High-Speed USB Drive",
       "imageUrl": "https://image2url.com/r2/default/images/1770832460793-089fe66c-41d0-404d-bba5-92877ed468ac.webp",
       "imageHint": "usb drive"
+    },
+    {
+      "id": "prod_img_214",
+      "description": "Eyeshadow Palette",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832507017-40b27973-7ff0-4038-abf2-65e7c67a23e6.jpg",
+      "imageHint": "eyeshadow palette"
+    },
+    {
+      "id": "prod_img_215",
+      "description": "Makeup Primer",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832575818-6d1d740c-4bc2-4ade-a625-be97860b087b.png",
+      "imageHint": "makeup primer"
+    },
+    {
+      "id": "prod_img_216",
+      "description": "Red Lipstick",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832612954-cb4e9a27-3776-4014-879d-982164b50ecf.avif",
+      "imageHint": "red lipstick"
+    },
+    {
+      "id": "prod_img_217",
+      "description": "Liquid Eyeliner",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832660607-b5ac74f8-7e22-42ea-95fd-6de8ff2d786f.jpeg",
+      "imageHint": "liquid eyeliner"
+    },
+    {
+      "id": "prod_img_218",
+      "description": "Red Lipstick",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832694590-ec6954a4-1626-482a-bf40-2e1f721b766c.webp",
+      "imageHint": "red lipstick"
+    },
+    {
+      "id": "prod_img_219",
+      "description": "Mascara Wand",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832739573-5234fb3f-5ce1-4ef1-8236-1caeba2ddf2c.webp",
+      "imageHint": "mascara wand"
+    },
+    {
+      "id": "prod_img_220",
+      "description": "Brow Pencil",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832769764-7c9ebae0-e15e-429c-8f68-df7fc8aba055.jpg",
+      "imageHint": "brow pencil"
+    },
+    {
+      "id": "prod_img_221",
+      "description": "Setting Spray",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832800617-b58367c6-30ef-45a3-bc41-265cd2448ddc.webp",
+      "imageHint": "setting spray"
+    },
+    {
+      "id": "prod_img_222",
+      "description": "Blush Compact",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832870178-57bb5523-e24e-43e8-91ef-d25bf0908dec.webp",
+      "imageHint": "blush compact"
+    },
+    {
+      "id": "prod_img_223",
+      "description": "Bronzer Powder",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832905351-6706e02b-e89d-4440-9318-52861427f494.webp",
+      "imageHint": "bronzer powder"
+    },
+    {
+      "id": "prod_img_224",
+      "description": "Lip Liner",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832960610-0331e603-980a-4963-986f-b95035d6b712.webp",
+      "imageHint": "lip liner"
+    },
+    {
+      "id": "prod_img_225",
+      "description": "Nail Polish",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833010012-33dfb07a-8520-4c76-80eb-12bfb4906a9c.webp",
+      "imageHint": "nail polish"
+    },
+    {
+      "id": "prod_img_226",
+      "description": "Makeup Brushes",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833056882-219c497f-6442-479f-a93f-811bd484b0b2.webp",
+      "imageHint": "makeup brushes"
+    },
+    {
+      "id": "prod_img_227",
+      "description": "Black Watch",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833097256-b741bf25-113f-40bd-a6d5-88ae88390606.jpg",
+      "imageHint": "black watch"
+    },
+    {
+      "id": "prod_img_228",
+      "description": "Trench Coat",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833142939-57906a53-ec2a-47ae-b082-c7a0c8ebd5c9.jpg",
+      "imageHint": "trench coat"
+    },
+    {
+      "id": "prod_img_229",
+      "description": "Futuristic Phone",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833181549-ee69ff2e-a86d-4eba-9175-db2e4dd2df0a.webp",
+      "imageHint": "futuristic phone"
+    },
+    {
+      "id": "prod_img_230",
+      "description": "Professional Laptop",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833221273-95ccf3a0-4244-4805-871c-7d784a148992.webp",
+      "imageHint": "professional laptop"
+    },
+    {
+      "id": "prod_img_231",
+      "description": "Face Moisturizer",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833269823-c35f7655-dba8-4493-829d-2b9429276996.webp",
+      "imageHint": "face moisturizer"
+    },
+    {
+      "id": "prod_img_232",
+      "description": "Night Cream",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833307468-305b199d-4b3c-4f01-9a66-dfe75444da39.webp",
+      "imageHint": "night cream"
+    },
+    {
+      "id": "prod_img_233",
+      "description": "Lip Balm",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833368717-646d9d62-3e67-43a1-a1c1-bdfd7785b3e4.jpeg",
+      "imageHint": "lip balm"
+    },
+    {
+      "id": "prod_img_234",
+      "description": "Facial Toner",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833411103-a3114154-7fb2-4e81-999a-a551e16341c0.jpg",
+      "imageHint": "facial toner"
+    },
+    {
+      "id": "prod_img_235",
+      "description": "Clay Mask",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833453724-c80baf1e-01a7-4cbb-90d8-2e4387dd5225.jpg",
+      "imageHint": "clay mask"
+    },
+    {
+      "id": "prod_img_236",
+      "description": "Fragrance Bottle",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833498703-14b5d176-ea97-4a92-88bd-b591b858f86c.webp",
+      "imageHint": "fragrance bottle"
+    },
+    {
+      "id": "prod_img_237",
+      "description": "Skincare Set",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833533357-c8322609-85da-414f-8a4b-64da1673648c.webp",
+      "imageHint": "skincare set"
+    },
+    {
+      "id": "prod_img_238",
+      "description": "Perfume Bottle",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833570618-fc3f2a3c-655d-4e48-95b2-ec7e14b603b1.avif",
+      "imageHint": "perfume bottle"
+    },
+    {
+      "id": "prod_img_239",
+      "description": "Cream Jar",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833605715-5a215e42-3ccf-4f1b-81ea-13e11722fb2d.webp",
+      "imageHint": "cream jar"
+    },
+    {
+      "id": "prod_img_240",
+      "description": "Lip Balm",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833640966-739175f1-375b-40ed-a88b-c8deaae6cc29.jpg",
+      "imageHint": "lip balm"
+    },
+    {
+      "id": "prod_img_241",
+      "description": "Toner Bottle",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833678508-784446b1-96bd-4f48-af03-cb3c8015bb68.jpg",
+      "imageHint": "toner bottle"
+    },
+    {
+      "id": "prod_img_242",
+      "description": "Clay Mask",
+      "imageUrl": "https://image2url.com/r2/default/images/1770833729046-8d939304-0fd2-4833-81ac-3b9d056f1ffa.jpg",
+      "imageHint": "clay mask"
     }
   ]
 }
