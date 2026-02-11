@@ -1586,6 +1586,97 @@ export const products: Product[] = [
     stock: 60,
     rating: 4.9,
     reviewCount: 170
+  },
+  {
+    id: 'prod_121',
+    slug: 'product-121',
+    name: 'Nexa Daily Moisturizer',
+    description: 'Keep your skin hydrated and refreshed all day long with our lightweight Daily Moisturizer. This fast-absorbing formula provides essential moisture without a greasy feel, leaving your skin soft, smooth, and ready for the day.',
+    category: 'Beauty',
+    price: 35,
+    brand: 'Nexa',
+    images: [findImage('prod_img_121')],
+    stock: 80,
+    rating: 4.8,
+    reviewCount: 150
+  },
+  {
+    id: 'prod_122',
+    slug: 'product-122',
+    name: 'Stellar Night Repair Cream',
+    description: 'Wake up to rejuvenated skin with the Stellar Night Repair Cream. This rich, nourishing cream works overnight to repair and restore your skin’s barrier, reducing the appearance of fine lines and promoting a youthful glow.',
+    category: 'Beauty',
+    price: 75,
+    brand: 'Stellar',
+    images: [findImage('prod_img_122')],
+    stock: 50,
+    rating: 4.9,
+    reviewCount: 110
+  },
+  {
+    id: 'prod_123',
+    slug: 'product-123',
+    name: 'Orion Tinted Lip Balm',
+    description: 'Get a hint of color and a whole lot of hydration with the Orion Tinted Lip Balm. This nourishing balm soothes dry lips while providing a sheer, natural-looking tint for an effortlessly beautiful look.',
+    category: 'Beauty',
+    price: 15,
+    brand: 'Orion',
+    images: [findImage('prod_img_123')],
+    stock: 200,
+    rating: 4.7,
+    reviewCount: 300
+  },
+  {
+    id: 'prod_124',
+    slug: 'product-124',
+    name: 'Zenco Purifying Toner',
+    description: 'Balance and refine your complexion with the Zenco Purifying Toner. This alcohol-free toner gently removes impurities, minimizes pores, and preps your skin to absorb the maximum benefits of your skincare routine.',
+    category: 'Beauty',
+    price: 28,
+    brand: 'Zenco',
+    images: [findImage('prod_img_124')],
+    stock: 100,
+    rating: 4.6,
+    reviewCount: 120
+  },
+  {
+    id: 'prod_125',
+    slug: 'product-125',
+    name: 'Aperture Detox Clay Mask',
+    description: 'Deeply cleanse and purify your pores with the Aperture Detox Clay Mask. Formulated with natural clays and botanicals, this mask draws out impurities, absorbs excess oil, and leaves your skin feeling refreshed and revitalized.',
+    category: 'Beauty',
+    price: 42,
+    brand: 'Aperture',
+    images: [findImage('prod_img_125')],
+    stock: 65,
+    rating: 4.8,
+    reviewCount: 90
+  },
+  {
+    id: 'prod_126',
+    slug: 'product-126',
+    name: 'Helios Aura Fragrance',
+    description: 'Radiate confidence with Helios Aura, an uplifting fragrance that blends bright citrus notes with soft florals and a warm, musky base. A scent that is as vibrant and captivating as you are.',
+    category: 'Beauty',
+    price: 95,
+    brand: 'Helios',
+    images: [findImage('prod_img_126')],
+    stock: 55,
+    rating: 4.9,
+    reviewCount: 130
+  },
+  {
+    id: 'prod_127',
+    slug: 'product-127',
+    name: 'iDino Skincare Essentials Kit',
+    description: 'Discover your complete skincare routine with the iDino Skincare Essentials Kit. This curated set includes a cleanser, toner, serum, and moisturizer, providing everything you need for healthy, glowing skin.',
+    category: 'Beauty',
+    price: 150,
+    brand: 'iDino',
+    images: [findImage('prod_img_127')],
+    stock: 30,
+    rating: 4.9,
+    reviewCount: 105
   }
 ];
 

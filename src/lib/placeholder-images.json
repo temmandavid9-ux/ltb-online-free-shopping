@@ -719,6 +719,48 @@
       "description": "Helios Makeup Brush Set",
       "imageUrl": "https://image2url.com/r2/default/images/1770827992396-6450ffb4-70a7-4661-9b69-078c15e69dfc.webp",
       "imageHint": "makeup brushes"
+    },
+    {
+      "id": "prod_img_121",
+      "description": "Nexa Daily Moisturizer",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828337991-0cd9d9d1-1982-4524-b06d-fd1167d1c9f3.avif",
+      "imageHint": "face moisturizer"
+    },
+    {
+      "id": "prod_img_122",
+      "description": "Stellar Night Repair Cream",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828372348-2b025113-5516-48b4-9622-de8aa2d3070d.avif",
+      "imageHint": "night cream"
+    },
+    {
+      "id": "prod_img_123",
+      "description": "Orion Tinted Lip Balm",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828406094-bc30c566-d5c0-4ff3-b0ef-476846bcf6c0.avif",
+      "imageHint": "lip balm"
+    },
+    {
+      "id": "prod_img_124",
+      "description": "Zenco Purifying Toner",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828434472-3a590cf9-0d67-4cd4-830b-f49877366a43.avif",
+      "imageHint": "facial toner"
+    },
+    {
+      "id": "prod_img_125",
+      "description": "Aperture Detox Clay Mask",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828460747-07a9571c-1b01-4158-9ba5-dec31d5d195c.avif",
+      "imageHint": "clay mask"
+    },
+    {
+      "id": "prod_img_126",
+      "description": "Helios Aura Fragrance",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828494306-51c76b0f-1cab-4706-aa33-92200bd3b62a.avif",
+      "imageHint": "fragrance bottle"
+    },
+    {
+      "id": "prod_img_127",
+      "description": "iDino Skincare Essentials Kit",
+      "imageUrl": "https://image2url.com/r2/default/images/1770828521005-12ddf70d-6cbf-4c0e-9ebf-86a13c45fb48.webp",
+      "imageHint": "skincare set"
     }
   ]
 }
