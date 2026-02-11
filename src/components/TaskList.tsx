@@ -25,8 +25,8 @@ const TASK_DEFINITIONS = [
 ];
 
 const TASK_LINKS = {
-  instagram: "https://instagram.com/eden022026",
   youtube: "https://youtube.com/@Eden-s8u",
+  instagram: "https://instagram.com/eden022026",
   twitch: "https://twitch.tv/edenonlineshoppingstore"
 };
 
@@ -106,7 +106,10 @@ export default function TaskList() {
   
   const sortedTasks = useMemo(() => {
     if (!tasks) return [];
-    return [...tasks].sort((a, b) => {
+    const definedTaskIds = new Set(TASK_DEFINITIONS.map(t => t.id));
+    return tasks
+      .filter(task => definedTaskIds.has(task.name.toLowerCase()))
+      .sort((a, b) => {
         const aIndex = TASK_DEFINITIONS.findIndex(t => t.id === a.name.toLowerCase());
         const bIndex = TASK_DEFINITIONS.findIndex(t => t.id === b.name.toLowerCase());
         return aIndex - bIndex;
