@@ -1,7 +1,7 @@
 
 import type { Product, Category } from './types';
 import { PlaceHolderImages } from './placeholder-images';
-import { Shirt, Laptop, Watch, Dna, Footprints, Layers, Smartphone, Link as LinkIcon } from 'lucide-react';
+import { Shirt, Laptop, Watch, Dna, Footprints, Layers, Smartphone, Link as LinkIcon, Palette } from 'lucide-react';
 
 const findImage = (id: string) => {
   const image = PlaceHolderImages.find(img => img.id === id);
@@ -21,6 +21,7 @@ export const categories: Category[] = [
   { id: 'cat6', name: 'Underwear', icon: Layers },
   { id: 'cat7', name: 'Chains', icon: LinkIcon },
   { id: 'cat8', name: 'Phones', icon: Smartphone },
+  { id: 'cat9', name: 'Beauty', icon: Palette },
 ];
 
 export const brands: string[] = ['Zenco', 'Stellar', 'Nexa', 'Orion', 'Helios', 'iDino', 'Aperture'];
@@ -1325,5 +1326,111 @@ export const products: Product[] = [
     stock: 50,
     rating: 4.5,
     reviewCount: 100
+  },
+  {
+    id: 'prod_101',
+    slug: 'product-101',
+    name: 'Product 101',
+    description: 'Achieve a flawless complexion with the Nexa Radiant Foundation. This lightweight formula provides buildable coverage for a natural, luminous finish that lasts all day.',
+    category: 'Beauty',
+    price: 45,
+    brand: 'Nexa',
+    images: [findImage('prod_img_101')],
+    stock: 50,
+    rating: 4.7,
+    reviewCount: 88
+  },
+  {
+    id: 'prod_102',
+    slug: 'product-102',
+    name: 'Product 102',
+    description: 'Rejuvenate your skin with the Stellar Glow Serum. Packed with powerful antioxidants and hydrating ingredients, it leaves your skin looking bright, firm, and radiant.',
+    category: 'Beauty',
+    price: 65,
+    brand: 'Stellar',
+    images: [findImage('prod_img_102')],
+    stock: 40,
+    rating: 4.8,
+    reviewCount: 95
+  },
+  {
+    id: 'prod_103',
+    slug: 'product-103',
+    name: 'Product 103',
+    description: 'The Orion Elegance Watch is the epitome of classic style. With its clean dial, and polished stainless steel case, it’s a timeless accessory for the modern woman.',
+    category: 'Watches',
+    price: 1950,
+    brand: 'Orion',
+    images: [findImage('prod_img_103')],
+    stock: 25,
+    rating: 4.9,
+    reviewCount: 110
+  },
+  {
+    id: 'prod_104',
+    slug: 'product-104',
+    name: 'Product 104',
+    description: 'Discover your perfect pout with the Zenco Lip Lacquer Set. This collection features a range of high-shine, non-sticky glosses in universally flattering shades.',
+    category: 'Beauty',
+    price: 25,
+    brand: 'Zenco',
+    images: [findImage('prod_img_104')],
+    stock: 100,
+    rating: 4.6,
+    reviewCount: 150
+  },
+  {
+    id: 'prod_105',
+    slug: 'product-105',
+    name: 'Product 105',
+    description: 'The Aperture Flawless Finish Foundation offers a matte, yet comfortable finish that controls shine without drying the skin. Perfect for a long-lasting, impeccable look.',
+    category: 'Beauty',
+    price: 50,
+    brand: 'Aperture',
+    images: [findImage('prod_img_105')],
+    stock: 60,
+    rating: 4.8,
+    reviewCount: 120
+  },
+  {
+    id: 'prod_106',
+    slug: 'product-106',
+    name: 'Product 106',
+    description: 'Instantly refresh and hydrate your skin with the Helios Hydrating Face Mist. Infused with botanical extracts, it soothes and revitalizes for a dewy glow.',
+    category: 'Beauty',
+    price: 80,
+    brand: 'Helios',
+    images: [findImage('prod_img_106')],
+    stock: 70,
+    rating: 4.7,
+    reviewCount: 75
+  },
+  {
+    id: 'prod_107',
+    slug: 'product-107',
+    name: 'Product 107',
+    description: 'Brighten and firm the delicate skin around your eyes with the iDino Revitalizing Eye Cream. This potent formula targets dark circles and fine lines for a youthful appearance.',
+    category: 'Beauty',
+    price: 75,
+    brand: 'iDino',
+    images: [findImage('prod_img_107')],
+    stock: 45,
+    rating: 4.8,
+    reviewCount: 80
+  },
+  {
+    id: 'prod_108',
+    slug: 'product-108',
+    name: 'Product 108',
+    description: 'An enchanting fragrance that captivates the senses. This luxurious perfume from Stellar blends exotic florals with warm, woody notes to create a scent that is both timeless and modern.',
+    category: 'Beauty',
+    price: 180,
+    brand: 'Stellar',
+    images: [findImage('prod_img_108')],
+    stock: 40,
+    rating: 4.9,
+    reviewCount: 92
   }
 ];
+
+    
