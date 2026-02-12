@@ -1330,7 +1330,7 @@ export const products: Product[] = [
   {
     id: 'prod_101',
     slug: 'product-101',
-    name: 'Nexa Radiant Foundation',
+    name: 'Product 101',
     description: 'Achieve a flawless complexion with the Nexa Radiant Foundation. This lightweight formula provides buildable coverage for a natural, luminous finish that lasts all day.',
     category: 'Beauty',
     price: 45,
@@ -1343,7 +1343,7 @@ export const products: Product[] = [
   {
     id: 'prod_102',
     slug: 'product-102',
-    name: 'Stellar Glow Serum',
+    name: 'Product 102',
     description: 'Rejuvenate your skin with the Stellar Glow Serum. Packed with powerful antioxidants and hydrating ingredients, it leaves your skin looking bright, firm, and radiant.',
     category: 'Beauty',
     price: 65,
@@ -1356,7 +1356,7 @@ export const products: Product[] = [
   {
     id: 'prod_103',
     slug: 'product-103',
-    name: 'Orion Elegance Watch',
+    name: 'Product 103',
     description: 'The Orion Elegance Watch is the epitome of classic style. With its clean dial, and polished stainless steel case, it’s a timeless accessory for the modern woman.',
     category: 'Watches',
     price: 1950,
@@ -1369,7 +1369,7 @@ export const products: Product[] = [
   {
     id: 'prod_104',
     slug: 'product-104',
-    name: 'Zenco Lip Lacquer Set',
+    name: 'Product 104',
     description: 'Discover your perfect pout with the Zenco Lip Lacquer Set. This collection features a range of high-shine, non-sticky glosses in universally flattering shades.',
     category: 'Beauty',
     price: 25,
@@ -1382,7 +1382,7 @@ export const products: Product[] = [
   {
     id: 'prod_105',
     slug: 'product-105',
-    name: 'Aperture Flawless Finish Foundation',
+    name: 'Product 105',
     description: 'The Aperture Flawless Finish Foundation offers a matte, yet comfortable finish that controls shine without drying the skin. Perfect for a long-lasting, impeccable look.',
     category: 'Beauty',
     price: 50,
@@ -1395,7 +1395,7 @@ export const products: Product[] = [
   {
     id: 'prod_106',
     slug: 'product-106',
-    name: 'Helios Hydrating Face Mist',
+    name: 'Product 106',
     description: 'Instantly refresh and hydrate your skin with the Helios Hydrating Face Mist. Infused with botanical extracts, it soothes and revitalizes for a dewy glow.',
     category: 'Beauty',
     price: 80,
@@ -1408,7 +1408,7 @@ export const products: Product[] = [
   {
     id: 'prod_107',
     slug: 'product-107',
-    name: 'iDino Revitalizing Eye Cream',
+    name: 'Product 107',
     description: 'Brighten and firm the delicate skin around your eyes with the iDino Revitalizing Eye Cream. This potent formula targets dark circles and fine lines for a youthful appearance.',
     category: 'Beauty',
     price: 75,
@@ -1590,7 +1590,7 @@ export const products: Product[] = [
   {
     id: 'prod_121',
     slug: 'product-121',
-    name: 'Nexa Daily Moisturizer',
+    name: 'Product 121',
     description: 'Keep your skin hydrated and refreshed all day long with our lightweight Daily Moisturizer. This fast-absorbing formula provides essential moisture without a greasy feel, leaving your skin soft, smooth, and ready for the day.',
     category: 'Beauty',
     price: 35,
@@ -1603,7 +1603,7 @@ export const products: Product[] = [
   {
     id: 'prod_122',
     slug: 'product-122',
-    name: 'Stellar Night Repair Cream',
+    name: 'Product 122',
     description: 'Wake up to rejuvenated skin with the Stellar Night Repair Cream. This rich, nourishing cream works overnight to repair and restore your skin’s barrier, reducing the appearance of fine lines and promoting a youthful glow.',
     category: 'Beauty',
     price: 75,
@@ -1616,7 +1616,7 @@ export const products: Product[] = [
   {
     id: 'prod_123',
     slug: 'product-123',
-    name: 'Orion Tinted Lip Balm',
+    name: 'Product 123',
     description: 'Get a hint of color and a whole lot of hydration with the Orion Tinted Lip Balm. This nourishing balm soothes dry lips while providing a sheer, natural-looking tint for an effortlessly beautiful look.',
     category: 'Beauty',
     price: 15,
@@ -1629,7 +1629,7 @@ export const products: Product[] = [
   {
     id: 'prod_124',
     slug: 'product-124',
-    name: 'Zenco Purifying Toner',
+    name: 'Product 124',
     description: 'Balance and refine your complexion with the Zenco Purifying Toner. This alcohol-free toner gently removes impurities, minimizes pores, and preps your skin to absorb the maximum benefits of your skincare routine.',
     category: 'Beauty',
     price: 28,
@@ -1642,7 +1642,7 @@ export const products: Product[] = [
   {
     id: 'prod_125',
     slug: 'product-125',
-    name: 'Aperture Detox Clay Mask',
+    name: 'Product 125',
     description: 'Deeply cleanse and purify your pores with the Aperture Detox Clay Mask. Formulated with natural clays and botanicals, this mask draws out impurities, absorbs excess oil, and leaves your skin feeling refreshed and revitalized.',
     category: 'Beauty',
     price: 42,
@@ -1655,7 +1655,7 @@ export const products: Product[] = [
   {
     id: 'prod_126',
     slug: 'product-126',
-    name: 'Helios Aura Fragrance',
+    name: 'Product 126',
     description: 'Radiate confidence with Helios Aura, an uplifting fragrance that blends bright citrus notes with soft florals and a warm, musky base. A scent that is as vibrant and captivating as you are.',
     category: 'Beauty',
     price: 95,
@@ -1668,7 +1668,7 @@ export const products: Product[] = [
   {
     id: 'prod_127',
     slug: 'product-127',
-    name: 'iDino Skincare Essentials Kit',
+    name: 'Product 127',
     description: 'Discover your complete skincare routine with the iDino Skincare Essentials Kit. This curated set includes a cleanser, toner, serum, and moisturizer, providing everything you need for healthy, glowing skin.',
     category: 'Beauty',
     price: 150,
@@ -1681,7 +1681,7 @@ export const products: Product[] = [
   {
     id: 'prod_128',
     slug: 'product-128',
-    name: 'Stellar Luxe Perfume',
+    name: 'Product 128',
     description: 'A captivating scent for the modern individual. This luxurious perfume combines floral notes with a hint of musk to create an unforgettable fragrance experience.',
     category: 'Beauty',
     price: 185,
@@ -1694,7 +1694,7 @@ export const products: Product[] = [
   {
     id: 'prod_129',
     slug: 'product-129',
-    name: 'Orion Rejuvenating Cream',
+    name: 'Product 129',
     description: 'Turn back the clock with this powerful rejuvenating cream. Its advanced formula helps to reduce the appearance of fine lines and wrinkles, leaving your skin looking youthful and radiant.',
     category: 'Beauty',
     price: 85,
@@ -1707,7 +1707,7 @@ export const products: Product[] = [
   {
     id: 'prod_130',
     slug: 'product-130',
-    name: 'Nexa Hydrating Lip Balm',
+    name: 'Product 130',
     description: 'Keep your lips soft and supple with this ultra-hydrating lip balm. Enriched with natural oils, it provides long-lasting moisture and a subtle, healthy-looking sheen.',
     category: 'Beauty',
     price: 18,
@@ -1720,7 +1720,7 @@ export const products: Product[] = [
   {
     id: 'prod_131',
     slug: 'product-131',
-    name: 'Zenco Balancing Toner',
+    name: 'Product 131',
     description: 'Restore your skin’s natural balance with this gentle toner. It helps to clarify your skin, tighten pores, and prepare it for the next steps in your skincare routine.',
     category: 'Beauty',
     price: 32,
@@ -1733,7 +1733,7 @@ export const products: Product[] = [
   {
     id: 'prod_132',
     slug: 'product-132',
-    name: 'Aperture Purifying Clay Mask',
+    name: 'Product 132',
     description: 'Detoxify your skin with this purifying clay mask. It draws out impurities and excess oil to leave your skin feeling clean, refreshed, and incredibly smooth.',
     category: 'Beauty',
     price: 48,
@@ -1746,7 +1746,7 @@ export const products: Product[] = [
   {
     id: 'prod_133',
     slug: 'product-133',
-    name: 'Helios Enchanting Fragrance',
+    name: 'Product 133',
     description: 'A magical scent that will transport you to another world. This enchanting fragrance features a blend of exotic flowers and rare spices for a truly unique aroma.',
     category: 'Beauty',
     price: 110,
@@ -1759,7 +1759,7 @@ export const products: Product[] = [
   {
     id: 'prod_134',
     slug: 'product-134',
-    name: 'iDino Complete Skincare Set',
+    name: 'Product 134',
     description: 'Everything you need for perfect skin. This complete set includes a cleanser, toner, serum, and moisturizer, all formulated to work together for a healthy, glowing complexion.',
     category: 'Beauty',
     price: 160,
@@ -1772,7 +1772,7 @@ export const products: Product[] = [
   {
     id: 'prod_135',
     slug: 'product-135',
-    name: 'Stellar Nourishing Face Cream',
+    name: 'Product 135',
     description: 'Give your skin the nourishment it deserves. This rich face cream is packed with vitamins and antioxidants to hydrate, protect, and revitalize your skin.',
     category: 'Beauty',
     price: 70,
@@ -1785,7 +1785,7 @@ export const products: Product[] = [
   {
     id: 'prod_136',
     slug: 'product-136',
-    name: 'Orion Age-Defying Cream',
+    name: 'Product 136',
     description: 'A luxurious cream that helps to fight the signs of aging. It visibly reduces wrinkles and firms the skin, giving you a more youthful and radiant appearance.',
     category: 'Beauty',
     price: 95,
@@ -1798,7 +1798,7 @@ export const products: Product[] = [
   {
     id: 'prod_137',
     slug: 'product-137',
-    name: 'Stellar Luxe Perfume',
+    name: 'Product 137',
     description: 'A captivating scent for the modern individual. This luxurious perfume combines floral notes with a hint of musk to create an unforgettable fragrance experience.',
     category: 'Beauty',
     price: 185,
@@ -1811,7 +1811,7 @@ export const products: Product[] = [
   {
     id: 'prod_138',
     slug: 'product-138',
-    name: 'Orion Rejuvenating Cream',
+    name: 'Product 138',
     description: 'Turn back the clock with this powerful rejuvenating cream. Its advanced formula helps to reduce the appearance of fine lines and wrinkles, leaving your skin looking youthful and radiant.',
     category: 'Beauty',
     price: 85,
@@ -1824,7 +1824,7 @@ export const products: Product[] = [
   {
     id: 'prod_139',
     slug: 'product-139',
-    name: 'Nexa Hydrating Lip Balm',
+    name: 'Product 139',
     description: 'Keep your lips soft and supple with this ultra-hydrating lip balm. Enriched with natural oils, it provides long-lasting moisture and a subtle, healthy-looking sheen.',
     category: 'Beauty',
     price: 18,
@@ -1837,7 +1837,7 @@ export const products: Product[] = [
   {
     id: 'prod_140',
     slug: 'product-140',
-    name: 'Zenco Balancing Toner',
+    name: 'Product 140',
     description: 'Restore your skin’s natural balance with this gentle toner. It helps to clarify your skin, tighten pores, and prepare it for the next steps in your skincare routine.',
     category: 'Beauty',
     price: 32,
@@ -1850,7 +1850,7 @@ export const products: Product[] = [
   {
     id: 'prod_141',
     slug: 'product-141',
-    name: 'Aperture Purifying Clay Mask',
+    name: 'Product 141',
     description: 'Detoxify your skin with this purifying clay mask. It draws out impurities and excess oil to leave your skin feeling clean, refreshed, and incredibly smooth.',
     category: 'Beauty',
     price: 48,
@@ -1863,7 +1863,7 @@ export const products: Product[] = [
   {
     id: 'prod_142',
     slug: 'product-142',
-    name: 'Helios Enchanting Fragrance',
+    name: 'Product 142',
     description: 'A magical scent that will transport you to another world. This enchanting fragrance features a blend of exotic flowers and rare spices for a truly unique aroma.',
     category: 'Beauty',
     price: 110,
@@ -1876,7 +1876,7 @@ export const products: Product[] = [
   {
     id: 'prod_143',
     slug: 'product-143',
-    name: 'iDino Complete Skincare Set',
+    name: 'Product 143',
     description: 'Everything you need for perfect skin. This complete set includes a cleanser, toner, serum, and moisturizer, all formulated to work together for a healthy, glowing complexion.',
     category: 'Beauty',
     price: 160,
@@ -1889,7 +1889,7 @@ export const products: Product[] = [
   {
     id: 'prod_144',
     slug: 'product-144',
-    name: 'Stellar Nourishing Face Cream',
+    name: 'Product 144',
     description: 'Give your skin the nourishment it deserves. This rich face cream is packed with vitamins and antioxidants to hydrate, protect, and revitalize your skin.',
     category: 'Beauty',
     price: 70,
@@ -1902,7 +1902,7 @@ export const products: Product[] = [
   {
     id: 'prod_145',
     slug: 'product-145',
-    name: 'Orion Age-Defying Cream',
+    name: 'Product 145',
     description: 'A luxurious cream that helps to fight the signs of aging. It visibly reduces wrinkles and firms the skin, giving you a more youthful and radiant appearance.',
     category: 'Beauty',
     price: 95,
@@ -1915,7 +1915,7 @@ export const products: Product[] = [
   {
     id: 'prod_146',
     slug: 'product-146',
-    name: 'Nexa Daily Moisturizer',
+    name: 'Product 146',
     description: 'Keep your skin hydrated and refreshed all day long with our lightweight Daily Moisturizer. This fast-absorbing formula provides essential moisture without a greasy feel, leaving your skin soft, smooth, and ready for the day.',
     category: 'Beauty',
     price: 35,
@@ -1928,7 +1928,7 @@ export const products: Product[] = [
   {
     id: 'prod_147',
     slug: 'product-147',
-    name: 'Stellar Night Repair Cream',
+    name: 'Product 147',
     description: 'Wake up to rejuvenated skin with the Stellar Night Repair Cream. This rich, nourishing cream works overnight to repair and restore your skin’s barrier, reducing the appearance of fine lines and promoting a youthful glow.',
     category: 'Beauty',
     price: 75,
@@ -1941,7 +1941,7 @@ export const products: Product[] = [
   {
     id: 'prod_148',
     slug: 'product-148',
-    name: 'Orion Tinted Lip Balm',
+    name: 'Product 148',
     description: 'Get a hint of color and a whole lot of hydration with the Orion Tinted Lip Balm. This nourishing balm soothes dry lips while providing a sheer, natural-looking tint for an effortlessly beautiful look.',
     category: 'Beauty',
     price: 15,
@@ -1954,7 +1954,7 @@ export const products: Product[] = [
   {
     id: 'prod_149',
     slug: 'product-149',
-    name: 'Zenco Purifying Toner',
+    name: 'Product 149',
     description: 'Balance and refine your complexion with the Zenco Purifying Toner. This alcohol-free toner gently removes impurities, minimizes pores, and preps your skin to absorb the maximum benefits of your skincare routine.',
     category: 'Beauty',
     price: 28,
@@ -1967,7 +1967,7 @@ export const products: Product[] = [
   {
     id: 'prod_150',
     slug: 'product-150',
-    name: 'Aperture Detox Clay Mask',
+    name: 'Product 150',
     description: 'Deeply cleanse and purify your pores with the Aperture Detox Clay Mask. Formulated with natural clays and botanicals, this mask draws out impurities, absorbs excess oil, and leaves your skin feeling refreshed and revitalized.',
     category: 'Beauty',
     price: 42,
@@ -1980,7 +1980,7 @@ export const products: Product[] = [
   {
     id: 'prod_151',
     slug: 'product-151',
-    name: 'Helios Aura Fragrance',
+    name: 'Product 151',
     description: 'Radiate confidence with Helios Aura, an uplifting fragrance that blends bright citrus notes with soft florals and a warm, musky base. A scent that is as vibrant and captivating as you are.',
     category: 'Beauty',
     price: 95,
@@ -1993,7 +1993,7 @@ export const products: Product[] = [
   {
     id: 'prod_152',
     slug: 'product-152',
-    name: 'iDino Skincare Essentials Kit',
+    name: 'Product 152',
     description: 'Discover your complete skincare routine with the iDino Skincare Essentials Kit. This curated set includes a cleanser, toner, serum, and moisturizer, providing everything you need for healthy, glowing skin.',
     category: 'Beauty',
     price: 150,
@@ -2006,7 +2006,7 @@ export const products: Product[] = [
   {
     id: 'prod_153',
     slug: 'product-153',
-    name: 'Stellar Luxe Perfume',
+    name: 'Product 153',
     description: 'A captivating scent for the modern individual. This luxurious perfume combines floral notes with a hint of musk to create an unforgettable fragrance experience.',
     category: 'Beauty',
     price: 185,
@@ -2019,7 +2019,7 @@ export const products: Product[] = [
   {
     id: 'prod_154',
     slug: 'product-154',
-    name: 'Orion Rejuvenating Cream',
+    name: 'Product 154',
     description: 'Turn back the clock with this powerful rejuvenating cream. Its advanced formula helps to reduce the appearance of fine lines and wrinkles, leaving your skin looking youthful and radiant.',
     category: 'Beauty',
     price: 85,
@@ -2032,7 +2032,7 @@ export const products: Product[] = [
   {
     id: 'prod_155',
     slug: 'product-155',
-    name: 'Nexa Hydrating Lip Balm',
+    name: 'Product 155',
     description: 'Keep your lips soft and supple with this ultra-hydrating lip balm. Enriched with natural oils, it provides long-lasting moisture and a subtle, healthy-looking sheen.',
     category: 'Beauty',
     price: 18,
@@ -2045,7 +2045,7 @@ export const products: Product[] = [
   {
     id: 'prod_156',
     slug: 'product-156',
-    name: 'Zenco Balancing Toner',
+    name: 'Product 156',
     description: 'Restore your skin’s natural balance with this gentle toner. It helps to clarify your skin, tighten pores, and prepare it for the next steps in your skincare routine.',
     category: 'Beauty',
     price: 32,
@@ -2058,7 +2058,7 @@ export const products: Product[] = [
   {
     id: 'prod_157',
     slug: 'product-157',
-    name: 'Aperture Purifying Clay Mask',
+    name: 'Product 157',
     description: 'Detoxify your skin with this purifying clay mask. It draws out impurities and excess oil to leave your skin feeling clean, refreshed, and incredibly smooth.',
     category: 'Beauty',
     price: 48,
@@ -2071,7 +2071,7 @@ export const products: Product[] = [
   {
     id: 'prod_158',
     slug: 'product-158',
-    name: 'Helios Enchanting Fragrance',
+    name: 'Product 158',
     description: 'A magical scent that will transport you to another world. This enchanting fragrance features a blend of exotic flowers and rare spices for a truly unique aroma.',
     category: 'Beauty',
     price: 110,
@@ -2084,7 +2084,7 @@ export const products: Product[] = [
   {
     id: 'prod_159',
     slug: 'product-159',
-    name: 'iDino Complete Skincare Set',
+    name: 'Product 159',
     description: 'Everything you need for perfect skin. This complete set includes a cleanser, toner, serum, and moisturizer, all formulated to work together for a healthy, glowing complexion.',
     category: 'Beauty',
     price: 160,
@@ -2097,7 +2097,7 @@ export const products: Product[] = [
   {
     id: 'prod_160',
     slug: 'product-160',
-    name: 'Stellar Nourishing Face Cream',
+    name: 'Product 160',
     description: 'Give your skin the nourishment it deserves. This rich face cream is packed with vitamins and antioxidants to hydrate, protect, and revitalize your skin.',
     category: 'Beauty',
     price: 70,
@@ -2110,7 +2110,7 @@ export const products: Product[] = [
   {
     id: 'prod_161',
     slug: 'product-161',
-    name: 'Orion Age-Defying Cream',
+    name: 'Product 161',
     description: 'A luxurious cream that helps to fight the signs of aging. It visibly reduces wrinkles and firms the skin, giving you a more youthful and radiant appearance.',
     category: 'Beauty',
     price: 95,
@@ -2123,7 +2123,7 @@ export const products: Product[] = [
   {
     id: 'prod_162',
     slug: 'product-162',
-    name: 'Nexa Radiance Serum',
+    name: 'Product 162',
     description: 'A potent serum that brightens and evens skin tone, revealing a luminous, healthy glow. Powered by Vitamin C and antioxidants.',
     category: 'Beauty',
     price: 88,
@@ -2136,7 +2136,7 @@ export const products: Product[] = [
   {
     id: 'prod_163',
     slug: 'product-163',
-    name: 'Zenco Executive Watch',
+    name: 'Product 163',
     description: 'A bold statement of modern luxury. The Zenco Executive Watch features a striking black design with precision chronographs, perfect for the decisive leader.',
     category: 'Watches',
     price: 3100,
@@ -2149,7 +2149,7 @@ export const products: Product[] = [
   {
     id: 'prod_164',
     slug: 'product-164',
-    name: 'Helios Trench Coat',
+    name: 'Product 164',
     description: 'The quintessential outerwear piece for any season. The Helios Trench Coat is impeccably tailored for a timeless silhouette that exudes sophistication and style.',
     category: 'Clothes',
     price: 450,
@@ -2162,7 +2162,7 @@ export const products: Product[] = [
   {
     id: 'prod_165',
     slug: 'product-165',
-    name: 'Aperture Sphere Phone',
+    name: 'Product 165',
     description: 'Experience the future of communication with the Aperture Sphere. Its revolutionary design and holographic display offer an immersive and unparalleled user experience.',
     category: 'Phones',
     price: 2200,
@@ -2175,7 +2175,7 @@ export const products: Product[] = [
   {
     id: 'prod_166',
     slug: 'product-166',
-    name: 'StellarBook Pro',
+    name: 'Product 166',
     description: 'Engineered for professionals who demand the best. The StellarBook Pro delivers exceptional performance, a stunning display, and all-day battery life in a sleek, portable design.',
     category: 'Laptops',
     price: 2700,
@@ -2188,7 +2188,7 @@ export const products: Product[] = [
   {
     id: 'prod_167',
     slug: 'product-167',
-    name: 'Nexa Daily Moisturizer',
+    name: 'Product 167',
     description: 'Keep your skin hydrated and refreshed all day long with our lightweight Daily Moisturizer. This fast-absorbing formula provides essential moisture without a greasy feel, leaving your skin soft, smooth, and ready for the day.',
     category: 'Beauty',
     price: 35,
@@ -2201,7 +2201,7 @@ export const products: Product[] = [
   {
     id: 'prod_168',
     slug: 'product-168',
-    name: 'Stellar Night Repair Cream',
+    name: 'Product 168',
     description: 'Wake up to rejuvenated skin with the Stellar Night Repair Cream. This rich, nourishing cream works overnight to repair and restore your skin’s barrier, reducing the appearance of fine lines and promoting a youthful glow.',
     category: 'Beauty',
     price: 75,
@@ -2214,7 +2214,7 @@ export const products: Product[] = [
   {
     id: 'prod_169',
     slug: 'product-169',
-    name: 'Orion Tinted Lip Balm',
+    name: 'Product 169',
     description: 'Get a hint of color and a whole lot of hydration with the Orion Tinted Lip Balm. This nourishing balm soothes dry lips while providing a sheer, natural-looking tint for an effortlessly beautiful look.',
     category: 'Beauty',
     price: 15,
@@ -2227,7 +2227,7 @@ export const products: Product[] = [
   {
     id: 'prod_170',
     slug: 'product-170',
-    name: 'Zenco Purifying Toner',
+    name: 'Product 170',
     description: 'Balance and refine your complexion with the Zenco Purifying Toner. This alcohol-free toner gently removes impurities, minimizes pores, and preps your skin to absorb the maximum benefits of your skincare routine.',
     category: 'Beauty',
     price: 28,
@@ -2240,7 +2240,7 @@ export const products: Product[] = [
   {
     id: 'prod_171',
     slug: 'product-171',
-    name: 'Aperture Detox Clay Mask',
+    name: 'Product 171',
     description: 'Deeply cleanse and purify your pores with the Aperture Detox Clay Mask. Formulated with natural clays and botanicals, this mask draws out impurities, absorbs excess oil, and leaves your skin feeling refreshed and revitalized.',
     category: 'Beauty',
     price: 42,
@@ -2253,7 +2253,7 @@ export const products: Product[] = [
   {
     id: 'prod_172',
     slug: 'product-172',
-    name: 'Helios Aura Fragrance',
+    name: 'Product 172',
     description: 'Radiate confidence with Helios Aura, an uplifting fragrance that blends bright citrus notes with soft florals and a warm, musky base. A scent that is as vibrant and captivating as you are.',
     category: 'Beauty',
     price: 95,
@@ -2266,7 +2266,7 @@ export const products: Product[] = [
   {
     id: 'prod_173',
     slug: 'product-173',
-    name: 'iDino Skincare Essentials Kit',
+    name: 'Product 173',
     description: 'Discover your complete skincare routine with the iDino Skincare Essentials Kit. This curated set includes a cleanser, toner, serum, and moisturizer, providing everything you need for healthy, glowing skin.',
     category: 'Beauty',
     price: 150,
@@ -2279,7 +2279,7 @@ export const products: Product[] = [
   {
     id: 'prod_174',
     slug: 'product-174',
-    name: 'Stellar Luxe Perfume',
+    name: 'Product 174',
     description: 'A captivating scent for the modern individual. This luxurious perfume combines floral notes with a hint of musk to create an unforgettable fragrance experience.',
     category: 'Beauty',
     price: 185,
@@ -2292,7 +2292,7 @@ export const products: Product[] = [
   {
     id: 'prod_175',
     slug: 'product-175',
-    name: 'Orion Rejuvenating Cream',
+    name: 'Product 175',
     description: 'Turn back the clock with this powerful rejuvenating cream. Its advanced formula helps to reduce the appearance of fine lines and wrinkles, leaving your skin looking youthful and radiant.',
     category: 'Beauty',
     price: 85,
@@ -2305,7 +2305,7 @@ export const products: Product[] = [
   {
     id: 'prod_176',
     slug: 'product-176',
-    name: 'Nexa Hydrating Lip Balm',
+    name: 'Product 176',
     description: 'Keep your lips soft and supple with this ultra-hydrating lip balm. Enriched with natural oils, it provides long-lasting moisture and a subtle, healthy-looking sheen.',
     category: 'Beauty',
     price: 18,
@@ -2318,7 +2318,7 @@ export const products: Product[] = [
   {
     id: 'prod_177',
     slug: 'product-177',
-    name: 'Zenco Balancing Toner',
+    name: 'Product 177',
     description: 'Restore your skin’s natural balance with this gentle toner. It helps to clarify your skin, tighten pores, and prepare it for the next steps in your skincare routine.',
     category: 'Beauty',
     price: 32,
@@ -2331,7 +2331,7 @@ export const products: Product[] = [
   {
     id: 'prod_178',
     slug: 'product-178',
-    name: 'Aperture Purifying Clay Mask',
+    name: 'Product 178',
     description: 'Detoxify your skin with this purifying clay mask. It draws out impurities and excess oil to leave your skin feeling clean, refreshed, and incredibly smooth.',
     category: 'Beauty',
     price: 48,
@@ -2344,7 +2344,7 @@ export const products: Product[] = [
   {
     id: 'prod_179',
     slug: 'product-179',
-    name: 'Helios Enchanting Fragrance',
+    name: 'Product 179',
     description: 'A magical scent that will transport you to another world. This enchanting fragrance features a blend of exotic flowers and rare spices for a truly unique aroma.',
     category: 'Beauty',
     price: 110,
@@ -2357,7 +2357,7 @@ export const products: Product[] = [
   {
     id: 'prod_180',
     slug: 'product-180',
-    name: 'iDino Complete Skincare Set',
+    name: 'Product 180',
     description: 'Everything you need for perfect skin. This complete set includes a cleanser, toner, serum, and moisturizer, all formulated to work together for a healthy, glowing complexion.',
     category: 'Beauty',
     price: 160,
@@ -2370,7 +2370,7 @@ export const products: Product[] = [
   {
     id: 'prod_181',
     slug: 'product-181',
-    name: 'Stellar Nourishing Face Cream',
+    name: 'Product 181',
     description: 'Give your skin the nourishment it deserves. This rich face cream is packed with vitamins and antioxidants to hydrate, protect, and revitalize your skin.',
     category: 'Beauty',
     price: 70,
@@ -2383,7 +2383,7 @@ export const products: Product[] = [
   {
     id: 'prod_182',
     slug: 'product-182',
-    name: 'Orion Age-Defying Cream',
+    name: 'Product 182',
     description: 'A luxurious cream that helps to fight the signs of aging. It visibly reduces wrinkles and firms the skin, giving you a more youthful and radiant appearance.',
     category: 'Beauty',
     price: 95,
@@ -2396,7 +2396,7 @@ export const products: Product[] = [
   {
     id: 'prod_183',
     slug: 'product-183',
-    name: 'Nexa Radiance Serum',
+    name: 'Product 183',
     description: 'A potent serum that brightens and evens skin tone, revealing a luminous, healthy glow. Powered by Vitamin C and antioxidants.',
     category: 'Beauty',
     price: 88,
@@ -2409,7 +2409,7 @@ export const products: Product[] = [
   {
     id: 'prod_184',
     slug: 'product-184',
-    name: 'Zenco Midnight Watch',
+    name: 'Product 184',
     description: 'A bold statement of modern luxury. The Zenco Midnight Watch features a striking black design with precision chronographs, perfect for the decisive leader.',
     category: 'Watches',
     price: 3100,
@@ -2422,7 +2422,7 @@ export const products: Product[] = [
   {
     id: 'prod_185',
     slug: 'product-185',
-    name: 'Nexa Liquid Foundation',
+    name: 'Product 185',
     description: 'A new foundation for a flawless look. Buildable coverage that lasts all day.',
     category: 'Beauty',
     price: 55,
@@ -2435,7 +2435,7 @@ export const products: Product[] = [
   {
     id: 'prod_186',
     slug: 'product-186',
-    name: 'Stellar Hydration Serum',
+    name: 'Product 186',
     description: 'A deeply hydrating serum to plump and refresh your skin. Perfect for all skin types.',
     category: 'Beauty',
     price: 70,
@@ -2448,7 +2448,7 @@ export const products: Product[] = [
   {
     id: 'prod_187',
     slug: 'product-187',
-    name: 'Orion Youthful Face Serum',
+    name: 'Product 187',
     description: 'Turn back time with this powerful anti-aging face serum. Reduces fine lines and wrinkles.',
     category: 'Beauty',
     price: 80,
@@ -2461,7 +2461,7 @@ export const products: Product[] = [
   {
     id: 'prod_188',
     slug: 'product-188',
-    name: 'Zenco Classic White Shirt',
+    name: 'Product 188',
     description: 'A timeless wardrobe staple. This classic white shirt is made from pure cotton for ultimate comfort.',
     category: 'Clothes',
     price: 125,
@@ -2474,7 +2474,7 @@ export const products: Product[] = [
   {
     id: 'prod_189',
     slug: 'product-189',
-    name: 'Helios Sleek Black Trousers',
+    name: 'Product 189',
     description: 'Perfect for the office or a night out, these sleek black trousers offer a flattering fit.',
     category: 'Clothes',
     price: 150,
@@ -2487,7 +2487,7 @@ export const products: Product[] = [
   {
     id: 'prod_190',
     slug: 'product-190',
-    name: 'Stellar Summer Floral Dress',
+    name: 'Product 190',
     description: 'A beautiful floral dress perfect for summer days. Light, airy, and stylish.',
     category: 'Clothes',
     price: 210,
@@ -2500,7 +2500,7 @@ export const products: Product[] = [
   {
     id: 'prod_191',
     slug: 'product-191',
-    name: 'Aperture Artisan Handbag',
+    name: 'Product 191',
     description: 'A beautifully crafted leather handbag with plenty of space for your essentials.',
     category: 'Clothes',
     price: 350,
@@ -2513,7 +2513,7 @@ export const products: Product[] = [
   {
     id: 'prod_192',
     slug: 'product-192',
-    name: 'Orion Timeless Denim Jacket',
+    name: 'Product 192',
     description: 'The perfect denim jacket to complete any casual look. Made with high-quality denim.',
     category: 'Clothes',
     price: 190,
@@ -2526,7 +2526,7 @@ export const products: Product[] = [
   {
     id: 'prod_193',
     slug: 'product-193',
-    name: 'iDino Woven Straw Hat',
+    name: 'Product 193',
     description: 'Stay shaded in style with this chic woven straw hat. Perfect for beach days.',
     category: 'Clothes',
     price: 85,
@@ -2539,7 +2539,7 @@ export const products: Product[] = [
   {
     id: 'prod_194',
     slug: 'product-194',
-    name: 'Nexa Luxurious Silk Scarf',
+    name: 'Product 194',
     description: 'Add a touch of elegance to any outfit with this luxurious silk scarf.',
     category: 'Clothes',
     price: 110,
@@ -2552,7 +2552,7 @@ export const products: Product[] = [
   {
     id: 'prod_195',
     slug: 'product-195',
-    name: 'Zenco Modern Business Suit',
+    name: 'Product 195',
     description: 'Look sharp and professional in this modern business suit. Tailored for a perfect fit.',
     category: 'Clothes',
     price: 750,
@@ -2565,7 +2565,7 @@ export const products: Product[] = [
   {
     id: 'prod_196',
     slug: 'product-196',
-    name: 'Stellar Riviera Bikini Set',
+    name: 'Product 196',
     description: 'Hit the beach in style with this elegant Riviera bikini set. Flattering and comfortable.',
     category: 'Clothes',
     price: 95,
@@ -2578,7 +2578,7 @@ export const products: Product[] = [
   {
     id: 'prod_197',
     slug: 'product-197',
-    name: 'Orion Cozy Wool Sweater',
+    name: 'Product 197',
     description: 'Stay warm and cozy in this beautifully knitted wool sweater.',
     category: 'Clothes',
     price: 220,
@@ -2591,7 +2591,7 @@ export const products: Product[] = [
   {
     id: 'prod_198',
     slug: 'product-198',
-    name: 'Aperture Tartan Plaid Skirt',
+    name: 'Product 198',
     description: 'A classic tartan plaid skirt that adds a touch of preppy style to your wardrobe.',
     category: 'Clothes',
     price: 135,
@@ -2604,7 +2604,7 @@ export const products: Product[] = [
   {
     id: 'prod_199',
     slug: 'product-199',
-    name: 'Helios Everyday Cotton Socks',
+    name: 'Product 199',
     description: 'Comfortable and breathable cotton socks for everyday wear. Comes in a pack of 5.',
     category: 'Underwear',
     price: 45,
@@ -2617,7 +2617,7 @@ export const products: Product[] = [
   {
     id: 'prod_200',
     slug: 'product-200',
-    name: 'Zenco Classic Leather Belt',
+    name: 'Product 200',
     description: 'A high-quality leather belt that is built to last. A timeless accessory.',
     category: 'Clothes',
     price: 90,
@@ -2630,7 +2630,7 @@ export const products: Product[] = [
   {
     id: 'prod_201',
     slug: 'product-201',
-    name: 'Helios Fine Leather Gloves',
+    name: 'Product 201',
     description: 'Keep your hands warm with these stylish and comfortable fine leather gloves.',
     category: 'Clothes',
     price: 120,
@@ -2643,7 +2643,7 @@ export const products: Product[] = [
   {
     id: 'prod_202',
     slug: 'product-202',
-    name: 'Nexa Elegant Silk Tie',
+    name: 'Product 202',
     description: 'An elegant silk tie to complete your formal look. Available in various colors.',
     category: 'Clothes',
     price: 75,
@@ -2656,7 +2656,7 @@ export const products: Product[] = [
   {
     id: 'prod_203',
     slug: 'product-203',
-    name: 'Stellar Aviator Sunglasses',
+    name: 'Product 203',
     description: 'Classic aviator sunglasses that never go out of style. 100% UV protection.',
     category: 'Clothes',
     price: 180,
@@ -2669,7 +2669,7 @@ export const products: Product[] = [
   {
     id: 'prod_204',
     slug: 'product-204',
-    name: 'Orion Signet Gold Ring',
+    name: 'Product 204',
     description: 'A classic signet ring made from 14k gold. A timeless piece of jewelry.',
     category: 'Chains',
     price: 450,
@@ -2682,7 +2682,7 @@ export const products: Product[] = [
   {
     id: 'prod_205',
     slug: 'product-205',
-    name: 'Nexa Silver Bracelet',
+    name: 'Product 205',
     description: 'A minimalist silver bracelet that adds a touch of elegance to any wrist.',
     category: 'Chains',
     price: 280,
@@ -2695,7 +2695,7 @@ export const products: Product[] = [
   {
     id: 'prod_206',
     slug: 'product-206',
-    name: 'Aperture Diamond Earrings',
+    name: 'Product 206',
     description: 'Stunning solitaire diamond earrings that sparkle with every movement.',
     category: 'Chains',
     price: 1200,
@@ -2708,7 +2708,7 @@ export const products: Product[] = [
   {
     id: 'prod_207',
     slug: 'product-207',
-    name: 'iDino Protective Phone Case',
+    name: 'Product 207',
     description: 'A durable and stylish case to protect your smartphone from drops and scratches.',
     category: 'Phones',
     price: 50,
@@ -2721,7 +2721,7 @@ export const products: Product[] = [
   {
     id: 'prod_208',
     slug: 'product-208',
-    name: 'Zenco Wireless Headphones',
+    name: 'Product 208',
     description: 'Immerse yourself in music with these high-fidelity noise-cancelling headphones.',
     category: 'Phones',
     price: 350,
@@ -2734,7 +2734,7 @@ export const products: Product[] = [
   {
     id: 'prod_209',
     slug: 'product-209',
-    name: 'Aperture Pro Keyboard',
+    name: 'Product 209',
     description: 'A professional mechanical keyboard with customizable RGB lighting for gamers and programmers.',
     category: 'Laptops',
     price: 210,
@@ -2747,7 +2747,7 @@ export const products: Product[] = [
   {
     id: 'prod_210',
     slug: 'product-210',
-    name: 'Nexa Ergonomic Gaming Mouse',
+    name: 'Product 210',
     description: 'An ergonomic gaming mouse with programmable buttons for the ultimate gaming experience.',
     category: 'Laptops',
     price: 95,
@@ -2760,7 +2760,7 @@ export const products: Product[] = [
   {
     id: 'prod_211',
     slug: 'product-211',
-    name: 'Stellar UltraWide Monitor',
+    name: 'Product 211',
     description: 'An ultrawide monitor that provides an immersive viewing experience for work and play.',
     category: 'Laptops',
     price: 800,
@@ -2773,7 +2773,7 @@ export const products: Product[] = [
   {
     id: 'prod_212',
     slug: 'product-212',
-    name: 'Helios 4K HD Webcam',
+    name: 'Product 212',
     description: 'A 4K high-definition webcam for crystal-clear video calls and streaming.',
     category: 'Laptops',
     price: 150,
@@ -2786,7 +2786,7 @@ export const products: Product[] = [
   {
     id: 'prod_213',
     slug: 'product-213',
-    name: 'iDino High-Speed USB Drive',
+    name: 'Product 213',
     description: 'A high-speed USB 3.1 drive for fast data transfers. 256GB capacity.',
     category: 'Laptops',
     price: 60,
@@ -2799,7 +2799,7 @@ export const products: Product[] = [
   {
     id: 'prod_214',
     slug: 'product-214',
-    name: 'Orion Eyeshadow Palette',
+    name: 'Product 214',
     description: 'Unleash your inner artist with the Orion Eyeshadow Palette. Featuring a versatile range of richly pigmented shades in matte, shimmer, and metallic finishes, it’s perfect for creating any look from subtle to dramatic.',
     category: 'Beauty',
     price: 55,
@@ -2812,7 +2812,7 @@ export const products: Product[] = [
   {
     id: 'prod_215',
     slug: 'product-215',
-    name: 'Nexa Luminous Primer',
+    name: 'Product 215',
     description: 'Create the perfect canvas with Nexa Luminous Primer. This lightweight primer blurs imperfections, smooths skin texture, and imparts a radiant glow, ensuring your makeup applies flawlessly and lasts all day.',
     category: 'Beauty',
     price: 38,
@@ -2825,7 +2825,7 @@ export const products: Product[] = [
   {
     id: 'prod_216',
     slug: 'product-216',
-    name: 'Zenco Velvet Lipstick',
+    name: 'Product 216',
     description: 'Make a bold statement with Zenco Velvet Lipstick. This intensely pigmented lipstick glides on smoothly, delivering a rich, velvety color with a comfortable, long-wearing finish that doesn’t feather or fade.',
     category: 'Beauty',
     price: 28,
@@ -2838,7 +2838,7 @@ export const products: Product[] = [
   {
     id: 'prod_217',
     slug: 'product-217',
-    name: 'Stellar Precision Eyeliner',
+    name: 'Product 217',
     description: 'Define your eyes with ultimate precision using the Stellar Precision Eyeliner. Its ultra-fine tip allows for effortless application, from a subtle line to a dramatic wing, with a waterproof, smudge-proof formula.',
     category: 'Beauty',
     price: 22,
@@ -2851,7 +2851,7 @@ export const products: Product[] = [
   {
     id: 'prod_218',
     slug: 'product-218',
-    name: 'Zenco Velvet Lipstick',
+    name: 'Product 218',
     description: 'Make a bold statement with Zenco Velvet Lipstick. This intensely pigmented lipstick glides on smoothly, delivering a rich, velvety color with a comfortable, long-wearing finish that doesn’t feather or fade.',
     category: 'Beauty',
     price: 28,
@@ -2864,7 +2864,7 @@ export const products: Product[] = [
   {
     id: 'prod_219',
     slug: 'product-219',
-    name: 'Helios Volumizing Mascara',
+    name: 'Product 219',
     description: 'Achieve breathtaking lash volume with Helios Volumizing Mascara. The specially designed brush coats every lash from root to tip, creating a bold, false-lash effect without clumping or flaking.',
     category: 'Beauty',
     price: 30,
@@ -2877,7 +2877,7 @@ export const products: Product[] = [
   {
     id: 'prod_220',
     slug: 'product-220',
-    name: 'Aperture Brow Pencil',
+    name: 'Product 220',
     description: 'Shape and define your brows to perfection with the Aperture Brow Pencil. This dual-ended pencil features a fine tip for precise application and a spoolie brush for seamless blending.',
     category: 'Beauty',
     price: 20,
@@ -2890,7 +2890,7 @@ export const products: Product[] = [
   {
     id: 'prod_221',
     slug: 'product-221',
-    name: 'iDino Setting Spray',
+    name: 'Product 221',
     description: 'Lock in your look all day with the iDino Setting Spray. This fine mist sets makeup in place, preventing it from melting, fading, or settling into fine lines, for a flawless finish that lasts.',
     category: 'Beauty',
     price: 35,
@@ -2903,7 +2903,7 @@ export const products: Product[] = [
   {
     id: 'prod_222',
     slug: 'product-222',
-    name: 'Orion Blush Compact',
+    name: 'Product 222',
     description: 'Add a natural flush of color to your cheeks with the Orion Blush Compact. This finely-milled powder blush provides a buildable, blendable color for a healthy, radiant glow.',
     category: 'Beauty',
     price: 32,
@@ -2916,7 +2916,7 @@ export const products: Product[] = [
   {
     id: 'prod_223',
     slug: 'product-223',
-    name: 'Nexa Bronzer Powder',
+    name: 'Product 223',
     description: 'Get a sun-kissed glow with the Nexa Bronzer Powder. This silky-smooth bronzer blends effortlessly to add warmth and definition for a naturally bronzed look.',
     category: 'Beauty',
     price: 40,
@@ -2929,7 +2929,7 @@ export const products: Product[] = [
   {
     id: 'prod_224',
     slug: 'product-224',
-    name: 'Zenco Lip Liner',
+    name: 'Product 224',
     description: 'Define and shape your lips with the Zenco Lip Liner. This creamy, long-lasting liner glides on smoothly to prevent feathering and create a perfectly polished lip look.',
     category: 'Beauty',
     price: 18,
@@ -2942,7 +2942,7 @@ export const products: Product[] = [
   {
     id: 'prod_225',
     slug: 'product-225',
-    name: 'Stellar Nail Polish',
+    name: 'Product 225',
     description: 'Express your style with Stellar Nail Polish. This high-shine, chip-resistant formula delivers vibrant color and a flawless finish for a perfect manicure that lasts.',
     category: 'Beauty',
     price: 15,
@@ -2955,7 +2955,7 @@ export const products: Product[] = [
   {
     id: 'prod_226',
     slug: 'product-226',
-    name: 'Helios Makeup Brush Set',
+    name: 'Product 226',
     description: 'Achieve professional-quality makeup application with the Helios Makeup Brush Set. This comprehensive set includes all the essential brushes for a flawless face, eye, and lip look.',
     category: 'Beauty',
     price: 85,
@@ -2968,7 +2968,7 @@ export const products: Product[] = [
   {
     id: 'prod_227',
     slug: 'product-227',
-    name: 'Zenco Executive Watch',
+    name: 'Product 227',
     description: 'A bold statement of modern luxury. The Zenco Executive Watch features a striking black design with precision chronographs, perfect for the decisive leader.',
     category: 'Watches',
     price: 3100,
@@ -2981,7 +2981,7 @@ export const products: Product[] = [
   {
     id: 'prod_228',
     slug: 'product-228',
-    name: 'Helios Trench Coat',
+    name: 'Product 228',
     description: 'The quintessential outerwear piece for any season. The Helios Trench Coat is impeccably tailored for a timeless silhouette that exudes sophistication and style.',
     category: 'Clothes',
     price: 450,
@@ -2994,7 +2994,7 @@ export const products: Product[] = [
   {
     id: 'prod_229',
     slug: 'product-229',
-    name: 'Aperture Sphere Phone',
+    name: 'Product 229',
     description: 'Experience the future of communication with the Aperture Sphere. Its revolutionary design and holographic display offer an immersive and unparalleled user experience.',
     category: 'Phones',
     price: 2200,
@@ -3007,7 +3007,7 @@ export const products: Product[] = [
   {
     id: 'prod_230',
     slug: 'product-230',
-    name: 'StellarBook Pro',
+    name: 'Product 230',
     description: 'Engineered for professionals who demand the best. The StellarBook Pro delivers exceptional performance, a stunning display, and all-day battery life in a sleek, portable design.',
     category: 'Laptops',
     price: 2700,
@@ -3020,7 +3020,7 @@ export const products: Product[] = [
   {
     id: 'prod_231',
     slug: 'product-231',
-    name: 'Nexa Daily Moisturizer',
+    name: 'Product 231',
     description: 'Keep your skin hydrated and refreshed all day long with our lightweight Daily Moisturizer. This fast-absorbing formula provides essential moisture without a greasy feel, leaving your skin soft, smooth, and ready for the day.',
     category: 'Beauty',
     price: 35,
@@ -3033,7 +3033,7 @@ export const products: Product[] = [
   {
     id: 'prod_232',
     slug: 'product-232',
-    name: 'Stellar Night Repair Cream',
+    name: 'Product 232',
     description: 'Wake up to rejuvenated skin with the Stellar Night Repair Cream. This rich, nourishing cream works overnight to repair and restore your skin’s barrier, reducing the appearance of fine lines and promoting a youthful glow.',
     category: 'Beauty',
     price: 75,
@@ -3046,7 +3046,7 @@ export const products: Product[] = [
   {
     id: 'prod_233',
     slug: 'product-233',
-    name: 'Orion Tinted Lip Balm',
+    name: 'Product 233',
     description: 'Get a hint of color and a whole lot of hydration with the Orion Tinted Lip Balm. This nourishing balm soothes dry lips while providing a sheer, natural-looking tint for an effortlessly beautiful look.',
     category: 'Beauty',
     price: 15,
@@ -3059,7 +3059,7 @@ export const products: Product[] = [
   {
     id: 'prod_234',
     slug: 'product-234',
-    name: 'Zenco Purifying Toner',
+    name: 'Product 234',
     description: 'Balance and refine your complexion with the Zenco Purifying Toner. This alcohol-free toner gently removes impurities, minimizes pores, and preps your skin to absorb the maximum benefits of your skincare routine.',
     category: 'Beauty',
     price: 28,
@@ -3072,7 +3072,7 @@ export const products: Product[] = [
   {
     id: 'prod_235',
     slug: 'product-235',
-    name: 'Aperture Detox Clay Mask',
+    name: 'Product 235',
     description: 'Deeply cleanse and purify your pores with the Aperture Detox Clay Mask. Formulated with natural clays and botanicals, this mask draws out impurities, absorbs excess oil, and leaves your skin feeling refreshed and revitalized.',
     category: 'Beauty',
     price: 42,
@@ -3085,7 +3085,7 @@ export const products: Product[] = [
   {
     id: 'prod_236',
     slug: 'product-236',
-    name: 'Helios Aura Fragrance',
+    name: 'Product 236',
     description: 'Radiate confidence with Helios Aura, an uplifting fragrance that blends bright citrus notes with soft florals and a warm, musky base. A scent that is as vibrant and captivating as you are.',
     category: 'Beauty',
     price: 95,
@@ -3098,7 +3098,7 @@ export const products: Product[] = [
   {
     id: 'prod_237',
     slug: 'product-237',
-    name: 'iDino Skincare Essentials Kit',
+    name: 'Product 237',
     description: 'Discover your complete skincare routine with the iDino Skincare Essentials Kit. This curated set includes a cleanser, toner, serum, and moisturizer, providing everything you need for healthy, glowing skin.',
     category: 'Beauty',
     price: 150,
@@ -3111,7 +3111,7 @@ export const products: Product[] = [
   {
     id: 'prod_238',
     slug: 'product-238',
-    name: 'Stellar Luxe Perfume',
+    name: 'Product 238',
     description: 'A captivating scent for the modern individual. This luxurious perfume combines floral notes with a hint of musk to create an unforgettable fragrance experience.',
     category: 'Beauty',
     price: 185,
@@ -3124,7 +3124,7 @@ export const products: Product[] = [
   {
     id: 'prod_239',
     slug: 'product-239',
-    name: 'Orion Rejuvenating Cream',
+    name: 'Product 239',
     description: 'Turn back the clock with this powerful rejuvenating cream. Its advanced formula helps to reduce the appearance of fine lines and wrinkles, leaving your skin looking youthful and radiant.',
     category: 'Beauty',
     price: 85,
@@ -3137,7 +3137,7 @@ export const products: Product[] = [
   {
     id: 'prod_240',
     slug: 'product-240',
-    name: 'Nexa Hydrating Lip Balm',
+    name: 'Product 240',
     description: 'Keep your lips soft and supple with this ultra-hydrating lip balm. Enriched with natural oils, it provides long-lasting moisture and a subtle, healthy-looking sheen.',
     category: 'Beauty',
     price: 18,
@@ -3150,7 +3150,7 @@ export const products: Product[] = [
   {
     id: 'prod_241',
     slug: 'product-241',
-    name: 'Zenco Balancing Toner',
+    name: 'Product 241',
     description: 'Restore your skin’s natural balance with this gentle toner. It helps to clarify your skin, tighten pores, and prepare it for the next steps in your skincare routine.',
     category: 'Beauty',
     price: 32,
@@ -3163,7 +3163,7 @@ export const products: Product[] = [
   {
     id: 'prod_242',
     slug: 'product-242',
-    name: 'Aperture Purifying Clay Mask',
+    name: 'Product 242',
     description: 'Detoxify your skin with this purifying clay mask. It draws out impurities and excess oil to leave your skin feeling clean, refreshed, and incredibly smooth.',
     category: 'Beauty',
     price: 48,
@@ -3176,7 +3176,7 @@ export const products: Product[] = [
   {
     id: 'prod_243',
     slug: 'product-243',
-    name: 'Stellar Pink Dream Wig',
+    name: 'Product 243',
     description: 'Live out your fantasies with this stunning pink wig. Perfect for costumes, parties, or just for fun.',
     category: 'Wigs',
     price: 130,
@@ -3189,7 +3189,7 @@ export const products: Product[] = [
   {
     id: 'prod_244',
     slug: 'product-244',
-    name: 'Nexa Noir Elegance Dress',
+    name: 'Product 244',
     description: 'A timeless black dress that exudes elegance and sophistication. Perfect for any formal occasion.',
     category: 'Clothes',
     price: 320,
@@ -3202,7 +3202,7 @@ export const products: Product[] = [
   {
     id: 'prod_245',
     slug: 'product-245',
-    name: 'Orion Cloud-Rift Sneakers',
+    name: 'Product 245',
     description: 'Walk on clouds with these ultra-comfortable and stylish white sneakers. A must-have for your shoe collection.',
     category: 'Shoes',
     price: 190,
@@ -3215,7 +3215,7 @@ export const products: Product[] = [
   {
     id: 'prod_246',
     slug: 'product-246',
-    name: 'Helios Future-Smart Watch',
+    name: 'Product 246',
     description: 'Stay connected and track your fitness with this sleek smartwatch. The future is on your wrist.',
     category: 'Watches',
     price: 350,
@@ -3228,7 +3228,7 @@ export const products: Product[] = [
   {
     id: 'prod_247',
     slug: 'product-247',
-    name: 'Zenco Athletic Boxer Briefs',
+    name: 'Product 247',
     description: 'Designed for the active man, these boxer briefs offer superior comfort and support.',
     category: 'Underwear',
     price: 45,
@@ -3241,7 +3241,7 @@ export const products: Product[] = [
   {
     id: 'prod_248',
     slug: 'product-248',
-    name: 'Aperture Golden Link Chain',
+    name: 'Product 248',
     description: 'A classic gold chain that adds a touch of luxury to any outfit. A timeless piece.',
     category: 'Chains',
     price: 950,
@@ -3254,7 +3254,7 @@ export const products: Product[] = [
   {
     id: 'prod_249',
     slug: 'product-249',
-    name: 'iDino Crystal-Clear Smartphone',
+    name: 'Product 249',
     description: 'Experience clarity like never before with this crystal-clear smartphone. Powerful and stylish.',
     category: 'Phones',
     price: 1100,
@@ -3267,7 +3267,7 @@ export const products: Product[] = [
   {
     id: 'prod_250',
     slug: 'product-250',
-    name: 'Stellar Graphic Art T-Shirt',
+    name: 'Product 250',
     description: 'Express your artistic side with this unique graphic t-shirt. Comfortable and eye-catching.',
     category: 'Clothes',
     price: 65,
@@ -3280,7 +3280,7 @@ export const products: Product[] = [
   {
     id: 'prod_251',
     slug: 'product-251',
-    name: 'Nexa Platinum Sheen Wig',
+    name: 'Product 251',
     description: 'Turn heads with this stunning silver wig. A bold fashion statement for any occasion.',
     category: 'Wigs',
     price: 160,
@@ -3293,7 +3293,7 @@ export const products: Product[] = [
   {
     id: 'prod_252',
     slug: 'product-252',
-    name: 'Orion Power-Book Laptop',
+    name: 'Product 252',
     description: 'A powerful laptop designed for professionals and creatives. Handle any task with ease.',
     category: 'Laptops',
     price: 2400,
@@ -3306,7 +3306,7 @@ export const products: Product[] = [
   {
     id: 'prod_253',
     slug: 'product-253',
-    name: 'Helios Urban Explorer Boots',
+    name: 'Product 253',
     description: 'These stylish boots are perfect for exploring the city in comfort and style.',
     category: 'Shoes',
     price: 280,
@@ -3319,7 +3319,7 @@ export const products: Product[] = [
   {
     id: 'prod_254',
     slug: 'product-254',
-    name: 'Zenco Classic Timepiece',
+    name: 'Product 254',
     description: 'A classic watch with a timeless design. The perfect accessory for any gentleman.',
     category: 'Watches',
     price: 1800,
@@ -3332,7 +3332,7 @@ export const products: Product[] = [
   {
     id: 'prod_255',
     slug: 'product-255',
-    name: 'Aperture Performance Boxers',
+    name: 'Product 255',
     description: 'Stay cool and comfortable all day long with these performance boxers. Made for the modern man.',
     category: 'Underwear',
     price: 50,
@@ -3345,7 +3345,7 @@ export const products: Product[] = [
   {
     id: 'prod_256',
     slug: 'product-256',
-    name: 'iDino Silver Curb Chain',
+    name: 'Product 256',
     description: 'A sleek and modern silver chain that adds a touch of cool to your look.',
     category: 'Chains',
     price: 450,
@@ -3358,7 +3358,7 @@ export const products: Product[] = [
   {
     id: 'prod_257',
     slug: 'product-257',
-    name: 'Stellar Aura Smartphone',
+    name: 'Product 257',
     description: 'A smartphone that is as beautiful as it is powerful. Featuring an amazing camera.',
     category: 'Phones',
     price: 1300,
@@ -3371,7 +3371,7 @@ export const products: Product[] = [
   {
     id: 'prod_258',
     slug: 'product-258',
-    name: 'Nexa Signature Polo Shirt',
+    name: 'Product 258',
     description: 'A classic polo shirt with a modern twist. The perfect blend of comfort and style.',
     category: 'Clothes',
     price: 85,
@@ -3384,7 +3384,7 @@ export const products: Product[] = [
   {
     id: 'prod_259',
     slug: 'product-259',
-    name: 'Orion Ocean Blue Wig',
+    name: 'Product 259',
     description: 'Make a splash with this stunning ocean blue wig. A unique and fashionable choice.',
     category: 'Wigs',
     price: 140,
@@ -3397,7 +3397,7 @@ export const products: Product[] = [
   {
     id: 'prod_260',
     slug: 'product-260',
-    name: 'Helios Streamer-X Laptop',
+    name: 'Product 260',
     description: 'The ultimate laptop for streaming and gaming. High performance meets stunning visuals.',
     category: 'Laptops',
     price: 2800,
@@ -3410,7 +3410,7 @@ export const products: Product[] = [
   {
     id: 'prod_261',
     slug: 'product-261',
-    name: 'Zenco Starlight Heels',
+    name: 'Product 261',
     description: 'Dazzle the night away with these stunning high heels. Perfect for a special occasion.',
     category: 'Shoes',
     price: 250,
@@ -3423,7 +3423,7 @@ export const products: Product[] = [
   {
     id: 'prod_262',
     slug: 'product-262',
-    name: 'Aperture Chronos Watch',
+    name: 'Product 262',
     description: 'A watch that is both a work of art and a precision instrument. A true masterpiece.',
     category: 'Watches',
     price: 4500,
@@ -3436,7 +3436,7 @@ export const products: Product[] = [
   {
     id: 'prod_263',
     slug: 'product-263',
-    name: 'iDino Comfort-Luxe Briefs',
+    name: 'Product 263',
     description: 'Experience the ultimate in comfort with these luxurious briefs. Soft, stylish, and supportive.',
     category: 'Underwear',
     price: 55,
@@ -3449,7 +3449,7 @@ export const products: Product[] = [
   {
     id: 'prod_264',
     slug: 'product-264',
-    name: 'Stellar Nova Pendant',
+    name: 'Product 264',
     description: 'A beautiful pendant necklace that shines like a star. A perfect gift for someone special.',
     category: 'Chains',
     price: 650,
@@ -3462,7 +3462,7 @@ export const products: Product[] = [
   {
     id: 'prod_265',
     slug: 'product-265',
-    name: 'Nexa Vision Pro Phone',
+    name: 'Product 265',
     description: 'A phone that changes the way you see the world. With its transparent display, the future is now.',
     category: 'Phones',
     price: 1800,
@@ -3475,7 +3475,7 @@ export const products: Product[] = [
   {
     id: 'prod_266',
     slug: 'product-266',
-    name: 'Orion Expedition Jacket',
+    name: 'Product 266',
     description: 'A rugged and durable jacket built for adventure. Ready for anything you can throw at it.',
     category: 'Clothes',
     price: 320,
@@ -3488,7 +3488,7 @@ export const products: Product[] = [
   {
     id: 'prod_267',
     slug: 'product-267',
-    name: 'Helios Emerald Envy Wig',
+    name: 'Product 267',
     description: 'Make them green with envy with this vibrant green wig. A fun and fashionable choice.',
     category: 'Wigs',
     price: 150,
@@ -3501,7 +3501,7 @@ export const products: Product[] = [
   {
     id: 'prod_268',
     slug: 'product-268',
-    name: 'Zenco GalaxyBook',
+    name: 'Product 268',
     description: 'Explore the universe of creativity with this powerful and sleek gaming laptop.',
     category: 'Laptops',
     price: 2600,
@@ -3514,7 +3514,7 @@ export const products: Product[] = [
   {
     id: 'prod_269',
     slug: 'product-269',
-    name: 'Aperture Street-Smart Sneakers',
+    name: 'Product 269',
     description: 'The perfect sneakers for the urban explorer. Stylish, comfortable, and built to last.',
     category: 'Shoes',
     price: 175,
@@ -3527,7 +3527,7 @@ export const products: Product[] = [
   {
     id: 'prod_270',
     slug: 'product-270',
-    name: 'iDino Sport-Tek Watch',
+    name: 'Product 270',
     description: 'The ultimate sports watch for the modern athlete. Track your workouts in style.',
     category: 'Watches',
     price: 280,
@@ -3540,7 +3540,7 @@ export const products: Product[] = [
   {
     id: 'prod_271',
     slug: 'product-271',
-    name: 'Stellar Lace Dreams Underwear',
+    name: 'Product 271',
     description: 'Elegant and comfortable lace underwear that makes you feel beautiful from the inside out.',
     category: 'Underwear',
     price: 65,
@@ -3553,7 +3553,7 @@ export const products: Product[] = [
   {
     id: 'prod_272',
     slug: 'product-272',
-    name: 'Nexa Infinity Pendant',
+    name: 'Product 272',
     description: 'A beautiful pendant that symbolizes eternal love and friendship. A meaningful gift.',
     category: 'Chains',
     price: 380,
@@ -3566,7 +3566,7 @@ export const products: Product[] = [
   {
     id: 'prod_273',
     slug: 'product-273',
-    name: 'Orion Ghost Phone',
+    name: 'Product 273',
     description: 'A phone so sleek and clear, it is almost invisible. The pinnacle of minimalist design.',
     category: 'Phones',
     price: 1500,
@@ -3579,7 +3579,7 @@ export const products: Product[] = [
   {
     id: 'prod_274',
     slug: 'product-274',
-    name: 'Helios Aviator Jacket',
+    name: 'Product 274',
     description: 'A classic aviator jacket that never goes out of style. Made from premium leather.',
     category: 'Clothes',
     price: 480,
@@ -3592,7 +3592,7 @@ export const products: Product[] = [
   {
     id: 'prod_275',
     slug: 'product-275',
-    name: 'Zenco Amethyst Wave Wig',
+    name: 'Product 275',
     description: 'Ride the wave of fashion with this gorgeous purple wig. A vibrant and exciting choice.',
     category: 'Wigs',
     price: 170,
@@ -3605,7 +3605,7 @@ export const products: Product[] = [
   {
     id: 'prod_276',
     slug: 'product-276',
-    name: 'Azure Flow Dress',
+    name: 'Product 276',
     description: 'A beautiful blue dress that flows with elegance and grace, perfect for any special occasion.',
     category: 'Clothes',
     price: 280,
@@ -3618,7 +3618,7 @@ export const products: Product[] = [
   {
     id: 'prod_277',
     slug: 'product-277',
-    name: 'Ivory Business Trousers',
+    name: 'Product 277',
     description: 'Sharp and sophisticated ivory trousers, tailored for a perfect fit in any professional setting.',
     category: 'Clothes',
     price: 180,
@@ -3631,7 +3631,7 @@ export const products: Product[] = [
   {
     id: 'prod_278',
     slug: 'product-278',
-    name: 'Emerald Evening Dress',
+    name: 'Product 278',
     description: 'A stunning emerald green dress that is sure to make a statement at any evening event.',
     category: 'Clothes',
     price: 350,
@@ -3644,7 +3644,7 @@ export const products: Product[] = [
   {
     id: 'prod_279',
     slug: 'product-279',
-    name: 'Bohemian Pattern Shirt',
+    name: 'Product 279',
     description: 'A vibrant and stylish shirt with a unique bohemian pattern, perfect for a casual day out.',
     category: 'Clothes',
     price: 95,
@@ -3657,7 +3657,7 @@ export const products: Product[] = [
   {
     id: 'prod_280',
     slug: 'product-280',
-    name: 'Midnight Leather Jacket',
+    name: 'Product 280',
     description: 'A classic black leather jacket that adds a touch of cool to any outfit, day or night.',
     category: 'Clothes',
     price: 420,
@@ -3670,7 +3670,7 @@ export const products: Product[] = [
   {
     id: 'prod_281',
     slug: 'product-281',
-    name: 'Caramel Wool Overcoat',
+    name: 'Product 281',
     description: 'Stay warm and stylish with this elegant caramel-colored wool overcoat.',
     category: 'Clothes',
     price: 550,
@@ -3683,7 +3683,7 @@ export const products: Product[] = [
   {
     id: 'prod_282',
     slug: 'product-282',
-    name: 'Classic High-Top Sneakers',
+    name: 'Product 282',
     description: 'Timeless white high-top sneakers that are a must-have for any casual wardrobe.',
     category: 'Shoes',
     price: 160,
@@ -3696,7 +3696,7 @@ export const products: Product[] = [
   {
     id: 'prod_283',
     slug: 'product-283',
-    name: 'Rugged Terrain Boots',
+    name: 'Product 283',
     description: 'Durable and comfortable boots designed for tackling any terrain with ease.',
     category: 'Shoes',
     price: 240,
@@ -3709,7 +3709,7 @@ export const products: Product[] = [
   {
     id: 'prod_284',
     slug: 'product-284',
-    name: 'Formal Black Oxfords',
+    name: 'Product 284',
     description: 'Classic black oxford shoes, perfect for formal occasions and professional settings.',
     category: 'Shoes',
     price: 280,
@@ -3722,7 +3722,7 @@ export const products: Product[] = [
   {
     id: 'prod_285',
     slug: 'product-285',
-    name: 'Urban Runner Sneakers',
+    name: 'Product 285',
     description: 'Sleek and stylish black sneakers perfect for urban adventures and everyday wear.',
     category: 'Shoes',
     price: 180,
@@ -3735,7 +3735,7 @@ export const products: Product[] = [
   {
     id: 'prod_286',
     slug: 'product-286',
-    name: 'Elegant White Derbys',
+    name: 'Product 286',
     description: 'Elegant white derby shoes that add a touch of class to any outfit.',
     category: 'Shoes',
     price: 220,
@@ -3748,7 +3748,7 @@ export const products: Product[] = [
   {
     id: 'prod_287',
     slug: 'product-287',
-    name: 'Mahogany Dress Shoes',
+    name: 'Product 287',
     description: 'Rich mahogany-colored dress shoes that are perfect for making a statement.',
     category: 'Shoes',
     price: 300,
@@ -3761,7 +3761,7 @@ export const products: Product[] = [
   {
     id: 'prod_288',
     slug: 'product-288',
-    name: 'Jet Black Summer Sandals',
+    name: 'Product 288',
     description: 'Stylish and comfortable black sandals perfect for a summer day.',
     category: 'Shoes',
     price: 85,
@@ -3774,7 +3774,7 @@ export const products: Product[] = [
   {
     id: 'prod_289',
     slug: 'product-289',
-    name: 'Gilded Weave Bracelet',
+    name: 'Product 289',
     description: 'An intricately woven gold bracelet that adds a touch of elegance to any wrist.',
     category: 'Chains',
     price: 600,
@@ -3787,7 +3787,7 @@ export const products: Product[] = [
   {
     id: 'prod_290',
     slug: 'product-290',
-    name: 'Sterling Figaro Necklace',
+    name: 'Product 290',
     description: 'A classic sterling silver figaro necklace that is both timeless and versatile.',
     category: 'Chains',
     price: 350,
@@ -3800,7 +3800,7 @@ export const products: Product[] = [
   {
     id: 'prod_291',
     slug: 'product-291',
-    name: 'Lustrous Pearl Earrings',
+    name: 'Product 291',
     description: 'Elegant and classic pearl earrings that are perfect for any occasion.',
     category: 'Chains',
     price: 250,
@@ -3813,7 +3813,7 @@ export const products: Product[] = [
   {
     id: 'prod_292',
     slug: 'product-292',
-    name: 'Classic Gold Hoop Earrings',
+    name: 'Product 292',
     description: 'A staple for any jewelry collection, these classic gold hoop earrings are effortlessly stylish.',
     category: 'Chains',
     price: 180,
@@ -3826,7 +3826,7 @@ export const products: Product[] = [
   {
     id: 'prod_293',
     slug: 'product-293',
-    name: 'Rose Gold Heart Locket',
+    name: 'Product 293',
     description: 'A beautiful rose gold locket, perfect for holding a cherished memory close to your heart.',
     category: 'Chains',
     price: 450,
@@ -3839,7 +3839,7 @@ export const products: Product[] = [
   {
     id: 'prod_294',
     slug: 'product-294',
-    name: 'Minimalist Silver Ring',
+    name: 'Product 294',
     description: 'A simple yet elegant minimalist silver ring that is perfect for everyday wear.',
     category: 'Chains',
     price: 120,
@@ -3852,7 +3852,7 @@ export const products: Product[] = [
   {
     id: 'prod_295',
     slug: 'product-295',
-    name: 'Onyx Black Smartphone',
+    name: 'Product 295',
     description: 'A sleek and powerful smartphone in a classic onyx black finish.',
     category: 'Phones',
     price: 950,
@@ -3865,7 +3865,7 @@ export const products: Product[] = [
   {
     id: 'prod_296',
     slug: 'product-296',
-    name: 'Sapphire Blue Smartphone',
+    name: 'Product 296',
     description: 'A stunning smartphone in a vibrant sapphire blue, combining style with performance.',
     category: 'Phones',
     price: 980,
@@ -3878,7 +3878,7 @@ export const products: Product[] = [
   {
     id: 'prod_297',
     slug: 'product-297',
-    name: 'Crimson Red Smartphone',
+    name: 'Product 297',
     description: 'Make a bold statement with this eye-catching crimson red smartphone.',
     category: 'Phones',
     price: 970,
@@ -3891,7 +3891,7 @@ export const products: Product[] = [
   {
     id: 'prod_298',
     slug: 'product-298',
-    name: 'Titanium Silver Smartphone',
+    name: 'Product 298',
     description: 'A durable and stylish smartphone with a sleek titanium silver finish.',
     category: 'Phones',
     price: 1050,
@@ -3904,7 +3904,7 @@ export const products: Product[] = [
   {
     id: 'prod_299',
     slug: 'product-299',
-    name: 'Forest Green Smartphone',
+    name: 'Product 299',
     description: 'A unique and stylish smartphone in a sophisticated forest green.',
     category: 'Phones',
     price: 1020,
@@ -3917,7 +3917,7 @@ export const products: Product[] = [
   {
     id: 'prod_300',
     slug: 'product-300',
-    name: 'Stellar Aura Perfume',
+    name: 'Product 300',
     description: 'A captivating fragrance that evokes a sense of mystery and allure. Perfect for evening wear.',
     category: 'Beauty',
     price: 195,
@@ -3930,7 +3930,7 @@ export const products: Product[] = [
   {
     id: 'prod_301',
     slug: 'product-301',
-    name: 'Nexa Youthful Cream',
+    name: 'Product 301',
     description: 'A revolutionary anti-aging cream that reduces the appearance of fine lines and wrinkles for a youthful glow.',
     category: 'Beauty',
     price: 90,
@@ -3943,7 +3943,7 @@ export const products: Product[] = [
   {
     id: 'prod_302',
     slug: 'product-302',
-    name: 'Orion Lip Care',
+    name: 'Product 302',
     description: 'A nourishing lip balm that provides long-lasting hydration and a hint of natural color.',
     category: 'Beauty',
     price: 20,
@@ -3956,7 +3956,7 @@ export const products: Product[] = [
   {
     id: 'prod_303',
     slug: 'product-303',
-    name: 'Helios Refresh Toner',
+    name: 'Product 303',
     description: 'A refreshing toner that balances your skin’s pH and prepares it for the next steps in your skincare routine.',
     category: 'Beauty',
     price: 35,
@@ -3969,7 +3969,7 @@ export const products: Product[] = [
   {
     id: 'prod_304',
     slug: 'product-304',
-    name: 'Zenco Detox Mask',
+    name: 'Product 304',
     description: 'A detoxifying clay mask that draws out impurities and leaves your skin feeling clean and refreshed.',
     category: 'Beauty',
     price: 50,
@@ -3982,7 +3982,7 @@ export const products: Product[] = [
   {
     id: 'prod_305',
     slug: 'product-305',
-    name: 'Aperture Scent',
+    name: 'Product 305',
     description: 'An elegant and sophisticated fragrance with notes of jasmine and sandalwood. A timeless classic.',
     category: 'Beauty',
     price: 150,
@@ -3995,7 +3995,7 @@ export const products: Product[] = [
   {
     id: 'prod_306',
     slug: 'product-306',
-    name: 'iDino Ultimate Skincare Kit',
+    name: 'Product 306',
     description: 'The ultimate skincare kit with everything you need for a complete and effective beauty regimen.',
     category: 'Beauty',
     price: 180,
@@ -4008,7 +4008,7 @@ export const products: Product[] = [
   {
     id: 'prod_307',
     slug: 'product-307',
-    name: 'Stellar Revive Cream',
+    name: 'Product 307',
     description: 'A revitalizing face cream that restores your skin’s natural radiance and leaves it feeling soft and supple.',
     category: 'Beauty',
     price: 78,
@@ -4021,7 +4021,7 @@ export const products: Product[] = [
   {
     id: 'prod_308',
     slug: 'product-308',
-    name: 'Nexa Radiance Face Cream',
+    name: 'Product 308',
     description: 'Achieve a radiant complexion with this illuminating face cream. It brightens and evens out your skin tone.',
     category: 'Beauty',
     price: 85,
@@ -4034,7 +4034,7 @@ export const products: Product[] = [
   {
     id: 'prod_309',
     slug: 'product-309',
-    name: 'Orion Daily Moisturizer',
+    name: 'Product 309',
     description: 'A lightweight daily moisturizer that provides all-day hydration without feeling greasy.',
     category: 'Beauty',
     price: 40,
@@ -4047,7 +4047,7 @@ export const products: Product[] = [
   {
     id: 'prod_310',
     slug: 'product-310',
-    name: 'Helios Night Elixir',
+    name: 'Product 310',
     description: 'A powerful night serum that works while you sleep to repair and rejuvenate your skin.',
     category: 'Beauty',
     price: 95,
@@ -4060,7 +4060,7 @@ export const products: Product[] = [
   {
     id: 'prod_311',
     slug: 'product-311',
-    name: 'Zenco Lip Shield',
+    name: 'Product 311',
     description: 'Protect your lips from the elements with this shielding lip balm, enriched with SPF and vitamins.',
     category: 'Beauty',
     price: 22,
@@ -4099,7 +4099,7 @@ export const products: Product[] = [
   {
     id: 'prod_314',
     slug: 'product-314',
-    name: 'Denim Edge Jeans',
+    name: 'Product 314',
     description: 'Classic denim jeans designed for comfort and style, a wardrobe staple.',
     category: 'Clothes',
     price: 65,
@@ -4112,7 +4112,7 @@ export const products: Product[] = [
   {
     id: 'prod_315',
     slug: 'product-315',
-    name: 'Alpine Ridge Jacket',
+    name: 'Product 315',
     description: 'A warm and stylish winter jacket that provides protection.',
     category: 'Clothes',
     price: 150,
@@ -4125,7 +4125,7 @@ export const products: Product[] = [
   {
     id: 'prod_316',
     slug: 'product-316',
-    name: 'Velocity Athletic Shoes',
+    name: 'Product 316',
     description: 'High-performance athletic shoes designed for speed and comfort during your run.',
     category: 'Shoes',
     price: 110,
@@ -4138,7 +4138,7 @@ export const products: Product[] = [
   {
     id: 'prod_317',
     slug: 'product-317',
-    name: 'Tempo Timepiece',
+    name: 'Product 317',
     description: 'A stylish watch.',
     category: 'Watches',
     price: 250,
@@ -4151,7 +4151,7 @@ export const products: Product[] = [
   {
     id: 'prod_318',
     slug: 'product-318',
-    name: 'Stellar S23',
+    name: 'Product 318',
     description: 'The latest Stellar model. Includes advanced features and capabilities, and a sleek design.',
     category: 'Phones',
     price: 899,
@@ -4164,7 +4164,7 @@ export const products: Product[] = [
   {
     id: 'prod_319',
     slug: 'product-319',
-    name: 'Zenith ProBook',
+    name: 'Product 319',
     description: 'A high-performance laptop. Ideal for professionals and demanding tasks.',
     category: 'Laptops',
     price: 1499,
@@ -4177,7 +4177,7 @@ export const products: Product[] = [
   {
     id: 'prod_320',
     slug: 'product-320',
-    name: 'SilkFlow Wig',
+    name: 'Product 320',
     description: 'A natural-looking wig made with high-quality fibers for a realistic appearance.',
     category: 'Wigs',
     price: 180,
@@ -4190,7 +4190,7 @@ export const products: Product[] = [
   {
     id: 'prod_321',
     slug: 'product-321',
-    name: 'Eon Silver Chain',
+    name: 'Product 321',
     description: 'An elegant silver chain. Adds a touch of sophistication to any outfit.',
     category: 'Chains',
     price: 95,
@@ -4203,7 +4203,7 @@ export const products: Product[] = [
   {
     id: 'prod_322',
     slug: 'product-322',
-    name: 'Nova Underwear Set',
+    name: 'Product 322',
     description: 'A comfortable underwear set. Made from soft, breathable materials.',
     category: 'Underwear',
     price: 35,
@@ -4216,7 +4216,7 @@ export const products: Product[] = [
   {
     id: 'prod_323',
     slug: 'product-323',
-    name: 'Aperture Enchant',
+    name: 'Product 323',
     description: 'A floral scent that will create an exquisite perfume experience.',
     category: 'Beauty',
     price: 220,
@@ -4229,7 +4229,7 @@ export const products: Product[] = [
   {
     id: 'prod_324',
     slug: 'product-324',
-    name: 'iDino Radiance Cream',
+    name: 'Product 324',
     description: 'A moisturizing face cream.',
     category: 'Beauty',
     price: 85,
@@ -4242,7 +4242,7 @@ export const products: Product[] = [
   {
     id: 'prod_325',
     slug: 'product-325',
-    name: 'Crimson Evening Gown',
+    name: 'Product 325',
     description: 'An elegant evening dress.',
     category: 'Clothes',
     price: 275,
@@ -4255,7 +4255,7 @@ export const products: Product[] = [
   {
     id: 'prod_326',
     slug: 'product-326',
-    name: 'Eco Graphic Tee',
+    name: 'Product 326',
     description: 'A casual graphic shirt.',
     category: 'Clothes',
     price: 45,
@@ -4268,7 +4268,7 @@ export const products: Product[] = [
   {
     id: 'prod_327',
     slug: 'product-327',
-    name: 'Stride Runner',
+    name: 'Product 327',
     description: 'Vibrant sneakers designed for runners',
     category: 'Shoes',
     price: 120,
@@ -4281,7 +4281,7 @@ export const products: Product[] = [
   {
     id: 'prod_328',
     slug: 'product-328',
-    name: 'Chrono Classic',
+    name: 'Product 328',
     description: 'A classic analog watch.',
     category: 'Watches',
     price: 275,
@@ -4294,7 +4294,7 @@ export const products: Product[] = [
   {
     id: 'prod_329',
     slug: 'product-329',
-    name: 'Stellar Flex',
+    name: 'Product 329',
     description: 'A revolutionary foldable smartphone with advanced features.',
     category: 'Phones',
     price: 999,
@@ -4307,7 +4307,7 @@ export const products: Product[] = [
   {
     id: 'prod_330',
     slug: 'product-330',
-    name: 'Zenith AirBook',
+    name: 'Product 330',
     description: 'A slim and ultra-lightweight laptop.',
     category: 'Laptops',
     price: 1599,
@@ -4320,7 +4320,7 @@ export const products: Product[] = [
   {
     id: 'prod_331',
     slug: 'product-331',
-    name: 'Vivid Fusion Wig',
+    name: 'Product 331',
     description: 'Vibrant and colorful wig. Adds bold color to your look.',
     category: 'Wigs',
     price: 190,
@@ -4333,7 +4333,7 @@ export const products: Product[] = [
   {
     id: 'prod_332',
     slug: 'product-332',
-    name: 'Eon Regal Chain',
+    name: 'Product 332',
     description: 'A heavy, luxurious gold chain.',
     category: 'Chains',
     price: 150,
@@ -4346,7 +4346,7 @@ export const products: Product[] = [
   {
     id: 'prod_333',
     slug: 'product-333',
-    name: 'Nova Lace Set',
+    name: 'Product 333',
     description: 'A lace underwear set.',
     category: 'Underwear',
     price: 40,
@@ -4359,7 +4359,7 @@ export const products: Product[] = [
   {
     id: 'prod_334',
     slug: 'product-334',
-    name: 'iDino Velvet Kiss',
+    name: 'Product 334',
     description: 'A matte lipstick.',
     category: 'Beauty',
     price: 30,
@@ -4372,7 +4372,7 @@ export const products: Product[] = [
   {
     id: 'prod_335',
     slug: 'product-335',
-    name: 'iDino Blush',
+    name: 'Product 335',
     description: 'A blush to enhance your natural glow.',
     category: 'Beauty',
     price: 35,
@@ -4385,7 +4385,7 @@ export const products: Product[] = [
   {
     id: 'prod_336',
     slug: 'product-336',
-    name: 'Eco Plaid Shirt',
+    name: 'Product 336',
     description: 'A shirt for any casual occasion.',
     category: 'Clothes',
     price: 50,
@@ -4398,7 +4398,7 @@ export const products: Product[] = [
   {
     id: 'prod_337',
     slug: 'product-337',
-    name: 'Stride Luxe Shoes',
+    name: 'Product 337',
     description: 'Leather dress shoes',
     category: 'Shoes',
     price: 130,
@@ -4411,7 +4411,7 @@ export const products: Product[] = [
   {
     id: 'prod_338',
     slug: 'product-338',
-    name: 'Chrono Solar Watch',
+    name: 'Product 338',
     description: 'A solar-powered watch with a modern design.',
     category: 'Watches',
     price: 320,
@@ -4424,7 +4424,7 @@ export const products: Product[] = [
   {
     id: 'prod_339',
     slug: 'product-339',
-    name: 'Stellar Capsule Phone',
+    name: 'Product 339',
     description: 'A compact and powerful smartphone with a unique design.',
     category: 'Phones',
     price: 750,
@@ -4437,7 +4437,7 @@ export const products: Product[] = [
   {
     id: 'prod_340',
     slug: 'product-340',
-    name: 'Zenith Studio Laptop',
+    name: 'Product 340',
     description: 'A versatile laptop designed for creative professionals.',
     category: 'Laptops',
     price: 1800,
@@ -4450,7 +4450,7 @@ export const products: Product[] = [
   {
     id: 'prod_341',
     slug: 'product-341',
-    name: 'Vivid Neon Wig',
+    name: 'Product 341',
     description: 'A bright neon wig that is perfect for parties and events.',
     category: 'Wigs',
     price: 160,
@@ -4463,7 +4463,7 @@ export const products: Product[] = [
   {
     id: 'prod_342',
     slug: 'product-342',
-    name: 'Eon Link Bracelet',
+    name: 'Product 342',
     description: 'A stylish link bracelet that adds a modern touch to your look.',
     category: 'Chains',
     price: 120,
@@ -4476,7 +4476,7 @@ export const products: Product[] = [
   {
     id: 'prod_343',
     slug: 'product-343',
-    name: 'Nova Performance Briefs',
+    name: 'Product 343',
     description: 'Performance briefs designed for comfort and support during workouts.',
     category: 'Underwear',
     price: 45,
@@ -4489,7 +4489,7 @@ export const products: Product[] = [
   {
     id: 'prod_344',
     slug: 'product-344',
-    name: 'iDino Matte Liquid Lipstick',
+    name: 'Product 344',
     description: 'A long-lasting matte liquid lipstick with intense color payoff.',
     category: 'Beauty',
     price: 32,
@@ -4502,7 +4502,7 @@ export const products: Product[] = [
   {
     id: 'prod_345',
     slug: 'product-345',
-    name: 'Eco Bamboo Toothbrush Set',
+    name: 'Product 345',
     description: 'An eco-friendly toothbrush set made from sustainable bamboo.',
     category: 'Beauty',
     price: 15,
@@ -4515,7 +4515,7 @@ export const products: Product[] = [
   {
     id: 'prod_346',
     slug: 'product-346',
-    name: 'Stride Urban Boots',
+    name: 'Product 346',
     description: 'Stylish and durable boots perfect for city life.',
     category: 'Shoes',
     price: 140,
