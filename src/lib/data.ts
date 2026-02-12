@@ -24,7 +24,7 @@ export const categories: Category[] = [
   { id: 'cat9', name: 'Beauty', icon: Palette },
 ];
 
-export const brands: string[] = ['Zenco', 'Stellar', 'Nexa', 'Orion', 'Helios', 'iDino', 'Aperture'];
+export const brands: string[] = ['Zenco', 'Stellar', 'Nexa', 'Orion', 'Helios', 'iDino', 'Aperture', 'Denim Edge', 'Alpine Ridge', 'Velocity', 'Tempo', 'Zenith', 'SilkFlow', 'Eon', 'Nova', 'Crimson', 'Eco', 'Stride', 'Vivid', 'Chrono'];
 
 export const products: Product[] = [
   {
@@ -4073,8 +4073,8 @@ export const products: Product[] = [
   {
     id: 'prod_312',
     slug: 'product-312',
-    name: 'Aperture Twilight Mist',
-    description: 'An alluring fragrance that captures the essence of twilight. A woody and floral scent for the mysterious individual.',
+    name: 'Product 312',
+    description: 'An exquisite perfume bottle that is a work of art. A perfect gift for a loved one.',
     category: 'Beauty',
     price: 210,
     brand: 'Aperture',
@@ -4086,8 +4086,8 @@ export const products: Product[] = [
   {
     id: 'prod_313',
     slug: 'product-313',
-    name: 'iDino Artistry Palette',
-    description: 'A professional makeup palette with a spectrum of colors for endless creativity. High-pigment and blendable.',
+    name: 'Product 313',
+    description: 'A luxurious makeup palette featuring a curated selection of shades for a complete look.',
     category: 'Beauty',
     price: 75,
     brand: 'iDino',
@@ -4407,6 +4407,123 @@ export const products: Product[] = [
     stock: 65,
     rating: 4.7,
     reviewCount: 80
+  },
+  {
+    id: 'prod_338',
+    slug: 'product-338',
+    name: 'Chrono Solar Watch',
+    description: 'A solar-powered watch with a modern design.',
+    category: 'Watches',
+    price: 320,
+    brand: 'Chrono',
+    images: [findImage('prod_img_338')],
+    stock: 40,
+    rating: 4.8,
+    reviewCount: 88
+  },
+  {
+    id: 'prod_339',
+    slug: 'product-339',
+    name: 'Stellar Capsule Phone',
+    description: 'A compact and powerful smartphone with a unique design.',
+    category: 'Phones',
+    price: 750,
+    brand: 'Stellar',
+    images: [findImage('prod_img_339')],
+    stock: 50,
+    rating: 4.7,
+    reviewCount: 110
+  },
+  {
+    id: 'prod_340',
+    slug: 'product-340',
+    name: 'Zenith Studio Laptop',
+    description: 'A versatile laptop designed for creative professionals.',
+    category: 'Laptops',
+    price: 1800,
+    brand: 'Zenith',
+    images: [findImage('prod_img_340')],
+    stock: 30,
+    rating: 4.9,
+    reviewCount: 120
+  },
+  {
+    id: 'prod_341',
+    slug: 'product-341',
+    name: 'Vivid Neon Wig',
+    description: 'A bright neon wig that is perfect for parties and events.',
+    category: 'Wigs',
+    price: 160,
+    brand: 'Vivid',
+    images: [findImage('prod_img_341')],
+    stock: 70,
+    rating: 4.5,
+    reviewCount: 65
+  },
+  {
+    id: 'prod_342',
+    slug: 'product-342',
+    name: 'Eon Link Bracelet',
+    description: 'A stylish link bracelet that adds a modern touch to your look.',
+    category: 'Chains',
+    price: 120,
+    brand: 'Eon',
+    images: [findImage('prod_img_342')],
+    stock: 90,
+    rating: 4.6,
+    reviewCount: 78
+  },
+  {
+    id: 'prod_343',
+    slug: 'product-343',
+    name: 'Nova Performance Briefs',
+    description: 'Performance briefs designed for comfort and support during workouts.',
+    category: 'Underwear',
+    price: 45,
+    brand: 'Nova',
+    images: [findImage('prod_img_343')],
+    stock: 120,
+    rating: 4.4,
+    reviewCount: 62
+  },
+  {
+    id: 'prod_344',
+    slug: 'product-344',
+    name: 'iDino Matte Liquid Lipstick',
+    description: 'A long-lasting matte liquid lipstick with intense color payoff.',
+    category: 'Beauty',
+    price: 32,
+    brand: 'iDino',
+    images: [findImage('prod_img_344')],
+    stock: 85,
+    rating: 4.7,
+    reviewCount: 98
+  },
+  {
+    id: 'prod_345',
+    slug: 'product-345',
+    name: 'Eco Bamboo Toothbrush Set',
+    description: 'An eco-friendly toothbrush set made from sustainable bamboo.',
+    category: 'Beauty',
+    price: 15,
+    brand: 'Eco',
+    images: [findImage('prod_img_345')],
+    stock: 200,
+    rating: 4.9,
+    reviewCount: 150
+  },
+  {
+    id: 'prod_346',
+    slug: 'product-346',
+    name: 'Stride Urban Boots',
+    description: 'Stylish and durable boots perfect for city life.',
+    category: 'Shoes',
+    price: 140,
+    brand: 'Stride',
+    images: [findImage('prod_img_346')],
+    stock: 70,
+    rating: 4.6,
+    reviewCount: 85
   }
 ];
 
