@@ -23,8 +23,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center space-x-2 mb-4">
-              <Image src="https://image2url.com/r2/default/images/1771007062654-ff8e2521-cbb9-4dab-8222-20cfbdcff6d3.png" alt="Eden 0² Logo" width={24} height={24} />
-              <span className="font-bold text-xl font-headline">Eden 0²</span>
+              <Image src="https://image2url.com/r2/default/images/1771007062654-ff8e2521-cbb9-4dab-8222-20cfbdcff6d3.png" alt="Eden 0² Logo" width={36} height={36} />
+              <span className="font-bold text-3xl font-headline">Eden 0²</span>
             </Link>
             <p className="text-sm text-muted-foreground">{t('footer.companyLine')}</p>
           </div>
