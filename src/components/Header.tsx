@@ -34,7 +34,7 @@ export default function Header() {
           <div className="flex items-center space-x-8">
             <Link href="/" className="flex items-center space-x-4">
               <Image src="https://image2url.com/r2/default/images/1771007062654-ff8e2521-cbb9-4dab-8222-20cfbdcff6d3.png" alt="Eden 0² Logo" width={60} height={60} />
-              <span className="font-bold text-3xl font-headline text-primary">Eden 0²</span>
+              <span className="font-extrabold text-3xl font-headline text-primary">Eden 0²</span>
             </Link>
           </div>
           
