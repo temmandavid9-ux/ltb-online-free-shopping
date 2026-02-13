@@ -22,9 +22,9 @@ export default function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center space-x-4 mb-4">
-              <Image src="https://image2url.com/r2/default/images/1771007062654-ff8e2521-cbb9-4dab-8222-20cfbdcff6d3.png" alt="Eden 0² Logo" width={60} height={60} />
-              <span className="font-bold text-6xl font-headline">Eden 0²</span>
+            <Link href="/" className="flex items-center space-x-2 mb-4">
+              <Image src="https://image2url.com/r2/default/images/1771007062654-ff8e2521-cbb9-4dab-8222-20cfbdcff6d3.png" alt="Eden 0² Logo" width={30} height={30} />
+              <span className="font-bold text-3xl font-headline">Eden 0²</span>
             </Link>
             <p className="text-sm text-muted-foreground">{t('footer.companyLine')}</p>
           </div>
