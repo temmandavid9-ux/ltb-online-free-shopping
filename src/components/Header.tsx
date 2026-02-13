@@ -1,7 +1,8 @@
 "use client";
 
 import Link from 'next/link';
-import { Search, Gem, ListChecks, Wallet, User as UserIcon, Globe } from 'lucide-react';
+import { Search, ListChecks, Wallet, User as UserIcon, Globe } from 'lucide-react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { useRedeem } from '@/context/CartContext';
 import { useUser, useFirestore, useDoc, useMemoFirebase } from '@/firebase';
@@ -32,7 +33,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center space-x-8">
             <Link href="/" className="flex items-center space-x-2">
-              <Gem className="h-7 w-7 text-primary" />
+              <Image src="https://image2url.com/r2/default/images/1771007062654-ff8e2521-cbb9-4dab-8222-20cfbdcff6d3.png" alt="Eden 0² Logo" width={28} height={28} />
               <span className="font-bold text-2xl font-headline text-primary">Eden 0²</span>
             </Link>
           </div>

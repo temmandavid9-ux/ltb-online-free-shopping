@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Gem } from 'lucide-react';
+import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 
 const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -23,7 +23,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center space-x-2 mb-4">
-              <Gem className="h-6 w-6 text-primary" />
+              <Image src="https://image2url.com/r2/default/images/1771007062654-ff8e2521-cbb9-4dab-8222-20cfbdcff6d3.png" alt="Eden 0² Logo" width={24} height={24} />
               <span className="font-bold text-xl font-headline">Eden 0²</span>
             </Link>
             <p className="text-sm text-muted-foreground">{t('footer.companyLine')}</p>
