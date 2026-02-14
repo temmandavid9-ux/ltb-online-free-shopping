@@ -24,7 +24,7 @@ export default function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center space-x-4 mb-4">
               <Image src="https://image2url.com/r2/default/images/1771070780543-14ed69a5-dd31-45fd-b42b-250e069cc2c5.png" alt="Eden 0² Logo" width={60} height={60} />
-              <span className="font-extrabold text-3xl font-headline">Eden 0²</span>
+              <span className="font-black text-3xl font-headline">Eden 0²</span>
             </Link>
             <p className="text-sm text-muted-foreground">{t('footer.companyLine')}</p>
           </div>
