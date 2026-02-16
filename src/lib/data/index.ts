@@ -1,14 +1,15 @@
-import type { Product, Category } from './types';
+import type { Product, Category } from '../types';
+import { watchProducts } from './watches';
+import { laptopProducts } from './laptops';
+import { clothesProducts } from './clothes';
+import { shoeProducts } from './shoes';
+import { phoneProducts } from './phones';
+import { wigProducts } from './wigs';
+import { chainProducts } from './chains';
+import { underwearProducts } from './underwear';
+import { beautyProducts } from './beauty';
+
 import { Shirt, Laptop, Watch, Dna, Footprints, Layers, Smartphone, Link as LinkIcon, Palette } from 'lucide-react';
-import { beautyProducts } from './data/beauty';
-import { chainProducts } from './data/chains';
-import { clothesProducts } from './data/clothes';
-import { laptopProducts } from './data/laptops';
-import { phoneProducts } from './data/phones';
-import { shoeProducts } from './data/shoes';
-import { underwearProducts } from './data/underwear';
-import { watchProducts } from './data/watches';
-import { wigProducts } from './data/wigs';
 
 export const categories: Category[] = [
   { id: 'cat1', name: 'Clothes', icon: Shirt },
@@ -25,13 +26,13 @@ export const categories: Category[] = [
 export const brands: string[] = ['Zenco', 'Stellar', 'Nexa', 'Orion', 'Helios', 'iDino', 'Aperture', 'Denim Edge', 'Alpine Ridge', 'Velocity', 'Tempo', 'Zenith', 'SilkFlow', 'Eon', 'Nova', 'Crimson', 'Eco', 'Stride', 'Vivid', 'Chrono'];
 
 export const products: Product[] = [
-    ...watchProducts,
-    ...laptopProducts,
-    ...clothesProducts,
-    ...shoeProducts,
-    ...phoneProducts,
-    ...wigProducts,
-    ...chainProducts,
-    ...underwearProducts,
-    ...beautyProducts
+  ...watchProducts,
+  ...laptopProducts,
+  ...clothesProducts,
+  ...shoeProducts,
+  ...phoneProducts,
+  ...wigProducts,
+  ...chainProducts,
+  ...underwearProducts,
+  ...beautyProducts,
 ];
