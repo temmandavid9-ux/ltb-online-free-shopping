@@ -9,6 +9,7 @@ import { shoeProducts } from './data/shoes';
 import { underwearProducts } from './data/underwear';
 import { watchProducts } from './data/watches';
 import { wigProducts } from './data/wigs';
+import { newProducts } from './data/new-products';
 
 export const categories: Category[] = [
   { id: 'cat1', name: 'Clothes', icon: Shirt },
@@ -33,5 +34,6 @@ export const products: Product[] = [
     ...wigProducts,
     ...chainProducts,
     ...underwearProducts,
-    ...beautyProducts
+    ...beautyProducts,
+    ...newProducts
 ];
