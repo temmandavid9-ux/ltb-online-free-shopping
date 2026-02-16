@@ -302,3 +302,5 @@ export const wigProducts: Product[] = [
     reviewCount: 170,
   },
 ];
+
+    

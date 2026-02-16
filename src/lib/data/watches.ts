@@ -72,7 +72,7 @@ export const watchProducts: Product[] = [
     slug: 'product-320',
     name: 'Product 320',
     description: 'A brand new exclusive item, Product 320, offering superior quality and unmatched style. A perfect addition to your collection.',
-    category: 'Clothes',
+    category: 'Wigs',
     price: 286,
     brand: 'iDino',
     images: [findImage('prod_img_320')],
@@ -158,17 +158,6 @@ export const watchProducts: Product[] = [
     rating: 4.8,
     reviewCount: 125,
   },
-  {
-    id: 'prod_331',
-    slug: 'product-331',
-    name: 'Product 331',
-    description: 'A brand new exclusive item, Product 331, offering superior quality and unmatched style. A perfect addition to your collection.',
-    category: 'Shoes',
-    price: 271,
-    brand: 'Velocity',
-    images: [findImage('prod_img_331')],
-    stock: 54,
-    rating: 4.8,
-    reviewCount: 247,
-  },
 ];
+
+    
