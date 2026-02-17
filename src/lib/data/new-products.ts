@@ -1423,7 +1423,7 @@ export const newProducts: Product[] = [
     id: 'prod_588',
     slug: 'product-588',
     name: 'Product 588',
-    description: 'A brand new exclusive item, Product 588, offering superior quality and unmatched style. A perfect addition to your collection.',
+    description: 'A brand new exclusive item, Product 588, offering superior quality and unmatched. A perfect addition to your collection.',
     category: 'Beauty',
     price: 115,
     brand: 'Alpine Ridge',
