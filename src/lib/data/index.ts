@@ -37,3 +37,5 @@ export const products: Product[] = [
     ...beautyProducts,
     ...newProducts,
 ];
+
+    
