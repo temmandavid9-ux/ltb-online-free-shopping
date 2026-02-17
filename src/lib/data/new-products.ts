@@ -10,7 +10,7 @@ export const newProducts: Product[] = [
     category: 'Clothes',
     price: 188,
     brand: 'Nexa',
-    images: [findImage('prod_img_204')],
+    images: [findImage('prod_img_170')],
     stock: 75,
     rating: 4.7,
     reviewCount: 201
@@ -23,7 +23,7 @@ export const newProducts: Product[] = [
     category: 'Shoes',
     price: 251,
     brand: 'Orion',
-    images: [findImage('prod_img_205')],
+    images: [findImage('prod_img_171')],
     stock: 50,
     rating: 4.9,
     reviewCount: 155
@@ -36,7 +36,7 @@ export const newProducts: Product[] = [
     category: 'Wigs',
     price: 121,
     brand: 'Stellar',
-    images: [findImage('prod_img_206')],
+    images: [findImage('prod_img_172')],
     stock: 88,
     rating: 4.6,
     reviewCount: 182
@@ -49,7 +49,7 @@ export const newProducts: Product[] = [
     category: 'Watches',
     price: 1208,
     brand: 'Helios',
-    images: [findImage('prod_img_207')],
+    images: [findImage('prod_img_173')],
     stock: 22,
     rating: 4.8,
     reviewCount: 95
@@ -62,7 +62,7 @@ export const newProducts: Product[] = [
     category: 'Laptops',
     price: 1502,
     brand: 'Aperture',
-    images: [findImage('prod_img_208')],
+    images: [findImage('prod_img_174')],
     stock: 18,
     rating: 4.9,
     reviewCount: 112
@@ -75,7 +75,7 @@ export const newProducts: Product[] = [
     category: 'Chains',
     price: 452,
     brand: 'Zenco',
-    images: [findImage('prod_img_209')],
+    images: [findImage('prod_img_175')],
     stock: 63,
     rating: 4.7,
     reviewCount: 148
@@ -88,7 +88,7 @@ export const newProducts: Product[] = [
     category: 'Beauty',
     price: 82,
     brand: 'iDino',
-    images: [findImage('prod_img_210')],
+    images: [findImage('prod_img_176')],
     stock: 110,
     rating: 4.8,
     reviewCount: 231
@@ -101,7 +101,7 @@ export const newProducts: Product[] = [
     category: 'Phones',
     price: 980,
     brand: 'Nexa',
-    images: [findImage('prod_img_211')],
+    images: [findImage('prod_img_177')],
     stock: 41,
     rating: 4.9,
     reviewCount: 302
@@ -114,7 +114,7 @@ export const newProducts: Product[] = [
     category: 'Underwear',
     price: 46,
     brand: 'Stellar',
-    images: [findImage('prod_img_212')],
+    images: [findImage('prod_img_178')],
     stock: 152,
     rating: 4.5,
     reviewCount: 251
@@ -127,7 +127,7 @@ export const newProducts: Product[] = [
     category: 'Clothes',
     price: 134,
     brand: 'Orion',
-    images: [findImage('prod_img_213')],
+    images: [findImage('prod_img_179')],
     stock: 93,
     rating: 4.7,
     reviewCount: 188
@@ -140,7 +140,7 @@ export const newProducts: Product[] = [
     category: 'Shoes',
     price: 210,
     brand: 'Helios',
-    images: [findImage('prod_img_214')],
+    images: [findImage('prod_img_180')],
     stock: 68,
     rating: 4.8,
     reviewCount: 215
@@ -153,7 +153,7 @@ export const newProducts: Product[] = [
     category: 'Watches',
     price: 890,
     brand: 'Aperture',
-    images: [findImage('prod_img_215')],
+    images: [findImage('prod_img_181')],
     stock: 33,
     rating: 4.9,
     reviewCount: 130
@@ -166,7 +166,7 @@ export const newProducts: Product[] = [
     category: 'Beauty',
     price: 65,
     brand: 'Zenco',
-    images: [findImage('prod_img_216')],
+    images: [findImage('prod_img_182')],
     stock: 120,
     rating: 4.6,
     reviewCount: 278
@@ -179,7 +179,7 @@ export const newProducts: Product[] = [
     category: 'Wigs',
     price: 155,
     brand: 'iDino',
-    images: [findImage('prod_img_217')],
+    images: [findImage('prod_img_183')],
     stock: 72,
     rating: 4.7,
     reviewCount: 166
@@ -192,7 +192,7 @@ export const newProducts: Product[] = [
     category: 'Chains',
     price: 330,
     brand: 'Nexa',
-    images: [findImage('prod_img_218')],
+    images: [findImage('prod_img_194')],
     stock: 55,
     rating: 4.8,
     reviewCount: 121
@@ -205,7 +205,7 @@ export const newProducts: Product[] = [
     category: 'Clothes',
     price: 95,
     brand: 'Stellar',
-    images: [findImage('prod_img_219')],
+    images: [findImage('prod_img_195')],
     stock: 105,
     rating: 4.9,
     reviewCount: 301
@@ -218,7 +218,7 @@ export const newProducts: Product[] = [
     category: 'Shoes',
     price: 175,
     brand: 'Orion',
-    images: [findImage('prod_img_220')],
+    images: [findImage('prod_img_196')],
     stock: 82,
     rating: 4.7,
     reviewCount: 243
@@ -231,7 +231,7 @@ export const newProducts: Product[] = [
     category: 'Laptops',
     price: 1850,
     brand: 'Helios',
-    images: [findImage('prod_img_221')],
+    images: [findImage('prod_img_197')],
     stock: 15,
     rating: 4.9,
     reviewCount: 102
@@ -244,7 +244,7 @@ export const newProducts: Product[] = [
     category: 'Phones',
     price: 1150,
     brand: 'Aperture',
-    images: [findImage('prod_img_222')],
+    images: [findImage('prod_img_198')],
     stock: 38,
     rating: 4.8,
     reviewCount: 289
@@ -257,7 +257,7 @@ export const newProducts: Product[] = [
     category: 'Underwear',
     price: 52,
     brand: 'Zenco',
-    images: [findImage('prod_img_223')],
+    images: [findImage('prod_img_199')],
     stock: 130,
     rating: 4.6,
     reviewCount: 220
@@ -270,7 +270,7 @@ export const newProducts: Product[] = [
     category: 'Wigs',
     price: 140,
     brand: 'iDino',
-    images: [findImage('prod_img_224')],
+    images: [findImage('prod_img_200')],
     stock: 78,
     rating: 4.7,
     reviewCount: 155
@@ -286,7 +286,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_479')],
     stock: 80,
     rating: 4.7,
-    reviewCount: 150,
+    reviewCount: 150
   },
   {
     id: 'prod_501',
@@ -299,7 +299,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_480')],
     stock: 50,
     rating: 4.8,
-    reviewCount: 200,
+    reviewCount: 200
   },
   {
     id: 'prod_502',
@@ -312,7 +312,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_481')],
     stock: 20,
     rating: 4.9,
-    reviewCount: 100,
+    reviewCount: 100
   },
   {
     id: 'prod_503',
@@ -325,7 +325,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_482')],
     stock: 15,
     rating: 4.9,
-    reviewCount: 120,
+    reviewCount: 120
   },
   {
     id: 'prod_504',
@@ -338,7 +338,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_483')],
     stock: 30,
     rating: 4.8,
-    reviewCount: 250,
+    reviewCount: 250
   },
   {
     id: 'prod_505',
@@ -351,7 +351,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_484')],
     stock: 40,
     rating: 4.6,
-    reviewCount: 80,
+    reviewCount: 80
   },
   {
     id: 'prod_506',
@@ -364,7 +364,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_485')],
     stock: 60,
     rating: 4.7,
-    reviewCount: 90,
+    reviewCount: 90
   },
   {
     id: 'prod_507',
@@ -377,7 +377,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_486')],
     stock: 100,
     rating: 4.5,
-    reviewCount: 120,
+    reviewCount: 120
   },
   {
     id: 'prod_508',
@@ -390,7 +390,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_487')],
     stock: 70,
     rating: 4.8,
-    reviewCount: 180,
+    reviewCount: 180
   },
   {
     id: 'prod_509',
@@ -403,7 +403,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_488')],
     stock: 85,
     rating: 4.7,
-    reviewCount: 160,
+    reviewCount: 160
   },
   {
     id: 'prod_510',
@@ -416,7 +416,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_489')],
     stock: 55,
     rating: 4.8,
-    reviewCount: 210,
+    reviewCount: 210
   },
   {
     id: 'prod_511',
@@ -429,7 +429,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_490')],
     stock: 25,
     rating: 4.9,
-    reviewCount: 110,
+    reviewCount: 110
   },
   {
     id: 'prod_512',
@@ -442,7 +442,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_491')],
     stock: 18,
     rating: 4.9,
-    reviewCount: 130,
+    reviewCount: 130
   },
   {
     id: 'prod_513',
@@ -455,7 +455,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_492')],
     stock: 35,
     rating: 4.8,
-    reviewCount: 260,
+    reviewCount: 260
   },
   {
     id: 'prod_514',
@@ -468,7 +468,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_493')],
     stock: 45,
     rating: 4.6,
-    reviewCount: 85,
+    reviewCount: 85
   },
   {
     id: 'prod_515',
@@ -481,7 +481,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_494')],
     stock: 65,
     rating: 4.7,
-    reviewCount: 95,
+    reviewCount: 95
   },
   {
     id: 'prod_516',
@@ -494,7 +494,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_495')],
     stock: 110,
     rating: 4.5,
-    reviewCount: 130,
+    reviewCount: 130
   },
   {
     id: 'prod_517',
@@ -507,7 +507,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_496')],
     stock: 75,
     rating: 4.8,
-    reviewCount: 190,
+    reviewCount: 190
   },
   {
     id: 'prod_518',
@@ -520,7 +520,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_497')],
     stock: 90,
     rating: 4.7,
-    reviewCount: 170,
+    reviewCount: 170
   },
   {
     id: 'prod_519',
@@ -533,7 +533,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_498')],
     stock: 60,
     rating: 4.8,
-    reviewCount: 220,
+    reviewCount: 220
   },
   {
     id: 'prod_520',
@@ -546,7 +546,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_499')],
     stock: 28,
     rating: 4.9,
-    reviewCount: 115,
+    reviewCount: 115
   },
   {
     id: 'prod_521',
@@ -559,7 +559,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_500')],
     stock: 20,
     rating: 4.9,
-    reviewCount: 140,
+    reviewCount: 140
   },
   {
     id: 'prod_522',
@@ -572,7 +572,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_501')],
     stock: 38,
     rating: 4.8,
-    reviewCount: 270,
+    reviewCount: 270
   },
   {
     id: 'prod_523',
@@ -585,7 +585,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_502')],
     stock: 48,
     rating: 4.6,
-    reviewCount: 90,
+    reviewCount: 90
   },
   {
     id: 'prod_524',
@@ -598,7 +598,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_503')],
     stock: 68,
     rating: 4.7,
-    reviewCount: 100,
+    reviewCount: 100
   },
   {
     id: 'prod_525',
@@ -611,7 +611,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_504')],
     stock: 120,
     rating: 4.5,
-    reviewCount: 140,
+    reviewCount: 140
   },
   {
     id: 'prod_526',
@@ -624,7 +624,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_505')],
     stock: 80,
     rating: 4.8,
-    reviewCount: 200,
+    reviewCount: 200
   },
   {
     id: 'prod_527',
@@ -637,7 +637,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_506')],
     stock: 95,
     rating: 4.7,
-    reviewCount: 180,
+    reviewCount: 180
   },
   {
     id: 'prod_528',
@@ -650,7 +650,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_507')],
     stock: 65,
     rating: 4.8,
-    reviewCount: 230,
+    reviewCount: 230
   },
   {
     id: 'prod_529',
@@ -663,7 +663,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_508')],
     stock: 30,
     rating: 4.9,
-    reviewCount: 125,
+    reviewCount: 125
   },
   {
     id: 'prod_530',
@@ -676,7 +676,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_509')],
     stock: 22,
     rating: 4.9,
-    reviewCount: 150,
+    reviewCount: 150
   },
   {
     id: 'prod_531',
@@ -689,7 +689,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_510')],
     stock: 40,
     rating: 4.8,
-    reviewCount: 280,
+    reviewCount: 280
   },
   {
     id: 'prod_532',
@@ -702,7 +702,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_511')],
     stock: 50,
     rating: 4.6,
-    reviewCount: 95,
+    reviewCount: 95
   },
   {
     id: 'prod_533',
@@ -715,7 +715,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_512')],
     stock: 70,
     rating: 4.7,
-    reviewCount: 105,
+    reviewCount: 105
   },
   {
     id: 'prod_534',
@@ -728,7 +728,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_513')],
     stock: 130,
     rating: 4.5,
-    reviewCount: 150,
+    reviewCount: 150
   },
   {
     id: 'prod_535',
@@ -741,7 +741,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_514')],
     stock: 85,
     rating: 4.8,
-    reviewCount: 210,
+    reviewCount: 210
   },
   {
     id: 'prod_536',
@@ -754,7 +754,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_515')],
     stock: 100,
     rating: 4.7,
-    reviewCount: 190,
+    reviewCount: 190
   },
   {
     id: 'prod_537',
@@ -767,7 +767,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_516')],
     stock: 70,
     rating: 4.8,
-    reviewCount: 240,
+    reviewCount: 240
   },
   {
     id: 'prod_538',
@@ -780,7 +780,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_517')],
     stock: 78,
     rating: 4.7,
-    reviewCount: 198,
+    reviewCount: 198
   },
   {
     id: 'prod_539',
@@ -793,7 +793,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_518')],
     stock: 21,
     rating: 4.9,
-    reviewCount: 144,
+    reviewCount: 144
   },
   {
     id: 'prod_540',
@@ -806,7 +806,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_519')],
     stock: 43,
     rating: 4.8,
-    reviewCount: 167,
+    reviewCount: 167
   },
   {
     id: 'prod_541',
@@ -819,7 +819,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_520')],
     stock: 110,
     rating: 4.6,
-    reviewCount: 210,
+    reviewCount: 210
   },
   {
     id: 'prod_542',
@@ -832,7 +832,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_521')],
     stock: 60,
     rating: 4.7,
-    reviewCount: 135,
+    reviewCount: 135
   },
   {
     id: 'prod_543',
@@ -845,7 +845,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_522')],
     stock: 95,
     rating: 4.8,
-    reviewCount: 255,
+    reviewCount: 255
   },
   {
     id: 'prod_544',
@@ -858,7 +858,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_523')],
     stock: 32,
     rating: 4.9,
-    reviewCount: 290,
+    reviewCount: 290
   },
   {
     id: 'prod_545',
@@ -871,7 +871,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_524')],
     stock: 88,
     rating: 4.7,
-    reviewCount: 178,
+    reviewCount: 178
   },
   {
     id: 'prod_546',
@@ -884,7 +884,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_525')],
     stock: 55,
     rating: 4.8,
-    reviewCount: 220,
+    reviewCount: 220
   },
   {
     id: 'prod_547',
@@ -897,7 +897,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_526')],
     stock: 65,
     rating: 4.6,
-    reviewCount: 140,
+    reviewCount: 140
   },
   {
     id: 'prod_548',
@@ -910,7 +910,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_527')],
     stock: 19,
     rating: 4.9,
-    reviewCount: 160,
+    reviewCount: 160
   },
   {
     id: 'prod_549',
@@ -923,7 +923,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_528')],
     stock: 28,
     rating: 4.8,
-    reviewCount: 110,
+    reviewCount: 110
   },
   {
     id: 'prod_550',
@@ -936,7 +936,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_529')],
     stock: 130,
     rating: 4.5,
-    reviewCount: 190,
+    reviewCount: 190
   },
   {
     id: 'prod_551',
@@ -949,7 +949,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_530')],
     stock: 50,
     rating: 4.7,
-    reviewCount: 115,
+    reviewCount: 115
   },
   {
     id: 'prod_552',
@@ -962,7 +962,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_531')],
     stock: 80,
     rating: 4.8,
-    reviewCount: 280,
+    reviewCount: 280
   },
   {
     id: 'prod_553',
@@ -975,7 +975,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_532')],
     stock: 45,
     rating: 4.9,
-    reviewCount: 310,
+    reviewCount: 310
   },
   {
     id: 'prod_554',
@@ -988,7 +988,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_533')],
     stock: 70,
     rating: 4.7,
-    reviewCount: 200,
+    reviewCount: 200
   },
   {
     id: 'prod_555',
@@ -1001,7 +1001,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_534')],
     stock: 40,
     rating: 4.8,
-    reviewCount: 190,
+    reviewCount: 190
   },
   {
     id: 'prod_556',
@@ -1014,7 +1014,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_535')],
     stock: 60,
     rating: 4.6,
-    reviewCount: 120,
+    reviewCount: 120
   },
   {
     id: 'prod_557',
@@ -1027,7 +1027,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_536')],
     stock: 15,
     rating: 4.9,
-    reviewCount: 180,
+    reviewCount: 180
   },
   {
     id: 'prod_558',
@@ -1040,7 +1040,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_537')],
     stock: 35,
     rating: 4.8,
-    reviewCount: 140,
+    reviewCount: 140
   },
   {
     id: 'prod_559',
@@ -1053,7 +1053,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_538')],
     stock: 120,
     rating: 4.5,
-    reviewCount: 160,
+    reviewCount: 160
   },
   {
     id: 'prod_560',
@@ -1066,7 +1066,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_539')],
     stock: 58,
     rating: 4.7,
-    reviewCount: 125,
+    reviewCount: 125
   },
   {
     id: 'prod_561',
@@ -1079,7 +1079,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_540')],
     stock: 90,
     rating: 4.8,
-    reviewCount: 290,
+    reviewCount: 290
   },
   {
     id: 'prod_562',
@@ -1092,7 +1092,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_541')],
     stock: 25,
     rating: 4.9,
-    reviewCount: 320,
+    reviewCount: 320
   },
   {
     id: 'prod_563',
@@ -1105,7 +1105,7 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_542')],
     stock: 65,
     rating: 4.7,
-    reviewCount: 210,
+    reviewCount: 210
   },
   {
     id: 'prod_564',
@@ -1118,6 +1118,786 @@ export const newProducts: Product[] = [
     images: [findImage('prod_img_543')],
     stock: 50,
     rating: 4.8,
-    reviewCount: 230,
+    reviewCount: 230
+  },
+  {
+    id: 'prod_565',
+    slug: 'product-565',
+    name: 'Product 565',
+    description: 'A brand new exclusive item, Product 565, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Wigs',
+    price: 145,
+    brand: 'Zenco',
+    images: [findImage('prod_img_544')],
+    stock: 68,
+    rating: 4.7,
+    reviewCount: 158
+  },
+  {
+    id: 'prod_566',
+    slug: 'product-566',
+    name: 'Product 566',
+    description: 'A brand new exclusive item, Product 566, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Laptops',
+    price: 2150,
+    brand: 'iDino',
+    images: [findImage('prod_img_545')],
+    stock: 18,
+    rating: 4.9,
+    reviewCount: 170
+  },
+  {
+    id: 'prod_567',
+    slug: 'product-567',
+    name: 'Product 567',
+    description: 'A brand new exclusive item, Product 567, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Watches',
+    price: 1200,
+    brand: 'Denim Edge',
+    images: [findImage('prod_img_546')],
+    stock: 32,
+    rating: 4.8,
+    reviewCount: 130
+  },
+  {
+    id: 'prod_568',
+    slug: 'product-568',
+    name: 'Product 568',
+    description: 'A brand new exclusive item, Product 568, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Underwear',
+    price: 49,
+    brand: 'Alpine Ridge',
+    images: [findImage('prod_img_547')],
+    stock: 125,
+    rating: 4.5,
+    reviewCount: 180
+  },
+  {
+    id: 'prod_569',
+    slug: 'product-569',
+    name: 'Product 569',
+    description: 'A brand new exclusive item, Product 569, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Chains',
+    price: 400,
+    brand: 'Velocity',
+    images: [findImage('prod_img_548')],
+    stock: 52,
+    rating: 4.7,
+    reviewCount: 110
+  },
+  {
+    id: 'prod_570',
+    slug: 'product-570',
+    name: 'Product 570',
+    description: 'A brand new exclusive item, Product 570, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Beauty',
+    price: 110,
+    brand: 'Tempo',
+    images: [findImage('prod_img_549')],
+    stock: 78,
+    rating: 4.8,
+    reviewCount: 270
+  },
+  {
+    id: 'prod_571',
+    slug: 'product-571',
+    name: 'Product 571',
+    description: 'A brand new exclusive item, Product 571, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Phones',
+    price: 1050,
+    brand: 'Zenith',
+    images: [findImage('prod_img_550')],
+    stock: 38,
+    rating: 4.9,
+    reviewCount: 300
+  },
+  {
+    id: 'prod_572',
+    slug: 'product-572',
+    name: 'Product 572',
+    description: 'A brand new exclusive item, Product 572, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Clothes',
+    price: 190,
+    brand: 'SilkFlow',
+    images: [findImage('prod_img_551')],
+    stock: 68,
+    rating: 4.7,
+    reviewCount: 220
+  },
+  {
+    id: 'prod_573',
+    slug: 'product-573',
+    name: 'Product 573',
+    description: 'A brand new exclusive item, Product 573, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Shoes',
+    price: 300,
+    brand: 'Eon',
+    images: [findImage('prod_img_552')],
+    stock: 48,
+    rating: 4.8,
+    reviewCount: 200
+  },
+  {
+    id: 'prod_574',
+    slug: 'product-574',
+    name: 'Product 574',
+    description: 'A brand new exclusive item, Product 574, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Wigs',
+    price: 175,
+    brand: 'Nova',
+    images: [findImage('prod_img_553')],
+    stock: 58,
+    rating: 4.6,
+    reviewCount: 130
+  },
+  {
+    id: 'prod_575',
+    slug: 'product-575',
+    name: 'Product 575',
+    description: 'A brand new exclusive item, Product 575, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Laptops',
+    price: 2300,
+    brand: 'Crimson',
+    images: [findImage('prod_img_554')],
+    stock: 12,
+    rating: 4.9,
+    reviewCount: 190
+  },
+  {
+    id: 'prod_576',
+    slug: 'product-576',
+    name: 'Product 576',
+    description: 'A brand new exclusive item, Product 576, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Watches',
+    price: 1300,
+    brand: 'Eco',
+    images: [findImage('prod_img_555')],
+    stock: 30,
+    rating: 4.8,
+    reviewCount: 150
+  },
+  {
+    id: 'prod_577',
+    slug: 'product-577',
+    name: 'Product 577',
+    description: 'A brand new exclusive item, Product 577, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Underwear',
+    price: 54,
+    brand: 'Stride',
+    images: [findImage('prod_img_556')],
+    stock: 115,
+    rating: 4.5,
+    reviewCount: 170
+  },
+  {
+    id: 'prod_578',
+    slug: 'product-578',
+    name: 'Product 578',
+    description: 'A brand new exclusive item, Product 578, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Chains',
+    price: 420,
+    brand: 'Vivid',
+    images: [findImage('prod_img_557')],
+    stock: 54,
+    rating: 4.7,
+    reviewCount: 120
+  },
+  {
+    id: 'prod_579',
+    slug: 'product-579',
+    name: 'Product 579',
+    description: 'A brand new exclusive item, Product 579, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Beauty',
+    price: 105,
+    brand: 'Chrono',
+    images: [findImage('prod_img_558')],
+    stock: 82,
+    rating: 4.8,
+    reviewCount: 260
+  },
+  {
+    id: 'prod_580',
+    slug: 'product-580',
+    name: 'Product 580',
+    description: 'A brand new exclusive item, Product 580, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Phones',
+    price: 1150,
+    brand: 'Nexa',
+    images: [findImage('prod_img_559')],
+    stock: 42,
+    rating: 4.9,
+    reviewCount: 310
+  },
+  {
+    id: 'prod_581',
+    slug: 'product-581',
+    name: 'Product 581',
+    description: 'A brand new exclusive item, Product 581, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Clothes',
+    price: 210,
+    brand: 'Orion',
+    images: [findImage('prod_img_560')],
+    stock: 62,
+    rating: 4.7,
+    reviewCount: 230
+  },
+  {
+    id: 'prod_582',
+    slug: 'product-582',
+    name: 'Product 582',
+    description: 'A brand new exclusive item, Product 582, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Shoes',
+    price: 320,
+    brand: 'Stellar',
+    images: [findImage('prod_img_561')],
+    stock: 42,
+    rating: 4.8,
+    reviewCount: 210
+  },
+  {
+    id: 'prod_583',
+    slug: 'product-583',
+    name: 'Product 583',
+    description: 'A brand new exclusive item, Product 583, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Wigs',
+    price: 185,
+    brand: 'Helios',
+    images: [findImage('prod_img_562')],
+    stock: 52,
+    rating: 4.6,
+    reviewCount: 140
+  },
+  {
+    id: 'prod_584',
+    slug: 'product-584',
+    name: 'Product 584',
+    description: 'A brand new exclusive item, Product 584, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Laptops',
+    price: 2400,
+    brand: 'Aperture',
+    images: [findImage('prod_img_563')],
+    stock: 10,
+    rating: 4.9,
+    reviewCount: 200
+  },
+  {
+    id: 'prod_585',
+    slug: 'product-585',
+    name: 'Product 585',
+    description: 'A brand new exclusive item, Product 585, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Watches',
+    price: 1400,
+    brand: 'Zenco',
+    images: [findImage('prod_img_564')],
+    stock: 28,
+    rating: 4.8,
+    reviewCount: 160
+  },
+  {
+    id: 'prod_586',
+    slug: 'product-586',
+    name: 'Product 586',
+    description: 'A brand new exclusive item, Product 586, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Underwear',
+    price: 58,
+    brand: 'iDino',
+    images: [findImage('prod_img_565')],
+    stock: 110,
+    rating: 4.5,
+    reviewCount: 160
+  },
+  {
+    id: 'prod_587',
+    slug: 'product-587',
+    name: 'Product 587',
+    description: 'A brand new exclusive item, Product 587, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Chains',
+    price: 440,
+    brand: 'Denim Edge',
+    images: [findImage('prod_img_566')],
+    stock: 50,
+    rating: 4.7,
+    reviewCount: 130
+  },
+  {
+    id: 'prod_588',
+    slug: 'product-588',
+    name: 'Product 588',
+    description: 'A brand new exclusive item, Product 588, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Beauty',
+    price: 115,
+    brand: 'Alpine Ridge',
+    images: [findImage('prod_img_567')],
+    stock: 75,
+    rating: 4.8,
+    reviewCount: 280
+  },
+  {
+    id: 'prod_589',
+    slug: 'product-589',
+    name: 'Product 589',
+    description: 'A brand new exclusive item, Product 589, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Phones',
+    price: 1250,
+    brand: 'Velocity',
+    images: [findImage('prod_img_568')],
+    stock: 35,
+    rating: 4.9,
+    reviewCount: 320
+  },
+  {
+    id: 'prod_590',
+    slug: 'product-590',
+    name: 'Product 590',
+    description: 'A brand new exclusive item, Product 590, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Clothes',
+    price: 220,
+    brand: 'Tempo',
+    images: [findImage('prod_img_569')],
+    stock: 60,
+    rating: 4.7,
+    reviewCount: 240
+  },
+  {
+    id: 'prod_591',
+    slug: 'product-591',
+    name: 'Product 591',
+    description: 'A brand new exclusive item, Product 591, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Shoes',
+    price: 330,
+    brand: 'Zenith',
+    images: [findImage('prod_img_570')],
+    stock: 40,
+    rating: 4.8,
+    reviewCount: 220
+  },
+  {
+    id: 'prod_592',
+    slug: 'product-592',
+    name: 'Product 592',
+    description: 'A brand new exclusive item, Product 592, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Wigs',
+    price: 195,
+    brand: 'SilkFlow',
+    images: [findImage('prod_img_571')],
+    stock: 50,
+    rating: 4.6,
+    reviewCount: 150
+  },
+  {
+    id: 'prod_593',
+    slug: 'product-593',
+    name: 'Product 593',
+    description: 'A brand new exclusive item, Product 593, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Laptops',
+    price: 2500,
+    brand: 'Eon',
+    images: [findImage('prod_img_572')],
+    stock: 8,
+    rating: 4.9,
+    reviewCount: 210
+  },
+  {
+    id: 'prod_594',
+    slug: 'product-594',
+    name: 'Product 594',
+    description: 'A brand new exclusive item, Product 594, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Watches',
+    price: 1500,
+    brand: 'Nova',
+    images: [findImage('prod_img_573')],
+    stock: 25,
+    rating: 4.8,
+    reviewCount: 170
+  },
+  {
+    id: 'prod_595',
+    slug: 'product-595',
+    name: 'Product 595',
+    description: 'A brand new exclusive item, Product 595, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Underwear',
+    price: 62,
+    brand: 'Crimson',
+    images: [findImage('prod_img_574')],
+    stock: 100,
+    rating: 4.5,
+    reviewCount: 150
+  },
+  {
+    id: 'prod_596',
+    slug: 'product-596',
+    name: 'Product 596',
+    description: 'A brand new exclusive item, Product 596, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Chains',
+    price: 450,
+    brand: 'Eco',
+    images: [findImage('prod_img_575')],
+    stock: 48,
+    rating: 4.7,
+    reviewCount: 140
+  },
+  {
+    id: 'prod_597',
+    slug: 'product-597',
+    name: 'Product 597',
+    description: 'A brand new exclusive item, Product 597, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Beauty',
+    price: 120,
+    brand: 'Stride',
+    images: [findImage('prod_img_576')],
+    stock: 70,
+    rating: 4.8,
+    reviewCount: 290
+  },
+  {
+    id: 'prod_598',
+    slug: 'product-598',
+    name: 'Product 598',
+    description: 'A brand new exclusive item, Product 598, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Phones',
+    price: 1350,
+    brand: 'Vivid',
+    images: [findImage('prod_img_577')],
+    stock: 30,
+    rating: 4.9,
+    reviewCount: 330
+  },
+  {
+    id: 'prod_599',
+    slug: 'product-599',
+    name: 'Product 599',
+    description: 'A brand new exclusive item, Product 599, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Clothes',
+    price: 230,
+    brand: 'Chrono',
+    images: [findImage('prod_img_578')],
+    stock: 58,
+    rating: 4.7,
+    reviewCount: 250
+  },
+  {
+    id: 'prod_600',
+    slug: 'product-600',
+    name: 'Product 600',
+    description: 'A brand new exclusive item, Product 600, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Shoes',
+    price: 340,
+    brand: 'Nexa',
+    images: [findImage('prod_img_579')],
+    stock: 38,
+    rating: 4.8,
+    reviewCount: 230
+  },
+  {
+    id: 'prod_601',
+    slug: 'product-601',
+    name: 'Product 601',
+    description: 'A brand new exclusive item, Product 601, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Wigs',
+    price: 205,
+    brand: 'Orion',
+    images: [findImage('prod_img_580')],
+    stock: 48,
+    rating: 4.6,
+    reviewCount: 160
+  },
+  {
+    id: 'prod_602',
+    slug: 'product-602',
+    name: 'Product 602',
+    description: 'A brand new exclusive item, Product 602, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Laptops',
+    price: 2600,
+    brand: 'Stellar',
+    images: [findImage('prod_img_581')],
+    stock: 6,
+    rating: 4.9,
+    reviewCount: 220
+  },
+  {
+    id: 'prod_603',
+    slug: 'product-603',
+    name: 'Product 603',
+    description: 'A brand new exclusive item, Product 603, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Watches',
+    price: 1600,
+    brand: 'Helios',
+    images: [findImage('prod_img_582')],
+    stock: 22,
+    rating: 4.8,
+    reviewCount: 180
+  },
+  {
+    id: 'prod_604',
+    slug: 'product-604',
+    name: 'Product 604',
+    description: 'A brand new exclusive item, Product 604, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Underwear',
+    price: 65,
+    brand: 'Aperture',
+    images: [findImage('prod_img_583')],
+    stock: 95,
+    rating: 4.5,
+    reviewCount: 140
+  },
+  {
+    id: 'prod_605',
+    slug: 'product-605',
+    name: 'Product 605',
+    description: 'A brand new exclusive item, Product 605, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Chains',
+    price: 460,
+    brand: 'Zenco',
+    images: [findImage('prod_img_584')],
+    stock: 46,
+    rating: 4.7,
+    reviewCount: 150
+  },
+  {
+    id: 'prod_606',
+    slug: 'product-606',
+    name: 'Product 606',
+    description: 'A brand new exclusive item, Product 606, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Beauty',
+    price: 125,
+    brand: 'iDino',
+    images: [findImage('prod_img_585')],
+    stock: 68,
+    rating: 4.8,
+    reviewCount: 300
+  },
+  {
+    id: 'prod_607',
+    slug: 'product-607',
+    name: 'Product 607',
+    description: 'A brand new exclusive item, Product 607, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Phones',
+    price: 1450,
+    brand: 'Denim Edge',
+    images: [findImage('prod_img_586')],
+    stock: 28,
+    rating: 4.9,
+    reviewCount: 340
+  },
+  {
+    id: 'prod_608',
+    slug: 'product-608',
+    name: 'Product 608',
+    description: 'A brand new exclusive item, Product 608, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Clothes',
+    price: 240,
+    brand: 'Alpine Ridge',
+    images: [findImage('prod_img_587')],
+    stock: 55,
+    rating: 4.7,
+    reviewCount: 260
+  },
+  {
+    id: 'prod_609',
+    slug: 'product-609',
+    name: 'Product 609',
+    description: 'A brand new exclusive item, Product 609, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Shoes',
+    price: 350,
+    brand: 'Velocity',
+    images: [findImage('prod_img_588')],
+    stock: 35,
+    rating: 4.8,
+    reviewCount: 240
+  },
+  {
+    id: 'prod_610',
+    slug: 'product-610',
+    name: 'Product 610',
+    description: 'A brand new exclusive item, Product 610, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Wigs',
+    price: 215,
+    brand: 'Tempo',
+    images: [findImage('prod_img_589')],
+    stock: 45,
+    rating: 4.6,
+    reviewCount: 170
+  },
+  {
+    id: 'prod_611',
+    slug: 'product-611',
+    name: 'Product 611',
+    description: 'A brand new exclusive item, Product 611, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Laptops',
+    price: 2700,
+    brand: 'Zenith',
+    images: [findImage('prod_img_590')],
+    stock: 4,
+    rating: 4.9,
+    reviewCount: 230
+  },
+  {
+    id: 'prod_612',
+    slug: 'product-612',
+    name: 'Product 612',
+    description: 'A brand new exclusive item, Product 612, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Watches',
+    price: 1700,
+    brand: 'SilkFlow',
+    images: [findImage('prod_img_591')],
+    stock: 20,
+    rating: 4.8,
+    reviewCount: 190
+  },
+  {
+    id: 'prod_613',
+    slug: 'product-613',
+    name: 'Product 613',
+    description: 'A brand new exclusive item, Product 613, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Underwear',
+    price: 68,
+    brand: 'Eon',
+    images: [findImage('prod_img_592')],
+    stock: 90,
+    rating: 4.5,
+    reviewCount: 130
+  },
+  {
+    id: 'prod_614',
+    slug: 'product-614',
+    name: 'Product 614',
+    description: 'A brand new exclusive item, Product 614, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Chains',
+    price: 470,
+    brand: 'Nova',
+    images: [findImage('prod_img_593')],
+    stock: 44,
+    rating: 4.7,
+    reviewCount: 160
+  },
+  {
+    id: 'prod_615',
+    slug: 'product-615',
+    name: 'Product 615',
+    description: 'A brand new exclusive item, Product 615, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Beauty',
+    price: 130,
+    brand: 'Crimson',
+    images: [findImage('prod_img_594')],
+    stock: 65,
+    rating: 4.8,
+    reviewCount: 310
+  },
+  {
+    id: 'prod_616',
+    slug: 'product-616',
+    name: 'Product 616',
+    description: 'A brand new exclusive item, Product 616, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Phones',
+    price: 1550,
+    brand: 'Eco',
+    images: [findImage('prod_img_595')],
+    stock: 25,
+    rating: 4.9,
+    reviewCount: 350
+  },
+  {
+    id: 'prod_617',
+    slug: 'product-617',
+    name: 'Product 617',
+    description: 'A brand new exclusive item, Product 617, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Clothes',
+    price: 250,
+    brand: 'Stride',
+    images: [findImage('prod_img_596')],
+    stock: 52,
+    rating: 4.7,
+    reviewCount: 270
+  },
+  {
+    id: 'prod_618',
+    slug: 'product-618',
+    name: 'Product 618',
+    description: 'A brand new exclusive item, Product 618, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Shoes',
+    price: 360,
+    brand: 'Vivid',
+    images: [findImage('prod_img_597')],
+    stock: 32,
+    rating: 4.8,
+    reviewCount: 250
+  },
+  {
+    id: 'prod_619',
+    slug: 'product-619',
+    name: 'Product 619',
+    description: 'A brand new exclusive item, Product 619, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Wigs',
+    price: 225,
+    brand: 'Chrono',
+    images: [findImage('prod_img_598')],
+    stock: 42,
+    rating: 4.6,
+    reviewCount: 180
+  },
+  {
+    id: 'prod_620',
+    slug: 'product-620',
+    name: 'Product 620',
+    description: 'A brand new exclusive item, Product 620, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Laptops',
+    price: 2800,
+    brand: 'Nexa',
+    images: [findImage('prod_img_599')],
+    stock: 2,
+    rating: 4.9,
+    reviewCount: 240
+  },
+  {
+    id: 'prod_621',
+    slug: 'product-621',
+    name: 'Product 621',
+    description: 'A brand new exclusive item, Product 621, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Watches',
+    price: 1800,
+    brand: 'Orion',
+    images: [findImage('prod_img_600')],
+    stock: 18,
+    rating: 4.8,
+    reviewCount: 200
+  },
+  {
+    id: 'prod_622',
+    slug: 'product-622',
+    name: 'Product 622',
+    description: 'A brand new exclusive item, Product 622, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Underwear',
+    price: 70,
+    brand: 'Stellar',
+    images: [findImage('prod_img_601')],
+    stock: 88,
+    rating: 4.5,
+    reviewCount: 120
+  },
+  {
+    id: 'prod_623',
+    slug: 'product-623',
+    name: 'Product 623',
+    description: 'A brand new exclusive item, Product 623, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Chains',
+    price: 480,
+    brand: 'Helios',
+    images: [findImage('prod_img_602')],
+    stock: 42,
+    rating: 4.7,
+    reviewCount: 170
+  },
+  {
+    id: 'prod_624',
+    slug: 'product-624',
+    name: 'Product 624',
+    description: 'A brand new exclusive item, Product 624, offering superior quality and unmatched style. A perfect addition to your collection.',
+    category: 'Beauty',
+    price: 135,
+    brand: 'Aperture',
+    images: [findImage('prod_img_603')],
+    stock: 62,
+    rating: 4.8,
+    reviewCount: 320
   }
 ];
