@@ -27,7 +27,7 @@ export default function Home() {
                         <p className="mb-4 text-primary-foreground/80">Powerful laptops for work and play. Redeem yours today!</p>
                         <Button variant="secondary" asChild><Link href="#">Shop Laptops</Link></Button>
                     </div>
-                    <Image src="https://cdn.phototourl.com/uploads/2026-02-07-d223f37a-d7bf-4d3b-9782-154f265de79e.jpg" data-ai-hint="silver laptop" alt="Laptops" width={400} height={250} className="rounded-lg z-10" />
+                    <Image src="https://image2url.com/r2/default/images/1770837173662-e632ecef-d573-4659-951f-67795a96a4b4.jpg" data-ai-hint="laptop" alt="Laptops" width={400} height={250} className="rounded-lg z-10" />
                 </div>
               </Card>
             </CarouselItem>
