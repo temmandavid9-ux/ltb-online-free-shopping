@@ -1372,7 +1372,7 @@ export const beautyProducts: Product[] = [
     slug: 'product-106',
     name: 'Product 106',
     description: 'Nexa Soft-Kiss Lip Balm',
-    category: 'Beauty',
+    category: 'Wigs',
     price: 24,
     brand: 'Nexa',
     images: [findImage('prod_img_106')],
