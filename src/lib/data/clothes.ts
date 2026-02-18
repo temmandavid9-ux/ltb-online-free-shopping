@@ -992,5 +992,3 @@ export const clothesProducts: Product[] = [
     reviewCount: 140,
   },
 ];
-
-    
