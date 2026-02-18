@@ -11,8 +11,9 @@ type ProductGridProps = {
 };
 
 export default function ProductGrid({ products }: ProductGridProps) {
+  // Changed default category from 'Clothes' to 'All' to ensure all products are visible on load
   const [filters, setFilters] = useState({
-    category: 'Clothes',
+    category: 'All',
     search: '',
   });
 
@@ -41,7 +42,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
       <main>
         <div className="mb-6">
           <h2 className="text-2xl font-bold font-headline">
-            {filters.category} For You
+            {filters.category === 'All' ? 'All Products' : `${filters.category} For You`}
           </h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
