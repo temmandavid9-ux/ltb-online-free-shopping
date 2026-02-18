@@ -20,7 +20,7 @@ export const laptopProducts: Product[] = [
     slug: 'product-225',
     name: 'Product 225',
     description: 'Lead the charge. The Vanguard Pro-X is engineered with next-gen performance and a breathtaking 4K display, making it the ultimate machine for professionals who demand nothing but the best.',
-    category: 'Laptops',
+    category: 'Chains',
     price: 2499,
     brand: 'Nexa',
     images: [findImage('prod_img_225')],
