@@ -7,7 +7,7 @@ export const phoneProducts: Product[] = [
     slug: 'product-244',
     name: 'Product 244',
     description: 'Experience tomorrow, today. The Horizon X1 Pro puts the future in your palm with its revolutionary edge-to-edge display and a cinematic-grade camera that captures life in breathtaking detail.',
-    category: 'Phones',
+    category: 'Wigs',
     price: 1599,
     brand: 'Nexa',
     images: [findImage('prod_img_244')],
@@ -263,5 +263,3 @@ export const phoneProducts: Product[] = [
     reviewCount: 500,
   },
 ];
-
-    
