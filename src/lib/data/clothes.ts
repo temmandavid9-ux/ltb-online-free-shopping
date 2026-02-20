@@ -1,3 +1,4 @@
+
 import type { Product } from '../types';
 import { findImage } from './find-image';
 
@@ -163,7 +164,7 @@ export const clothesProducts: Product[] = [
     slug: 'product-160',
     name: 'Product 160',
     description: 'Aperture Polo Shirt',
-    category: 'Clothes',
+    category: 'Watches',
     price: 85,
     brand: 'Aperture',
     images: [findImage('prod_img_160')],
