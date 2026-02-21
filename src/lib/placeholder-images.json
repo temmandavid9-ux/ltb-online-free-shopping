@@ -1,70 +1,22 @@
 {
   "placeholderImages": [
     {
-      "id": "prod_img_1",
-      "description": "Nexa Radiant Foundation",
-      "imageUrl": "https://image2url.com/r2/default/images/1770824935867-ecb2d9d6-b71a-4b3a-bac0-59c2c2a40a7b.webp",
-      "imageHint": "foundation"
-    },
-    {
-      "id": "prod_img_2",
-      "description": "Stellar Glow Serum",
-      "imageUrl": "https://image2url.com/r2/default/images/1770825714885-f114eb41-34a4-4d23-9754-1ddd565083d1.webp",
-      "imageHint": "serum bottle"
-    },
-    {
-      "id": "prod_img_3",
-      "description": "Zenco Lip Lacquer Set",
-      "imageUrl": "https://image2url.com/r2/default/images/1770825913878-1b4b2e9e-e060-4d76-966d-1af1b047db81.webp",
-      "imageHint": "lip gloss"
-    },
-    {
-      "id": "prod_img_4",
-      "description": "Aperture Flawless Finish",
-      "imageUrl": "https://image2url.com/r2/default/images/1770826343096-71bf9c45-f573-4b8c-8e65-f795424b0fd6.avif",
-      "imageHint": "cosmetic foundation"
-    },
-    {
-      "id": "prod_img_5",
-      "description": "Helios Hydrating Mist",
-      "imageUrl": "https://image2url.com/r2/default/images/1770827222723-f1192fc1-222e-4db9-ba2a-f0b6aac20256.avif",
-      "imageHint": "skincare mist"
-    },
-    {
-      "id": "prod_img_6",
-      "description": "iDino Eye Cream",
-      "imageUrl": "https://image2url.com/r2/default/images/1770827308146-eb25b641-cfac-4e5a-a096-0993a3dbf0e3.avif",
-      "imageHint": "eye cream"
-    },
-    {
-      "id": "prod_img_7",
-      "description": "Stellar Perfume",
-      "imageUrl": "https://image2url.com/r2/default/images/1770827466145-60f95598-8b1f-4ecd-be85-8ae745150779.webp",
-      "imageHint": "perfume bottle"
-    },
-    {
-      "id": "prod_img_8",
-      "description": "Orion Eyeshadow",
-      "imageUrl": "https://image2url.com/r2/default/images/1770827655927-b964c635-f649-4912-93bf-69a5b9fec060.webp",
-      "imageHint": "eyeshadow palette"
-    },
-    {
       "id": "prod_img_160",
-      "description": "Watch Item Pro",
+      "description": "Executive Precision Watch",
       "imageUrl": "https://image2url.com/r2/default/images/1770830817088-14a00d33-82c4-4379-be33-5a563ac7612f.jpg",
       "imageHint": "luxury watch"
     },
     {
       "id": "prod_img_167",
-      "description": "Watch Item Deluxe",
+      "description": "Minimalist Black Watch",
       "imageUrl": "https://image2url.com/r2/default/images/1770906972800-8b3e5a62-6266-4f50-81c3-4cc7b6882e41.webp",
-      "imageHint": "watch item"
+      "imageHint": "black watch"
     },
     {
       "id": "prod_img_170",
-      "description": "Elite Watch S1",
+      "description": "Elite Business Watch",
       "imageUrl": "https://image2url.com/r2/default/images/1770908473052-7271e66e-c791-420e-9fb0-47ad9dbd3c8e.webp",
-      "imageHint": "trench coat style"
+      "imageHint": "executive watch"
     },
     {
       "id": "prod_img_332",

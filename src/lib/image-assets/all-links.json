@@ -1,0 +1,21 @@
+
+{
+  "catalogName": "Eden 0² Master Image Assets",
+  "folders": {
+    "Watches": [
+      "https://image2url.com/r2/default/images/1770830817088-14a00d33-82c4-4379-be33-5a563ac7612f.jpg",
+      "https://image2url.com/r2/default/images/1770906972800-8b3e5a62-6266-4f50-81c3-4cc7b6882e41.webp",
+      "https://image2url.com/r2/default/images/1770908473052-7271e66e-c791-420e-9fb0-47ad9dbd3c8e.webp"
+    ],
+    "Wigs": [
+      "https://image2url.com/r2/default/images/1770832314431-1cb02ddc-c6a2-4471-a72e-c7f48c0c1a55.webp",
+      "https://image2url.com/r2/default/images/1770832373361-097d6eac-53b5-45fd-a840-06b9d6f41cd0.jpg",
+      "https://image2url.com/r2/default/images/1770832460793-089fe66c-41d0-404d-bba5-92877ed468ac.webp"
+    ],
+    "General": [
+      "https://image2url.com/r2/default/images/1770829146130-288f820d-7418-461c-993e-0d47637d40c7.webp",
+      "https://image2url.com/r2/default/images/1770829175859-039e3dda-9845-4959-ae65-01c3305ae839.avif"
+    ]
+  },
+  "usageNotes": "All IDs in the product database now reference entries in placeholder-images.json which pulls from this list."
+}

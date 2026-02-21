@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -6,7 +7,7 @@ import type { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { useRedeem } from '@/context/CartContext';
 import { Star } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 type ProductCardProps = {
   product: Product;
@@ -39,6 +40,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [imgSrc, setImgSrc] = useState(product.images[0].url);
   const isBestSeller = product.reviewCount > 200;
 
+  // Sync state if product changes
+  useEffect(() => {
+    setImgSrc(product.images[0].url);
+  }, [product]);
+
   return (
     <div className="bg-card rounded-lg overflow-hidden group transition-all duration-300 hover:shadow-lg flex flex-col h-full border">
         <Link href={`/product/${product.slug}`} className="block overflow-hidden relative">
@@ -53,9 +59,11 @@ export default function ProductCard({ product }: ProductCardProps) {
             data-ai-hint={product.images[0].hint}
             width={600}
             height={600}
+            priority={product.id === 'prod_160'}
             onError={() => {
                 // If the primary image fails to load, use a guaranteed fallback based on product ID
-                setImgSrc(`https://picsum.photos/seed/${product.id}/600/600`);
+                const seed = product.id.replace(/\D/g, '') || '1';
+                setImgSrc(`https://picsum.photos/seed/${seed}/600/600`);
             }}
             className="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105"
             />
