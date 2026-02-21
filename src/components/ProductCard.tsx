@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image';
@@ -53,20 +52,21 @@ export default function ProductCard({ product }: ProductCardProps) {
                 Best Seller
                 </div>
             )}
-            <Image
-            src={imgSrc}
-            alt={product.name}
-            data-ai-hint={product.images[0].hint}
-            width={600}
-            height={600}
-            priority={product.id === 'prod_160'}
-            onError={() => {
-                // If the primary image fails to load, use a guaranteed fallback based on product ID
-                const seed = product.id.replace(/\D/g, '') || '1';
-                setImgSrc(`https://picsum.photos/seed/${seed}/600/600`);
-            }}
-            className="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105"
-            />
+            {imgSrc ? (
+              <Image
+                src={imgSrc}
+                alt={product.name}
+                data-ai-hint={product.images[0].hint}
+                width={600}
+                height={600}
+                priority={product.id === 'prod_160'}
+                className="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105"
+              />
+            ) : (
+              <div className="aspect-square bg-muted flex items-center justify-center text-muted-foreground text-xs">
+                No Image Available
+              </div>
+            )}
         </Link>
 
         <div className="p-3 flex flex-col flex-grow">

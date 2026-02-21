@@ -19,172 +19,58 @@
       "imageHint": "executive watch"
     },
     {
+      "id": "prod_img_148",
+      "description": "Clothes Item 1",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832047489-3d16ae18-d466-4ce2-8380-438ac0d816d7.webp",
+      "imageHint": "clothes"
+    },
+    {
+      "id": "prod_img_149",
+      "description": "Clothes Item 2",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832111646-a8e67b50-00a5-4e58-a09c-4969f127a0b0.jpg",
+      "imageHint": "clothes"
+    },
+    {
+      "id": "prod_img_150",
+      "description": "Clothes Item 3",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832187701-b7058605-3013-4a07-ba25-6f77bae450ed.jpg",
+      "imageHint": "clothes"
+    },
+    {
+      "id": "prod_img_151",
+      "description": "Clothes Item 4",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832232904-37746b10-6e53-4bf5-88a5-2f3eddaf3e44.webp",
+      "imageHint": "clothes"
+    },
+    {
       "id": "prod_img_332",
-      "description": "Sun-Kissed Wig",
+      "description": "Wig Item 1",
       "imageUrl": "https://image2url.com/r2/default/images/1770832314431-1cb02ddc-c6a2-4471-a72e-c7f48c0c1a55.webp",
       "imageHint": "wig"
     },
     {
       "id": "prod_img_333",
-      "description": "Natural Charisma Wig",
+      "description": "Wig Item 2",
       "imageUrl": "https://image2url.com/r2/default/images/1770832373361-097d6eac-53b5-45fd-a840-06b9d6f41cd0.jpg",
       "imageHint": "wig"
     },
     {
       "id": "prod_img_334",
-      "description": "Fire Opal Wig",
+      "description": "Wig Item 3",
       "imageUrl": "https://image2url.com/r2/default/images/1770832460793-089fe66c-41d0-404d-bba5-92877ed468ac.webp",
       "imageHint": "wig"
     },
     {
-      "id": "prod_img_500",
-      "description": "Premium Wig A1",
-      "imageUrl": "https://image2url.com/r2/default/images/1770886662785-b98769b0-0aaf-466b-a9f7-12ceedee1cde.webp",
-      "imageHint": "wig"
+      "id": "prod_img_127",
+      "description": "Chain Item 1",
+      "imageUrl": "https://image2url.com/r2/default/images/1770830586189-709f5b81-b421-496d-aca5-309c11d54af3.webp",
+      "imageHint": "chain"
     },
     {
-      "id": "prod_img_501",
-      "description": "Premium Wig A2",
-      "imageUrl": "https://image2url.com/r2/default/images/1770886701172-991ded76-5c70-48c9-adad-308d1da1c2fb.webp",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_502",
-      "description": "Premium Wig A3",
-      "imageUrl": "https://image2url.com/r2/default/images/1770886733927-24db41db-3731-4f34-a689-f3531141a58d.webp",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_503",
-      "description": "Premium Wig A4",
-      "imageUrl": "https://image2url.com/r2/default/images/1770886764441-e0c05a1a-7c32-4e69-a00e-56036f1705c8.webp",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_504",
-      "description": "Premium Wig A5",
-      "imageUrl": "https://image2url.com/r2/default/images/1770886794156-548d6da8-7a44-43f1-922d-4c60c2faa11f.webp",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_505",
-      "description": "Premium Wig A6",
-      "imageUrl": "https://image2url.com/r2/default/images/1770886852384-a7f9ea3a-634e-4b48-b38d-d79c10373bd3.webp",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_506",
-      "description": "Premium Wig A7",
-      "imageUrl": "https://image2url.com/r2/default/images/1770886884968-b0eca2e3-2b64-4ca6-9b45-2841a949c455.webp",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_507",
-      "description": "Premium Wig A8",
-      "imageUrl": "https://image2url.com/r2/default/images/1770886922602-d37ec739-60ac-4994-990d-3a15291f0e91.webp",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_508",
-      "description": "Premium Wig A9",
-      "imageUrl": "https://image2url.com/r2/default/images/1770886959304-668f6554-d4e3-49b3-bf15-c483341f58c0.webp",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_509",
-      "description": "Premium Wig A10",
-      "imageUrl": "https://image2url.com/r2/default/images/1770886994171-3e075815-0d99-4b67-80a2-b033328d780f.jpg",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_510",
-      "description": "Premium Wig A11",
-      "imageUrl": "https://image2url.com/r2/default/images/1770887044855-27530ac6-7292-4c2c-b6e7-643cef4fd6b9.jpg",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_511",
-      "description": "Premium Wig A12",
-      "imageUrl": "https://image2url.com/r2/default/images/1770887079770-926e6083-f823-439d-bab8-3433b2619098.jpg",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_512",
-      "description": "Premium Wig A13",
-      "imageUrl": "https://image2url.com/r2/default/images/1770887117872-33100a29-58a5-4807-9b08-bc6cf916f974.jpg",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_513",
-      "description": "Premium Wig A14",
-      "imageUrl": "https://image2url.com/r2/default/images/1770887151030-4947391a-2233-4eba-805c-a116593cc1d0.webp",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_514",
-      "description": "Premium Wig A15",
-      "imageUrl": "https://image2url.com/r2/default/images/1770887191724-3e511d07-5060-4701-a64a-2b66e09627c7.webp",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_515",
-      "description": "Premium Wig A16",
-      "imageUrl": "https://image2url.com/r2/default/images/1770887234375-f03e9cea-6a4d-4e05-94f9-5e2d87c00e90.jpg",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_516",
-      "description": "Premium Wig A17",
-      "imageUrl": "https://image2url.com/r2/default/images/1770887274962-4ed21c33-ba61-48b7-afe6-352af58ebc6a.jpg",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_517",
-      "description": "Premium Wig A18",
-      "imageUrl": "https://image2url.com/r2/default/images/1770887318748-28f339ea-aee7-4ccb-bfd5-611dda3f1a94.jpg",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_834",
-      "description": "Registry Link 834",
-      "imageUrl": "https://image2url.com/r2/default/images/1770889656450-d2c0d9ac-5ae4-4d06-a97e-eaa72d87be1a.webp",
-      "imageHint": "product"
-    },
-    {
-      "id": "prod_img_835",
-      "description": "Registry Link 835",
-      "imageUrl": "https://image2url.com/r2/default/images/1770889693394-6830f216-3ca7-4433-9135-d82ced376590.webp",
-      "imageHint": "product"
-    },
-    {
-      "id": "prod_img_836",
-      "description": "Registry Link 836",
-      "imageUrl": "https://image2url.com/r2/default/images/1770889736017-308892b4-5678-4540-821c-11e234502ff1.webp",
-      "imageHint": "product"
-    },
-    {
-      "id": "prod_img_837",
-      "description": "Registry Link 837",
-      "imageUrl": "https://image2url.com/r2/default/images/1770889771252-22056873-be5a-4dc6-a63e-fb3bc72f88a7.webp",
-      "imageHint": "product"
-    },
-    {
-      "id": "prod_img_838",
-      "description": "Registry Link 838",
-      "imageUrl": "https://image2url.com/r2/default/images/1770889807894-ec0f26ed-6a0d-406b-9e64-692ae18d4ddb.webp",
-      "imageHint": "product"
-    },
-    {
-      "id": "prod_img_839",
-      "description": "Registry Link 839",
-      "imageUrl": "https://image2url.com/r2/default/images/1770889875970-fb7f1262-a4bd-4054-a58a-74cc687fa9ce.webp",
-      "imageHint": "product"
-    },
-    {
-      "id": "prod_img_840",
-      "description": "Registry Link 840",
-      "imageUrl": "https://image2url.com/r2/default/images/1770889916629-68a652f6-0170-4b4e-bdad-1e6015041fb9.webp",
-      "imageHint": "product"
+      "id": "prod_img_128",
+      "description": "Chain Item 2",
+      "imageUrl": "https://image2url.com/r2/default/images/1770830619868-05641088-9849-48d2-92fd-28e9beadee2b.webp",
+      "imageHint": "chain"
     }
   ]
 }
