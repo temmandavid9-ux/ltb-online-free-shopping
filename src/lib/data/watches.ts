@@ -1,4 +1,3 @@
-
 import type { Product } from '../types';
 import { findImage } from './find-image';
 
@@ -50,7 +49,7 @@ export const watchProducts: Product[] = [
     category: 'Watches',
     price: 3199,
     brand: 'Stellar',
-    images: [findImage('prod_img_170')],
+    images: [findImage('prod_img_171')],
     stock: 10,
     rating: 4.9,
     reviewCount: 198,
@@ -63,7 +62,7 @@ export const watchProducts: Product[] = [
     category: 'Watches',
     price: 2250,
     brand: 'Helios',
-    images: [findImage('prod_img_167')],
+    images: [findImage('prod_img_173')],
     stock: 18,
     rating: 4.8,
     reviewCount: 154,
