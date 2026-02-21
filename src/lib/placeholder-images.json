@@ -167,48 +167,6 @@
       "description": "Product 167",
       "imageUrl": "https://image2url.com/r2/default/images/1770906972800-8b3e5a62-6266-4f50-81c3-4cc7b6882e41.webp",
       "imageHint": "watch item"
-    },
-    {
-      "id": "prod_img_168",
-      "description": "Product 168",
-      "imageUrl": "https://image2url.com/r2/default/images/1770907355413-fc39e3fa-9d5e-42e4-a7cd-ddaf2bbabae0.webp",
-      "imageHint": "watch item"
-    },
-    {
-      "id": "prod_img_169",
-      "description": "Product 169",
-      "imageUrl": "https://image2url.com/r2/default/images/1770907682258-a021cc87-9fc9-4316-bdff-dcb0012dc784.webp",
-      "imageHint": "watch item"
-    },
-    {
-      "id": "prod_img_170",
-      "description": "Product 170",
-      "imageUrl": "https://image2url.com/r2/default/images/1770908473052-7271e66e-c791-420e-9fb0-47ad9dbd3c8e.webp",
-      "imageHint": "watch item"
-    },
-    {
-      "id": "prod_img_171",
-      "description": "Product 171",
-      "imageUrl": "https://image2url.com/r2/default/images/1770908515130-e009dab8-71fa-4085-ae8d-5cb17a26ac87.webp",
-      "imageHint": "watch item"
-    },
-    {
-      "id": "prod_img_172",
-      "description": "Product 172",
-      "imageUrl": "https://image2url.com/r2/default/images/1770908822870-2156c825-2a07-4ebe-8539-8b6a9959ef1e.webp",
-      "imageHint": "watch item"
-    },
-    {
-      "id": "prod_img_173",
-      "description": "Product 173",
-      "imageUrl": "https://image2url.com/r2/default/images/1770909106707-11ef02ff-454b-4c0c-8429-aabae7a28590.webp",
-      "imageHint": "watch item"
-    },
-    {
-      "id": "prod_img_174",
-      "description": "Product 174",
-      "imageUrl": "https://image2url.com/r2/default/images/1770909392463-e6e77946-eb1e-4864-8cff-fdd77af34dbc.webp",
-      "imageHint": "watch item"
     }
   ]
 }
