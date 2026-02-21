@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -36,12 +37,12 @@ const StarRating = ({ rating, reviewCount }: { rating: number, reviewCount: numb
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { addToBasket } = useRedeem();
-  const [imgSrc, setImgSrc] = useState(product.images[0].url);
+  const [imgSrc, setImgSrc] = useState(product.images[0]?.url || '');
   const isBestSeller = product.reviewCount > 200;
 
   // Sync state if product changes
   useEffect(() => {
-    setImgSrc(product.images[0].url);
+    setImgSrc(product.images[0]?.url || '');
   }, [product]);
 
   return (
@@ -56,15 +57,15 @@ export default function ProductCard({ product }: ProductCardProps) {
               <Image
                 src={imgSrc}
                 alt={product.name}
-                data-ai-hint={product.images[0].hint}
+                data-ai-hint={product.images[0]?.hint || 'product'}
                 width={600}
                 height={600}
                 priority={product.id === 'prod_160'}
                 className="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105"
               />
             ) : (
-              <div className="aspect-square bg-muted flex items-center justify-center text-muted-foreground text-xs">
-                No Image Available
+              <div className="aspect-square bg-muted flex items-center justify-center text-muted-foreground text-xs text-center p-4">
+                No Image Provided for {product.name}
               </div>
             )}
         </Link>
