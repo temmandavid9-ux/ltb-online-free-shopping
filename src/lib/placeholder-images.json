@@ -19,60 +19,6 @@
       "imageHint": "executive watch"
     },
     {
-      "id": "prod_img_148",
-      "description": "Clothes Item 1",
-      "imageUrl": "https://image2url.com/r2/default/images/1770832047489-3d16ae18-d466-4ce2-8380-438ac0d816d7.webp",
-      "imageHint": "clothes"
-    },
-    {
-      "id": "prod_img_149",
-      "description": "Clothes Item 2",
-      "imageUrl": "https://image2url.com/r2/default/images/1770832111646-a8e67b50-00a5-4e58-a09c-4969f127a0b0.jpg",
-      "imageHint": "clothes"
-    },
-    {
-      "id": "prod_img_150",
-      "description": "Clothes Item 3",
-      "imageUrl": "https://image2url.com/r2/default/images/1770832187701-b7058605-3013-4a07-ba25-6f77bae450ed.jpg",
-      "imageHint": "clothes"
-    },
-    {
-      "id": "prod_img_151",
-      "description": "Clothes Item 4",
-      "imageUrl": "https://image2url.com/r2/default/images/1770832232904-37746b10-6e53-4bf5-88a5-2f3eddaf3e44.webp",
-      "imageHint": "clothes"
-    },
-    {
-      "id": "prod_img_332",
-      "description": "Wig Item 1",
-      "imageUrl": "https://image2url.com/r2/default/images/1770832314431-1cb02ddc-c6a2-4471-a72e-c7f48c0c1a55.webp",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_333",
-      "description": "Wig Item 2",
-      "imageUrl": "https://image2url.com/r2/default/images/1770832373361-097d6eac-53b5-45fd-a840-06b9d6f41cd0.jpg",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_334",
-      "description": "Wig Item 3",
-      "imageUrl": "https://image2url.com/r2/default/images/1770832460793-089fe66c-41d0-404d-bba5-92877ed468ac.webp",
-      "imageHint": "wig"
-    },
-    {
-      "id": "prod_img_127",
-      "description": "Chain Item 1",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830586189-709f5b81-b421-496d-aca5-309c11d54af3.webp",
-      "imageHint": "chain"
-    },
-    {
-      "id": "prod_img_128",
-      "description": "Chain Item 2",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830619868-05641088-9849-48d2-92fd-28e9beadee2b.webp",
-      "imageHint": "chain"
-    },
-    {
       "id": "prod_img_1",
       "imageUrl": "https://image2url.com/r2/default/images/1770829146130-288f820d-7418-461c-993e-0d47637d40c7.webp",
       "imageHint": "product"
@@ -93,89 +39,229 @@
       "imageHint": "product"
     },
     {
-      "id": "prod_img_5",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829251956-80b88e89-f2ee-4686-a432-733ad2ae7792.avif",
-      "imageHint": "product"
+      "id": "prod_img_127",
+      "imageUrl": "https://image2url.com/r2/default/images/1770830586189-709f5b81-b421-496d-aca5-309c11d54af3.webp",
+      "imageHint": "chain"
     },
     {
-      "id": "prod_img_6",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829309278-ef5b186a-e41e-4205-9ea2-284e579de7dd.webp",
-      "imageHint": "product"
+      "id": "prod_img_128",
+      "imageUrl": "https://image2url.com/r2/default/images/1770830619868-05641088-9849-48d2-92fd-28e9beadee2b.webp",
+      "imageHint": "chain"
     },
     {
-      "id": "prod_img_7",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829352155-6f0a3caf-c63f-4fd3-85c0-daf669487669.webp",
-      "imageHint": "product"
+      "id": "prod_img_148",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832047489-3d16ae18-d466-4ce2-8380-438ac0d816d7.webp",
+      "imageHint": "clothes"
     },
     {
-      "id": "prod_img_8",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829379744-b78ff303-5e7e-4b20-ad0b-999382f26b30.webp",
-      "imageHint": "product"
+      "id": "prod_img_149",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832111646-a8e67b50-00a5-4e58-a09c-4969f127a0b0.jpg",
+      "imageHint": "clothes"
     },
     {
-      "id": "prod_img_9",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829416683-909daa11-17c0-43ab-8186-1138bb720732.avif",
-      "imageHint": "product"
+      "id": "prod_img_332",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832314431-1cb02ddc-c6a2-4471-a72e-c7f48c0c1a55.webp",
+      "imageHint": "wig"
     },
     {
-      "id": "prod_img_10",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829444074-520e1bf1-ba8c-43d0-b0fc-c37482251972.avif",
-      "imageHint": "product"
+      "id": "prod_img_333",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832373361-097d6eac-53b5-45fd-a840-06b9d6f41cd0.jpg",
+      "imageHint": "wig"
     },
     {
-      "id": "prod_img_11",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829477406-65a0411a-0693-405c-8324-1029e37d77e6.avif",
-      "imageHint": "product"
+      "id": "prod_img_171",
+      "imageUrl": "https://image2url.com/r2/default/images/1770908515130-e009dab8-71fa-4085-ae8d-5cb17a26ac87.webp",
+      "imageHint": "summer dress"
     },
     {
-      "id": "prod_img_12",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829520670-e98b695e-0014-4817-83af-a7142aeb45ea.avif",
-      "imageHint": "product"
+      "id": "prod_img_172",
+      "imageUrl": "https://image2url.com/r2/default/images/1770908822870-2156c825-2a07-4ebe-8539-8b6a9959ef1e.webp",
+      "imageHint": "gray t-shirt"
     },
     {
-      "id": "prod_img_13",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829554689-9a839325-a4fa-41b8-b21d-f63697c6053a.avif",
-      "imageHint": "product"
+      "id": "prod_img_479",
+      "imageUrl": "https://image2url.com/r2/default/images/1770909704941-e0aed0e0-2299-4f12-b6b5-40222668c2cb.avif",
+      "imageHint": "new item"
     },
     {
-      "id": "prod_img_14",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829579591-525d4bbd-d496-4ce6-bc6b-de766b86f72b.webp",
-      "imageHint": "product"
+      "id": "prod_img_480",
+      "imageUrl": "https://image2url.com/r2/default/images/1770909749630-0cd6f50f-18bf-45c3-aa79-9fee030737cc.jpg",
+      "imageHint": "new item"
     },
     {
-      "id": "prod_img_15",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829614087-7f7331ba-5ecd-4f89-99a1-7242240791f1.webp",
-      "imageHint": "product"
+      "id": "prod_img_481",
+      "imageUrl": "https://image2url.com/r2/default/images/1770909788034-29b2ae7b-6f9c-4596-a537-74750cd8aa55.jpg",
+      "imageHint": "new item"
     },
     {
-      "id": "prod_img_16",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829672964-da5c2e84-0294-4ad0-9b78-3ae010b33823.jpg",
-      "imageHint": "product"
+      "id": "prod_img_482",
+      "imageUrl": "https://image2url.com/r2/default/images/1770909818184-4794627f-f61c-42e5-a261-944fffa199ba.jpg",
+      "imageHint": "new item"
     },
     {
-      "id": "prod_img_17",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829723366-1defddc8-e054-4baa-8a1c-d5d6602aa713.jpg",
-      "imageHint": "product"
+      "id": "prod_img_483",
+      "imageUrl": "https://image2url.com/r2/default/images/1770909850456-0ac80e93-7c61-40ed-9d15-616585695730.jpg",
+      "imageHint": "new item"
     },
     {
-      "id": "prod_img_18",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829748484-c894d846-9aac-4de7-ab7c-60bffa2e5360.webp",
-      "imageHint": "product"
+      "id": "prod_img_484",
+      "imageUrl": "https://image2url.com/r2/default/images/1770909882316-5e526cbd-f038-43d9-8fd0-afff5df61967.jpg",
+      "imageHint": "new item"
     },
     {
-      "id": "prod_img_19",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829776290-ed3fa1ba-ec9c-47d4-ae4e-e1c4a092015b.webp",
-      "imageHint": "product"
+      "id": "prod_img_485",
+      "imageUrl": "https://image2url.com/r2/default/images/1770909910905-a0240f58-cd78-4803-b862-e40c91a085ba.webp",
+      "imageHint": "new item"
     },
     {
-      "id": "prod_img_20",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829804383-4d4bc832-621b-4cd3-9f91-07f4d42c6e38.webp",
-      "imageHint": "product"
+      "id": "prod_img_486",
+      "imageUrl": "https://image2url.com/r2/default/images/1770909946549-fd7da2b3-14c5-4e2e-a1fa-35de7b19bd04.jpg",
+      "imageHint": "new item"
     },
     {
-      "id": "prod_img_21",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829833039-4bf5e908-e0e7-4e41-afc3-84f34e7e3011.webp",
-      "imageHint": "product"
+      "id": "prod_img_487",
+      "imageUrl": "https://image2url.com/r2/default/images/1770909973492-08d4b1ee-abb6-4012-a12d-3b988680715d.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_488",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910005462-c2579bcc-111e-4b87-a574-7049d26b5465.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_489",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910035477-81fe6d65-0ed5-47c7-a58f-e3c8f2256f33.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_490",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910078803-3aacc4f1-a40d-4beb-a62d-9fab2d4a3f71.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_491",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910115814-bef7a6af-94f3-48dd-b716-e80beb83ef4f.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_492",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910145975-c2cca806-c11b-4a1f-9d47-3d1b7e59c902.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_493",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910181208-98aca5f2-6566-4c77-bc72-83fbef16fe4d.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_494",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910213841-c189072e-e68d-47cd-98a1-4b8a8bfb66f4.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_495",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910248295-6d745c37-8b6d-4168-945d-c696d843f6ae.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_496",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910276110-b223fc81-1216-4a35-9c02-8edfd248e980.avif",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_497",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910318334-e13a4d00-dfea-4528-97c8-ad72055feff4.avif",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_498",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910355598-4c7b4f29-661c-4109-84ac-20cd50412ff4.webp",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_499",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910383935-386d5b4f-76b3-4e86-8e1a-300200d66afd.avif",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_500",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910420787-23d90976-41d6-45c8-9d1f-c9d478ed8d9e.webp",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_501",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910453166-4250c3eb-77c3-4996-9de8-1716b59a5db6.avif",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_502",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910515935-156eb020-9b23-4c89-8d7c-5132cfb89a7f.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_503",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910549070-f169e879-44cc-47f6-9ba7-7eea14062b43.webp",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_504",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910579296-7abe7900-8b36-45f9-ad65-e0c4033ee5e5.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_505",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910613075-5e88956c-f032-4994-9328-f67d00d89e22.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_506",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910645483-07304bcc-b3e6-4993-97e3-32faa001c4e1.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_507",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910689155-0e1ec59a-162e-4384-a537-571827153952.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_508",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910732145-a3afdfb7-621b-4eec-9204-8ada302127fc.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_509",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910767280-edf6cd85-fb64-4ba4-9cb1-720deb1bc861.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_510",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910818900-ebf2a31b-b7be-46ba-bffa-8d76a09c6904.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_511",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910848605-21ff5407-6193-4029-8438-24f5978f2017.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_512",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910876124-947b6ac2-2cf0-4c93-95d6-01483312a125.jpg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_513",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910911640-49dc708a-a105-4d86-9d2f-92e05fcfe23c.jpeg",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_514",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910954793-13af5461-a206-4d3b-b573-4e38c175b661.webp",
+      "imageHint": "new item"
+    },
+    {
+      "id": "prod_img_515",
+      "imageUrl": "https://image2url.com/r2/default/images/1770910996238-23c729ce-9d26-48f9-bb77-d02e9a1385e1.webp",
+      "imageHint": "new item"
     }
   ]
 }
