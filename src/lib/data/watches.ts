@@ -6,7 +6,7 @@ export const watchProducts: Product[] = [
   {
     id: 'prod_160',
     slug: 'product-160',
-    name: 'Product 160',
+    name: 'Executive Precision Watch',
     description: 'A masterpiece of precision horology and refined aesthetics. Designed for the executive who values both time and timeless style.',
     category: 'Watches',
     price: 85,
@@ -19,7 +19,7 @@ export const watchProducts: Product[] = [
   {
     id: 'prod_167',
     slug: 'product-167',
-    name: 'Product 167',
+    name: 'Minimalist Black Horizon',
     description: 'Sleek black finish with minimalist details. This watch represents the pinnacle of modern luxury and reliable functionality.',
     category: 'Watches',
     price: 150,
@@ -32,7 +32,7 @@ export const watchProducts: Product[] = [
   {
     id: 'prod_170',
     slug: 'product-170',
-    name: 'Product 170',
+    name: 'Elite Business Master',
     description: 'The ultimate business accessory. Hand-assembled with premium components for a life of success and precision.',
     category: 'Watches',
     price: 800,
@@ -45,7 +45,7 @@ export const watchProducts: Product[] = [
   {
     id: 'prod_311',
     slug: 'product-311',
-    name: 'Product 311',
+    name: 'The Sovereign Gold',
     description: 'Command the moment. The Sovereign is a masterpiece of 18k gold and precision engineering, built for those who lead. A statement of pure, undiluted power.',
     category: 'Watches',
     price: 3199,
@@ -58,7 +58,7 @@ export const watchProducts: Product[] = [
   {
     id: 'prod_312',
     slug: 'product-312',
-    name: 'Product 312',
+    name: 'Apex Titanium Pioneer',
     description: 'Master time itself. Fusing aerospace-grade titanium with classic functionality, the Apex is the essential tool for the modern pioneer who values both style and substance.',
     category: 'Watches',
     price: 2250,
