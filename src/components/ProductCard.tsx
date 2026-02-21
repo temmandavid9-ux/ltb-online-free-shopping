@@ -6,6 +6,7 @@ import type { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { useRedeem } from '@/context/CartContext';
 import { Star } from 'lucide-react';
+import { useState } from 'react';
 
 type ProductCardProps = {
   product: Product;
@@ -35,6 +36,7 @@ const StarRating = ({ rating, reviewCount }: { rating: number, reviewCount: numb
 
 export default function ProductCard({ product }: ProductCardProps) {
   const { addToBasket } = useRedeem();
+  const [imgSrc, setImgSrc] = useState(product.images[0].url);
   const isBestSeller = product.reviewCount > 200;
 
   return (
@@ -46,11 +48,15 @@ export default function ProductCard({ product }: ProductCardProps) {
                 </div>
             )}
             <Image
-            src={product.images[0].url}
+            src={imgSrc}
             alt={product.name}
             data-ai-hint={product.images[0].hint}
             width={600}
             height={600}
+            onError={() => {
+                // If the primary image fails to load, use a guaranteed fallback based on product ID
+                setImgSrc(`https://picsum.photos/seed/${product.id}/600/600`);
+            }}
             className="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105"
             />
         </Link>
