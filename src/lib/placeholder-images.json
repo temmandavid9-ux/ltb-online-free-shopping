@@ -37,19 +37,19 @@
       "imageHint": "titanium watch"
     },
     {
-      "id": "prod_img_1",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829146130-288f820d-7418-461c-993e-0d47637d40c7.webp",
-      "imageHint": "beauty product"
+      "id": "prod_img_332",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832314431-1cb02ddc-c6a2-4471-a72e-c7f48c0c1a55.webp",
+      "imageHint": "wig style A"
     },
     {
-      "id": "prod_img_2",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829175859-039e3dda-9845-4959-ae65-01c3305ae839.avif",
-      "imageHint": "serum"
+      "id": "prod_img_333",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832373361-097d6eac-53b5-45fd-a840-06b9d6f41cd0.jpg",
+      "imageHint": "wig style B"
     },
     {
-      "id": "prod_img_3",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829197925-9056cbca-a8f8-4164-859e-50d78cd43f33.avif",
-      "imageHint": "lipstick"
+      "id": "prod_img_334",
+      "imageUrl": "https://image2url.com/r2/default/images/1770832460793-089fe66c-41d0-404d-bba5-92877ed468ac.webp",
+      "imageHint": "wig style C"
     },
     {
       "id": "prod_img_127",
@@ -64,42 +64,37 @@
     {
       "id": "prod_img_148",
       "imageUrl": "https://image2url.com/r2/default/images/1770832047489-3d16ae18-d466-4ce2-8380-438ac0d816d7.webp",
-      "imageHint": "clothes"
+      "imageHint": "designer clothes"
     },
     {
       "id": "prod_img_149",
       "imageUrl": "https://image2url.com/r2/default/images/1770832111646-a8e67b50-00a5-4e58-a09c-4969f127a0b0.jpg",
-      "imageHint": "clothes"
-    },
-    {
-      "id": "prod_img_332",
-      "imageUrl": "https://image2url.com/r2/default/images/1770832314431-1cb02ddc-c6a2-4471-a72e-c7f48c0c1a55.webp",
-      "imageHint": "wig style 1"
-    },
-    {
-      "id": "prod_img_333",
-      "imageUrl": "https://image2url.com/r2/default/images/1770832373361-097d6eac-53b5-45fd-a840-06b9d6f41cd0.jpg",
-      "imageHint": "wig style 2"
-    },
-    {
-      "id": "prod_img_334",
-      "imageUrl": "https://image2url.com/r2/default/images/1770832460793-089fe66c-41d0-404d-bba5-92877ed468ac.webp",
-      "imageHint": "wig style 3"
+      "imageHint": "lifestyle apparel"
     },
     {
       "id": "prod_img_400",
       "imageUrl": "https://image2url.com/r2/default/images/1770886662785-b98769b0-0aaf-466b-a9f7-12ceedee1cde.webp",
-      "imageHint": "wig long"
+      "imageHint": "long wig"
     },
     {
       "id": "prod_img_401",
       "imageUrl": "https://image2url.com/r2/default/images/1770886701172-991ded76-5c70-48c9-adad-308d1da1c2fb.webp",
-      "imageHint": "wig curly"
+      "imageHint": "curly wig"
     },
     {
       "id": "prod_img_402",
       "imageUrl": "https://image2url.com/r2/default/images/1770886733927-24db41db-3731-4f34-a689-f3531141a58d.webp",
-      "imageHint": "wig blonde"
+      "imageHint": "straight wig"
+    },
+    {
+      "id": "prod_img_1",
+      "imageUrl": "https://image2url.com/r2/default/images/1770829146130-288f820d-7418-461c-993e-0d47637d40c7.webp",
+      "imageHint": "beauty asset 1"
+    },
+    {
+      "id": "prod_img_2",
+      "imageUrl": "https://image2url.com/r2/default/images/1770829175859-039e3dda-9845-4959-ae65-01c3305ae839.avif",
+      "imageHint": "beauty asset 2"
     }
   ]
 }

@@ -1,3 +1,4 @@
+
 import type { Product } from '../types';
 import { findImage } from './find-image';
 
@@ -45,7 +46,7 @@ export const watchProducts: Product[] = [
     id: 'prod_311',
     slug: 'product-311',
     name: 'The Sovereign Gold',
-    description: 'Command the moment. The Sovereign is a masterpiece of 18k gold and precision engineering, built for those who lead. A statement of pure, undiluted power.',
+    description: 'Command the moment. The Sovereign is a masterpiece of 18k gold and precision engineering, built for those who lead.',
     category: 'Watches',
     price: 3199,
     brand: 'Stellar',
@@ -58,7 +59,7 @@ export const watchProducts: Product[] = [
     id: 'prod_312',
     slug: 'product-312',
     name: 'Apex Titanium Pioneer',
-    description: 'Master time itself. Fusing aerospace-grade titanium with classic functionality, the Apex is the essential tool for the modern pioneer who values both style and substance.',
+    description: 'Master time itself. Fusing aerospace-grade titanium with classic functionality, the Apex is the essential tool for the modern pioneer.',
     category: 'Watches',
     price: 2250,
     brand: 'Helios',
