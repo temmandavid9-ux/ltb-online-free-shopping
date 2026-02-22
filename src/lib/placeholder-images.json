@@ -93,7 +93,8 @@
     },
     {
       "id": "prod_img_2",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829175859-039e3dda-9845-4959-ae65-01c3305ae839.avif"
+      "imageUrl": "https://image2url.com/r2/default/images/1770829175859-039e3dda-9845-4959-ae65-01c3305ae839.avif",
+      "imageHint": "beauty asset 2"
     }
   ]
 }
