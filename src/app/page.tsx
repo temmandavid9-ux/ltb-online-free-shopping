@@ -1,3 +1,4 @@
+
 import { products } from '@/lib/data';
 import {
   Carousel,
@@ -23,11 +24,19 @@ export default function Home() {
               <Card className="bg-primary text-primary-foreground overflow-hidden">
                 <div className="flex items-center justify-between p-8">
                     <div className="z-10 max-w-md">
-                        <h2 className="text-3xl font-bold mb-2">High-Tech Laptops</h2>
-                        <p className="mb-4 text-primary-foreground/80">Powerful laptops for work and play. Redeem yours today!</p>
-                        <Button variant="secondary" asChild><Link href="#">Shop Laptops</Link></Button>
+                        <h2 className="text-3xl font-bold mb-2">Exclusive New Arrival</h2>
+                        <p className="mb-4 text-primary-foreground/80">Experience the latest in premium design. Available now for redemption.</p>
+                        <Button variant="secondary" asChild><Link href="/redeem">Redeem Now</Link></Button>
                     </div>
-                    <Image src="https://image2url.com/r2/default/images/1770837173662-e632ecef-d573-4659-951f-67795a96a4b4.jpg" data-ai-hint="laptop" alt="Laptops" width={400} height={250} className="rounded-lg z-10" />
+                    <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-white/20">
+                      <Image 
+                        src="https://image2url.com/r2/default/files/1771780145929-e1e471cf-e471-40fb-b086-8a32e8c3819a.file3" 
+                        alt="Featured Master Asset" 
+                        fill
+                        className="object-cover"
+                        data-ai-hint="master asset"
+                      />
+                    </div>
                 </div>
               </Card>
             </CarouselItem>

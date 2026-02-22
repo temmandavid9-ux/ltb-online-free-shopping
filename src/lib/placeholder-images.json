@@ -1,6 +1,12 @@
 {
   "placeholderImages": [
     {
+      "id": "prod_img_master_asset_3",
+      "description": "CEO Verified New Asset",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780145929-e1e471cf-e471-40fb-b086-8a32e8c3819a.file3",
+      "imageHint": "master asset"
+    },
+    {
       "id": "prod_img_test_verified",
       "description": "CEO Verified Master Key Link",
       "imageUrl": "https://image2url.com/r2/default/files/1771780166049-41b3600f-b3f2-4dc0-b480-ad2ed8ea0b5b.file2",
