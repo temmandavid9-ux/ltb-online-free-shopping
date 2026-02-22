@@ -52,6 +52,21 @@
       "imageHint": "wig style C"
     },
     {
+      "id": "prod_img_400",
+      "imageUrl": "https://image2url.com/r2/default/images/1770886662785-b98769b0-0aaf-466b-a9f7-12ceedee1cde.webp",
+      "imageHint": "long wig"
+    },
+    {
+      "id": "prod_img_401",
+      "imageUrl": "https://image2url.com/r2/default/images/1770886701172-991ded76-5c70-48c9-adad-308d1da1c2fb.webp",
+      "imageHint": "curly wig"
+    },
+    {
+      "id": "prod_img_402",
+      "imageUrl": "https://image2url.com/r2/default/images/1770886733927-24db41db-3731-4f34-a689-f3531141a58d.webp",
+      "imageHint": "straight wig"
+    },
+    {
       "id": "prod_img_127",
       "imageUrl": "https://image2url.com/r2/default/images/1770830586189-709f5b81-b421-496d-aca5-309c11d54af3.webp",
       "imageHint": "silver chain"
@@ -72,29 +87,13 @@
       "imageHint": "lifestyle apparel"
     },
     {
-      "id": "prod_img_400",
-      "imageUrl": "https://image2url.com/r2/default/images/1770886662785-b98769b0-0aaf-466b-a9f7-12ceedee1cde.webp",
-      "imageHint": "long wig"
-    },
-    {
-      "id": "prod_img_401",
-      "imageUrl": "https://image2url.com/r2/default/images/1770886701172-991ded76-5c70-48c9-adad-308d1da1c2fb.webp",
-      "imageHint": "curly wig"
-    },
-    {
-      "id": "prod_img_402",
-      "imageUrl": "https://image2url.com/r2/default/images/1770886733927-24db41db-3731-4f34-a689-f3531141a58d.webp",
-      "imageHint": "straight wig"
-    },
-    {
       "id": "prod_img_1",
       "imageUrl": "https://image2url.com/r2/default/images/1770829146130-288f820d-7418-461c-993e-0d47637d40c7.webp",
       "imageHint": "beauty asset 1"
     },
     {
       "id": "prod_img_2",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829175859-039e3dda-9845-4959-ae65-01c3305ae839.avif",
-      "imageHint": "beauty asset 2"
+      "imageUrl": "https://image2url.com/r2/default/images/1770829175859-039e3dda-9845-4959-ae65-01c3305ae839.avif"
     }
   ]
 }
