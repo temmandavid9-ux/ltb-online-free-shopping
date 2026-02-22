@@ -33,6 +33,7 @@ export default function Home() {
                         src="https://image2url.com/r2/default/files/1771780145929-e1e471cf-e471-40fb-b086-8a32e8c3819a.file3" 
                         alt="Featured Master Asset" 
                         fill
+                        priority
                         className="object-cover"
                         data-ai-hint="master asset"
                       />
@@ -44,11 +45,19 @@ export default function Home() {
               <Card className="bg-accent text-accent-foreground overflow-hidden">
                 <div className="flex items-center justify-between p-8">
                     <div className="z-10 max-w-md">
-                        <h2 className="text-3xl font-bold mb-2">Luxury Watches</h2>
-                        <p className="mb-4 text-accent-foreground/80">Discover our collection of stylish and elegant watches.</p>
-                        <Button variant="secondary" asChild><Link href="#">Shop Watches</Link></Button>
+                        <h2 className="text-3xl font-bold mb-2">Verified Master Collection</h2>
+                        <p className="mb-4 text-accent-foreground/80">Explore our CEO-verified catalog of luxury items and premium accessories.</p>
+                        <Button variant="secondary" asChild><Link href="/tasks">Earn Rewards</Link></Button>
                     </div>
-                    <Image src="https://image2url.com/r2/default/files/1770462568985-dc2a3b81-4ca1-4b45-b94d-901d677f1aae.avif" data-ai-hint="gold watch" alt="Watches" width={400} height={250} className="rounded-lg z-10" />
+                    <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden">
+                      <Image 
+                        src="https://image2url.com/r2/default/files/1771780166049-41b3600f-b3f2-4dc0-b480-ad2ed8ea0b5b.file2" 
+                        alt="CEO Verified Asset" 
+                        fill
+                        className="object-cover" 
+                        data-ai-hint="verified master" 
+                      />
+                    </div>
                 </div>
               </Card>
             </CarouselItem>
