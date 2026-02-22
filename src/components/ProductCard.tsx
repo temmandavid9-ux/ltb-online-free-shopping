@@ -6,7 +6,7 @@ import Link from 'next/link';
 import type { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { useRedeem } from '@/context/CartContext';
-import { Star } from 'lucide-react';
+import { Star, ImageOff } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 type ProductCardProps = {
@@ -38,11 +38,12 @@ const StarRating = ({ rating, reviewCount }: { rating: number, reviewCount: numb
 export default function ProductCard({ product }: ProductCardProps) {
   const { addToBasket } = useRedeem();
   const [imgSrc, setImgSrc] = useState(product.images[0]?.url || '');
+  const [imgError, setImgError] = useState(false);
   const isBestSeller = product.reviewCount > 200;
 
-  // Sync state if product changes
   useEffect(() => {
     setImgSrc(product.images[0]?.url || '');
+    setImgError(!product.images[0]?.url);
   }, [product]);
 
   return (
@@ -53,7 +54,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 Best Seller
                 </div>
             )}
-            {imgSrc ? (
+            {!imgError && imgSrc ? (
               <Image
                 src={imgSrc}
                 alt={product.name}
@@ -61,11 +62,14 @@ export default function ProductCard({ product }: ProductCardProps) {
                 width={600}
                 height={600}
                 priority={product.id === 'prod_160'}
+                onError={() => setImgError(true)}
                 className="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105"
               />
             ) : (
-              <div className="aspect-square bg-muted flex items-center justify-center text-muted-foreground text-xs text-center p-4">
-                No Image Provided for {product.name}
+              <div className="aspect-square bg-muted flex flex-col items-center justify-center text-muted-foreground text-xs text-center p-4">
+                <ImageOff className="w-8 h-8 mb-2 opacity-20" />
+                <span className="font-medium opacity-50">Eden 0² Asset Pending</span>
+                <span className="text-[10px] mt-1 opacity-30">{product.id}</span>
               </div>
             )}
         </Link>
