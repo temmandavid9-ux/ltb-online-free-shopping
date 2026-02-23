@@ -1,6 +1,12 @@
 {
   "placeholderImages": [
     {
+      "id": "prod_img_master_12",
+      "description": "Latest Master Asset - File 12",
+      "imageUrl": "https://image2url.com/r2/default/files/1771779949744-50aae246-9ea2-4065-a378-a3c2abdd2e78.file12",
+      "imageHint": "master asset"
+    },
+    {
       "id": "prod_img_master_11",
       "description": "Latest Master Asset - File 11",
       "imageUrl": "https://image2url.com/r2/default/files/1771779970633-ef7c63c8-8f00-49f8-8e55-4fa33f91ca5b.file11",
@@ -28,12 +34,6 @@
       "id": "prod_img_master_7",
       "description": "Latest Master Asset - File 7",
       "imageUrl": "https://image2url.com/r2/default/files/1771780057671-9c884ea6-1428-4a19-8121-f52abbfae0de.file7",
-      "imageHint": "master asset"
-    },
-    {
-      "id": "prod_img_master_6",
-      "description": "Latest Master Asset - File 6",
-      "imageUrl": "https://image2url.com/r2/default/files/1771780086899-dd21c8bd-c2dc-4b9d-a3de-997f8f64de73.file6",
       "imageHint": "master asset"
     },
     {
@@ -65,114 +65,6 @@
       "description": "CEO Master Asset - Featured Watch",
       "imageUrl": "https://image2url.com/r2/default/files/1771779993129-edea962d-f137-45fa-81b4-02ea6440f590.file10",
       "imageHint": "master watch"
-    },
-    {
-      "id": "prod_img_56",
-      "description": "New Link 30",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829928744-2f938888-68db-4e33-981f-e2a8c1ec44b6.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_57",
-      "description": "New Link 31",
-      "imageUrl": "https://image2url.com/r2/default/images/1770829953930-80854f05-d6cf-418a-b912-48818e684aba.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_58",
-      "description": "New Link 32",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830007219-24720834-6ebc-4a75-99a1-f2558f6259b4.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_59",
-      "description": "New Link 33",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830031747-072335f9-9ca5-4dcc-a82b-e6406181891a.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_60",
-      "description": "New Link 34",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830058838-fff4cecc-98b2-4aa4-9577-c8c20f2c7e5f.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_61",
-      "description": "New Link 35",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830082238-982ff5ce-08f6-4ee9-a1a9-5752b661522b.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_62",
-      "description": "New Link 36",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830108694-1db433f0-b7dc-4782-a3cd-1ba8d66e77af.jpg",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_63",
-      "description": "New Link 37",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830134843-cc460b9c-5499-40ab-ac1f-9989cc804d90.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_64",
-      "description": "New Link 38",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830166865-9b7f6aef-05cc-4142-adfe-798f0bc34b78.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_65",
-      "description": "New Link 39",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830206513-e80d30a5-1be7-49b6-b0d9-69e3176e3eed.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_66",
-      "description": "New Link 40",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830243267-0ac5b9fd-3a33-423b-904e-0f5344f14450.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_67",
-      "description": "New Link 41",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830273155-4bcc7327-55c7-47cb-8bfe-d65e905025b9.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_68",
-      "description": "New Link 42",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830298689-9b55f9a8-958b-4739-b02e-4e3fcf90963b.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_69",
-      "description": "New Link 43",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830324934-19fc4243-6627-48ae-b6db-7ad0b4bbe2df.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_70",
-      "description": "New Link 44",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830358284-63d4c227-4539-4e75-8b6e-47459d01d160.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_71",
-      "description": "New Link 45",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830385112-3431f4a9-6af2-4744-afeb-bb4dc51dff1a.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_72",
-      "description": "New Link 46",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830412724-deee32dc-6cd9-4985-a276-8aa74640dc5b.webp",
-      "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_73",
-      "description": "New Link 47",
-      "imageUrl": "https://image2url.com/r2/default/images/1770830444280-b3f069ff-095e-4957-a0c0-d23949b97b5e.webp",
-      "imageHint": "new item"
     }
   ]
 }
