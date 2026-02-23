@@ -1,17 +1,17 @@
 
 {
   "catalogName": "Eden 0² Master Image Assets",
-  "totalLinks": 1,
+  "totalLinks": 150,
   "description": "Consolidated image storage for Eden 0² platform. This file acts as the master reference for all product photos provided by the CEO.",
   "folders": {
     "Latest Upload": [
       "https://image2url.com/r2/default/files/1771780166049-41b3600f-b3f2-4dc0-b480-ad2ed8ea0b5b.file2"
     ],
     "CEO Verified": [
-      "https://image2url.com/r2/default/files/1771780166049-41b3600f-b3f2-4dc0-b480-ad2ed8ea0b5b.file2"
-    ],
-    "Watches": [
-      "https://image2url.com/r2/default/files/1771780166049-41b3600f-b3f2-4dc0-b480-ad2ed8ea0b5b.file2"
+      "https://image2url.com/r2/default/files/1771780166049-41b3600f-b3f2-4dc0-b480-ad2ed8ea0b5b.file2",
+      "https://image2url.com/r2/default/images/1770829928744-2f938888-68db-4e33-981f-e2a8c1ec44b6.webp",
+      "https://image2url.com/r2/default/images/1770829953930-80854f05-d6cf-418a-b912-48818e684aba.webp",
+      "https://image2url.com/r2/default/images/1770830007219-24720834-6ebc-4a75-99a1-f2558f6259b4.webp"
     ]
   }
 }
