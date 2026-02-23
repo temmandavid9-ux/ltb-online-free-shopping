@@ -1,3 +1,4 @@
+
 import { products } from '@/lib/data';
 import {
   Carousel,
@@ -20,6 +21,27 @@ export default function Home() {
         <Carousel className="w-full" opts={{ loop: true }}>
           <CarouselContent>
             <CarouselItem>
+              <Card className="bg-black text-white overflow-hidden">
+                <div className="flex items-center justify-between p-8">
+                    <div className="z-10 max-w-md">
+                        <h2 className="text-3xl font-bold mb-2">Legendary Master Collection</h2>
+                        <p className="mb-4 text-white/80">Our ninth and most profound asset. A definitive statement in luxury and design.</p>
+                        <Button variant="secondary" asChild><Link href="/redeem">Explore Legacy</Link></Button>
+                    </div>
+                    <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-white/20">
+                      <Image 
+                        src="https://image2url.com/r2/default/files/1771780013735-89a69de6-f40c-4f14-b30b-a2b8df72d243.file9" 
+                        alt="Ninth Master Asset" 
+                        fill
+                        priority
+                        className="object-cover"
+                        data-ai-hint="master asset"
+                      />
+                    </div>
+                </div>
+              </Card>
+            </CarouselItem>
+            <CarouselItem>
               <Card className="bg-neutral-900 text-white overflow-hidden">
                 <div className="flex items-center justify-between p-8">
                     <div className="z-10 max-w-md">
@@ -32,7 +54,6 @@ export default function Home() {
                         src="https://image2url.com/r2/default/files/1771780034680-2d3cac44-dc0e-413e-8a8a-12742fde11ab.file8" 
                         alt="Eighth Master Asset" 
                         fill
-                        priority
                         className="object-cover"
                         data-ai-hint="master asset"
                       />
@@ -55,26 +76,6 @@ export default function Home() {
                         fill
                         className="object-cover"
                         data-ai-hint="elite asset"
-                      />
-                    </div>
-                </div>
-              </Card>
-            </CarouselItem>
-            <CarouselItem>
-              <Card className="bg-primary text-primary-foreground overflow-hidden">
-                <div className="flex items-center justify-between p-8">
-                    <div className="z-10 max-w-md">
-                        <h2 className="text-3xl font-bold mb-2">Signature Master Asset</h2>
-                        <p className="mb-4 text-primary-foreground/80">Experience the latest CEO-verified addition to our luxury catalog.</p>
-                        <Button variant="secondary" asChild><Link href="/redeem">Redeem Now</Link></Button>
-                    </div>
-                    <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-white/20">
-                      <Image 
-                        src="https://image2url.com/r2/default/files/1771780086899-dd21c8bd-c2dc-4b9d-a3de-997f8f64de73.file6" 
-                        alt="Latest CEO Asset" 
-                        fill
-                        className="object-cover"
-                        data-ai-hint="master asset"
                       />
                     </div>
                 </div>
