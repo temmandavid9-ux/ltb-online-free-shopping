@@ -1,3 +1,16 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "prod_img_160",
+      "description": "CEO Master Asset - Watch",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780166049-41b3600f-b3f2-4dc0-b480-ad2ed8ea0b5b.file2",
+      "imageHint": "master watch"
+    },
+    {
+      "id": "prod_img_master_1",
+      "description": "Primary Project Asset",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780166049-41b3600f-b3f2-4dc0-b480-ad2ed8ea0b5b.file2",
+      "imageHint": "verified asset"
+    }
+  ]
 }
