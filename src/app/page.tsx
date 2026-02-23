@@ -23,14 +23,14 @@ export default function Home() {
               <Card className="bg-primary text-primary-foreground overflow-hidden">
                 <div className="flex items-center justify-between p-8">
                     <div className="z-10 max-w-md">
-                        <h2 className="text-3xl font-bold mb-2">New Global Collection</h2>
-                        <p className="mb-4 text-primary-foreground/80">Our latest premium asset just arrived. Experience the pinnacle of design.</p>
+                        <h2 className="text-3xl font-bold mb-2">Signature Master Asset</h2>
+                        <p className="mb-4 text-primary-foreground/80">Experience the latest CEO-verified addition to our luxury catalog.</p>
                         <Button variant="secondary" asChild><Link href="/redeem">Redeem Now</Link></Button>
                     </div>
                     <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-white/20">
                       <Image 
-                        src="https://image2url.com/r2/default/files/1771780128053-57d5e252-e064-40b0-abf2-2d3da79ee618.file4" 
-                        alt="Latest Master Asset" 
+                        src="https://image2url.com/r2/default/files/1771780108038-e509d998-3e3b-4ac1-a902-b087aee619cc.file5" 
+                        alt="Latest CEO Asset" 
                         fill
                         priority
                         className="object-cover"
@@ -44,13 +44,13 @@ export default function Home() {
               <Card className="bg-secondary text-secondary-foreground overflow-hidden">
                 <div className="flex items-center justify-between p-8">
                     <div className="z-10 max-w-md">
-                        <h2 className="text-3xl font-bold mb-2">Exclusive New Arrival</h2>
-                        <p className="mb-4 text-secondary-foreground/80">Experience the latest in premium design. Available now for redemption.</p>
+                        <h2 className="text-3xl font-bold mb-2">New Global Collection</h2>
+                        <p className="mb-4 text-secondary-foreground/80">Our latest premium asset just arrived. Experience the pinnacle of design.</p>
                         <Button variant="outline" asChild><Link href="/redeem">Redeem Now</Link></Button>
                     </div>
                     <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-primary/20">
                       <Image 
-                        src="https://image2url.com/r2/default/files/1771780145929-e1e471cf-e471-40fb-b086-8a32e8c3819a.file3" 
+                        src="https://image2url.com/r2/default/files/1771780128053-57d5e252-e064-40b0-abf2-2d3da79ee618.file4" 
                         alt="Featured Master Asset" 
                         fill
                         className="object-cover"
