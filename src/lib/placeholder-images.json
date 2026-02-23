@@ -1,6 +1,12 @@
 {
   "placeholderImages": [
     {
+      "id": "prod_img_master_8",
+      "description": "Latest Master Asset - File 8",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780034680-2d3cac44-dc0e-413e-8a8a-12742fde11ab.file8",
+      "imageHint": "master asset"
+    },
+    {
       "id": "prod_img_master_7",
       "description": "Latest Master Asset - File 7",
       "imageUrl": "https://image2url.com/r2/default/files/1771780057671-9c884ea6-1428-4a19-8121-f52abbfae0de.file7",
@@ -39,7 +45,7 @@
     {
       "id": "prod_img_160",
       "description": "CEO Master Asset - Featured Watch",
-      "imageUrl": "https://image2url.com/r2/default/files/1771780145929-e1e471cf-e471-40fb-b086-8a32e8c3819a.file3",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780034680-2d3cac44-dc0e-413e-8a8a-12742fde11ab.file8",
       "imageHint": "master watch"
     },
     {
@@ -149,120 +155,6 @@
       "description": "New Link 47",
       "imageUrl": "https://image2url.com/r2/default/images/1770830444280-b3f069ff-095e-4957-a0c0-d23949b97b5e.webp",
       "imageHint": "new item"
-    },
-    {
-      "id": "prod_img_105",
-      "description": "Product 105",
-      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-32a17242-6e52-457b-8c7a-12006e96ec42.webp",
-      "imageHint": "white t-shirt"
-    },
-    {
-      "id": "prod_img_106",
-      "description": "Product 106",
-      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-1412b7be-0c88-495e-b501-4412dfc205dd.webp",
-      "imageHint": "blue jeans"
-    },
-    {
-      "id": "prod_img_107",
-      "description": "Product 107",
-      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-00399e10-cd3f-48fe-bde8-008582d90f05.jpg",
-      "imageHint": "black gown"
-    },
-    {
-      "id": "prod_img_108",
-      "description": "Product 108",
-      "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-07-01e12df0-afb6-4314-a096-5ee6bb279aa2.webp",
-      "imageHint": "white hoodie"
-    },
-    {
-      "id": "prod_img_152",
-      "description": "Product 152",
-      "imageUrl": "https://image2url.com/r2/default/images/1770904121458-34d8590e-d2b0-46e8-9956-73b3f4a24f39.avif",
-      "imageHint": "black t-shirt"
-    },
-    {
-      "id": "prod_img_153",
-      "description": "Product 153",
-      "imageUrl": "https://image2url.com/r2/default/images/1770904239459-94f376d6-f66d-4938-bce5-c92fade54bf0.avif",
-      "imageHint": "blue hoodie"
-    },
-    {
-      "id": "prod_img_154",
-      "description": "Product 154",
-      "imageUrl": "https://image2url.com/r2/default/images/1770909910905-a0240f58-cd78-4803-b862-e40c91a085ba.webp",
-      "imageHint": "leaf pattern"
-    },
-    {
-      "id": "prod_img_155",
-      "description": "Product 155",
-      "imageUrl": "https://image2url.com/r2/default/images/1770910078803-3aacc4f1-a40d-4beb-a62d-9fab2d4a3f71.jpg",
-      "imageHint": "activewear tights"
-    },
-    {
-      "id": "prod_img_156",
-      "description": "Product 156",
-      "imageUrl": "https://image2url.com/r2/default/images/1770910115814-bef7a6af-94f3-48dd-b716-e80beb83ef4f.jpg",
-      "imageHint": "evening gown"
-    },
-    {
-      "id": "prod_img_157",
-      "description": "Product 157",
-      "imageUrl": "https://image2url.com/r2/default/images/1770910318334-e13a4d00-dfea-4528-97c8-ad72055feff4.avif",
-      "imageHint": "elegant blouse"
-    },
-    {
-      "id": "prod_img_158",
-      "description": "Product 158",
-      "imageUrl": "https://image2url.com/r2/default/images/1770910613075-5e88956c-f032-4994-9328-f67d00d89e22.jpg",
-      "imageHint": "linen trousers"
-    },
-    {
-      "id": "prod_img_167",
-      "description": "Product 167",
-      "imageUrl": "https://image2url.com/r2/default/images/1770906972800-8b3e5a62-6266-4f50-81c3-4cc7b6882e41.webp",
-      "imageHint": "blue shirt"
-    },
-    {
-      "id": "prod_img_168",
-      "description": "Product 168",
-      "imageUrl": "https://image2url.com/r2/default/images/1770907355413-fc39e3fa-9d5e-42e4-a7cd-ddaf2bbabae0.webp",
-      "imageHint": "patterned shirt"
-    },
-    {
-      "id": "prod_img_169",
-      "description": "Product 169",
-      "imageUrl": "https://image2url.com/r2/default/images/1770907682258-a021cc87-9fc9-4316-bdff-dcb0012dc784.webp",
-      "imageHint": "black jacket"
-    },
-    {
-      "id": "prod_img_170",
-      "description": "Product 170",
-      "imageUrl": "https://image2url.com/r2/default/images/1770908473052-7271e66e-c791-420e-9fb0-47ad9dbd3c8e.webp",
-      "imageHint": "trench coat"
-    },
-    {
-      "id": "prod_img_171",
-      "description": "Product 171",
-      "imageUrl": "https://image2url.com/r2/default/images/1770908515130-e009dab8-71fa-4085-ae8d-5cb17a26ac87.webp",
-      "imageHint": "summer dress"
-    },
-    {
-      "id": "prod_img_172",
-      "description": "Product 172",
-      "imageUrl": "https://image2url.com/r2/default/images/1770908822870-2156c825-2a07-4ebe-8539-8b6a9959ef1e.webp",
-      "imageHint": "gray t-shirt"
-    },
-    {
-      "id": "prod_img_173",
-      "description": "Product 173",
-      "imageUrl": "https://image2url.com/r2/default/images/1770909106707-11ef02ff-454b-4c0c-8429-aabae7a28590.webp",
-      "imageHint": "white shirt"
-    },
-    {
-      "id": "prod_img_174",
-      "description": "Product 174",
-      "imageUrl": "https://image2url.com/r2/default/images/1770909392463-e6e77946-eb1e-4864-8cff-fdd77af34dbc.webp",
-      "imageHint": "red dress"
     }
   ]
 }
