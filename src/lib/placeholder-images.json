@@ -1,6 +1,12 @@
 {
   "placeholderImages": [
     {
+      "id": "prod_img_master_11",
+      "description": "Latest Master Asset - File 11",
+      "imageUrl": "https://image2url.com/r2/default/files/1771779970633-ef7c63c8-8f00-49f8-8e55-4fa33f91ca5b.file11",
+      "imageHint": "master asset"
+    },
+    {
       "id": "prod_img_master_10",
       "description": "Latest Master Asset - File 10",
       "imageUrl": "https://image2url.com/r2/default/files/1771779993129-edea962d-f137-45fa-81b4-02ea6440f590.file10",
