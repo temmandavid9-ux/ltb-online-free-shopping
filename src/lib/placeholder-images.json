@@ -1,6 +1,12 @@
 {
   "placeholderImages": [
     {
+      "id": "prod_img_master_13",
+      "description": "Latest Master Asset - File 13",
+      "imageUrl": "https://image2url.com/r2/default/files/1771779927135-5335409b-8cc8-4cc7-b192-905d9c562826.file13",
+      "imageHint": "master asset"
+    },
+    {
       "id": "prod_img_master_12",
       "description": "Latest Master Asset - File 12",
       "imageUrl": "https://image2url.com/r2/default/files/1771779949744-50aae246-9ea2-4065-a378-a3c2abdd2e78.file12",
@@ -63,7 +69,7 @@
     {
       "id": "prod_img_160",
       "description": "CEO Master Asset - Featured Watch",
-      "imageUrl": "https://image2url.com/r2/default/files/1771779993129-edea962d-f137-45fa-81b4-02ea6440f590.file10",
+      "imageUrl": "https://image2url.com/r2/default/files/1771779927135-5335409b-8cc8-4cc7-b192-905d9c562826.file13",
       "imageHint": "master watch"
     }
   ]

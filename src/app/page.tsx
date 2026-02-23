@@ -1,4 +1,3 @@
-
 import { products } from '@/lib/data';
 import {
   Carousel,
@@ -21,11 +20,32 @@ export default function Home() {
         <Carousel className="w-full" opts={{ loop: true }}>
           <CarouselContent>
             <CarouselItem>
+              <Card className="bg-indigo-950 text-white overflow-hidden">
+                <div className="flex items-center justify-between p-8">
+                    <div className="z-10 max-w-md">
+                        <h2 className="text-3xl font-bold mb-2">Prestige Master Collection</h2>
+                        <p className="mb-4 text-white/80">Our thirteenth and most refined verified asset. The definitive standard of Eden 0² luxury.</p>
+                        <Button variant="secondary" asChild><Link href="/redeem">Redeem Prestige</Link></Button>
+                    </div>
+                    <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-white/20">
+                      <Image 
+                        src="https://image2url.com/r2/default/files/1771779927135-5335409b-8cc8-4cc7-b192-905d9c562826.file13" 
+                        alt="Thirteenth Master Asset" 
+                        fill
+                        priority
+                        className="object-cover"
+                        data-ai-hint="master asset"
+                      />
+                    </div>
+                </div>
+              </Card>
+            </CarouselItem>
+            <CarouselItem>
               <Card className="bg-black text-white overflow-hidden">
                 <div className="flex items-center justify-between p-8">
                     <div className="z-10 max-w-md">
                         <h2 className="text-3xl font-bold mb-2">Elite Master Collection</h2>
-                        <p className="mb-4 text-white/80">Our twelfth and premier verified asset. Experience the zenith of Eden 0² luxury and refinement.</p>
+                        <p className="mb-4 text-white/80">Our twelfth verified asset. Experience the zenith of Eden 0² luxury and refinement.</p>
                         <Button variant="secondary" asChild><Link href="/redeem">Redeem Elite</Link></Button>
                     </div>
                     <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-white/20">
@@ -33,7 +53,6 @@ export default function Home() {
                         src="https://image2url.com/r2/default/files/1771779949744-50aae246-9ea2-4065-a378-a3c2abdd2e78.file12" 
                         alt="Twelfth Master Asset" 
                         fill
-                        priority
                         className="object-cover"
                         data-ai-hint="master asset"
                       />
@@ -53,26 +72,6 @@ export default function Home() {
                       <Image 
                         src="https://image2url.com/r2/default/files/1771779970633-ef7c63c8-8f00-49f8-8e55-4fa33f91ca5b.file11" 
                         alt="Eleventh Master Asset" 
-                        fill
-                        className="object-cover"
-                        data-ai-hint="master asset"
-                      />
-                    </div>
-                </div>
-              </Card>
-            </CarouselItem>
-            <CarouselItem>
-              <Card className="bg-neutral-900 text-white overflow-hidden">
-                <div className="flex items-center justify-between p-8">
-                    <div className="z-10 max-w-md">
-                        <h2 className="text-3xl font-bold mb-2">Ultimate Master Collection</h2>
-                        <p className="mb-4 text-white/80">Our tenth signature asset. Redefining the standard of Eden 0² excellence.</p>
-                        <Button variant="secondary" asChild><Link href="/redeem">Explore Ultimate</Link></Button>
-                    </div>
-                    <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-white/20">
-                      <Image 
-                        src="https://image2url.com/r2/default/files/1771779993129-edea962d-f137-45fa-81b4-02ea6440f590.file10" 
-                        alt="Tenth Master Asset" 
                         fill
                         className="object-cover"
                         data-ai-hint="master asset"
