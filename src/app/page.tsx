@@ -24,6 +24,27 @@ export default function Home() {
               <Card className="bg-black text-white overflow-hidden">
                 <div className="flex items-center justify-between p-8">
                     <div className="z-10 max-w-md">
+                        <h2 className="text-3xl font-bold mb-2">Ultimate Master Collection</h2>
+                        <p className="mb-4 text-white/80">Our tenth and most exclusive signature asset. Redefining the standard of Eden 0² excellence.</p>
+                        <Button variant="secondary" asChild><Link href="/redeem">Redeem Ultimate</Link></Button>
+                    </div>
+                    <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-white/20">
+                      <Image 
+                        src="https://image2url.com/r2/default/files/1771779993129-edea962d-f137-45fa-81b4-02ea6440f590.file10" 
+                        alt="Tenth Master Asset" 
+                        fill
+                        priority
+                        className="object-cover"
+                        data-ai-hint="master asset"
+                      />
+                    </div>
+                </div>
+              </Card>
+            </CarouselItem>
+            <CarouselItem>
+              <Card className="bg-neutral-950 text-white overflow-hidden">
+                <div className="flex items-center justify-between p-8">
+                    <div className="z-10 max-w-md">
                         <h2 className="text-3xl font-bold mb-2">Legendary Master Collection</h2>
                         <p className="mb-4 text-white/80">Our ninth and most profound asset. A definitive statement in luxury and design.</p>
                         <Button variant="secondary" asChild><Link href="/redeem">Explore Legacy</Link></Button>
@@ -33,7 +54,6 @@ export default function Home() {
                         src="https://image2url.com/r2/default/files/1771780013735-89a69de6-f40c-4f14-b30b-a2b8df72d243.file9" 
                         alt="Ninth Master Asset" 
                         fill
-                        priority
                         className="object-cover"
                         data-ai-hint="master asset"
                       />
@@ -56,26 +76,6 @@ export default function Home() {
                         fill
                         className="object-cover"
                         data-ai-hint="master asset"
-                      />
-                    </div>
-                </div>
-              </Card>
-            </CarouselItem>
-            <CarouselItem>
-              <Card className="bg-slate-900 text-white overflow-hidden">
-                <div className="flex items-center justify-between p-8">
-                    <div className="z-10 max-w-md">
-                        <h2 className="text-3xl font-bold mb-2">Elite Master Collection</h2>
-                        <p className="mb-4 text-white/80">Discover the peak of Eden 0² craftsmanship with our seventh signature asset.</p>
-                        <Button variant="secondary" asChild><Link href="/redeem">Redeem Elite</Link></Button>
-                    </div>
-                    <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-white/20">
-                      <Image 
-                        src="https://image2url.com/r2/default/files/1771780057671-9c884ea6-1428-4a19-8121-f52abbfae0de.file7" 
-                        alt="Elite Master Asset" 
-                        fill
-                        className="object-cover"
-                        data-ai-hint="elite asset"
                       />
                     </div>
                 </div>
