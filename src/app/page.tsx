@@ -1,3 +1,4 @@
+
 import { products } from '@/lib/data';
 import {
   Carousel,
@@ -29,7 +30,7 @@ export default function Home() {
                     </div>
                     <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-white/20">
                       <Image 
-                        src="https://image2url.com/r2/default/files/1771780108038-e509d998-3e3b-4ac1-a902-b087aee619cc.file5" 
+                        src="https://image2url.com/r2/default/files/1771780086899-dd21c8bd-c2dc-4b9d-a3de-997f8f64de73.file6" 
                         alt="Latest CEO Asset" 
                         fill
                         priority
@@ -50,7 +51,7 @@ export default function Home() {
                     </div>
                     <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-primary/20">
                       <Image 
-                        src="https://image2url.com/r2/default/files/1771780128053-57d5e252-e064-40b0-abf2-2d3da79ee618.file4" 
+                        src="https://image2url.com/r2/default/files/1771780108038-e509d998-3e3b-4ac1-a902-b087aee619cc.file5" 
                         alt="Featured Master Asset" 
                         fill
                         className="object-cover"
@@ -68,9 +69,9 @@ export default function Home() {
                         <p className="mb-4 text-accent-foreground/80">Explore our CEO-verified catalog of luxury items and premium accessories.</p>
                         <Button variant="secondary" asChild><Link href="/tasks">Earn Rewards</Link></Button>
                     </div>
-                    <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden">
+                    <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-white/10">
                       <Image 
-                        src="https://image2url.com/r2/default/files/1771780166049-41b3600f-b3f2-4dc0-b480-ad2ed8ea0b5b.file2" 
+                        src="https://image2url.com/r2/default/files/1771780128053-57d5e252-e064-40b0-abf2-2d3da79ee618.file4" 
                         alt="CEO Verified Asset" 
                         fill
                         className="object-cover" 
