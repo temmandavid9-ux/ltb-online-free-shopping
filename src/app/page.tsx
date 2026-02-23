@@ -21,6 +21,27 @@ export default function Home() {
         <Carousel className="w-full" opts={{ loop: true }}>
           <CarouselContent>
             <CarouselItem>
+              <Card className="bg-slate-900 text-white overflow-hidden">
+                <div className="flex items-center justify-between p-8">
+                    <div className="z-10 max-w-md">
+                        <h2 className="text-3xl font-bold mb-2">Elite Master Collection</h2>
+                        <p className="mb-4 text-white/80">Our seventh signature asset just arrived. Discover the peak of Eden 0² craftsmanship.</p>
+                        <Button variant="secondary" asChild><Link href="/redeem">Redeem Elite</Link></Button>
+                    </div>
+                    <div className="relative w-[400px] h-[250px] rounded-lg overflow-hidden border-2 border-white/20">
+                      <Image 
+                        src="https://image2url.com/r2/default/files/1771780057671-9c884ea6-1428-4a19-8121-f52abbfae0de.file7" 
+                        alt="Elite Master Asset" 
+                        fill
+                        priority
+                        className="object-cover"
+                        data-ai-hint="elite asset"
+                      />
+                    </div>
+                </div>
+              </Card>
+            </CarouselItem>
+            <CarouselItem>
               <Card className="bg-primary text-primary-foreground overflow-hidden">
                 <div className="flex items-center justify-between p-8">
                     <div className="z-10 max-w-md">
@@ -33,7 +54,6 @@ export default function Home() {
                         src="https://image2url.com/r2/default/files/1771780086899-dd21c8bd-c2dc-4b9d-a3de-997f8f64de73.file6" 
                         alt="Latest CEO Asset" 
                         fill
-                        priority
                         className="object-cover"
                         data-ai-hint="master asset"
                       />
