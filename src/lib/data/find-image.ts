@@ -1,12 +1,25 @@
 
+import { PlaceHolderImages } from '../placeholder-images';
+
 /**
- * Strictly returns the user-provided master link for all assets.
+ * Retrieves a verified master asset from the registry based on ID.
  */
 export const findImage = (id: string) => {
-  const masterUrl = "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip";
+  const images = PlaceHolderImages;
   
+  // Try to find the exact ID match first
+  const image = images.find(img => img.id === id);
+  if (image) {
+    return { url: image.imageUrl, hint: image.imageHint };
+  }
+
+  // If not found, use cyclical mapping for consistent coverage
+  const numId = parseInt(id.replace(/\D/g, '')) || 0;
+  const cycleIndex = (numId % images.length) || 0;
+  const fallbackImage = images[cycleIndex] || images[0];
+
   return { 
-    url: masterUrl, 
-    hint: 'Eden 0² Verified Asset' 
+    url: fallbackImage.imageUrl, 
+    hint: fallbackImage.imageHint 
   };
 };

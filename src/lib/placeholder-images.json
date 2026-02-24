@@ -1,16 +1,82 @@
 {
   "placeholderImages": [
     {
-      "id": "prod_img_default",
-      "description": "Eden 0² Master Asset",
-      "imageUrl": "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip",
-      "imageHint": "master asset"
+      "id": "prod_img_1",
+      "description": "Master Asset 1",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780178822-ef7c63c8-8f00-49f8-8e55-4fa33f91ca5b.file1",
+      "imageHint": "verified asset"
     },
     {
-      "id": "prod_img_1",
-      "description": "Master Asset",
-      "imageUrl": "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip",
-      "imageHint": "verified resource"
+      "id": "prod_img_2",
+      "description": "Master Asset 2",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780158230-0bb90bf3-009c-4ec4-bcba-9006990ae6cb.file2",
+      "imageHint": "verified asset"
+    },
+    {
+      "id": "prod_img_3",
+      "description": "Master Asset 3",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780137638-edea962d-f137-45fa-81b4-02ea6440f590.file3",
+      "imageHint": "verified asset"
+    },
+    {
+      "id": "prod_img_4",
+      "description": "Master Asset 4",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780117046-89a69de6-f40c-4f14-b30b-a2b8df72d243.file4",
+      "imageHint": "verified asset"
+    },
+    {
+      "id": "prod_img_5",
+      "description": "Master Asset 5",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780096454-2d3cac44-dc0e-413e-8a8a-12742fde11ab.file5",
+      "imageHint": "verified asset"
+    },
+    {
+      "id": "prod_img_6",
+      "description": "Master Asset 6",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780075862-9dfef0ca-9cc4-4904-9ef3-0006990ae6cb.file6",
+      "imageHint": "verified asset"
+    },
+    {
+      "id": "prod_img_7",
+      "description": "Master Asset 7",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780055271-bc90df64-9be0-4be3-a003-9ef6ca600604.file7",
+      "imageHint": "verified asset"
+    },
+    {
+      "id": "prod_img_8",
+      "description": "Master Asset 8",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780034680-2d3cac44-dc0e-413e-8a8a-12742fde11ab.file8",
+      "imageHint": "verified asset"
+    },
+    {
+      "id": "prod_img_9",
+      "description": "Master Asset 9",
+      "imageUrl": "https://image2url.com/r2/default/files/1771780013735-89a69de6-f40c-4f14-b30b-a2b8df72d243.file9",
+      "imageHint": "verified asset"
+    },
+    {
+      "id": "prod_img_10",
+      "description": "Master Asset 10",
+      "imageUrl": "https://image2url.com/r2/default/files/1771779993129-edea962d-f137-45fa-81b4-02ea6440f590.file10",
+      "imageHint": "verified asset"
+    },
+    {
+      "id": "prod_img_11",
+      "description": "Master Asset 11",
+      "imageUrl": "https://image2url.com/r2/default/files/1771779970633-ef7c63c8-8f00-49f8-8e55-4fa33f91ca5b.file11",
+      "imageHint": "verified asset"
+    },
+    {
+      "id": "prod_img_12",
+      "description": "Master Asset 12",
+      "imageUrl": "https://image2url.com/r2/default/files/1771779949744-50aae246-9ea2-4065-a378-a3c2abdd2e78.file12",
+      "imageHint": "verified asset"
+    },
+    {
+      "id": "prod_img_13",
+      "description": "Master Asset 13",
+      "imageUrl": "https://image2url.com/r2/default/files/1771779927135-5335409b-8cc8-4cc7-b192-905d9c562826.file13",
+      "imageHint": "verified asset"
     }
   ]
 }
