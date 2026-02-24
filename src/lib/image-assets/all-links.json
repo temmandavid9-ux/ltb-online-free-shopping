@@ -1,9 +1,14 @@
+
 {
   "catalogName": "Eden 0² Master Image Assets",
-  "totalLinks": 0,
-  "description": "Registry cleared by CEO request.",
+  "totalLinks": 1,
+  "description": "Registry updated with latest CEO verified .avif resource.",
   "folders": {
-    "Verified Master Assets": [],
-    "Latest Upload": []
+    "Verified Master Assets": [
+      "https://image2url.com/r2/default/files/1771940966609-b927061a-b8ae-4d96-b236-35a78c784bae.avif"
+    ],
+    "Latest Upload": [
+      "https://image2url.com/r2/default/files/1771940966609-b927061a-b8ae-4d96-b236-35a78c784bae.avif"
+    ]
   }
 }

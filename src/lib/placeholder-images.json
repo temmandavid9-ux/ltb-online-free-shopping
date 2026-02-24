@@ -1,3 +1,10 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "prod_img_master",
+      "description": "Eden 0² Verified Master Asset",
+      "imageUrl": "https://image2url.com/r2/default/files/1771940966609-b927061a-b8ae-4d96-b236-35a78c784bae.avif",
+      "imageHint": "luxury asset"
+    }
+  ]
 }
