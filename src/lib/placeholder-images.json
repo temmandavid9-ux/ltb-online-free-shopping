@@ -13,30 +13,6 @@
       "imageHint": "master asset"
     },
     {
-      "id": "prod_img_3",
-      "description": "Eden 0² Master Asset",
-      "imageUrl": "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip",
-      "imageHint": "master asset"
-    },
-    {
-      "id": "prod_img_4",
-      "description": "Eden 0² Master Asset",
-      "imageUrl": "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip",
-      "imageHint": "master asset"
-    },
-    {
-      "id": "prod_img_5",
-      "description": "Eden 0² Master Asset",
-      "imageUrl": "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip",
-      "imageHint": "master asset"
-    },
-    {
-      "id": "prod_img_10",
-      "description": "Eden 0² Master Asset",
-      "imageUrl": "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip",
-      "imageHint": "master asset"
-    },
-    {
       "id": "prod_img_160",
       "description": "Executive Precision Watch",
       "imageUrl": "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip",
@@ -101,12 +77,6 @@
       "description": "Eden 0² Prime Asset",
       "imageUrl": "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip",
       "imageHint": "master asset"
-    },
-    {
-      "id": "prod_img_master_1",
-      "description": "Carousel Featured Asset",
-      "imageUrl": "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip",
-      "imageHint": "hero asset"
     }
   ]
 }
