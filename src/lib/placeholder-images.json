@@ -3,74 +3,14 @@
     {
       "id": "prod_img_default",
       "description": "Eden 0² Master Asset",
-      "imageUrl": "https://images.unsplash.com/photo-1695185844325-f4c0ee01b3d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxtYXN0ZXIlMjBhc3NldHxlbnwwfHx8fDE3NzE5Mzk5OTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip",
       "imageHint": "master asset"
     },
     {
       "id": "prod_img_1",
-      "description": "Beauty Collection 1",
-      "imageUrl": "https://images.unsplash.com/photo-1608571423539-e951b9b3871e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxiZWF1dHklMjBwcm9kdWN0fGVufDB8fHx8MTc3MTg2OTM4Nnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "beauty product"
-    },
-    {
-      "id": "prod_img_2",
-      "description": "Beauty Collection 2",
-      "imageUrl": "https://images.unsplash.com/photo-1600634999623-864991678406?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjb3NtZXRpY3N8ZW58MHx8fHwxNzcxOTM5OTkzfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "cosmetics"
-    },
-    {
-      "id": "prod_img_3",
-      "description": "Beauty Collection 3",
-      "imageUrl": "https://images.unsplash.com/photo-1581182815808-b6eb627a8798?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxza2luY2FyZXxlbnwwfHx8fDE3NzE4ODc5NjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "skincare"
-    },
-    {
-      "id": "prod_img_127",
-      "description": "Luxury Chain 1",
-      "imageUrl": "https://images.unsplash.com/photo-1585711715631-1e6bf224f092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxnb2xkJTIwY2hhaW58ZW58MHx8fHwxNzcxODUxMjQ4fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "gold chain"
-    },
-    {
-      "id": "prod_img_128",
-      "description": "Luxury Chain 2",
-      "imageUrl": "https://images.unsplash.com/photo-1599458349289-18f0ee82e6ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxqZXdlbHJ5fGVufDB8fHx8MTc3MTkyMjg1M3ww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "jewelry"
-    },
-    {
-      "id": "prod_img_148",
-      "description": "Premium Apparel 1",
-      "imageUrl": "https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxsdXh1cnklMjBmYXNoaW9ufGVufDB8fHx8MTc3MTkzNTM5NHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "luxury fashion"
-    },
-    {
-      "id": "prod_img_160",
-      "description": "Executive Watch",
-      "imageUrl": "https://images.unsplash.com/photo-1670404160620-a3a86428560e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjB3YXRjaHxlbnwwfHx8fDE3NzE5MDYzMTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "luxury watch"
-    },
-    {
-      "id": "prod_img_224",
-      "description": "High-End Laptop",
-      "imageUrl": "https://images.unsplash.com/photo-1618424181497-157f25b6ddd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxsYXB0b3AlMjBjb21wdXRlcnxlbnwwfHx8fDE3NzE5MDYxMzh8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "laptop computer"
-    },
-    {
-      "id": "prod_img_244",
-      "description": "Smartphone Pro",
-      "imageUrl": "https://images.unsplash.com/photo-1523206489230-c012c64b2b48?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtb2JpbGUlMjBwaG9uZXxlbnwwfHx8fDE3NzE5MTczMTF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "mobile phone"
-    },
-    {
-      "id": "prod_img_264",
-      "description": "Designer Shoes",
-      "imageUrl": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxydW5uaW5nJTIwc2hvZXN8ZW58MHx8fHwxNzcxODU4MTcxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "running shoes"
-    },
-    {
-      "id": "prod_img_332",
-      "description": "Elite Wig",
-      "imageUrl": "https://images.unsplash.com/photo-1712641966810-611ff1503c6d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxoYWlyJTIwc3R5bGluZ3xlbnwwfHx8fDE3NzE5MjYyNjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "hair styling"
+      "description": "Master Asset",
+      "imageUrl": "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip",
+      "imageHint": "verified resource"
     }
   ]
 }
