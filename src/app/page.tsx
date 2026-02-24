@@ -14,19 +14,21 @@ import ProductGrid from '@/components/ProductGrid';
 import { AiRecommendations } from '@/components/AiRecommendations';
 import { ImageOff } from 'lucide-react';
 
+const MASTER_URL = 'https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip';
+
 const MASTER_ASSETS = [
-  { id: '13', title: 'Prestige Collection', desc: 'The definitive standard of luxury.', url: '', color: 'bg-indigo-950' },
-  { id: '12', title: 'Elite Collection', desc: 'Zenith of refinement and class.', url: '', color: 'bg-black' },
-  { id: '11', title: 'Signature Collection', desc: 'Peak standard for Eden 0² aesthetics.', url: '', color: 'bg-neutral-900' },
-  { id: '10', title: 'Ultimate Collection', desc: 'Unmatched quality and presence.', url: '', color: 'bg-slate-950' },
-  { id: '09', title: 'Legacy Collection', desc: 'Inherit the style of masters.', url: '', color: 'bg-stone-950' },
-  { id: '08', title: 'Heritage Collection', desc: 'Timed-honored perfection.', url: '', color: 'bg-zinc-950' },
-  { id: '07', title: 'Prime Collection', desc: 'The core of modern elegance.', url: '', color: 'bg-blue-950' },
-  { id: '06', title: 'Royal Collection', desc: 'Fit for the elite echelon.', url: '', color: 'bg-gray-950' },
-  { id: '05', title: 'Vertex Collection', desc: 'At the top of the design curve.', url: '', color: 'bg-emerald-950' },
-  { id: '04', title: 'Apex Collection', desc: 'Reaching the highest heights.', url: '', color: 'bg-rose-950' },
-  { id: '03', title: 'Core Collection', desc: 'The fundamental Eden experience.', url: '', color: 'bg-amber-950' },
-  { id: '02', title: 'Founder Collection', desc: 'The vision that started it all.', url: '', color: 'bg-teal-950' }
+  { id: '13', title: 'Prestige Collection', desc: 'The definitive standard of luxury.', url: MASTER_URL, color: 'bg-indigo-950' },
+  { id: '12', title: 'Elite Collection', desc: 'Zenith of refinement and class.', url: MASTER_URL, color: 'bg-black' },
+  { id: '11', title: 'Signature Collection', desc: 'Peak standard for Eden 0² aesthetics.', url: MASTER_URL, color: 'bg-neutral-900' },
+  { id: '10', title: 'Ultimate Collection', desc: 'Unmatched quality and presence.', url: MASTER_URL, color: 'bg-slate-950' },
+  { id: '09', title: 'Legacy Collection', desc: 'Inherit the style of masters.', url: MASTER_URL, color: 'bg-stone-950' },
+  { id: '08', title: 'Heritage Collection', desc: 'Timed-honored perfection.', url: MASTER_URL, color: 'bg-zinc-950' },
+  { id: '07', title: 'Prime Collection', desc: 'The core of modern elegance.', url: MASTER_URL, color: 'bg-blue-950' },
+  { id: '06', title: 'Royal Collection', desc: 'Fit for the elite echelon.', url: MASTER_URL, color: 'bg-gray-950' },
+  { id: '05', title: 'Vertex Collection', desc: 'At the top of the design curve.', url: MASTER_URL, color: 'bg-emerald-950' },
+  { id: '04', title: 'Apex Collection', desc: 'Reaching the highest heights.', url: MASTER_URL, color: 'bg-rose-950' },
+  { id: '03', title: 'Core Collection', desc: 'The fundamental Eden experience.', url: MASTER_URL, color: 'bg-amber-950' },
+  { id: '02', title: 'Founder Collection', desc: 'The vision that started it all.', url: MASTER_URL, color: 'bg-teal-950' }
 ];
 
 export default function Home() {

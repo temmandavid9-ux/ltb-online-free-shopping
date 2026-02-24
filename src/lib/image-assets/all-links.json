@@ -1,9 +1,13 @@
 {
   "catalogName": "Eden 0² Master Image Assets",
-  "totalLinks": 0,
-  "description": "Consolidated image storage for Eden 0² platform. Currently empty as per purge request.",
+  "totalLinks": 1,
+  "description": "Consolidated image storage for Eden 0² platform featuring the latest verified resource.",
   "folders": {
-    "Latest Upload": [],
-    "CEO Verified Master Assets": []
+    "Latest Upload": [
+      "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip"
+    ],
+    "CEO Verified Master Assets": [
+      "https://image2url.com/r2/default/files/1771936544705-6f115c1c-270b-4a22-9ab8-f3abf8d75145.zip"
+    ]
   }
 }
