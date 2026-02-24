@@ -1,3 +1,4 @@
+
 import { products } from '@/lib/data';
 import {
   Carousel,
@@ -58,6 +59,7 @@ export default function Home() {
                             fill
                             priority={asset.id === '13'}
                             className="object-cover transition-transform duration-700 hover:scale-110"
+                            unoptimized={true}
                           />
                         ) : (
                           <div className="flex flex-col items-center text-white/20">
