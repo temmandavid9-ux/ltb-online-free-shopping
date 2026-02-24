@@ -2,7 +2,7 @@
 {
   "catalogName": "Eden 0² Master Image Assets",
   "totalLinks": 15,
-  "description": "Registry updated with 15 unique verified resources provided by CEO.",
+  "description": "Registry updated with 15 unique deduplicated resources provided by CEO.",
   "folders": {
     "Verified Master Assets": [
       "https://image2url.com/r2/default/files/1771940966609-b927061a-b8ae-4d96-b236-35a78c784bae.avif",
@@ -19,9 +19,6 @@
       "https://image2url.com/r2/default/files/1771941426060-2e2decb9-ea7a-4e64-b35e-2b5484fe5f76.avif",
       "https://image2url.com/r2/default/files/1771941447081-ad4689a9-354a-47b8-9caf-f33939555eff.avif",
       "https://image2url.com/r2/default/files/1771941488065-c3309532-fb68-4eae-9173-cd3cfed3be6a.avif",
-      "https://image2url.com/r2/default/files/1771941508970-ba37b8ed-0d11-4644-8318-f4cfa6a22e0f.avif"
-    ],
-    "Latest Upload": [
       "https://image2url.com/r2/default/files/1771941508970-ba37b8ed-0d11-4644-8318-f4cfa6a22e0f.avif"
     ]
   }
