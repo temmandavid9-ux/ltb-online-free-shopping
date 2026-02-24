@@ -1,3 +1,4 @@
+
 import { products } from '@/lib/data';
 import {
   Carousel,
@@ -60,7 +61,7 @@ export default function Home() {
                             data-ai-hint="lifestyle collection"
                           />
                         ) : (
-                          <div className="text-white/20 text-sm font-medium">Asset Pending</div>
+                          <div className="text-white/5 text-sm font-medium"></div>
                         )}
                       </div>
                   </div>

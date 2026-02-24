@@ -64,17 +64,13 @@ export default function ProductCard({ product }: ProductCardProps) {
                 priority={product.id === 'prod_160'}
                 unoptimized={true}
                 onError={() => {
-                  console.warn(`Format Issue: ${imgSrc}`);
                   setImgError(true);
                 }}
                 className="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105"
               />
             ) : (
-              <div className="aspect-square bg-muted flex flex-col items-center justify-center text-muted-foreground text-xs text-center p-4">
-                <ImageOff className="w-8 h-8 mb-2 opacity-20" />
-                <span className="font-medium opacity-50">Eden 0² Asset Pending</span>
-                <span className="text-[10px] mt-1 opacity-30">{product.id}</span>
-                <span className="text-[8px] mt-2 px-2 text-muted-foreground/40 break-all">{imgSrc.split('/').pop()}</span>
+              <div className="aspect-square bg-muted/30 flex flex-col items-center justify-center text-muted-foreground">
+                <ImageOff className="w-8 h-8 opacity-10" />
               </div>
             )}
         </Link>
