@@ -4,6 +4,45 @@ import { findImage } from './find-image';
 
 export const newProducts: Product[] = [
   {
+    id: 'prod_f1',
+    slug: 'prestige-foundation-item',
+    name: 'Prestige Legacy Foundation',
+    description: 'A masterpiece of precision and refined aesthetics from our primary Prestige Collection.',
+    category: 'Beauty',
+    price: 450,
+    brand: 'Nexa',
+    images: [findImage('prod_img_1')],
+    stock: 10,
+    rating: 5.0,
+    reviewCount: 85
+  },
+  {
+    id: 'prod_f2',
+    slug: 'elite-foundation-item',
+    name: 'Elite Zenith Series',
+    description: 'Crafted for the elite echelon, providing unmatched quality and presence.',
+    category: 'Beauty',
+    price: 320,
+    brand: 'Stellar',
+    images: [findImage('prod_img_2')],
+    stock: 15,
+    rating: 4.9,
+    reviewCount: 64
+  },
+  {
+    id: 'prod_f3',
+    slug: 'signature-foundation-item',
+    name: 'Signature Standard Piece',
+    description: 'The definitive standard for Eden 0² aesthetics and professional quality.',
+    category: 'Beauty',
+    price: 280,
+    brand: 'Zenco',
+    images: [findImage('prod_img_3')],
+    stock: 20,
+    rating: 4.8,
+    reviewCount: 92
+  },
+  {
     id: 'prod_400',
     slug: 'exclusive-product-400',
     name: 'Elite Horizon Watch',
