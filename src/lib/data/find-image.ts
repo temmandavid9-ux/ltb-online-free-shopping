@@ -3,8 +3,8 @@ import { PlaceHolderImages } from '../placeholder-images';
 
 /**
  * Retrieves assets from the registry based on their ID.
- * Ensures a strict mapping but provides a fallback to hero assets if specific IDs are missing
- * during high-volume population to prevent 'Asset Pending' errors.
+ * Ensures a strict mapping but provides a intelligent fallback if specific IDs are missing
+ * during high-volume population.
  */
 export const findImage = (id: string) => {
   const image = PlaceHolderImages.find((img) => img.id === id);
@@ -16,9 +16,8 @@ export const findImage = (id: string) => {
     };
   }
 
-  // Fallback Logic: If the requested ID is missing (e.g. gap in 12-410), 
-  // intelligently cycle through the high-integrity hero assets (1-11)
-  // This ensures no 'Asset Pending' UI is ever displayed.
+  // Optimized Fallback: If the requested ID is missing, intelligently cycle through
+  // the first 11 high-integrity hero assets to ensure no 'Asset Pending' UI is displayed.
   const numericId = parseInt(id.replace('prod_img_', '')) || 1;
   const fallbackIndex = (numericId % 11) + 1;
   const fallbackImage = PlaceHolderImages.find((img) => img.id === `prod_img_${fallbackIndex}`);
