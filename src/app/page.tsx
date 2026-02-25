@@ -61,7 +61,7 @@ export default function Home() {
                             data-ai-hint="lifestyle collection"
                           />
                         ) : (
-                          <div className="text-white/20 text-sm font-medium italic">Eden 0² Asset Pending</div>
+                          <div className="text-white/20 text-sm font-medium italic">Asset Pending</div>
                         )}
                       </div>
                   </div>
