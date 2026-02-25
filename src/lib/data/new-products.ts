@@ -39,5 +39,6 @@ export const newProducts: Product[] = [
   ...generateBatch(411, 424),
   ...generateBatch(425, 450),
   ...generateBatch(451, 477),
-  ...generateBatch(478, 504)
+  ...generateBatch(478, 504),
+  ...generateBatch(505, 528)
 ];
