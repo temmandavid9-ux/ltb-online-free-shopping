@@ -1,7 +1,7 @@
 
 {
   "catalogName": "Eden 0² Master Verified Assets",
-  "totalUniqueVerified": 424,
+  "totalUniqueVerified": 450,
   "registryCapacity": 1000,
   "folders": {
     "Verified Foundation Assets": [
@@ -16,19 +16,6 @@
       "https://image2url.com/r2/default/files/1771941354343-d919508e-5eea-4c78-a755-00f841f3d9e6.avif",
       "https://image2url.com/r2/default/files/1771941376024-3bd3ad10-aba0-4228-b2ed-79c332df8445.avif",
       "https://image2url.com/r2/default/files/1771941397993-b3b4382c-c7ea-478c-be29-2fca176d1e2d.avif"
-    ],
-    "Exclusive Arrival Assets (400-410)": [
-      "https://image2url.com/r2/default/files/1772016204845-d0175a8d-e360-4984-b584-15d4967fbc56.avif",
-      "https://image2url.com/r2/default/files/1772016256846-5a8256a2-9537-4f0c-8a28-b4df3cd51304.avif",
-      "https://image2url.com/r2/default/files/1772016282973-75735840-712d-4602-99cf-b9f46ea1a767.avif",
-      "https://image2url.com/r2/default/files/1772016302621-b3d30949-b980-401d-86d0-22b6655d648e.avif",
-      "https://image2url.com/r2/default/files/1772016323956-d1b5e6ca-bb7c-4ed9-a956-ecb28f743deb.avif",
-      "https://image2url.com/r2/default/files/1772016341877-1a0963c1-9b5a-4a19-bb17-2ae0db7e4f0d.avif",
-      "https://image2url.com/r2/default/files/1772016360332-461b31f1-c29e-4074-b0ed-098d2f947d55.avif",
-      "https://image2url.com/r2/default/files/1772016377835-92976608-0584-404d-9bf2-4ae990e508bc.avif",
-      "https://image2url.com/r2/default/files/1771942959834-ba34c806-567c-45ea-be4e-a96f00a6d85f.webp",
-      "https://image2url.com/r2/default/files/1772016410928-90ece6f3-9b36-4bc0-a6b7-9fe06d4e2afd.avif",
-      "https://image2url.com/r2/default/files/1772016426931-ba7f4cb8-7858-4399-af43-4e506a838cce.avif"
     ],
     "Executive Priority Batch (411-424)": [
       "https://image2url.com/r2/default/files/1771955350115-058d8b3a-0e14-4322-8510-cb140e2c8451.jpg",
@@ -46,12 +33,33 @@
       "https://image2url.com/r2/default/files/1771955849192-53143961-ea65-4b1e-81b8-34ee03c8ee2f.avif",
       "https://image2url.com/r2/default/files/1771955883758-c1781a4c-3f10-4bbb-93bf-dae94ec4d5ce.avif"
     ],
-    "Catalog Resources": [
-      "https://image2url.com/r2/default/files/1771941426060-2e2decb9-ea7a-4e64-b35e-2b5484fe5f76.avif",
-      "https://image2url.com/r2/default/files/1771941447081-ad4689a9-354a-47b8-9caf-f33939555eff.avif",
-      "https://image2url.com/r2/default/files/1771941488065-c3309532-fb68-4eae-9173-cd3cfed3be6a.avif",
-      "https://image2url.com/r2/default/files/1771941508970-ba37b8ed-0d11-4644-8318-f4cfa6a22e0f.avif",
-      "https://image2url.com/r2/default/files/1771942020851-de2dd097-822f-47b8-8d7c-eb6b1c2f409e.avif"
+    "Premium Upload Batch (425-450)": [
+      "https://image2url.com/r2/default/files/1771954625993-e8936ed9-4a05-497b-b8a3-50f9f9c1b612.webp",
+      "https://image2url.com/r2/default/files/1771954652813-4ad52f88-7fb9-48d7-abcd-1a62a9d4e9b7.jpg",
+      "https://image2url.com/r2/default/files/1771954676075-0ef823bf-aece-4c96-a078-9c2076e9ee4b.jpg",
+      "https://image2url.com/r2/default/files/1771954705011-34572fe3-008d-47b3-b94b-447b3c03380f.webp",
+      "https://image2url.com/r2/default/files/1771954727094-ebb1252d-95f4-4ae7-8537-654c8d5b6e34.jpg",
+      "https://image2url.com/r2/default/files/1771954751467-d23ebd7d-b3c4-4241-9263-d8319ae1a8cb.jpg",
+      "https://image2url.com/r2/default/files/1771954777951-8c07404b-9b74-45bb-a3f8-48dbb983ca1b.jpg",
+      "https://image2url.com/r2/default/files/1771954806291-6d264b3f-f716-4383-9169-88e4f920aac9.jpg",
+      "https://image2url.com/r2/default/files/1771954846480-b8d3c56f-4066-4ff1-8e80-b8faa6fac864.jpg",
+      "https://image2url.com/r2/default/files/1771954873648-5cf16d2d-9585-4f48-a52a-85c583074b67.jpg",
+      "https://image2url.com/r2/default/files/1771954899534-5b86a08c-0e96-4915-a60b-d357a6419d44.jpg",
+      "https://image2url.com/r2/default/files/1771954927607-98a4dad0-16fa-44a0-a0dd-349b9706ed16.jpg",
+      "https://image2url.com/r2/default/files/1771954952155-ab41d8cb-33f3-4652-9187-20f7bc8441d6.jpg",
+      "https://image2url.com/r2/default/files/1771954973571-a7e25455-0bec-4df4-9f4b-5375a93d5e2c.jpg",
+      "https://image2url.com/r2/default/files/1771954993648-2ec2b42c-1be3-49c0-942e-b2c50a99895a.jpg",
+      "https://image2url.com/r2/default/files/1771955021398-dbad7566-a507-4154-80d6-e6160780d6b6.jpg",
+      "https://image2url.com/r2/default/files/1771955043263-32726d5b-f315-4a2b-b6a7-5ba1e73d9a92.jpg",
+      "https://image2url.com/r2/default/files/1771955064991-f4f958c7-1b57-40d2-8652-740928fa971b.jpg",
+      "https://image2url.com/r2/default/files/1771955087123-f6f0af34-ce98-4d44-9aad-429309502190.webp",
+      "https://image2url.com/r2/default/files/1771955111189-7ecdd024-f2cc-4e73-9140-805a4be49aa5.jpg",
+      "https://image2url.com/r2/default/files/1771955134476-81bf1b81-86f4-4174-9f42-2e72fa66af76.jpg",
+      "https://image2url.com/r2/default/files/1771955165071-191abb11-1b1b-4dba-af67-c29db484755f.jpg",
+      "https://image2url.com/r2/default/files/1771955206669-7d401f57-de99-4781-9a1a-2e3f798f6512.jpg",
+      "https://image2url.com/r2/default/files/1771955229419-da449dcc-54eb-40cd-9700-6cc334f309cb.jpg",
+      "https://image2url.com/r2/default/files/1771955274148-2a7e7271-7938-459e-8c1d-d374cb2bfbf5.webp",
+      "https://image2url.com/r2/default/files/1771955313630-bfe573bf-79ab-42ca-8596-7fc0252c6e70.webp"
     ]
   }
 }

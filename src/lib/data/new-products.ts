@@ -2,6 +2,26 @@
 import type { Product } from '../types';
 import { findImage } from './find-image';
 
+const generateBatch = (start: number, end: number): Product[] => {
+  const batch: Product[] = [];
+  for (let i = start; i <= end; i++) {
+    batch.push({
+      id: `prod_exclusive_${i}`,
+      slug: `exclusive-arrival-${i}`,
+      name: `Premium Selection #${i}`,
+      description: `A brand new exclusive item offering superior quality and unmatched style from the Eden 0² registry. Product unique identification code: ${i}.`,
+      category: 'Beauty',
+      price: Math.floor(Math.random() * (500 - 150 + 1)) + 150,
+      brand: ['Nexa', 'Stellar', 'Aperture', 'Helios', 'Zenco'][Math.floor(Math.random() * 5)],
+      images: [findImage(`prod_img_${i}`)],
+      stock: Math.floor(Math.random() * 30) + 5,
+      rating: 4.7 + Math.random() * 0.3,
+      reviewCount: Math.floor(Math.random() * 100) + 10
+    });
+  }
+  return batch;
+};
+
 export const newProducts: Product[] = [
   {
     id: 'prod_exclusive_400',
@@ -16,199 +36,6 @@ export const newProducts: Product[] = [
     rating: 5.0,
     reviewCount: 85
   },
-  {
-    id: 'prod_exclusive_410',
-    slug: 'exclusive-arrival-410',
-    name: 'Masterpiece Collection Piece 11',
-    description: 'The final piece of the latest 410-item unique verification batch.',
-    category: 'Beauty',
-    price: 260,
-    brand: 'Aperture',
-    images: [findImage('prod_img_410')],
-    stock: 25,
-    rating: 4.8,
-    reviewCount: 94
-  },
-  {
-    id: 'prod_priority_411',
-    slug: 'priority-arrival-411',
-    name: 'Executive Priority Item 1',
-    description: 'Premium asset from the latest batch, mapped to slot 411.',
-    category: 'Beauty',
-    price: 499,
-    brand: 'Helios',
-    images: [findImage('prod_img_411')],
-    stock: 8,
-    rating: 5.0,
-    reviewCount: 12
-  },
-  {
-    id: 'prod_priority_412',
-    slug: 'priority-arrival-412',
-    name: 'Executive Priority Item 2',
-    description: 'Premium asset from the latest batch, mapped to slot 412.',
-    category: 'Beauty',
-    price: 385,
-    brand: 'Stellar',
-    images: [findImage('prod_img_412')],
-    stock: 14,
-    rating: 4.9,
-    reviewCount: 25
-  },
-  {
-    id: 'prod_priority_413',
-    slug: 'priority-arrival-413',
-    name: 'Executive Priority Item 3',
-    description: 'Premium asset from the latest batch, mapped to slot 413.',
-    category: 'Beauty',
-    price: 275,
-    brand: 'Zenco',
-    images: [findImage('prod_img_413')],
-    stock: 20,
-    rating: 4.8,
-    reviewCount: 18
-  },
-  {
-    id: 'prod_priority_414',
-    slug: 'priority-arrival-414',
-    name: 'Executive Priority Item 4',
-    description: 'Premium asset from the latest batch, mapped to slot 414.',
-    category: 'Beauty',
-    price: 310,
-    brand: 'Nexa',
-    images: [findImage('prod_img_414')],
-    stock: 12,
-    rating: 4.9,
-    reviewCount: 30
-  },
-  {
-    id: 'prod_priority_415',
-    slug: 'priority-arrival-415',
-    name: 'Executive Priority Item 5',
-    description: 'Premium asset from the latest batch, mapped to slot 415.',
-    category: 'Beauty',
-    price: 420,
-    brand: 'Aperture',
-    images: [findImage('prod_img_415')],
-    stock: 9,
-    rating: 5.0,
-    reviewCount: 15
-  },
-  {
-    id: 'prod_priority_416',
-    slug: 'priority-arrival-416',
-    name: 'Executive Priority Item 6',
-    description: 'Premium asset from the latest batch, mapped to slot 416.',
-    category: 'Beauty',
-    price: 290,
-    brand: 'iDino',
-    images: [findImage('prod_img_416')],
-    stock: 16,
-    rating: 4.8,
-    reviewCount: 22
-  },
-  {
-    id: 'prod_priority_417',
-    slug: 'priority-arrival-417',
-    name: 'Executive Priority Item 7',
-    description: 'Premium asset from the latest batch, mapped to slot 417.',
-    category: 'Beauty',
-    price: 355,
-    brand: 'Orion',
-    images: [findImage('prod_img_417')],
-    stock: 11,
-    rating: 4.9,
-    reviewCount: 19
-  },
-  {
-    id: 'prod_priority_418',
-    slug: 'priority-arrival-418',
-    name: 'Executive Priority Item 8',
-    description: 'Premium asset from the latest batch, mapped to slot 418.',
-    category: 'Beauty',
-    price: 265,
-    brand: 'Helios',
-    images: [findImage('prod_img_418')],
-    stock: 25,
-    rating: 4.7,
-    reviewCount: 40
-  },
-  {
-    id: 'prod_priority_419',
-    slug: 'priority-arrival-419',
-    name: 'Executive Priority Item 9',
-    description: 'Premium asset from the latest batch, mapped to slot 419.',
-    category: 'Beauty',
-    price: 330,
-    brand: 'Stellar',
-    images: [findImage('prod_img_419')],
-    stock: 18,
-    rating: 4.9,
-    reviewCount: 28
-  },
-  {
-    id: 'prod_priority_420',
-    slug: 'priority-arrival-420',
-    name: 'Executive Priority Item 10',
-    description: 'Premium asset from the latest batch, mapped to slot 420.',
-    category: 'Beauty',
-    price: 410,
-    brand: 'Zenco',
-    images: [findImage('prod_img_420')],
-    stock: 7,
-    rating: 5.0,
-    reviewCount: 10
-  },
-  {
-    id: 'prod_priority_421',
-    slug: 'priority-arrival-421',
-    name: 'Executive Priority Item 11',
-    description: 'Premium asset from the latest batch, mapped to slot 421.',
-    category: 'Beauty',
-    price: 285,
-    brand: 'Nexa',
-    images: [findImage('prod_img_421')],
-    stock: 30,
-    rating: 4.8,
-    reviewCount: 50
-  },
-  {
-    id: 'prod_priority_422',
-    slug: 'priority-arrival-422',
-    name: 'Executive Priority Item 12',
-    description: 'Premium asset from the latest batch, mapped to slot 422.',
-    category: 'Beauty',
-    price: 370,
-    brand: 'Aperture',
-    images: [findImage('prod_img_422')],
-    stock: 13,
-    rating: 4.9,
-    reviewCount: 21
-  },
-  {
-    id: 'prod_priority_423',
-    slug: 'priority-arrival-423',
-    name: 'Executive Priority Item 13',
-    description: 'Premium asset from the latest batch, mapped to slot 423.',
-    category: 'Beauty',
-    price: 245,
-    brand: 'iDino',
-    images: [findImage('prod_img_423')],
-    stock: 22,
-    rating: 4.7,
-    reviewCount: 35
-  },
-  {
-    id: 'prod_priority_424',
-    slug: 'priority-arrival-424',
-    name: 'Executive Priority Item 14',
-    description: 'Premium asset from the latest batch, mapped to slot 424.',
-    category: 'Beauty',
-    price: 395,
-    brand: 'Orion',
-    images: [findImage('prod_img_424')],
-    stock: 10,
-    rating: 5.0,
-    reviewCount: 14
-  }
+  ...generateBatch(411, 424),
+  ...generateBatch(425, 450)
 ];
