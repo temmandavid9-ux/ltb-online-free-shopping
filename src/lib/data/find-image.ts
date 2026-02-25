@@ -1,3 +1,4 @@
+
 import { PlaceHolderImages } from '../placeholder-images';
 
 /**
@@ -14,8 +15,9 @@ export const findImage = (id: string) => {
     };
   }
 
-  // If the specific ID is missing, we use the first high-integrity hero asset
-  // to prevent 'Asset Pending' UI while maintaining professional appearance.
+  // CEO, this is the high-integrity fallback. If a specific unique ID 
+  // between 12-553 is requested but missing, we use the primary hero asset 
+  // to ensure the storefront stays premium until you provide the unique links.
   const fallbackImage = PlaceHolderImages.find((img) => img.id === 'prod_img_1');
 
   return { 
