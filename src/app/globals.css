@@ -23,7 +23,7 @@
     --border: 220 13% 91%;
     --input: 220 13% 91%;
     --ring: 142 71% 45%;
-    --radius: 1rem;
+    --radius: 1.5rem;
   }
 
   .dark {
@@ -71,18 +71,31 @@
 }
 
 .glass-header {
-  @apply sticky top-0 z-50 w-full border-b bg-background/60 backdrop-blur-xl;
+  @apply sticky top-0 z-50 w-full border-b bg-white/70 backdrop-blur-2xl transition-all duration-500;
 }
 
 .product-card-hover {
-  @apply transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)];
+  @apply transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)];
 }
 
 .hero-gradient {
-  background: radial-gradient(circle at top right, hsl(var(--primary)/0.15), transparent 50%),
-              radial-gradient(circle at bottom left, hsl(var(--accent)/0.08), transparent 50%);
+  background: radial-gradient(circle at top right, hsl(var(--primary)/0.1), transparent 60%),
+              radial-gradient(circle at bottom left, hsl(var(--accent)/0.05), transparent 60%);
 }
 
 .luxury-text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/60;
+  @apply bg-clip-text text-transparent bg-gradient-to-br from-foreground via-foreground/90 to-foreground/50;
+}
+
+.btn-luxury {
+  @apply relative overflow-hidden transition-all duration-500 active:scale-95;
+}
+
+.btn-luxury::after {
+  content: '';
+  @apply absolute inset-0 bg-white/20 translate-y-full transition-transform duration-500;
+}
+
+.btn-luxury:hover::after {
+  @apply translate-y-0;
 }
