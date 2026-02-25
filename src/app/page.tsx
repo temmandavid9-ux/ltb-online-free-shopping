@@ -1,3 +1,4 @@
+
 import { products } from '@/lib/data';
 import {
   Carousel,

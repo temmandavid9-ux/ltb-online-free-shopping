@@ -1,11 +1,12 @@
+
 import { PlaceHolderImages } from '../placeholder-images';
 
 /**
  * Retrieves assets from the registry based on their ID.
- * Performs a strict lookup to ensure all verified links are displayed.
+ * Ensures a strict one-to-one mapping to prevent link repetition.
  */
 export const findImage = (id: string) => {
-  // Look for the specific ID in our populated registry
+  // Strict lookup in the deduplicated registry
   const image = PlaceHolderImages.find((img) => img.id === id);
   
   if (image && image.imageUrl) {
@@ -15,9 +16,9 @@ export const findImage = (id: string) => {
     };
   }
 
-  // Fallback if no specific mapping is found
+  // No repetition allowed: if no unique asset is mapped to this ID, return empty.
   return { 
     url: "", 
-    hint: "asset pending" 
+    hint: "unique asset pending" 
   };
 };
