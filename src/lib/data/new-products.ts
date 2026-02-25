@@ -37,5 +37,6 @@ export const newProducts: Product[] = [
     reviewCount: 85
   },
   ...generateBatch(411, 424),
-  ...generateBatch(425, 450)
+  ...generateBatch(425, 450),
+  ...generateBatch(451, 477)
 ];
