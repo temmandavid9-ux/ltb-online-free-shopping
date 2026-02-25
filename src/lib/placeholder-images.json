@@ -2,69 +2,75 @@
   "placeholderImages": [
     {
       "id": "prod_img_1",
-      "description": "Prestige Foundation",
+      "description": "Prestige Collection #1",
       "imageUrl": "https://image2url.com/r2/default/files/1771940966609-b927061a-b8ae-4d96-b236-35a78c784bae.avif",
-      "imageHint": "prestige luxury"
+      "imageHint": "luxury prestige"
     },
     {
       "id": "prod_img_2",
-      "description": "Elite Foundation",
+      "description": "Elite Collection #2",
       "imageUrl": "https://image2url.com/r2/default/files/1771941181225-7311e871-65d3-4eb5-9dad-4790de51d52e.avif",
       "imageHint": "elite class"
     },
     {
       "id": "prod_img_3",
-      "description": "Signature Foundation",
+      "description": "Signature Collection #3",
       "imageUrl": "https://image2url.com/r2/default/files/1771941212937-8689c1de-14dc-47b6-a70d-d43cbf98c2e6.avif",
-      "imageHint": "signature standard"
+      "imageHint": "signature style"
     },
     {
       "id": "prod_img_4",
-      "description": "Ultimate Foundation",
+      "description": "Ultimate Collection #4",
       "imageUrl": "https://image2url.com/r2/default/files/1771941258775-5021bb4f-770c-46af-b3d1-1b01cb850d75.jpg",
       "imageHint": "ultimate quality"
     },
     {
       "id": "prod_img_5",
-      "description": "Legacy Foundation",
+      "description": "Legacy Collection #5",
       "imageUrl": "https://image2url.com/r2/default/files/1771941278184-8a6ca1b1-f5b7-4d91-a8cd-349a7ef6e269.avif",
-      "imageHint": "legacy style"
+      "imageHint": "legacy heritage"
     },
     {
       "id": "prod_img_6",
-      "description": "Heritage Foundation",
+      "description": "Heritage Collection #6",
       "imageUrl": "https://image2url.com/r2/default/files/1771941298482-8e2ce328-4edd-440a-9e23-0b5d4eb82db8.avif",
       "imageHint": "heritage perfection"
     },
     {
       "id": "prod_img_7",
-      "description": "Prime Foundation",
+      "description": "Prime Collection #7",
       "imageUrl": "https://image2url.com/r2/default/files/1771941318401-fbd12e9f-8573-40fb-ad56-8aa364a680b3.avif",
       "imageHint": "prime elegance"
     },
     {
       "id": "prod_img_8",
-      "description": "Royal Foundation",
+      "description": "Royal Collection #8",
       "imageUrl": "https://image2url.com/r2/default/files/1771941338460-b8a00990-b788-42d5-a67c-e2a02680ec89.avif",
-      "imageHint": "royal echelon"
+      "imageHint": "royal luxury"
     },
     {
       "id": "prod_img_9",
-      "description": "Vertex Foundation",
+      "description": "Vertex Collection #9",
       "imageUrl": "https://image2url.com/r2/default/files/1771941354343-d919508e-5eea-4c78-a755-00f841f3d9e6.avif",
-      "imageHint": "vertex curve"
+      "imageHint": "vertex elite"
     },
     {
       "id": "prod_img_10",
-      "description": "Apex Foundation",
+      "description": "Apex Collection #10",
       "imageUrl": "https://image2url.com/r2/default/files/1771941376024-3bd3ad10-aba0-4228-b2ed-79c332df8445.avif",
-      "imageHint": "apex heights"
+      "imageHint": "apex peak"
     },
     {
       "id": "prod_img_11",
-      "description": "Core Foundation",
+      "description": "Core Collection #11",
       "imageUrl": "https://image2url.com/r2/default/files/1771941397993-b3b4382c-c7ea-478c-be29-2fca176d1e2d.avif",
-      "imageHint": "core experience"
+      "imageHint": "core essential"
+    },
+    {
+      "id": "prod_img_12",
+      "description": "Master Slot 12",
+      "imageUrl": "https://image2url.com/r2/default/files/1771941181225-7311e871-65d3-4eb5-9dad-4790de51d52e.avif",
+      "imageHint": "asset pending"
     },
     {
       "id": "prod_img_411",

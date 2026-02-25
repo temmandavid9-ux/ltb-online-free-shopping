@@ -5,7 +5,7 @@ import Link from 'next/link';
 import type { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { useRedeem } from '@/context/CartContext';
-import { Star, ImageOff, Plus, ShoppingBag } from 'lucide-react';
+import { Star, ImageOff, ShoppingBag } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 
@@ -18,21 +18,21 @@ const PriceDisplay = ({ price }: { price: number }) => {
   const [dollars, cents] = priceString.split('.');
   return (
     <div className="flex items-baseline font-headline">
-      <span className="text-xs font-bold text-muted-foreground mr-0.5">$</span>
-      <span className="text-xl font-black">{dollars}</span>
-      <span className="text-xs font-bold text-muted-foreground">.{cents}</span>
+      <span className="text-[10px] font-black text-muted-foreground mr-0.5">$</span>
+      <span className="text-xl font-black text-foreground">{dollars}</span>
+      <span className="text-[10px] font-black text-muted-foreground">.{cents}</span>
     </div>
   );
 };
 
 const StarRating = ({ rating, reviewCount }: { rating: number, reviewCount: number }) => {
     return (
-      <div className="flex items-center gap-1 text-[10px] uppercase tracking-tighter text-muted-foreground">
-        <div className="flex text-yellow-500">
+      <div className="flex items-center gap-1.5 text-[9px] uppercase tracking-widest font-black text-muted-foreground">
+        <div className="flex text-amber-400">
           <Star className="w-2.5 h-2.5 fill-current" />
         </div>
-        <span className="font-bold text-foreground">{rating}</span>
-        <span>({reviewCount < 1000 ? reviewCount : `${(reviewCount / 1000).toFixed(1)}k`})</span>
+        <span className="text-foreground">{rating}</span>
+        <span className="opacity-50">({reviewCount < 1000 ? reviewCount : `${(reviewCount / 1000).toFixed(1)}k`})</span>
       </div>
     );
 };
@@ -41,7 +41,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { addToBasket } = useRedeem();
   const [imgSrc, setImgSrc] = useState(product.images[0]?.url || '');
   const [imgError, setImgError] = useState(false);
-  const isBestSeller = product.reviewCount > 200;
+  const isExclusive = product.id.includes('exclusive');
 
   useEffect(() => {
     setImgSrc(product.images[0]?.url || '');
@@ -49,12 +49,12 @@ export default function ProductCard({ product }: ProductCardProps) {
   }, [product]);
 
   return (
-    <div className="product-card-hover bg-card group relative flex flex-col h-full border border-border/40 overflow-hidden rounded-xl">
-        <Link href={`/product/${product.slug}`} className="block relative aspect-square overflow-hidden bg-muted/20">
-            {isBestSeller && (
-                <div className="absolute top-3 left-3 z-10">
-                  <Badge className="bg-foreground text-background border-none font-bold uppercase text-[9px] tracking-widest px-2 py-0.5">
-                    Best Seller
+    <div className="product-card-hover bg-white group relative flex flex-col h-full border border-border/20 overflow-hidden rounded-[2rem]">
+        <Link href={`/product/${product.slug}`} className="block relative aspect-[4/5] overflow-hidden bg-muted/5">
+            {isExclusive && (
+                <div className="absolute top-5 left-5 z-10">
+                  <Badge className="bg-black text-white border-none font-black uppercase text-[8px] tracking-[0.2em] px-3 py-1 rounded-full shadow-2xl">
+                    Exclusive
                   </Badge>
                 </div>
             )}
@@ -62,44 +62,44 @@ export default function ProductCard({ product }: ProductCardProps) {
               <Image
                 src={imgSrc}
                 alt={product.name}
-                data-ai-hint={product.images[0]?.hint || 'product'}
+                data-ai-hint={product.images[0]?.hint || 'luxury product'}
                 width={600}
-                height={600}
-                priority={product.id === 'prod_160'}
-                className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+                height={750}
+                priority={product.id.includes('exclusive_1')}
+                className="object-cover w-full h-full transition-all duration-[1.2s] ease-out group-hover:scale-110"
                 onError={() => setImgError(true)}
               />
             ) : (
-              <div className="flex flex-col items-center justify-center h-full text-muted-foreground/20">
-                <ImageOff className="w-12 h-12" />
+              <div className="flex flex-col items-center justify-center h-full text-muted-foreground/10">
+                <ImageOff className="w-16 h-16" />
               </div>
             )}
-            <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-700" />
         </Link>
 
-        <div className="p-4 flex flex-col flex-grow">
-            <div className="mb-1">
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/80">{product.brand}</span>
+        <div className="p-6 flex flex-col flex-grow">
+            <div className="mb-2">
+              <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary/60">{product.brand}</span>
             </div>
             
-            <h3 className="text-[14px] font-bold leading-tight mb-3 line-clamp-2 min-h-[2.5rem]">
+            <h3 className="text-[15px] font-bold leading-tight mb-4 line-clamp-2 min-h-[2.5rem] tracking-tight text-foreground/90">
                 <Link href={`/product/${product.slug}`} className="hover:text-primary transition-colors">
                     {product.name}
                 </Link>
             </h3>
             
-            <div className="mt-auto pt-4 border-t border-border/40">
-                <div className="flex items-center justify-between mb-4">
+            <div className="mt-auto pt-5 border-t border-border/10">
+                <div className="flex items-center justify-between mb-5">
                     <PriceDisplay price={product.price} />
                     <StarRating rating={product.rating} reviewCount={product.reviewCount} />
                 </div>
 
                 <Button 
-                  className="w-full bg-foreground text-background hover:bg-primary hover:text-primary-foreground font-black uppercase text-[11px] tracking-[0.2em] h-11 transition-all rounded-lg gap-2"
+                  className="w-full bg-black text-white hover:bg-primary hover:text-white font-black uppercase text-[10px] tracking-[0.25em] h-14 transition-all rounded-2xl gap-3 shadow-xl shadow-black/5 active:scale-95"
                   onClick={() => addToBasket(product)}
                 >
-                    <ShoppingBag className="w-3.5 h-3.5" />
-                    Redeem
+                    <ShoppingBag className="w-4 h-4" />
+                    Redeem Item
                 </Button>
             </div>
         </div>

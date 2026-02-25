@@ -1,4 +1,3 @@
-
 import { products } from '@/lib/data';
 import {
   Carousel,
@@ -17,112 +16,113 @@ import { Sparkles, Trophy, ShieldCheck, Zap, Crown } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 
 const MASTER_ASSETS = [
-  { id: '13', title: 'Prestige Collection', desc: 'The definitive standard of luxury.', url: "https://image2url.com/r2/default/files/1771940966609-b927061a-b8ae-4d96-b236-35a78c784bae.avif", color: 'bg-indigo-950' },
-  { id: '12', title: 'Elite Collection', desc: 'Zenith of refinement and class.', url: "https://image2url.com/r2/default/files/1771941181225-7311e871-65d3-4eb5-9dad-4790de51d52e.avif", color: 'bg-black' },
-  { id: '11', title: 'Signature Collection', desc: 'Peak standard for Eden 0² aesthetics.', url: "https://image2url.com/r2/default/files/1771941212937-8689c1de-14dc-47b6-a70d-d43cbf98c2e6.avif", color: 'bg-neutral-900' },
-  { id: '10', title: 'Ultimate Collection', desc: 'Unmatched quality and presence.', url: "https://image2url.com/r2/default/files/1771941258775-5021bb4f-770c-46af-b3d1-1b01cb850d75.jpg", color: 'bg-slate-950' }
+  { id: '1', title: 'Prestige Collection', desc: 'The definitive standard of luxury verified by Eden 0².', url: "https://image2url.com/r2/default/files/1771940966609-b927061a-b8ae-4d96-b236-35a78c784bae.avif", color: 'bg-stone-950' },
+  { id: '2', title: 'Elite Collection', desc: 'Zenith of refinement and verified status.', url: "https://image2url.com/r2/default/files/1771941181225-7311e871-65d3-4eb5-9dad-4790de51d52e.avif", color: 'bg-neutral-900' },
+  { id: '3', title: 'Signature Selection', desc: 'Peak aesthetics for the global elite.', url: "https://image2url.com/r2/default/files/1771941212937-8689c1de-14dc-47b6-a70d-d43cbf98c2e6.avif", color: 'bg-black' }
 ];
 
 export default function Home() {
   const heritageProducts = products.filter(p => p.id.includes('exclusive') && parseInt(p.id.split('_').pop() || '0') >= 554).slice(0, 4);
 
   return (
-    <div className="pb-20">
-      <section className="relative overflow-hidden mb-12">
+    <div className="pb-24 hero-gradient">
+      <section className="relative overflow-hidden mb-16">
         <Carousel className="w-full" opts={{ loop: true }}>
           <CarouselContent>
             {MASTER_ASSETS.map((asset) => (
               <CarouselItem key={asset.id}>
-                <div className={`${asset.color} relative h-[500px] md:h-[650px] flex items-center`}>
-                  <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
-                    <div className="z-10 text-white space-y-6">
-                      <div className="flex items-center gap-2 text-primary">
-                        <Trophy className="w-5 h-5" />
-                        <span className="text-xs font-black uppercase tracking-[0.3em]">Official Eden Selection</span>
+                <div className={`${asset.color} relative h-[600px] md:h-[800px] flex items-center overflow-hidden`}>
+                  <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center gap-16">
+                    <div className="z-10 text-white space-y-8 animate-in slide-in-from-left duration-700">
+                      <div className="flex items-center gap-3 text-primary">
+                        <Trophy className="w-6 h-6" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em]">Official Eden Registry</span>
                       </div>
-                      <h2 className="text-5xl md:text-7xl font-black font-headline tracking-tighter leading-none">{asset.title}</h2>
-                      <p className="text-xl text-white/60 font-light max-w-md">{asset.desc}</p>
-                      <div className="flex flex-wrap gap-4 pt-4">
-                        <Button size="lg" className="bg-white text-black hover:bg-primary hover:text-white font-black rounded-full px-10 h-14 uppercase tracking-widest text-xs" asChild>
+                      <h2 className="text-6xl md:text-8xl font-black font-headline tracking-tighter leading-[0.9] luxury-text-gradient brightness-[3]">
+                        {asset.title}
+                      </h2>
+                      <p className="text-xl text-white/50 font-light max-w-lg leading-relaxed">{asset.desc}</p>
+                      <div className="flex flex-wrap gap-5 pt-6">
+                        <Button size="lg" className="bg-white text-black hover:bg-primary hover:text-white font-black rounded-full px-12 h-16 uppercase tracking-[0.2em] text-[10px] shadow-2xl transition-all active:scale-95" asChild>
                           <Link href="/redeem">Explore Collection</Link>
                         </Button>
-                        <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 font-black rounded-full px-10 h-14 uppercase tracking-widest text-xs">
+                        <Button size="lg" variant="outline" className="border-white/10 text-white hover:bg-white/5 font-black rounded-full px-12 h-16 uppercase tracking-[0.2em] text-[10px] transition-all">
                           View Lookbook
                         </Button>
                       </div>
                     </div>
-                    <div className="hidden md:block relative h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+                    <div className="hidden md:block relative h-[600px] rounded-[3rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-white/5 group">
                       <Image 
                         src={asset.url} 
                         alt={asset.title} 
                         fill
-                        priority={asset.id === '13'}
-                        className="object-cover transition-transform duration-[2s] group-hover:scale-110"
+                        priority={asset.id === '1'}
+                        className="object-cover transition-all duration-[3s] ease-out group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     </div>
                   </div>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="absolute bottom-10 right-10 flex gap-2 z-20">
-            <CarouselPrevious className="relative translate-y-0 translate-x-0 h-12 w-12 bg-white/10 hover:bg-white/20 text-white border-white/20" />
-            <CarouselNext className="relative translate-y-0 translate-x-0 h-12 w-12 bg-white/10 hover:bg-white/20 text-white border-white/20" />
+          <div className="absolute bottom-12 right-12 flex gap-3 z-20">
+            <CarouselPrevious className="relative translate-y-0 translate-x-0 h-14 w-14 bg-white/5 hover:bg-white/10 text-white border-white/10 rounded-full" />
+            <CarouselNext className="relative translate-y-0 translate-x-0 h-14 w-14 bg-white/5 hover:bg-white/10 text-white border-white/10 rounded-full" />
           </div>
         </Carousel>
       </section>
 
-      <div className="container mx-auto px-4 mb-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-y border-border/40">
-          <div className="flex items-center gap-4">
-            <ShieldCheck className="w-10 h-10 text-primary" />
+      <div className="container mx-auto px-4 mb-24">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 py-16 border-y border-border/10 bg-white/30 backdrop-blur-sm rounded-[3rem] px-8">
+          <div className="flex flex-col items-center text-center gap-4">
+            <ShieldCheck className="w-12 h-12 text-primary" />
             <div>
-              <h4 className="text-xs font-black uppercase tracking-widest">Verified Origins</h4>
-              <p className="text-[11px] text-muted-foreground">100% Authentic Assets</p>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-1">Verified Origins</h4>
+              <p className="text-[11px] text-muted-foreground/60">100% Authentic Assets</p>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <Zap className="w-10 h-10 text-primary" />
+          <div className="flex flex-col items-center text-center gap-4">
+            <Zap className="w-12 h-12 text-primary" />
             <div>
-              <h4 className="text-xs font-black uppercase tracking-widest">Instant Rewards</h4>
-              <p className="text-[11px] text-muted-foreground">Claim Balance Today</p>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-1">Instant Rewards</h4>
+              <p className="text-[11px] text-muted-foreground/60">Claim Balance Today</p>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <Sparkles className="w-10 h-10 text-primary" />
+          <div className="flex flex-col items-center text-center gap-4">
+            <Sparkles className="w-12 h-12 text-primary" />
             <div>
-              <h4 className="text-xs font-black uppercase tracking-widest">Premium Selection</h4>
-              <p className="text-[11px] text-muted-foreground">Curated for Excellence</p>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-1">Premium Selection</h4>
+              <p className="text-[11px] text-muted-foreground/60">Curated for Excellence</p>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-            <Trophy className="w-10 h-10 text-primary" />
+          <div className="flex flex-col items-center text-center gap-4">
+            <Trophy className="w-12 h-12 text-primary" />
             <div>
-              <h4 className="text-xs font-black uppercase tracking-widest">Elite Membership</h4>
-              <p className="text-[11px] text-muted-foreground">Exclusive Store Access</p>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-1">Elite Membership</h4>
+              <p className="text-[11px] text-muted-foreground/60">Exclusive Store Access</p>
             </div>
           </div>
         </div>
       </div>
 
       {heritageProducts.length > 0 && (
-        <section className="container mx-auto px-4 mb-24">
-          <div className="flex items-center justify-between mb-10">
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-primary/10 rounded-2xl">
-                <Crown className="w-8 h-8 text-primary" />
+        <section className="container mx-auto px-4 mb-32">
+          <div className="flex items-end justify-between mb-12">
+            <div className="flex items-center gap-5">
+              <div className="p-5 bg-white shadow-xl rounded-[2rem]">
+                <Crown className="w-10 h-10 text-black" />
               </div>
               <div>
-                <h2 className="text-3xl font-black font-headline tracking-tighter">Heritage Elite Series</h2>
-                <p className="text-muted-foreground text-sm font-bold uppercase tracking-widest">Latest Verified Masterpieces</p>
+                <h2 className="text-4xl font-black font-headline tracking-tighter luxury-text-gradient">Heritage Elite Series</h2>
+                <p className="text-muted-foreground/60 text-[10px] font-black uppercase tracking-[0.4em] mt-1">Latest Verified Masterpieces</p>
               </div>
             </div>
-            <Button variant="ghost" className="font-black uppercase tracking-widest text-[11px]" asChild>
-              <Link href="/redeem">View All</Link>
+            <Button variant="ghost" className="font-black uppercase tracking-[0.3em] text-[9px] h-12 px-8 rounded-full border border-border/10" asChild>
+              <Link href="/redeem">View All Assets</Link>
             </Button>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
             {heritageProducts.map(product => (
               <ProductCard key={product.id} product={product} />
             ))}
