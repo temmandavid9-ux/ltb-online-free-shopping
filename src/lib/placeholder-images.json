@@ -10,7 +10,7 @@
       "id": "prod_img_2",
       "description": "Elite Collection",
       "imageUrl": "https://image2url.com/r2/default/files/1771941181225-7311e871-65d3-4eb5-9dad-4790de51d52e.avif",
-      "imageHint": "premium collection"
+      "imageHint": "premium quality"
     },
     {
       "id": "prod_img_3",
@@ -22,7 +22,7 @@
       "id": "prod_img_4",
       "description": "Ultimate Collection",
       "imageUrl": "https://image2url.com/r2/default/files/1771941258775-5021bb4f-770c-46af-b3d1-1b01cb850d75.jpg",
-      "imageHint": "ultimate quality"
+      "imageHint": "ultimate luxury"
     },
     {
       "id": "prod_img_5",
@@ -58,7 +58,7 @@
       "id": "prod_img_10",
       "description": "Apex Collection",
       "imageUrl": "https://image2url.com/r2/default/files/1771941376024-3bd3ad10-aba0-4228-b2ed-79c332df8445.avif",
-      "imageHint": "apex high"
+      "imageHint": "apex peak"
     },
     {
       "id": "prod_img_11",
@@ -68,15 +68,15 @@
     },
     {
       "id": "prod_img_12",
-      "description": "Founder Collection",
+      "description": "Verified Asset 12",
       "imageUrl": "https://image2url.com/r2/default/files/1771941426060-2e2decb9-ea7a-4e64-b35e-2b5484fe5f76.avif",
-      "imageHint": "founder vision"
+      "imageHint": "verified asset"
     },
     {
       "id": "prod_img_13",
-      "description": "Origin Collection",
+      "description": "Verified Asset 13",
       "imageUrl": "https://image2url.com/r2/default/files/1771941447081-ad4689a9-354a-47b8-9caf-f33939555eff.avif",
-      "imageHint": "origin start"
+      "imageHint": "verified asset"
     },
     {
       "id": "prod_img_14",
@@ -2404,7 +2404,7 @@
       "id": "prod_img_401",
       "description": "Exclusive Asset 401",
       "imageUrl": "https://image2url.com/r2/default/files/1772016256846-5a8256a2-9537-4f0c-8a28-b4df3cd51304.avif",
-      "imageHint": "premium collection"
+      "imageHint": "premium quality"
     },
     {
       "id": "prod_img_402",
@@ -2416,7 +2416,7 @@
       "id": "prod_img_403",
       "description": "Exclusive Asset 403",
       "imageUrl": "https://image2url.com/r2/default/files/1772016302621-b3d30949-b980-401d-86d0-22b6655d648e.avif",
-      "imageHint": "ultimate quality"
+      "imageHint": "ultimate luxury"
     },
     {
       "id": "prod_img_404",
