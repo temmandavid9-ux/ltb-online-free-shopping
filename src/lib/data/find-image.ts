@@ -18,8 +18,6 @@ export const findImage = (id: string) => {
   }
 
   // Extract the numeric part of the ID for the seed (e.g., prod_img_127 -> 127)
-  // This ensures that even for IDs not explicitly in the registry yet, 
-  // every product gets a unique, consistent high-quality image.
   const seedMatch = id.match(/\d+/);
   const seed = seedMatch ? seedMatch[0] : 'fallback';
 
