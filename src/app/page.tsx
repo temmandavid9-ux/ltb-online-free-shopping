@@ -1,4 +1,3 @@
-
 import { products } from '@/lib/data';
 import {
   Carousel,
@@ -13,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import ProductGrid from '@/components/ProductGrid';
 import { AiRecommendations } from '@/components/AiRecommendations';
+import { Sparkles, Trophy, ShieldCheck, Zap } from 'lucide-react';
 
 const MASTER_ASSETS = [
   { id: '13', title: 'Prestige Collection', desc: 'The definitive standard of luxury.', url: "https://image2url.com/r2/default/files/1771940966609-b927061a-b8ae-4d96-b236-35a78c784bae.avif", color: 'bg-indigo-950' },
@@ -32,51 +32,89 @@ const MASTER_ASSETS = [
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <section className="mb-12">
+    <div className="pb-20">
+      <section className="relative overflow-hidden mb-12">
         <Carousel className="w-full" opts={{ loop: true }}>
           <CarouselContent>
             {MASTER_ASSETS.map((asset) => (
               <CarouselItem key={asset.id}>
-                <Card className={`${asset.color} text-white overflow-hidden border-none shadow-2xl`}>
-                  <div className="flex flex-col md:flex-row items-center justify-between p-8 md:p-12 min-h-[400px]">
-                      <div className="z-10 max-w-lg mb-8 md:mb-0">
-                          <h2 className="text-4xl md:text-5xl font-bold mb-4 font-headline tracking-tight">{asset.title}</h2>
-                          <p className="text-xl mb-8 text-white/70 font-light">{asset.desc}</p>
-                          <div className="flex gap-4">
-                            <Button size="lg" variant="secondary" className="font-bold px-8" asChild>
-                              <Link href="/redeem">Explore Collection</Link>
-                            </Button>
-                          </div>
+                <div className={`${asset.color} relative h-[500px] md:h-[650px] flex items-center`}>
+                  <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+                    <div className="z-10 text-white space-y-6">
+                      <div className="flex items-center gap-2 text-primary">
+                        <Trophy className="w-5 h-5" />
+                        <span className="text-xs font-black uppercase tracking-[0.3em]">Official Eden Selection</span>
                       </div>
-                      <div className="relative w-full md:w-[500px] h-[350px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-white/5 flex items-center justify-center">
-                        {asset.url ? (
-                          <Image 
-                            src={asset.url} 
-                            alt={asset.title} 
-                            fill
-                            priority={asset.id === '13'}
-                            unoptimized={true}
-                            className="object-cover transition-transform duration-700 hover:scale-110"
-                            data-ai-hint="lifestyle collection"
-                          />
-                        ) : (
-                          <div className="text-white/20 text-sm font-medium italic">Asset Pending</div>
-                        )}
+                      <h2 className="text-5xl md:text-7xl font-black font-headline tracking-tighter leading-none">{asset.title}</h2>
+                      <p className="text-xl text-white/60 font-light max-w-md">{asset.desc}</p>
+                      <div className="flex flex-wrap gap-4 pt-4">
+                        <Button size="lg" className="bg-white text-black hover:bg-primary hover:text-white font-black rounded-full px-10 h-14 uppercase tracking-widest text-xs" asChild>
+                          <Link href="/redeem">Explore Collection</Link>
+                        </Button>
+                        <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 font-black rounded-full px-10 h-14 uppercase tracking-widest text-xs">
+                          View Lookbook
+                        </Button>
                       </div>
+                    </div>
+                    <div className="hidden md:block relative h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+                      <Image 
+                        src={asset.url} 
+                        alt={asset.title} 
+                        fill
+                        priority={asset.id === '13'}
+                        className="object-cover transition-transform duration-[2s] group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    </div>
                   </div>
-                </Card>
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-4 bg-white/10 hover:bg-white/20 text-white border-none"/>
-          <CarouselNext className="right-4 bg-white/10 hover:bg-white/20 text-white border-none"/>
+          <div className="absolute bottom-10 right-10 flex gap-2 z-20">
+            <CarouselPrevious className="relative translate-y-0 translate-x-0 h-12 w-12 bg-white/10 hover:bg-white/20 text-white border-white/20" />
+            <CarouselNext className="relative translate-y-0 translate-x-0 h-12 w-12 bg-white/10 hover:bg-white/20 text-white border-white/20" />
+          </div>
         </Carousel>
       </section>
+
+      <div className="container mx-auto px-4 mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-y border-border/40">
+          <div className="flex items-center gap-4">
+            <ShieldCheck className="w-10 h-10 text-primary" />
+            <div>
+              <h4 className="text-xs font-black uppercase tracking-widest">Verified Origins</h4>
+              <p className="text-[11px] text-muted-foreground">100% Authentic Assets</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <Zap className="w-10 h-10 text-primary" />
+            <div>
+              <h4 className="text-xs font-black uppercase tracking-widest">Instant Rewards</h4>
+              <p className="text-[11px] text-muted-foreground">Claim Balance Today</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <Sparkles className="w-10 h-10 text-primary" />
+            <div>
+              <h4 className="text-xs font-black uppercase tracking-widest">Premium Selection</h4>
+              <p className="text-[11px] text-muted-foreground">Curated for Excellence</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <Trophy className="w-10 h-10 text-primary" />
+            <div>
+              <h4 className="text-xs font-black uppercase tracking-widest">Elite Membership</h4>
+              <p className="text-[11px] text-muted-foreground">Exclusive Store Access</p>
+            </div>
+          </div>
+        </div>
+      </div>
       
-      <ProductGrid products={products} />
-      
-      <AiRecommendations />
+      <div className="container mx-auto px-4">
+        <ProductGrid products={products} />
+        <AiRecommendations />
+      </div>
     </div>
   );
 }

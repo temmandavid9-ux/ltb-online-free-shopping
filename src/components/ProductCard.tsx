@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image';
@@ -6,30 +5,33 @@ import Link from 'next/link';
 import type { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { useRedeem } from '@/context/CartContext';
-import { Star, ImageOff } from 'lucide-react';
+import { Star, ImageOff, Plus } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { Badge } from '@/components/ui/badge';
 
 type ProductCardProps = {
   product: Product;
 };
 
 const PriceDisplay = ({ price }: { price: number }) => {
-  const priceString = price.toFixed(2);
+  const priceString = price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const [dollars, cents] = priceString.split('.');
   return (
-    <div className="flex items-baseline text-accent">
-      <span className="text-lg font-bold">$</span>
-      <span className="text-3xl font-bold">{dollars}</span>
-      <span className="text-lg font-bold">.{cents}</span>
+    <div className="flex items-baseline font-headline">
+      <span className="text-xs font-bold text-muted-foreground mr-0.5">$</span>
+      <span className="text-xl font-black">{dollars}</span>
+      <span className="text-xs font-bold text-muted-foreground">.{cents}</span>
     </div>
   );
 };
 
 const StarRating = ({ rating, reviewCount }: { rating: number, reviewCount: number }) => {
     return (
-      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-        <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
-        <span className="font-medium text-foreground">{rating}</span>
+      <div className="flex items-center gap-1 text-[10px] uppercase tracking-tighter text-muted-foreground">
+        <div className="flex text-yellow-500">
+          <Star className="w-2.5 h-2.5 fill-current" />
+        </div>
+        <span className="font-bold text-foreground">{rating}</span>
         <span>({reviewCount < 1000 ? reviewCount : `${(reviewCount / 1000).toFixed(1)}k`})</span>
       </div>
     );
@@ -47,11 +49,13 @@ export default function ProductCard({ product }: ProductCardProps) {
   }, [product]);
 
   return (
-    <div className="bg-card rounded-lg overflow-hidden group transition-all duration-300 hover:shadow-lg flex flex-col h-full border">
-        <Link href={`/product/${product.slug}`} className="block overflow-hidden relative">
+    <div className="product-card-hover bg-card group relative flex flex-col h-full border border-border/40 overflow-hidden rounded-xl">
+        <Link href={`/product/${product.slug}`} className="block relative aspect-square overflow-hidden bg-muted/20">
             {isBestSeller && (
-                <div className="absolute top-2 left-0 bg-accent text-accent-foreground text-xs font-bold py-1 px-2.5 rounded-r-md z-10">
-                Best Seller
+                <div className="absolute top-3 left-3 z-10">
+                  <Badge className="bg-accent text-accent-foreground border-none font-bold uppercase text-[9px] tracking-widest px-2 py-0.5">
+                    Best Seller
+                  </Badge>
                 </div>
             )}
             {!imgError && imgSrc ? (
@@ -63,33 +67,38 @@ export default function ProductCard({ product }: ProductCardProps) {
                 height={600}
                 priority={product.id === 'prod_160'}
                 unoptimized={true}
-                onError={() => {
-                  setImgError(true);
-                }}
-                className="aspect-square object-cover w-full transition-transform duration-300 group-hover:scale-105"
+                onError={() => setImgError(true)}
+                className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
               />
             ) : (
-              <div className="aspect-square bg-muted/30 flex flex-col items-center justify-center text-muted-foreground">
-                <ImageOff className="w-8 h-8 opacity-10" />
+              <div className="flex flex-col items-center justify-center h-full text-muted-foreground/20">
+                <ImageOff className="w-12 h-12" />
               </div>
             )}
+            <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         </Link>
 
-        <div className="p-3 flex flex-col flex-grow">
-            <h3 className="text-sm font-medium text-foreground leading-snug h-10 mb-2">
+        <div className="p-4 flex flex-col flex-grow">
+            <div className="mb-1">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-primary/60">{product.brand}</span>
+            </div>
+            
+            <h3 className="text-[13px] font-bold leading-tight mb-3 line-clamp-2 h-8">
                 <Link href={`/product/${product.slug}`} className="hover:text-primary transition-colors">
                     {product.name}
                 </Link>
             </h3>
             
-            <div className="mt-auto space-y-3">
-                <div className="flex items-center justify-between">
+            <div className="mt-auto pt-4 border-t border-border/40">
+                <div className="flex items-center justify-between mb-4">
                     <PriceDisplay price={product.price} />
+                    <StarRating rating={product.rating} reviewCount={product.reviewCount} />
                 </div>
 
-                <StarRating rating={product.rating} reviewCount={product.reviewCount} />
-
-                <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold rounded-lg" onClick={() => addToBasket(product)}>
+                <Button 
+                  className="w-full bg-foreground text-background hover:bg-primary hover:text-primary-foreground font-black uppercase text-[11px] tracking-[0.2em] h-10 transition-all rounded-lg"
+                  onClick={() => addToBasket(product)}
+                >
                     Redeem
                 </Button>
             </div>

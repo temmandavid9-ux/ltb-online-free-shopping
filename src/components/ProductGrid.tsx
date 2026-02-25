@@ -11,7 +11,6 @@ type ProductGridProps = {
 };
 
 export default function ProductGrid({ products }: ProductGridProps) {
-  // Changed default category from 'Clothes' to 'All' to ensure all products are visible on load
   const [filters, setFilters] = useState({
     category: 'All',
     search: '',
@@ -36,27 +35,27 @@ export default function ProductGrid({ products }: ProductGridProps) {
   }
 
   return (
-    <>
+    <section className="py-12">
+      <div className="text-center mb-12">
+        <h2 className="text-[10px] font-black uppercase tracking-[0.5em] text-primary mb-2">Curated Catalog</h2>
+        <h3 className="text-4xl font-black font-headline tracking-tighter">
+          {filters.category === 'All' ? 'World Class Selection' : `Elite ${filters.category} Collection`}
+        </h3>
+      </div>
+
       <CategoryFilter categories={categories} selectedCategory={filters.category} onSelectCategory={handleCategorySelect} />
 
-      <main>
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold font-headline">
-            {filters.category === 'All' ? 'All Products' : `${filters.category} For You`}
-          </h2>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-          {filteredProducts.length === 0 && (
-            <div className="col-span-full text-center py-12">
-              <h3 className="text-xl font-semibold">No products found</h3>
-              <p className="text-muted-foreground">Try a different category or search.</p>
-            </div>
-          )}
-        </div>
-      </main>
-    </>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        {filteredProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+        {filteredProducts.length === 0 && (
+          <div className="col-span-full text-center py-24 bg-muted/20 rounded-3xl border border-dashed">
+            <h3 className="text-xl font-bold font-headline mb-2">No items match your criteria</h3>
+            <p className="text-muted-foreground text-sm">Our concierge is sourcing more elite arrivals. Try another collection.</p>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
