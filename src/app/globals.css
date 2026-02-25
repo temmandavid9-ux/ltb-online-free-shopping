@@ -58,7 +58,7 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply tracking-tight;
+    @apply tracking-tight font-headline;
   }
 }
 
@@ -76,4 +76,9 @@
 
 .product-card-hover {
   @apply transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/5;
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at top right, hsl(var(--primary)/0.1), transparent 40%),
+              radial-gradient(circle at bottom left, hsl(var(--accent)/0.05), transparent 40%);
 }

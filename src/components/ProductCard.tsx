@@ -5,7 +5,7 @@ import Link from 'next/link';
 import type { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { useRedeem } from '@/context/CartContext';
-import { Star, ImageOff, Plus } from 'lucide-react';
+import { Star, ImageOff, Plus, ShoppingBag } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 
@@ -53,7 +53,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <Link href={`/product/${product.slug}`} className="block relative aspect-square overflow-hidden bg-muted/20">
             {isBestSeller && (
                 <div className="absolute top-3 left-3 z-10">
-                  <Badge className="bg-accent text-accent-foreground border-none font-bold uppercase text-[9px] tracking-widest px-2 py-0.5">
+                  <Badge className="bg-foreground text-background border-none font-bold uppercase text-[9px] tracking-widest px-2 py-0.5">
                     Best Seller
                   </Badge>
                 </div>
@@ -66,9 +66,8 @@ export default function ProductCard({ product }: ProductCardProps) {
                 width={600}
                 height={600}
                 priority={product.id === 'prod_160'}
-                unoptimized={true}
-                onError={() => setImgError(true)}
                 className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
+                onError={() => setImgError(true)}
               />
             ) : (
               <div className="flex flex-col items-center justify-center h-full text-muted-foreground/20">
@@ -80,10 +79,10 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         <div className="p-4 flex flex-col flex-grow">
             <div className="mb-1">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-primary/60">{product.brand}</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/80">{product.brand}</span>
             </div>
             
-            <h3 className="text-[13px] font-bold leading-tight mb-3 line-clamp-2 h-8">
+            <h3 className="text-[14px] font-bold leading-tight mb-3 line-clamp-2 min-h-[2.5rem]">
                 <Link href={`/product/${product.slug}`} className="hover:text-primary transition-colors">
                     {product.name}
                 </Link>
@@ -96,9 +95,10 @@ export default function ProductCard({ product }: ProductCardProps) {
                 </div>
 
                 <Button 
-                  className="w-full bg-foreground text-background hover:bg-primary hover:text-primary-foreground font-black uppercase text-[11px] tracking-[0.2em] h-10 transition-all rounded-lg"
+                  className="w-full bg-foreground text-background hover:bg-primary hover:text-primary-foreground font-black uppercase text-[11px] tracking-[0.2em] h-11 transition-all rounded-lg gap-2"
                   onClick={() => addToBasket(product)}
                 >
+                    <ShoppingBag className="w-3.5 h-3.5" />
                     Redeem
                 </Button>
             </div>
