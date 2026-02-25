@@ -3,7 +3,7 @@
   "catalogName": "Eden 0² Master Image Assets",
   "totalUniqueVerified": 410,
   "registryCapacity": 1000,
-  "description": "Expanded verified asset registry. Infrastructure now supports 1,000 unique resource slots.",
+  "description": "Expanded verified asset registry. Infrastructure now supports 1,000 unique resource slots. Map your assets to prod_img_1 through prod_img_1000.",
   "folders": {
     "Verified Foundation Assets": [
       "https://image2url.com/r2/default/files/1771940966609-b927061a-b8ae-4d96-b236-35a78c784bae.avif",

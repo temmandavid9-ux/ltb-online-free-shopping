@@ -67,18 +67,6 @@
       "imageHint": "core experience"
     },
     {
-      "id": "prod_img_12",
-      "description": "Secondary 12",
-      "imageUrl": "https://image2url.com/r2/default/files/1771941426060-2e2decb9-ea7a-4e64-b35e-2b5484fe5f76.avif",
-      "imageHint": "founder vision"
-    },
-    {
-      "id": "prod_img_13",
-      "description": "Secondary 13",
-      "imageUrl": "https://image2url.com/r2/default/files/1771941447081-ad4689a9-354a-47b8-9caf-f33939555eff.avif",
-      "imageHint": "origin start"
-    },
-    {
       "id": "prod_img_400",
       "description": "Exclusive 400",
       "imageUrl": "https://image2url.com/r2/default/files/1772016204845-d0175a8d-e360-4984-b584-15d4967fbc56.avif",
