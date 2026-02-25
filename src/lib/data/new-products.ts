@@ -1,3 +1,4 @@
+
 import type { Product } from '../types';
 import { findImage } from './find-image';
 
@@ -22,19 +23,6 @@ const generateBatch = (start: number, end: number, category: string = 'Beauty', 
 };
 
 export const newProducts: Product[] = [
-  {
-    id: 'prod_exclusive_400',
-    slug: 'exclusive-arrival-400',
-    name: 'Masterpiece Collection Piece 1',
-    description: 'A brand new exclusive item offering superior quality and unmatched style from the 1,000-slot registry.',
-    category: 'Beauty',
-    price: 450,
-    brand: 'Nexa',
-    images: [findImage('prod_img_1')],
-    stock: 10,
-    rating: 5.0,
-    reviewCount: 85
-  },
   ...generateBatch(411, 424, 'Clothes', 'Executive Collection'),
   ...generateBatch(425, 450, 'Beauty', 'Premium Selection'),
   ...generateBatch(451, 477, 'Clothes', 'Performance Elite'),
