@@ -2,193 +2,193 @@
   "placeholderImages": [
     {
       "id": "prod_img_1",
-      "description": "Prestige Foundation",
+      "description": "Foundation Asset 1",
       "imageUrl": "https://image2url.com/r2/default/files/1771940966609-b927061a-b8ae-4d96-b236-35a78c784bae.avif",
       "imageHint": "prestige luxury"
     },
     {
       "id": "prod_img_2",
-      "description": "Elite Foundation",
+      "description": "Foundation Asset 2",
       "imageUrl": "https://image2url.com/r2/default/files/1771941181225-7311e871-65d3-4eb5-9dad-4790de51d52e.avif",
       "imageHint": "elite class"
     },
     {
       "id": "prod_img_3",
-      "description": "Signature Foundation",
+      "description": "Foundation Asset 3",
       "imageUrl": "https://image2url.com/r2/default/files/1771941212937-8689c1de-14dc-47b6-a70d-d43cbf98c2e6.avif",
       "imageHint": "signature standard"
     },
     {
       "id": "prod_img_4",
-      "description": "Ultimate Foundation",
+      "description": "Foundation Asset 4",
       "imageUrl": "https://image2url.com/r2/default/files/1771941258775-5021bb4f-770c-46af-b3d1-1b01cb850d75.jpg",
       "imageHint": "ultimate quality"
     },
     {
       "id": "prod_img_5",
-      "description": "Legacy Foundation",
+      "description": "Foundation Asset 5",
       "imageUrl": "https://image2url.com/r2/default/files/1771941278184-8a6ca1b1-f5b7-4d91-a8cd-349a7ef6e269.avif",
       "imageHint": "legacy style"
     },
     {
       "id": "prod_img_6",
-      "description": "Heritage Foundation",
+      "description": "Foundation Asset 6",
       "imageUrl": "https://image2url.com/r2/default/files/1771941298482-8e2ce328-4edd-440a-9e23-0b5d4eb82db8.avif",
       "imageHint": "heritage perfection"
     },
     {
       "id": "prod_img_7",
-      "description": "Prime Foundation",
+      "description": "Foundation Asset 7",
       "imageUrl": "https://image2url.com/r2/default/files/1771941318401-fbd12e9f-8573-40fb-ad56-8aa364a680b3.avif",
       "imageHint": "prime elegance"
     },
     {
       "id": "prod_img_8",
-      "description": "Royal Foundation",
+      "description": "Foundation Asset 8",
       "imageUrl": "https://image2url.com/r2/default/files/1771941338460-b8a00990-b788-42d5-a67c-e2a02680ec89.avif",
       "imageHint": "royal echelon"
     },
     {
       "id": "prod_img_9",
-      "description": "Vertex Foundation",
+      "description": "Foundation Asset 9",
       "imageUrl": "https://image2url.com/r2/default/files/1771941354343-d919508e-5eea-4c78-a755-00f841f3d9e6.avif",
       "imageHint": "vertex curve"
     },
     {
       "id": "prod_img_10",
-      "description": "Apex Foundation",
+      "description": "Foundation Asset 10",
       "imageUrl": "https://image2url.com/r2/default/files/1771941376024-3bd3ad10-aba0-4228-b2ed-79c332df8445.avif",
       "imageHint": "apex heights"
     },
     {
       "id": "prod_img_11",
-      "description": "Core Foundation",
+      "description": "Foundation Asset 11",
       "imageUrl": "https://image2url.com/r2/default/files/1771941397993-b3b4382c-c7ea-478c-be29-2fca176d1e2d.avif",
       "imageHint": "core experience"
     },
     {
       "id": "prod_img_12",
-      "description": "Founder Collection",
+      "description": "Secondary Asset 12",
       "imageUrl": "https://image2url.com/r2/default/files/1771941426060-2e2decb9-ea7a-4e64-b35e-2b5484fe5f76.avif",
       "imageHint": "founder vision"
     },
     {
       "id": "prod_img_13",
-      "description": "Origin Collection",
+      "description": "Secondary Asset 13",
       "imageUrl": "https://image2url.com/r2/default/files/1771941447081-ad4689a9-354a-47b8-9caf-f33939555eff.avif",
       "imageHint": "origin start"
     },
     {
       "id": "prod_img_14",
-      "description": "Asset 14",
+      "description": "Secondary Asset 14",
       "imageUrl": "https://image2url.com/r2/default/files/1771941488065-c3309532-fb68-4eae-9173-cd3cfed3be6a.avif",
       "imageHint": "premium asset"
     },
     {
       "id": "prod_img_15",
-      "description": "Asset 15",
+      "description": "Secondary Asset 15",
       "imageUrl": "https://image2url.com/r2/default/files/1771941508970-ba37b8ed-0d11-4644-8318-f4cfa6a22e0f.avif",
       "imageHint": "luxury series"
     },
     {
       "id": "prod_img_16",
-      "description": "Asset 16",
+      "description": "Secondary Asset 16",
       "imageUrl": "https://image2url.com/r2/default/files/1771942020851-de2dd097-822f-47b8-8d7c-eb6b1c2f409e.avif",
       "imageHint": "high fashion"
     },
     {
       "id": "prod_img_17",
-      "description": "Asset 17",
+      "description": "Secondary Asset 17",
       "imageUrl": "https://image2url.com/r2/default/files/1771942054187-56d3d6ac-3d04-4612-9f93-2c0d6a74a4a8.jpg",
       "imageHint": "exclusive design"
     },
     {
       "id": "prod_img_18",
-      "description": "Asset 18",
+      "description": "Secondary Asset 18",
       "imageUrl": "https://image2url.com/r2/default/files/1771942078726-ae567e71-06f5-4d49-bb3f-e7d0ede94c1b.webp",
       "imageHint": "premium quality"
     },
     {
       "id": "prod_img_19",
-      "description": "Asset 19",
+      "description": "Secondary Asset 19",
       "imageUrl": "https://image2url.com/r2/default/files/1771942117420-0bf67949-bd9b-4888-a61a-bd952c2b3594.jpg",
       "imageHint": "lifestyle visual"
     },
     {
       "id": "prod_img_20",
-      "description": "Asset 20",
+      "description": "Secondary Asset 20",
       "imageUrl": "https://image2url.com/r2/default/files/1771942138647-3c910f41-cc88-4066-99d2-735656f5aa75.avif",
       "imageHint": "modern look"
     },
     {
       "id": "prod_img_21",
-      "description": "Asset 21",
+      "description": "Secondary Asset 21",
       "imageUrl": "https://image2url.com/r2/default/files/1771942159439-82d318c6-833b-463b-9f94-2bbf909d778c.avif",
       "imageHint": "elite catalog"
     },
     {
       "id": "prod_img_400",
-      "description": "Exclusive 400",
+      "description": "Exclusive Asset 400",
       "imageUrl": "https://image2url.com/r2/default/files/1772016204845-d0175a8d-e360-4984-b584-15d4967fbc56.avif",
       "imageHint": "exclusive arrival"
     },
     {
       "id": "prod_img_401",
-      "description": "Exclusive 401",
+      "description": "Exclusive Asset 401",
       "imageUrl": "https://image2url.com/r2/default/files/1772016256846-5a8256a2-9537-4f0c-8a28-b4df3cd51304.avif",
       "imageHint": "luxury arrival"
     },
     {
       "id": "prod_img_402",
-      "description": "Exclusive 402",
+      "description": "Exclusive Asset 402",
       "imageUrl": "https://image2url.com/r2/default/files/1772016282973-75735840-712d-4602-99cf-b9f46ea1a767.avif",
       "imageHint": "tech arrival"
     },
     {
       "id": "prod_img_403",
-      "description": "Exclusive 403",
+      "description": "Exclusive Asset 403",
       "imageUrl": "https://image2url.com/r2/default/files/1772016302621-b3d30949-b980-401d-86d0-22b6655d648e.avif",
       "imageHint": "gold arrival"
     },
     {
       "id": "prod_img_404",
-      "description": "Exclusive 404",
+      "description": "Exclusive Asset 404",
       "imageUrl": "https://image2url.com/r2/default/files/1772016323956-d1b5e6ca-bb7c-4ed9-a956-ecb28f743deb.avif",
       "imageHint": "beauty arrival"
     },
     {
       "id": "prod_img_405",
-      "description": "Exclusive 405",
+      "description": "Exclusive Asset 405",
       "imageUrl": "https://image2url.com/r2/default/files/1772016341877-1a0963c1-9b5a-4a19-bb17-2ae0db7e4f0d.avif",
       "imageHint": "leather arrival"
     },
     {
       "id": "prod_img_406",
-      "description": "Exclusive 406",
+      "description": "Exclusive Asset 406",
       "imageUrl": "https://image2url.com/r2/default/files/1772016360332-461b31f1-c29e-4074-b0ed-098d2f947d55.avif",
       "imageHint": "comfort arrival"
     },
     {
       "id": "prod_img_407",
-      "description": "Exclusive 407",
+      "description": "Exclusive Asset 407",
       "imageUrl": "https://image2url.com/r2/default/files/1772016377835-92976608-0584-404d-9bf2-4ae990e508bc.avif",
       "imageHint": "phone arrival"
     },
     {
       "id": "prod_img_408",
-      "description": "Exclusive 408",
+      "description": "Exclusive Asset 408",
       "imageUrl": "https://image2url.com/r2/default/files/1772016395020-a1b6959c-7278-406d-8ba1-28832d146c98.avif",
       "imageHint": "silk arrival"
     },
     {
       "id": "prod_img_409",
-      "description": "Exclusive 409",
+      "description": "Exclusive Asset 409",
       "imageUrl": "https://image2url.com/r2/default/files/1772016410928-90ece6f3-9b36-4bc0-a6b7-9fe06d4e2afd.avif",
       "imageHint": "canvas arrival"
     },
     {
       "id": "prod_img_410",
-      "description": "Exclusive 410",
+      "description": "Exclusive Asset 410",
       "imageUrl": "https://image2url.com/r2/default/files/1772016426931-ba7f4cb8-7858-4399-af43-4e506a838cce.avif",
       "imageHint": "polo arrival"
     }
