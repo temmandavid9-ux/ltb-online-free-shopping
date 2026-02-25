@@ -2,20 +2,20 @@ import { PlaceHolderImages } from '../placeholder-images';
 
 /**
  * Retrieves assets from the registry based on their ID.
- * Returns empty assets as all links have been purged.
+ * Performs a strict lookup to ensure all verified links are displayed.
  */
 export const findImage = (id: string) => {
-  // Direct lookup in the (now empty) registry
+  // Look for the specific ID in our populated registry
   const image = PlaceHolderImages.find((img) => img.id === id);
   
-  if (image) {
+  if (image && image.imageUrl) {
     return { 
       url: image.imageUrl, 
       hint: image.imageHint 
     };
   }
 
-  // Universal empty fallback
+  // Fallback if no specific mapping is found
   return { 
     url: "", 
     hint: "asset pending" 
