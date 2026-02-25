@@ -1,4 +1,3 @@
-
 import type { Product } from '../types';
 import { findImage } from './find-image';
 
@@ -45,5 +44,6 @@ export const newProducts: Product[] = [
   ...generateBatch(554, 576, 'Beauty', 'Heritage Elite'),
   ...generateBatch(577, 604, 'Beauty', 'Supreme Executive'),
   ...generateBatch(605, 631, 'Beauty', 'Elite Curated'),
-  ...generateBatch(632, 658, 'Clothes', 'Prestige Curated')
+  ...generateBatch(632, 658, 'Clothes', 'Prestige Curated'),
+  ...generateBatch(659, 713, 'Beauty', 'Prestige Curated II')
 ];
