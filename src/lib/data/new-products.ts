@@ -44,5 +44,6 @@ export const newProducts: Product[] = [
   ...generateBatch(529, 553, 'Wigs', 'Signature Piece'),
   ...generateBatch(554, 576, 'Beauty', 'Heritage Elite'),
   ...generateBatch(577, 604, 'Beauty', 'Supreme Executive'),
-  ...generateBatch(605, 631, 'Beauty', 'Elite Curated')
+  ...generateBatch(605, 631, 'Beauty', 'Elite Curated'),
+  ...generateBatch(632, 658, 'Clothes', 'Prestige Curated')
 ];
