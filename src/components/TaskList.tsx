@@ -6,7 +6,7 @@ import {
   useMemoFirebase,
   updateDocumentNonBlocking,
 } from '@/firebase';
-import { doc } from 'firebase/firestore';
+import { doc, increment } from 'firebase/firestore';
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
@@ -53,9 +53,11 @@ export default function TaskList() {
 
     const stage = activeStep;
     let reward = stage === 2 ? 0.34 : 0.33;
-    let updates: Partial<UserProfile> = {};
+    let updates: any = {};
 
-    // Update specific step status
+    // Standard sequence tracking
+    updates.lastStepDate = new Date().toISOString();
+
     if (stage === 0) updates.step1Status = true;
     if (stage === 1) updates.step2Status = true;
     if (stage === 2) {
@@ -96,7 +98,7 @@ export default function TaskList() {
         let newRewards = userData.eliteRewardsAvailable || 0;
         if (newMonthlyCounter >= 30) {
           newMonthlyCounter = 0;
-          newRewards += 1;
+          newRewards = (userData.eliteRewardsAvailable || 0) + 1;
           toast({ title: "MONTHLY BONUS EARNED", description: "$25 Gift Card credited to your account." });
         }
         updates.eliteMonthlyCounter = newMonthlyCounter;
@@ -104,8 +106,9 @@ export default function TaskList() {
       }
     }
 
-    // Increment balance
-    updates.balance = (userData.balance || 0) + reward;
+    // Atomic increment for balance security
+    updates.balance = increment(reward);
+    
     updateDocumentNonBlocking(userDocRef, updates);
     
     setActiveTimer(false);
@@ -128,20 +131,22 @@ export default function TaskList() {
     return () => clearInterval(timer);
   }, [activeTimer, countdown, handleStageComplete]);
 
-  // Reset steps if it's a new day
+  // Reset steps if it's a new day and steps are from previous days
   useEffect(() => {
-    if (userData && !isCompletedToday) {
-      if (userData.step1Status || userData.step2Status || userData.step3Status) {
-        // Only reset if it's not today's completion data
-        // To be safe, we check if the lastCompletedDate is not today
-        updateDocumentNonBlocking(userDocRef!, {
+    if (userData && userDocRef) {
+      const today = new Date().toDateString();
+      const lastStepDay = userData.lastStepDate ? new Date(userData.lastStepDate).toDateString() : null;
+      
+      // If the steps were set on a different day, reset them
+      if (lastStepDay !== today && (userData.step1Status || userData.step2Status || userData.step3Status)) {
+        updateDocumentNonBlocking(userDocRef, {
           step1Status: false,
           step2Status: false,
           step3Status: false
         });
       }
     }
-  }, [userData, isCompletedToday, userDocRef]);
+  }, [userData, userDocRef]);
 
   const handleStartSubTask = (stepIndex: number, url: string) => {
     if (isCompletedToday || activeTimer) return;
@@ -219,7 +224,6 @@ export default function TaskList() {
                 const isSecured = channel.status || (isCompletedToday && channel.id <= 2);
                 const isLocked = channel.id > currentStepIndex && !isCompletedToday;
                 const isActivating = channel.id === currentStepIndex && activeTimer;
-                const isAvailable = channel.id === currentStepIndex && !activeTimer && !isCompletedToday;
 
                 return (
                   <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 ${isSecured ? 'border-primary/40 bg-primary/5' : isActivating ? 'border-primary animate-pulse' : isLocked ? 'opacity-50 grayscale bg-muted/20' : 'border-black/5 bg-white'}`}>

@@ -38,7 +38,6 @@ export default function AccountPage() {
     const { t } = useLanguage();
     const { toast } = useToast();
     
-    // Standardized 2-segment path: /users/{userId}
     const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
     const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
@@ -120,6 +119,8 @@ export default function AccountPage() {
             step1Status: false,
             step2Status: false,
             step3Status: false,
+            lastStepDate: null,
+            lastCompletedDate: null,
             orderIds: userData?.orderIds || [],
             withdrawalIds: userData?.withdrawalIds || []
         };

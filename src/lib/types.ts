@@ -64,6 +64,7 @@ export type UserProfile = {
   step1Status: boolean;
   step2Status: boolean;
   step3Status: boolean;
+  lastStepDate: string | null;
   // Elite Mode & Gamification
   streakCount: number;
   lastCompletedDate: string | null;
