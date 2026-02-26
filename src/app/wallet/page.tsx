@@ -34,7 +34,7 @@ export default function WalletPage() {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid, 'profile', 'data') : null, [firestore, user]);
+  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid, 'profile') : null, [firestore, user]);
   const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
   const withdrawalsQuery = useMemoFirebase(() => user ? query(collection(firestore, 'withdrawals'), where('userId', '==', user.uid)) : null, [firestore, user]);
@@ -101,7 +101,7 @@ export default function WalletPage() {
   };
 
   if (isUserLoading || isUserDocLoading || areWithdrawalsLoading) {
-    return <div className="container text-center p-8">{t('general.loading')}</div>;
+    return <div className="container text-center p-24">{t('general.loading')}</div>;
   }
   
   if (!user) return null;
@@ -111,58 +111,58 @@ export default function WalletPage() {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold font-headline">{t('wallet.title')}</h1>
-        <p className="text-muted-foreground">{t('wallet.description')}</p>
+      <div className="mb-12">
+        <h1 className="text-5xl font-black luxury-text-gradient tracking-tighter">{t('wallet.title')}</h1>
+        <p className="text-muted-foreground font-medium uppercase tracking-[0.3em] text-[10px] mt-2">{t('wallet.description')}</p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-1 space-y-8">
-          <Card>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="lg:col-span-1 space-y-10">
+          <Card className="rounded-[3rem] shadow-xl border-primary/10">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">{t('wallet.balanceTitle')}</CardTitle>
-                <DollarSign className="w-4 h-4 text-muted-foreground" />
+                <CardTitle className="text-sm font-black uppercase tracking-widest">{t('wallet.balanceTitle')}</CardTitle>
+                <DollarSign className="w-5 h-5 text-primary" />
             </CardHeader>
             <CardContent>
-                <div className="text-4xl font-bold">${currentBalance.toLocaleString()}</div>
+                <div className="text-5xl font-black">${currentBalance.toLocaleString()}</div>
             </CardContent>
           </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Landmark/> {t('wallet.withdrawalTitle')}</CardTitle>
-              <CardDescription>{t('wallet.withdrawalDescription')}</CardDescription>
+          <Card className="rounded-[3rem] shadow-xl overflow-hidden border-black/5">
+            <CardHeader className="bg-secondary/30">
+              <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2"><Landmark className="w-4 h-4 text-primary" /> {t('wallet.withdrawalTitle')}</CardTitle>
+              <CardDescription className="text-[10px] font-bold text-muted-foreground/60">{t('wallet.withdrawalDescription')}</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="pt-8">
               {!canWithdraw && (
-                <Alert>
+                <Alert className="rounded-2xl border-none bg-primary/5 text-primary mb-6">
                   <WalletCards className="h-4 w-4"/>
-                  <AlertTitle>{t('wallet.minBalanceTitle')}</AlertTitle>
-                  <AlertDescription>{t('wallet.minBalanceDescription', { amount: MIN_WITHDRAWAL_AMOUNT.toLocaleString() })}</AlertDescription>
+                  <AlertTitle className="text-[10px] font-black uppercase tracking-widest">{t('wallet.minBalanceTitle')}</AlertTitle>
+                  <AlertDescription className="text-[10px] font-bold">{t('wallet.minBalanceDescription', { amount: MIN_WITHDRAWAL_AMOUNT.toLocaleString() })}</AlertDescription>
                 </Alert>
               )}
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className={`space-y-4 mt-4 ${!canWithdraw ? 'opacity-50' : ''}`}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className={`space-y-6 ${!canWithdraw ? 'opacity-50' : ''}`}>
                     <FormField name="amount" control={form.control} render={({ field }) => (
                         <FormItem>
-                        <FormLabel>{t('wallet.amountLabel')}</FormLabel>
-                        <FormControl><Input type="number" {...field} disabled={!canWithdraw} /></FormControl>
+                        <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{t('wallet.amountLabel')}</FormLabel>
+                        <FormControl><Input type="number" {...field} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none" /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )} />
                     <FormField name="paymentMethod" control={form.control} render={({ field }) => (
                         <FormItem>
-                        <FormLabel>{t('wallet.methodLabel')}</FormLabel>
-                        <FormControl><Input {...field} placeholder={t('wallet.methodPlaceholder')} disabled={!canWithdraw} /></FormControl>
+                        <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{t('wallet.methodLabel')}</FormLabel>
+                        <FormControl><Input {...field} placeholder={t('wallet.methodPlaceholder')} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none" /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )} />
                     <FormField name="accountDetails" control={form.control} render={({ field }) => (
                         <FormItem>
-                        <FormLabel>{t('wallet.detailsLabel')}</FormLabel>
-                        <FormControl><Input {...field} placeholder={t('wallet.detailsPlaceholder')} disabled={!canWithdraw} /></FormControl>
+                        <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{t('wallet.detailsLabel')}</FormLabel>
+                        <FormControl><Input {...field} placeholder={t('wallet.detailsPlaceholder')} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none" /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )} />
-                    <Button type="submit" className="w-full" disabled={!canWithdraw || form.formState.isSubmitting}>
+                    <Button type="submit" className="w-full rounded-2xl h-16 font-black uppercase tracking-widest text-[10px] btn-luxury" disabled={!canWithdraw || form.formState.isSubmitting}>
                         {form.formState.isSubmitting ? t('wallet.buttonLoading') : t('wallet.button')}
                     </Button>
                 </form>
@@ -171,39 +171,39 @@ export default function WalletPage() {
           </Card>
         </div>
         <div className="lg:col-span-2">
-          <Card>
-            <CardHeader>
-              <CardTitle>{t('wallet.historyTitle')}</CardTitle>
+          <Card className="rounded-[3rem] shadow-xl overflow-hidden border-black/5">
+            <CardHeader className="p-10 border-b border-border/50">
+              <CardTitle className="text-2xl font-black luxury-text-gradient">{t('wallet.historyTitle')}</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0">
               <Table>
                 <TableHeader>
-                  <TableRow>
-                    <TableHead>{t('general.date')}</TableHead>
-                    <TableHead>{t('general.amount')}</TableHead>
-                    <TableHead>{t('wallet.methodLabel')}</TableHead>
-                    <TableHead>{t('general.status')}</TableHead>
+                  <TableRow className="border-none bg-secondary/30">
+                    <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest">{t('general.date')}</TableHead>
+                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">{t('general.amount')}</TableHead>
+                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">{t('wallet.methodLabel')}</TableHead>
+                    <TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest">{t('general.status')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {clientWithdrawals.length > 0 ? clientWithdrawals.map(w => (
-                    <TableRow key={w.id}>
-                      <TableCell>{w.formattedDate}</TableCell>
-                      <TableCell className="font-medium">${w.amount.toLocaleString()}</TableCell>
-                      <TableCell>{w.paymentMethod}</TableCell>
-                      <TableCell>
-                         <Badge variant={w.status === 'Approved' ? 'default' : 'secondary'} className={
-                            w.status === 'Approved' ? 'bg-green-100 text-green-800' : 
-                            w.status === 'Rejected' ? 'bg-red-100 text-red-800' :
-                            'bg-yellow-100 text-yellow-800'
-                        }>
+                    <TableRow key={w.id} className="border-border/5">
+                      <TableCell className="pl-10 py-6 text-sm font-medium">{w.formattedDate}</TableCell>
+                      <TableCell className="font-black text-sm">${w.amount.toLocaleString()}</TableCell>
+                      <TableCell className="text-sm font-bold text-muted-foreground">{w.paymentMethod}</TableCell>
+                      <TableCell className="text-right pr-10">
+                         <Badge variant="outline" className={`rounded-full px-4 py-1 border-none text-[9px] font-black uppercase tracking-widest ${
+                            w.status === 'Approved' ? 'bg-primary/10 text-primary' : 
+                            w.status === 'Rejected' ? 'bg-destructive/10 text-destructive' :
+                            'bg-accent/10 text-accent'
+                        }`}>
                             {w.status}
                         </Badge>
                       </TableCell>
                     </TableRow>
                   )) : (
                     <TableRow>
-                      <TableCell colSpan={4} className="text-center">{t('wallet.noHistory')}</TableCell>
+                      <TableCell colSpan={4} className="text-center py-24 text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">{t('wallet.noHistory')}</TableCell>
                     </TableRow>
                   )}
                 </TableBody>

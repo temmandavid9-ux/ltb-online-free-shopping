@@ -25,7 +25,7 @@ export default function TaskList() {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid, 'profile', 'data') : null), [firestore, user]);
+  const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid, 'profile') : null), [firestore, user]);
   const { data: userData, isLoading: isUserDataLoading } = useDoc<UserProfile>(userDocRef);
 
   const [activeTimer, setActiveTimer] = useState<boolean>(false);
@@ -124,8 +124,8 @@ export default function TaskList() {
     setActiveTimer(true);
   };
 
-  if (isUserLoading || isUserDataLoading) return <div className="p-8 text-center">{t('tasks.loading')}</div>;
-  if (!user || !userData) return <p className="p-8 text-center">{t('tasks.loginPrompt')}</p>;
+  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center">{t('tasks.loading')}</div>;
+  if (!user || !userData) return <p className="p-24 text-center">{t('tasks.loginPrompt')}</p>;
 
   const minutes = Math.floor(countdown / 60);
   const seconds = countdown % 60;
@@ -133,93 +133,93 @@ export default function TaskList() {
 
   return (
     <div className="space-y-6">
-      <Card className="overflow-hidden border-2 border-primary/20 bg-gradient-to-br from-background to-secondary/10 shadow-2xl">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7">
+      <Card className="overflow-hidden border-2 border-primary/20 bg-gradient-to-br from-background to-secondary/10 shadow-2xl rounded-[3rem]">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 p-10 pb-7">
           <div>
-            <CardTitle className="text-2xl font-black luxury-text-gradient flex items-center gap-3">
-              {userData.eliteUnlocked ? <Crown className="w-8 h-8 text-primary animate-pulse" /> : <Zap className="w-8 h-8 text-primary" />}
+            <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
+              {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
               {userData.eliteUnlocked ? t('tasks.eliteActive') : t('tasks.pageTitle')}
             </CardTitle>
-            <CardDescription className="mt-2 font-medium">{t('tasks.pageDescription')}</CardDescription>
+            <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">{t('tasks.pageDescription')}</CardDescription>
           </div>
           <div className="text-right">
-            <div className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">Current Reward</div>
-            <div className="text-3xl font-black text-primary">${DAILY_REWARD.toFixed(2)}</div>
+            <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Current Reward</div>
+            <div className="text-4xl font-black text-primary">${DAILY_REWARD.toFixed(2)}</div>
           </div>
         </CardHeader>
         
-        <CardContent className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-black/5 rounded-3xl p-6 border border-border/50">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Trophy className="w-5 h-5 text-primary" />
+        <CardContent className="space-y-10 px-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white rounded-[2rem] p-8 border border-black/5 shadow-sm">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <Trophy className="w-6 h-6 text-primary" />
                   <span className="text-sm font-black uppercase tracking-widest">Master Streak</span>
                 </div>
-                <span className="text-xs font-bold text-muted-foreground">{userData.streakCount || 0} / 365 Days</span>
+                <span className="text-xs font-black text-muted-foreground">{userData.streakCount || 0} / 365 Days</span>
               </div>
-              <Progress value={((userData.streakCount || 0) / 365) * 100} className="h-3 bg-secondary" />
-              <p className="mt-3 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
+              <Progress value={((userData.streakCount || 0) / 365) * 100} className="h-4 bg-secondary rounded-full" />
+              <p className="mt-4 text-[10px] font-black text-muted-foreground/60 uppercase tracking-widest">
                 {t('account.eliteStreak', { streak: userData.streakCount || 0 })}
               </p>
             </div>
 
             {userData.eliteUnlocked && (
-              <div className="bg-primary/5 rounded-3xl p-6 border border-primary/20">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <Zap className="w-5 h-5 text-primary" />
+              <div className="bg-white rounded-[2rem] p-8 border border-primary/20 shadow-sm">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <Zap className="w-6 h-6 text-primary" />
                     <span className="text-sm font-black uppercase tracking-widest">Elite Monthly Bonus</span>
                   </div>
-                  <span className="text-xs font-bold text-primary">{userData.eliteMonthlyCounter || 0} / 30 Days</span>
+                  <span className="text-xs font-black text-primary">{userData.eliteMonthlyCounter || 0} / 30 Days</span>
                 </div>
-                <Progress value={((userData.eliteMonthlyCounter || 0) / 30) * 100} className="h-3 bg-secondary" />
-                <p className="mt-3 text-[10px] font-bold text-primary uppercase tracking-widest">
+                <Progress value={((userData.eliteMonthlyCounter || 0) / 30) * 100} className="h-4 bg-secondary rounded-full" />
+                <p className="mt-4 text-[10px] font-black text-primary uppercase tracking-widest">
                   {t('tasks.eliteMonthlyStatus', { count: userData.eliteMonthlyCounter || 0 })}
                 </p>
               </div>
             )}
           </div>
 
-          <div className="text-center py-8">
+          <div className="text-center py-12">
             {activeTimer ? (
-              <div className="space-y-6 animate-in zoom-in duration-500">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-xs font-black uppercase tracking-widest">
+              <div className="space-y-8 animate-in zoom-in duration-500">
+                <div className="inline-flex items-center gap-3 px-6 py-3 bg-primary/10 text-primary rounded-full text-[10px] font-black uppercase tracking-widest">
                   <Zap className="w-4 h-4 animate-bounce" />
                   Verification Active
                 </div>
-                <div className="text-7xl font-black font-mono tracking-tighter tabular-nums text-foreground">
+                <div className="text-8xl font-black font-headline tracking-tighter tabular-nums text-foreground">
                   {countdownText}
                 </div>
-                <p className="text-sm text-muted-foreground font-medium max-w-sm mx-auto leading-relaxed">
+                <p className="text-xs text-muted-foreground font-black uppercase tracking-[0.2em] max-w-sm mx-auto leading-relaxed">
                   {t('tasks.stayOnPage')}
                 </p>
               </div>
             ) : isCompletedToday ? (
-              <div className="space-y-4 animate-in fade-in duration-1000">
-                <div className="mx-auto w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                  <CheckCircle className="w-12 h-12 text-primary" />
+              <div className="space-y-6 animate-in fade-in duration-1000">
+                <div className="mx-auto w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                  <CheckCircle className="w-14 h-14 text-primary" />
                 </div>
-                <h3 className="text-2xl font-black luxury-text-gradient">{t('tasks.allCompletedTitle')}</h3>
-                <p className="text-muted-foreground text-sm font-medium">{t('tasks.allCompletedDescription')}</p>
+                <h3 className="text-3xl font-black luxury-text-gradient">{t('tasks.allCompletedTitle')}</h3>
+                <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">{t('tasks.allCompletedDescription')}</p>
               </div>
             ) : (
-              <div className="space-y-6">
-                <div className="mx-auto w-24 h-24 bg-secondary rounded-[2.5rem] flex items-center justify-center border-4 border-white shadow-xl">
-                  <Youtube className="w-12 h-12 text-primary" />
+              <div className="space-y-8">
+                <div className="mx-auto w-28 h-28 bg-white rounded-[3rem] flex items-center justify-center border-4 border-white shadow-2xl">
+                  <Youtube className="w-14 h-14 text-primary" />
                 </div>
-                <div className="space-y-2">
-                  <h3 className="text-xl font-bold">{t('tasks.startPrompt')}</h3>
-                  <p className="text-sm text-muted-foreground">Engage with our curated content to secure your daily reward.</p>
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-black">{t('tasks.startPrompt')}</h3>
+                  <p className="text-[10px] font-black text-muted-foreground/60 uppercase tracking-widest">Engage with our curated content to secure your daily reward.</p>
                 </div>
               </div>
             )}
           </div>
         </CardContent>
 
-        <CardFooter className="bg-secondary/50 p-8 border-t border-border/50">
+        <CardFooter className="bg-secondary/30 p-10 border-t border-border/50">
           <Button 
-            className="w-full h-16 rounded-2xl text-lg font-black uppercase tracking-[0.2em] shadow-xl transition-all active:scale-95 btn-luxury"
+            className="w-full h-20 rounded-[2rem] text-xs font-black uppercase tracking-[0.3em] shadow-2xl transition-all active:scale-95 btn-luxury"
             disabled={activeTimer || isCompletedToday}
             onClick={handleStartTask}
           >

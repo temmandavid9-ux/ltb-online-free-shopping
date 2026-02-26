@@ -23,7 +23,7 @@ export default function Header() {
   const firestore = useFirestore();
   const { t, setLocale, locale } = useLanguage();
 
-  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid, 'profile', 'data') : null, [firestore, user]);
+  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid, 'profile') : null, [firestore, user]);
   const { data: userData } = useDoc<UserProfile>(userDocRef);
 
   return (
