@@ -74,14 +74,14 @@ export default function Header() {
               <div className="h-10 w-32 md:h-12 md:w-36 bg-muted rounded-full animate-pulse" />
             ) : user && userData ? (
               <div className="flex items-center gap-2 md:gap-4">
-                 <Link href="/wallet" className="hidden sm:flex items-center gap-2 px-5 py-2.5 bg-black text-white rounded-full hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.3)] transition-all transform active:scale-95 btn-luxury">
-                    <Wallet className="h-4 w-4 text-primary" />
-                    <span className="text-xs font-black uppercase tracking-widest">${userData.balance?.toLocaleString() || '0.00'}</span>
+                 <Link href="/wallet" className="flex items-center gap-2 px-3 sm:px-5 py-2 md:py-2.5 bg-black text-white rounded-full hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.3)] transition-all transform active:scale-95 btn-luxury">
+                    <Wallet className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
+                    <span className="text-[9px] sm:text-xs font-black uppercase tracking-widest">${userData.balance?.toLocaleString() || '0.00'}</span>
                  </Link>
                 <Link href="/account">
-                  <Button variant="outline" className="rounded-full h-10 md:h-12 gap-3 px-4 md:px-6 border-foreground/5 hover:bg-secondary/50 transition-all shadow-sm">
+                  <Button variant="outline" className="rounded-full h-10 md:h-12 gap-3 px-3 md:px-6 border-foreground/5 hover:bg-secondary/50 transition-all shadow-sm">
                     <UserIcon className="h-4 w-4" />
-                    <span className="max-w-[80px] md:max-w-[120px] truncate text-[10px] md:text-[11px] font-black uppercase tracking-[0.1em]">{userData.username}</span>
+                    <span className="max-w-[60px] sm:max-w-[120px] truncate text-[9px] md:text-[11px] font-black uppercase tracking-[0.1em]">{userData.username}</span>
                   </Button>
                 </Link>
               </div>

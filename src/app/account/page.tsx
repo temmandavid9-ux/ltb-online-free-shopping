@@ -24,20 +24,22 @@ import { useEffect, useState } from "react";
 import { useUser, useFirestore, useDoc, useMemoFirebase, useAuth, useCollection, updateDocumentNonBlocking, setDocumentNonBlocking } from "@/firebase";
 import { doc, collection, query, where } from 'firebase/firestore';
 import { signOut } from "firebase/auth";
+import { useAdminStatus } from "@/hooks/useAdminStatus";
 import type { Order, UserProfile, RewardRedemption } from "@/lib/types";
-import { ArrowRight, DollarSign, ListChecks, Crown, Gift, Trophy } from "lucide-react";
+import { ArrowRight, DollarSign, ListChecks, Crown, Gift, Trophy, ShieldAlert } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
 
 export default function AccountPage() {
     const { user, isUserLoading } = useUser();
+    const { isAdmin } = useAdminStatus();
     const router = useRouter();
     const firestore = useFirestore();
     const auth = useAuth();
     const { t } = useLanguage();
     const { toast } = useToast();
     
-    // Corrected 2-segment path for profile document
+    // Aligned 2-segment path for profile document
     const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
     const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
@@ -103,6 +105,17 @@ export default function AccountPage() {
         });
     };
 
+    // CEO/Admin shortcut to set specific balance for testing
+    const handleAddTestBalance = () => {
+        if (!userDocRef || !userData) return;
+        updateDocumentNonBlocking(userDocRef, {
+            balance: (userData.balance || 0) + 1211,
+            eliteUnlocked: true,
+            streakCount: 365
+        });
+        toast({ title: "CEO Credit Applied", description: "$1,211 added to account for verification." });
+    };
+
     if (isUserLoading || isUserDocLoading || areOrdersLoading) {
         return <div className="container text-center p-24">{t('general.loading')}</div>;
     }
@@ -113,14 +126,21 @@ export default function AccountPage() {
 
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex justify-between items-end mb-12">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12">
             <div>
-                <h1 className="text-5xl font-black luxury-text-gradient tracking-tighter mb-2">{t('account.title')}</h1>
+                <h1 className="text-4xl sm:text-5xl font-black luxury-text-gradient tracking-tighter mb-2">{t('account.title')}</h1>
                 <p className="text-muted-foreground font-medium uppercase tracking-[0.3em] text-[10px]">{userData.username} • {userData.email}</p>
             </div>
-            <Button onClick={handleLogout} variant="ghost" className="rounded-full font-black uppercase tracking-widest text-[10px] h-12 px-8 border border-border/10">
-                {t('account.logout')}
-            </Button>
+            <div className="flex gap-3">
+                {isAdmin && (
+                    <Button onClick={handleAddTestBalance} variant="outline" className="rounded-full font-black uppercase tracking-widest text-[9px] h-12 px-6 border-primary/20 text-primary">
+                        <ShieldAlert className="w-4 h-4 mr-2" /> CEO Credit
+                    </Button>
+                )}
+                <Button onClick={handleLogout} variant="ghost" className="rounded-full font-black uppercase tracking-widest text-[10px] h-12 px-8 border border-border/10">
+                    {t('account.logout')}
+                </Button>
+            </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -153,7 +173,7 @@ export default function AccountPage() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-4xl font-black mb-6">${userData.balance?.toFixed(2) || '0.00'}</div>
+                        <div className="text-4xl font-black mb-6">${userData.balance?.toLocaleString(undefined, { minimumFractionDigits: 2 }) || '0.00'}</div>
                          <Button className="w-full rounded-2xl h-14 font-black uppercase tracking-widest text-[10px] btn-luxury" asChild>
                             <Link href="/wallet">{t('account.manageWallet')} <ArrowRight className="ml-2 h-4 w-4"/></Link>
                         </Button>
