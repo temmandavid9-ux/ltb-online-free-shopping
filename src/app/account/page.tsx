@@ -25,7 +25,7 @@ import { doc, collection, query, where } from 'firebase/firestore';
 import { signOut } from "firebase/auth";
 import { useAdminStatus } from "@/hooks/useAdminStatus";
 import type { Order, UserProfile, RewardRedemption } from "@/lib/types";
-import { ArrowRight, DollarSign, Crown, Gift, Trophy, ShieldAlert } from "lucide-react";
+import { ArrowRight, DollarSign, Crown, Gift, Trophy } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
 
@@ -103,36 +103,6 @@ export default function AccountPage() {
         });
     };
 
-    const handleRestoreCEOData = () => {
-        if (!userDocRef) return;
-        
-        const restoredData: Partial<UserProfile> = {
-            balance: 1211,
-            eliteUnlocked: true,
-            streakCount: 365,
-            username: user?.displayName || 'CEO',
-            email: user?.email || '',
-            eliteStartDate: new Date().toISOString(),
-            eliteMonthlyCounter: 0,
-            eliteRewardsAvailable: 0,
-            redeemedRewardIds: [],
-            step1Status: false,
-            step2Status: false,
-            step3Status: false,
-            lastStepDate: null,
-            lastCompletedDate: null,
-            orderIds: userData?.orderIds || [],
-            withdrawalIds: userData?.withdrawalIds || []
-        };
-
-        setDocumentNonBlocking(userDocRef, restoredData, { merge: true });
-
-        toast({
-            title: "CEO Data Restored",
-            description: "$1,211 balance and Elite status have been anchored to your registry.",
-        });
-    };
-
     if (isUserLoading || isUserDocLoading || areOrdersLoading) {
         return <div className="container text-center p-24">{t('general.loading')}</div>;
     }
@@ -151,9 +121,6 @@ export default function AccountPage() {
                 <p className="text-muted-foreground font-medium uppercase tracking-[0.3em] text-[10px]">{userData?.username || user.displayName || user.email} • {user.email}</p>
             </div>
             <div className="flex gap-3">
-                <Button onClick={handleRestoreCEOData} variant="outline" className="rounded-full font-black uppercase tracking-widest text-[9px] h-12 px-6 border-primary/20 text-primary hover:bg-primary hover:text-white transition-all shadow-lg">
-                    <ShieldAlert className="w-4 h-4 mr-2" /> RESTORE CEO DATA ($1,211)
-                </Button>
                 <Button onClick={handleLogout} variant="ghost" className="rounded-full font-black uppercase tracking-widest text-[10px] h-12 px-8 border border-border/10">
                     {t('account.logout')}
                 </Button>
