@@ -4,8 +4,8 @@ import { findImage } from './find-image';
 
 export const watchProducts: Product[] = [
   {
-    id: 'prod_160',
-    slug: 'product-160',
+    id: 'prod_watch_160',
+    slug: 'executive-precision-watch',
     name: 'Executive Precision Watch',
     description: 'A masterpiece of precision horology and refined aesthetics. Designed for the executive who values both time and timeless style.',
     category: 'Watches',
@@ -17,8 +17,8 @@ export const watchProducts: Product[] = [
     reviewCount: 320,
   },
   {
-    id: 'prod_167',
-    slug: 'product-167',
+    id: 'prod_watch_167',
+    slug: 'minimalist-black-horizon',
     name: 'Minimalist Black Horizon',
     description: 'Sleek black finish with minimalist details. This watch represents the pinnacle of modern luxury and reliable functionality.',
     category: 'Watches',
@@ -30,8 +30,8 @@ export const watchProducts: Product[] = [
     reviewCount: 300,
   },
   {
-    id: 'prod_170',
-    slug: 'product-170',
+    id: 'prod_watch_170',
+    slug: 'elite-business-master',
     name: 'Elite Business Master',
     description: 'The ultimate business accessory. Hand-assembled with premium components for a life of success and precision.',
     category: 'Watches',
@@ -43,8 +43,8 @@ export const watchProducts: Product[] = [
     reviewCount: 150,
   },
   {
-    id: 'prod_311',
-    slug: 'product-311',
+    id: 'prod_watch_311',
+    slug: 'the-sovereign-gold',
     name: 'The Sovereign Gold',
     description: 'Command the moment. The Sovereign is a masterpiece of 18k gold and precision engineering, built for those who lead.',
     category: 'Watches',
@@ -56,8 +56,8 @@ export const watchProducts: Product[] = [
     reviewCount: 198,
   },
   {
-    id: 'prod_312',
-    slug: 'product-312',
+    id: 'prod_watch_312',
+    slug: 'apex-titanium-pioneer',
     name: 'Apex Titanium Pioneer',
     description: 'Master time itself. Fusing aerospace-grade titanium with classic functionality, the Apex is the essential tool for the modern pioneer.',
     category: 'Watches',
