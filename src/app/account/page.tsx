@@ -25,7 +25,7 @@ import { doc, collection, query, where } from 'firebase/firestore';
 import { signOut } from "firebase/auth";
 import { useAdminStatus } from "@/hooks/useAdminStatus";
 import type { Order, UserProfile, RewardRedemption } from "@/lib/types";
-import { ArrowRight, DollarSign, ListChecks, Crown, Gift, Trophy, ShieldAlert } from "lucide-react";
+import { ArrowRight, DollarSign, Crown, Gift, Trophy, ShieldAlert } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
 
@@ -38,6 +38,7 @@ export default function AccountPage() {
     const { t } = useLanguage();
     const { toast } = useToast();
     
+    // Standardized path: /users/{userId}
     const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
     const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
@@ -103,38 +104,40 @@ export default function AccountPage() {
         });
     };
 
-    const handleAddTestBalance = () => {
-        if (!userDocRef || !userData) {
-            if (user) {
-                const newUserDoc: UserProfile = {
-                    id: user.uid,
-                    username: user.displayName || 'CEO',
-                    email: user.email || '',
-                    balance: 1211,
-                    taskProgress: 0,
-                    socialsFollowed: true,
-                    orderIds: [],
-                    withdrawalIds: [],
-                    streakCount: 365,
-                    lastCompletedDate: null,
-                    eliteUnlocked: true,
-                    eliteStartDate: new Date().toISOString(),
-                    eliteMonthlyCounter: 0,
-                    eliteRewardsAvailable: 0,
-                    redeemedRewardIds: [],
-                };
-                setDocumentNonBlocking(userDocRef as any, newUserDoc, { merge: false });
-                toast({ title: "CEO Account Initialized", description: "$1,211 and Elite Status restored to path." });
-            }
-            return;
-        }
+    const handleRestoreCEOData = () => {
+        if (!userDocRef) return;
         
-        updateDocumentNonBlocking(userDocRef, {
+        const restoredData: Partial<UserProfile> = {
             balance: 1211,
             eliteUnlocked: true,
-            streakCount: 365
+            streakCount: 365,
+            username: user?.displayName || 'CEO',
+            email: user?.email || '',
+            eliteStartDate: new Date().toISOString(),
+            eliteMonthlyCounter: 0,
+            eliteRewardsAvailable: 0,
+            redeemedRewardIds: []
+        };
+
+        if (!userData) {
+            // Document doesn't exist, create it
+            setDocumentNonBlocking(userDocRef, {
+                id: user!.uid,
+                ...restoredData,
+                taskProgress: 0,
+                socialsFollowed: true,
+                orderIds: [],
+                withdrawalIds: []
+            }, { merge: false });
+        } else {
+            // Update existing
+            updateDocumentNonBlocking(userDocRef, restoredData);
+        }
+
+        toast({
+            title: "CEO Data Restored",
+            description: "$1,211 and Elite status have been anchored to your account.",
         });
-        toast({ title: "CEO Credit Applied", description: "$1,211 added to account for verification." });
     };
 
     if (isUserLoading || isUserDocLoading || areOrdersLoading) {
@@ -155,7 +158,7 @@ export default function AccountPage() {
                 <p className="text-muted-foreground font-medium uppercase tracking-[0.3em] text-[10px]">{userData?.username || user.displayName || user.email} • {user.email}</p>
             </div>
             <div className="flex gap-3">
-                <Button onClick={handleAddTestBalance} variant="outline" className="rounded-full font-black uppercase tracking-widest text-[9px] h-12 px-6 border-primary/20 text-primary">
+                <Button onClick={handleRestoreCEOData} variant="outline" className="rounded-full font-black uppercase tracking-widest text-[9px] h-12 px-6 border-primary/20 text-primary">
                     <ShieldAlert className="w-4 h-4 mr-2" /> Restore CEO Data
                 </Button>
                 <Button onClick={handleLogout} variant="ghost" className="rounded-full font-black uppercase tracking-widest text-[10px] h-12 px-8 border border-border/10">

@@ -12,7 +12,7 @@ import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Youtube, CheckCircle, Zap, Crown, Trophy, ExternalLink, ShieldCheck, Eye } from 'lucide-react';
+import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, ExternalLink } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -32,8 +32,8 @@ export default function TaskList() {
   const [countdown, setCountdown] = useState(TASK_DURATION_SECONDS);
   const [visitedChannels, setVisitedChannels] = useState<Record<string, boolean>>({
     youtube: false,
-    registry: false,
-    lookbook: false
+    instagram: false,
+    twitch: false
   });
 
   const isCompletedToday = useMemo(() => {
@@ -104,7 +104,7 @@ export default function TaskList() {
     });
     
     setActiveTimer(false);
-    setVisitedChannels({ youtube: false, registry: false, lookbook: false });
+    setVisitedChannels({ youtube: false, instagram: false, twitch: false });
   }, [user, userData, userDocRef, t, toast]);
 
   useEffect(() => {
@@ -130,7 +130,7 @@ export default function TaskList() {
       return;
     }
     if (!allVisited) {
-      toast({ variant: "destructive", title: "Engagement Required", description: "Please engage with all 3 task media items first." });
+      toast({ variant: "destructive", title: "Engagement Required", description: "Please engage with all 3 task media items (YouTube, Instagram, Twitch) first." });
       return;
     }
     setCountdown(TASK_DURATION_SECONDS);
@@ -153,7 +153,7 @@ export default function TaskList() {
               {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
               {userData.eliteUnlocked ? t('tasks.eliteActive') : t('tasks.pageTitle')}
             </CardTitle>
-            <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">Complete the daily PACK to earn $1.00</CardDescription>
+            <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">Complete the daily social media PACK to earn $1.00</CardDescription>
           </div>
           <div className="text-left sm:text-right">
             <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Elite Accumulation</div>
@@ -189,12 +189,12 @@ export default function TaskList() {
           </div>
 
           <div className="space-y-6">
-            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Engagement Media PACK (3/3)</h3>
+            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Social Media PACK (3/3)</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { id: 'youtube', title: 'Official Channel', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Interact with latest media.' },
-                { id: 'registry', title: 'Asset Registry', icon: ShieldCheck, url: '/admin/image-viewer', desc: 'Verify catalog integrity.' },
-                { id: 'lookbook', title: 'Elite Lookbook', icon: Eye, url: '/', desc: 'Study signature selections.' }
+                { id: 'youtube', title: 'YouTube', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Watch latest verified media.' },
+                { id: 'instagram', title: 'Instagram', icon: Instagram, url: 'https://instagram.com/', desc: 'Follow visual showcases.' },
+                { id: 'twitch', title: 'Twitch', icon: Twitch, url: 'https://twitch.tv/', desc: 'Join live engagement streams.' }
               ].map((channel) => (
                 <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 overflow-hidden ${visitedChannels[channel.id] ? 'border-primary/40 bg-primary/5' : 'border-black/5 hover:border-black/10'}`}>
                   <CardContent className="p-6 text-center space-y-4">
@@ -211,7 +211,7 @@ export default function TaskList() {
                       className="w-full rounded-xl h-10 text-[9px] font-black uppercase tracking-widest"
                       disabled={isCompletedToday || activeTimer}
                     >
-                      {visitedChannels[channel.id] ? <><CheckCircle className="w-3 h-3 mr-2 text-primary" /> Engaged</> : <><ExternalLink className="w-3 h-3 mr-2" /> Visit Channel</>}
+                      {visitedChannels[channel.id] ? <><CheckCircle className="w-3 h-3 mr-2 text-primary" /> Visited</> : <><ExternalLink className="w-3 h-3 mr-2" /> Visit Channel</>}
                     </Button>
                   </CardContent>
                 </Card>
@@ -244,9 +244,9 @@ export default function TaskList() {
             ) : (
               <div className="space-y-4">
                 {!allVisited ? (
-                  <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Engage with all 3 media items to unlock verification.</p>
+                  <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Engage with all 3 media platforms to unlock verification.</p>
                 ) : (
-                  <p className="text-[10px] font-black text-primary uppercase tracking-widest">All media engaged. You may now start verification.</p>
+                  <p className="text-[10px] font-black text-primary uppercase tracking-widest">Social media engaged. You may now start verification.</p>
                 )}
               </div>
             )}
