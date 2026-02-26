@@ -1,160 +1,100 @@
-/**
- * This ruleset defines the security model for the Eden 0² platform.
- *
- * Core Philosophy:
- * The security model is built on strict user ownership for personal data.
- * Users have complete control over their own profiles and associated data (like tasks),
- * while shared resources like orders and withdrawals are created by users but would
- * typically be managed by admins (admin functionality is currently disabled).
- *
- * Data Structure:
- * - /users/{userId}: Each user's core data is stored in a dedicated document.
- * - /users/{userId}/tasks/{taskId}: User-specific tasks are nested within their user document,
- *   inheriting ownership permissions.
- * - /orders/{orderId}: A top-level collection for all user orders.
- * - /withdrawals/{withdrawalId}: A top-level collection for all withdrawal requests.
- *
- * Key Security Decisions:
- * - Strict Data Segregation: Users can only access their own data tree under `/users/{userId}`.
- *   They cannot see or interact with other users' data.
- * - No User Enumeration: Listing documents in the top-level `/users` collection is
- *   explicitly forbidden to prevent scraping of user information.
- * - User-Gated Workflows: Users can create orders and withdrawals, but these documents
- *   cannot be modified by them after creation.
- * - Default Secure: Access is denied by default. All permissions must be explicitly granted.
- */
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // --------------------------------
-    // Helper Functions
-    // --------------------------------
-
     /**
-     * Checks if a user is authenticated.
+     * SHOP SPHERE: ELITE MONTHLY GIFT CARD SYSTEM - SECURITY ARCHITECTURE
+     *
+     * Core Philosophy:
+     * This ruleset enforces a strict user-ownership model for all reward-related data. 
+     * Users are granted full control over their own progress tracking and redemption 
+     * history, while sensitive system assets like gift card codes are entirely 
+     * restricted from client-side access.
+     *
+     * Data Structure:
+     * - /users/{userId}/profile: A single document per user containing their 
+     *   balance, streak, and Elite Mode progress.
+     * - /users/{userId}/rewardRedemptions/{redemptionId}: A subcollection logging 
+     *   each individual gift card claimed by the user.
+     * - /giftCardCodes/{code}: A top-level collection of system-managed gift card 
+     *   assets, inaccessible to standard users.
+     *
+     * Key Security Decisions:
+     * 1. Path-Based Ownership: Authorization is primarily determined by the 
+     *    {userId} wildcard in the document path matching the request.auth.uid.
+     * 2. Prototyping Flexibility: While authorization is strictly enforced, 
+     *    schema validation is limited to relational integrity (IDs and ownership 
+     *    links) to allow for rapid UI/UX iteration.
+     * 3. Server-Only Gift Cards: The /giftCardCodes collection is locked down. 
+     *    Redemption logic is assumed to be handled by secure Cloud Functions 
+     *    operating with administrative privileges.
+     * 4. Relational Integrity: On document creation, the system ensures that 
+     *    internal 'userId' or 'id' fields match the authenticated user's ID 
+     *    to prevent data impersonation.
      */
+
+    // --- GLOBAL HELPER FUNCTIONS ---
+
+    /** @description Checks if the user is authenticated with a valid UID. */
     function isSignedIn() {
       return request.auth != null;
     }
 
-    /**
-     * Checks if the authenticated user's ID matches the provided userId,
-     * establishing document ownership.
-     */
+    /** @description Checks if the authenticated user matches the provided userId. */
     function isOwner(userId) {
-      return request.auth.uid == userId;
+      return isSignedIn() && request.auth.uid == userId;
     }
 
-    /**
-     * Verifies that a document exists before an update or delete operation.
-     * This prevents writes to non-existent paths.
-     */
-    function isExistingDoc() {
-      return resource != null;
+    /** @description Checks ownership and ensures the document exists for state changes. */
+    function isExistingOwner(userId) {
+      return resource != null && isOwner(userId);
     }
 
-    /**
-     * Validates that on create, a user is creating a request (Order/Withdrawal)
-     * for themselves and that the initial status is 'Pending'.
-     */
-    function isCreatingOwnRequest(entity) {
-      return isSignedIn() && entity.userId == request.auth.uid && entity.status == 'Pending';
-    }
+    // --- COLLECTION RULES ---
 
     /**
-     * On create, validates that a document's internal 'id' field matches the
-     * document's ID in the path, ensuring relational consistency.
+     * @description Rules for the User's core profile, streak data, and Elite status.
+     * @path /users/{userId}/profile
+     * @allow (create) User 'abc' creates document '/users/abc/profile' with data { id: 'abc' }.
+     * @deny (update) User 'abc' attempts to change the 'id' field to 'xyz'.
+     * @principle Enforces path-based ownership and ensures relational integrity of the user ID.
      */
-    function newUserDataIsValid(userId) {
-      return request.resource.data.id == userId;
-    }
-    
-    /**
-     * On update, ensures the 'id' field of a user document is immutable.
-     */
-    function userDataIsImmutable() {
-      return request.resource.data.id == resource.data.id;
-    }
-
-    /**
-     * On create for a user subcollection, validates the internal 'userId' field
-     * matches the owner's ID from the path.
-     */
-    function userSubcollectionDataIsValid(userId) {
-      return request.resource.data.userId == userId;
-    }
-
-    /**
-     * On update for a user subcollection, ensures the 'userId' field is immutable.
-     */
-    function userSubcollectionDataIsImmutable() {
-      return request.resource.data.userId == resource.data.userId;
-    }
-
-    // --------------------------------
-    // Collection Rules
-    // --------------------------------
-
-    /**
-     * @description Users can read and write their own profile data.
-     * @path /users/{userId}
-     * @allow (get, update) A user with auth.uid 'user123' can get or update '/users/user123'.
-     * @allow (create) A user with auth.uid 'user123' can create '/users/user123'.
-     * @deny (list) No user can list all documents in the '/users' collection.
-     * @deny (get) A user with auth.uid 'user123' cannot get '/users/user456'.
-     * @principle Restricts access to a user's own data tree and prevents user enumeration.
-     */
-    match /users/{userId} {
-      allow get: if isOwner(userId);
-      allow list: if false;
-      allow create: if isOwner(userId) && newUserDataIsValid(userId);
-      allow update: if isOwner(userId) && isExistingDoc() && userDataIsImmutable();
-      allow delete: if isOwner(userId) && isExistingDoc();
-    }
-
-    /**
-     * @description Users can manage tasks within their own profile.
-     * @path /users/{userId}/tasks/{taskId}
-     * @allow (list, create) A user with auth.uid 'user123' can list or create tasks under '/users/user123/tasks'.
-     * @deny (get) A user with auth.uid 'user123' cannot get a task under '/users/user456/tasks'.
-     * @principle Enforces hierarchical ownership from the parent document.
-     */
-    match /users/{userId}/tasks/{taskId} {
+    match /users/{userId}/profile {
       allow get, list: if isOwner(userId);
-      allow create: if isOwner(userId) && userSubcollectionDataIsValid(userId);
-      allow update: if isOwner(userId) && isExistingDoc() && userSubcollectionDataIsImmutable();
-      allow delete: if isOwner(userId) && isExistingDoc();
+      allow create: if isOwner(userId) && request.resource.data.id == userId;
+      allow update: if isExistingOwner(userId) && request.resource.data.id == resource.data.id;
+      allow delete: if isExistingOwner(userId);
     }
 
     /**
-     * @description Users can create orders and read their own.
-     * @path /orders/{orderId}
-     * @allow (create) Any signed-in user can create an order for themselves with 'Pending' status.
-     * @allow (get) User 'user123' can get an order where `resource.data.userId == 'user123'`.
-     * @deny (list) A non-admin user cannot list all orders on the platform.
-     * @deny (update) A user cannot update their own order status to 'Approved'.
-     * @principle Segregates user creation from admin modification for a secure workflow.
+     * @description Rules for logging user-specific gift card redemption events.
+     * @path /users/{userId}/rewardRedemptions/{redemptionId}
+     * @allow (get) User 'abc' reads their own redemption log at '/users/abc/rewardRedemptions/red_123'.
+     * @deny (list) User 'abc' attempts to list redemptions for user 'xyz'.
+     * @principle Uses hierarchical pathing to isolate private user transaction history.
      */
-    match /orders/{orderId} {
-      allow read: if isOwner(resource.data.userId);
-      allow create: if isCreatingOwnRequest(request.resource.data);
-      allow update, delete: if false;
+    match /users/{userId}/rewardRedemptions/{redemptionId} {
+      allow get, list: if isOwner(userId);
+      allow create: if isOwner(userId) && request.resource.data.userId == userId;
+      allow update: if isExistingOwner(userId) && request.resource.data.userId == resource.data.userId;
+      allow delete: if isExistingOwner(userId);
     }
 
     /**
-     * @description Users can create withdrawal requests and read their own.
-     * @path /withdrawals/{withdrawalId}
-     * @allow (create) Any signed-in user can create a withdrawal request for themselves.
-     * @allow (get) An admin can get any withdrawal request to review it.
-     * @deny (list) A non-admin user cannot see all withdrawal requests from other users.
-     * @deny (delete) A user cannot delete their own withdrawal request after creation.
-     * @principle Secures financial transactions by enforcing an admin-approval workflow.
+     * @description Rules for the pool of available gift card codes.
+     * @path /giftCardCodes/{giftCardCodeId}
+     * @allow (none) No client-side operations permitted.
+     * @deny (get) Authenticated user tries to fetch a gift card code to bypass redemption logic.
+     * @principle Protects sensitive system inventory; management is reserved for backend services.
      */
-    match /withdrawals/{withdrawalId} {
-      allow read: if isOwner(resource.data.userId);
-      allow create: if isCreatingOwnRequest(request.resource.data);
-      allow update, delete: if false;
+    match /giftCardCodes/{giftCardCodeId} {
+      allow read, write: if false; 
+    }
+
+    // --- GLOBAL DENY-ALL ---
+    // Explicitly deny access to any other paths not defined above.
+    match /{path=**} {
+      allow read, write: if false;
     }
   }
 }

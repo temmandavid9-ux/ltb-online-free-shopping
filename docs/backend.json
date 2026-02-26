@@ -1,53 +1,48 @@
 {
   "entities": {
-    "User": {
+    "UserProfile": {
       "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "User",
+      "title": "UserProfile",
       "type": "object",
-      "description": "Represents a user on the Eden 0² platform.",
+      "description": "A user's profile containing reward system data for the ShopSphere application, enabling daily task tracking and Elite Mode gift card bonuses.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the user entity."
+          "description": "Unique identifier for the UserProfile entity."
         },
-        "username": {
-          "type": "string",
-          "description": "The user's username."
-        },
-        "email": {
-          "type": "string",
-          "description": "The user's email address.",
-          "format": "email"
-        },
-        "walletBalance": {
+        "balance": {
           "type": "number",
-          "description": "The user's current wallet balance."
+          "description": "The user's current accumulated monetary balance from completing daily tasks."
         },
-        "taskProgress": {
+        "streakCount": {
           "type": "number",
-          "description": "The user's overall task completion progress (percentage)."
+          "description": "The number of consecutive days the user has completed daily tasks. Resets to 0 if a day is missed."
         },
-        "socialsFollowed": {
+        "lastCompletedDate": {
+          "type": "string",
+          "description": "The UTC date and time when the user last completed a daily task. Used to track streaks and enforce the one-task-per-day rule.",
+          "format": "date-time"
+        },
+        "eliteUnlocked": {
           "type": "boolean",
-          "description": "Indicates if the user has followed all the required social media handles."
+          "description": "Indicates whether the user has permanently unlocked Elite Mode by completing 365 consecutive daily tasks."
         },
-        "orderIds": {
-          "type": "array",
-          "description": "References to Orders. (Relationship: User 1:N Order)",
-          "items": {
-            "type": "string"
-          }
+        "eliteStartDate": {
+          "type": "string",
+          "description": "The UTC date and time when the user first achieved Elite Mode status.",
+          "format": "date-time"
         },
-        "withdrawalIds": {
-          "type": "array",
-          "description": "References to Withdrawals. (Relationship: User 1:N Withdrawal)",
-          "items": {
-            "type": "string"
-          }
+        "eliteMonthlyCounter": {
+          "type": "number",
+          "description": "A counter tracking the number of daily tasks an Elite user has completed within their current 30-day cycle for earning a gift card. Resets to 0 after 30 days."
         },
-        "tasks": {
+        "eliteRewardsAvailable": {
+          "type": "number",
+          "description": "The number of $25 gift cards an Elite user has earned but not yet redeemed."
+        },
+        "redeemedRewardIds": {
           "type": "array",
-          "description": "The tasks assigned to user.",
+          "description": "An array of unique identifiers referencing the RewardRedemption entities, logging the history of gift cards redeemed by this user. (Relationship: UserProfile 1:N RewardRedemption)",
           "items": {
             "type": "string"
           }
@@ -55,146 +50,83 @@
       },
       "required": [
         "id",
-        "username",
-        "email",
-        "walletBalance",
-        "taskProgress"
+        "balance",
+        "streakCount",
+        "lastCompletedDate",
+        "eliteUnlocked",
+        "eliteMonthlyCounter",
+        "eliteRewardsAvailable",
+        "redeemedRewardIds"
       ]
     },
-    "Order": {
+    "GiftCardCode": {
       "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "Order",
+      "title": "GiftCardCode",
       "type": "object",
-      "description": "Represents an order placed on the Eden 0² platform.",
+      "description": "Represents a unique $25 gift card code managed by the system, tracking its value and redemption status.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the order entity."
+          "description": "Unique identifier for the gift card, which also serves as its redeemable code."
         },
-        "userId": {
-          "type": "string",
-          "description": "Reference to User. (Relationship: User 1:N Order)"
-        },
-        "product": {
-          "type": "string",
-          "description": "The name of the product ordered."
-        },
-        "price": {
+        "value": {
           "type": "number",
-          "description": "The price of the product ordered."
+          "description": "The monetary value of the gift card (e.g., 25 for a $25 gift card)."
         },
         "status": {
           "type": "string",
-          "description": "The status of the order (Pending, Approved, Rejected, Completed)."
+          "description": "The current status of the gift card code (e.g., 'available' for codes not yet assigned/redeemed, 'redeemed' for codes that have been used)."
         },
-        "date": {
+        "assignedToRedemptionId": {
           "type": "string",
-          "description": "The date the order was placed.",
-          "format": "date-time"
-        },
-        "image": {
-          "type": "string",
-          "description": "The url for product image."
+          "description": "Reference to the RewardRedemption entity that claimed this specific gift card code. (Relationship: GiftCardCode 1:1 RewardRedemption)"
         }
       },
       "required": [
         "id",
-        "userId",
-        "product",
-        "price",
-        "status",
-        "date"
+        "value",
+        "status"
       ]
     },
-    "Withdrawal": {
+    "RewardRedemption": {
       "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "Withdrawal",
+      "title": "RewardRedemption",
       "type": "object",
-      "description": "Represents a withdrawal request made by a user.",
+      "description": "Logs an instance of a user redeeming an earned gift card, linking the user to the specific gift card code and recording the redemption details.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the withdrawal entity."
+          "description": "Unique identifier for this specific gift card redemption event."
         },
         "userId": {
           "type": "string",
-          "description": "Reference to User. (Relationship: User 1:N Withdrawal)"
+          "description": "Reference to the UserProfile entity of the user who performed this redemption. (Relationship: UserProfile 1:N RewardRedemption)"
         },
-        "amount": {
-          "type": "number",
-          "description": "The amount requested for withdrawal."
-        },
-        "paymentMethod": {
+        "giftCardCodeId": {
           "type": "string",
-          "description": "The user's chosen payment method."
+          "description": "Reference to the specific GiftCardCode entity that was redeemed in this event. (Relationship: GiftCardCode 1:1 RewardRedemption)"
         },
-        "accountDetails": {
+        "redemptionDate": {
           "type": "string",
-          "description": "The user's account details for the chosen payment method."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the withdrawal request (Pending, Approved, Rejected)."
-        },
-        "date": {
-          "type": "string",
-          "description": "The date the withdrawal request was made.",
+          "description": "The UTC date and time when the user redeemed the gift card.",
           "format": "date-time"
+        },
+        "rewardType": {
+          "type": "string",
+          "description": "A descriptive string indicating the type of reward redeemed (e.g., '$25 Elite Monthly Gift Card')."
+        },
+        "value": {
+          "type": "number",
+          "description": "The monetary value of the reward redeemed in this event."
         }
       },
       "required": [
         "id",
         "userId",
-        "amount",
-        "paymentMethod",
-        "accountDetails",
-        "status",
-        "date"
-      ]
-    },
-    "Task": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "Task",
-      "type": "object",
-      "description": "Represents task entity.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the task entity."
-        },
-        "userId": {
-          "type": "string",
-          "description": "Reference to User. (Relationship: User 1:N Task)"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the task (e.g., facebook, instagram, youtube, twitch)."
-        },
-        "completed": {
-          "type": "boolean",
-          "description": "Indicates whether the task has been completed."
-        },
-        "reward": {
-          "type": "number",
-          "description": "The reward associated with completing the task."
-        },
-        "taskStartTime": {
-          "type": "string",
-          "description": "The date and time the task was started.",
-          "format": "date-time"
-        },
-        "nextTaskUnlockTime": {
-          "type": "string",
-          "description": "The date and time the task will unlock again.",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "id",
-        "userId",
-        "name",
-        "completed",
-        "reward"
+        "giftCardCodeId",
+        "redemptionDate",
+        "rewardType",
+        "value"
       ]
     }
   },
@@ -207,74 +139,58 @@
   "firestore": {
     "structure": [
       {
-        "path": "/users/{userId}",
+        "path": "/users/{userId}/profile",
         "definition": {
-          "entityName": "User",
+          "entityName": "UserProfile",
           "schema": {
-            "$ref": "#/backend/entities/User"
+            "$ref": "#/backend/entities/UserProfile"
           },
-          "description": "Stores user profile information.  Path-based ownership ensures only the user can access their own data.",
+          "description": "Stores a user's profile information, daily task progress, Elite Mode status, and earned rewards. Access is restricted to the authenticated user. This document includes all reward system specific fields: 'balance', 'streakCount', 'lastCompletedDate', 'eliteUnlocked', 'eliteStartDate', 'eliteMonthlyCounter', 'eliteRewardsAvailable', and 'redeemedRewardIds'. Authorization is based on the path's '{userId}' matching 'request.auth.uid'.",
           "params": [
             {
               "name": "userId",
-              "description": "The unique identifier for the user."
+              "description": "The unique ID of the authenticated user."
             }
           ]
         }
       },
       {
-        "path": "/users/{userId}/tasks/{taskId}",
+        "path": "/users/{userId}/rewardRedemptions/{redemptionId}",
         "definition": {
-          "entityName": "Task",
+          "entityName": "RewardRedemption",
           "schema": {
-            "$ref": "#/backend/entities/Task"
+            "$ref": "#/backend/entities/RewardRedemption"
           },
-          "description": "Stores tasks assigned to each user. Path-based ownership ensures only the user can access their tasks.",
+          "description": "A subcollection under each user's profile, logging individual gift card redemption events. Each document contains details of a redemption, including the 'userId' (for denormalized reference, though path-based is primary for rules) and 'giftCardCodeId'. Access is restricted to the authenticated user's own redemption history for QAPs.",
           "params": [
             {
               "name": "userId",
-              "description": "The unique identifier for the user."
+              "description": "The unique ID of the user who performed the redemption."
             },
             {
-              "name": "taskId",
-              "description": "The unique identifier for the task."
+              "name": "redemptionId",
+              "description": "The unique ID for this specific gift card redemption event."
             }
           ]
         }
       },
       {
-        "path": "/orders/{orderId}",
+        "path": "/giftCardCodes/{giftCardCodeId}",
         "definition": {
-          "entityName": "Order",
+          "entityName": "GiftCardCode",
           "schema": {
-            "$ref": "#/backend/entities/Order"
+            "$ref": "#/backend/entities/GiftCardCode"
           },
-          "description": "Stores order information. Access is restricted for read access for the ordering user after order creation.",
+          "description": "A top-level collection containing all $25 gift card codes. Each document tracks the code's value and 'status' ('available' or 'redeemed'). This collection is primarily managed by backend services for assigning and marking codes as used. Direct client-side 'list' or 'get' access will be disallowed, ensuring security and Authorization Independence.",
           "params": [
             {
-              "name": "orderId",
-              "description": "The unique identifier for the order."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/withdrawals/{withdrawalId}",
-        "definition": {
-          "entityName": "Withdrawal",
-          "schema": {
-            "$ref": "#/backend/entities/Withdrawal"
-          },
-          "description": "Stores withdrawal requests. Access is restricted for read access for the requesting user after creation.",
-          "params": [
-            {
-              "name": "withdrawalId",
-              "description": "The unique identifier for the withdrawal."
+              "name": "giftCardCodeId",
+              "description": "The unique ID (code) of the gift card."
             }
           ]
         }
       }
     ],
-    "reasoning": "The Firestore data structure is designed to ensure authorization independence, clarity, and scalability for the Eden 0² platform. It leverages denormalization and structural segregation to simplify security rules and optimize data access.  User-owned data is stored under `/users/{userId}`.\n\nAuthorization Independence:\nAuthorization independence is achieved primarily through path-based ownership. For example, user-specific data like tasks is located directly under the `/users/{userId}` collection, eliminating the need for complex `get()` calls to determine ownership.\n\nQAPs Support:\nThe structure supports secure `list` operations (QAPs) through:\n\n1.  Structural Segregation: Placing public vs. private data in separate collections, such as user profiles under `/users/{userId}`, allows targeted security rules.\n2.  Path-Based Ownership: Using hierarchical paths like `/users/{userId}/tasks/{taskId}` enables listing operations restricted to a specific user's tasks."
+    "reasoning": "The Firestore structure is designed following the core principles of Authorization Independence, Structural Segregation, and consistent Access Modeling to ensure security, scalability, and debuggability for the Elite Monthly Gift Card System. \n\n**Authorization Independence (Strategy A) & QAPs:**\n1.  **UserProfile (`/users/{userId}/profile`):** Each user's profile data, including `balance`, `streakCount`, `eliteUnlocked`, `eliteMonthlyCounter`, and `eliteRewardsAvailable`, is stored in a document whose path directly incorporates the user's unique ID (`{userId}`). This directly links the document to `request.auth.uid` for authorization, eliminating the need for `get()` calls in security rules to check parent ownership. A user can only access their own profile. This design inherently supports Query-As-Permissions (QAPs) as `list` operations are not exposed on the `/users` collection, only direct `get` requests for a specific user's profile, which are easily secured.\n2.  **RewardRedemption (`/users/{userId}/rewardRedemptions/{redemptionId}`):** Similar to the UserProfile, individual redemption records are stored in a subcollection under the respective user's path. This ensures that a user's reward history is strictly owned by and accessible only to that user. The `userId` field within each `RewardRedemption` document also provides a denormalized reference, but the path-based authorization (`/users/{userId}/...`) is the primary mechanism for robust security rules. For QAPs, `list` operations on `/users/{userId}/rewardRedemptions` will automatically be scoped by the `userId` in the path, returning only the requesting user's redemption history without requiring filtering in rules.\n3.  **GiftCardCode (`/giftCardCodes/{giftCardCodeId}`):** This collection is designed as a top-level collection. It holds sensitive gift card codes and their status. This data is not directly owned by any single user for read/write access. Instead, its authorization will be strictly controlled, primarily allowing write/update operations only from trusted backend services (e.g., Firebase Functions) during the redemption process. Users will not directly interact with this collection, preventing exposure of unredeemed codes and supporting QAPs by not allowing arbitrary `list` or `get` operations from client applications. The `assignedToRedemptionId` field explicitly links a redeemed card to a `RewardRedemption` record, preventing duplicate redemptions.\n\n**Structural Segregation (Strategy B):**\nEach collection (`UserProfile`, `RewardRedemption`, `GiftCardCode`) has a homogeneous security posture. User profiles and their redemption histories are private and user-specific. Gift card codes are system-managed and highly restricted. This clear segregation simplifies security rules significantly by removing conditional logic based on document content within a collection.\n\n**Access Modeling (Strategy C):**\n*   **Private User Data:** `/users/{userId}/profile` uses path-based ownership for `UserProfile` data.\n*   **Hierarchical User-Owned Data:** `/users/{userId}/rewardRedemptions/{redemptionId}` continues the path hierarchy for user-owned `RewardRedemption` records, providing strong ownership guarantees.\n*   **Global Server-Managed Data:** `/giftCardCodes/{giftCardCodeId}` serves as a repository for global, sensitive data, managed by backend processes, not directly by individual users.\n\n**Data Clarity and Predictability (Strategy D):**\n*   Fields like `eliteUnlocked` and `eliteMonthlyCounter` explicitly model the user's Elite status and progress. The `GiftCardCode.status` field (`available`, `redeemed`) explicitly manages the state of gift cards.\n*   Consistent naming (`userId`, `redemptionId`, `giftCardCodeId`) and descriptive wildcards (`{userId}`) enhance readability and maintainability of both the database and security rules."
   }
 }
