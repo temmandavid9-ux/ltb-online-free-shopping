@@ -62,7 +62,6 @@ export default function ProductCard({ product }: ProductCardProps) {
               <Image
                 src={imgSrc}
                 alt={product.name}
-                data-ai-hint={product.images[0]?.hint || 'luxury product'}
                 width={600}
                 height={750}
                 priority={product.id.includes('exclusive_1')}

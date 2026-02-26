@@ -34,14 +34,17 @@ export default function RedeemPage() {
             {basket.map(item => (
               <Card key={item.product.id} className="flex items-center p-4">
                 <div className="w-24 h-24 aspect-square rounded-md overflow-hidden mr-4">
-                  <Image
-                    src={item.product.images[0].url}
-                    alt={item.product.name}
-                    data-ai-hint={item.product.images[0].hint}
-                    width={100}
-                    height={100}
-                    className="object-cover w-full h-full"
-                  />
+                  {item.product.images[0].url ? (
+                    <Image
+                      src={item.product.images[0].url}
+                      alt={item.product.name}
+                      width={100}
+                      height={100}
+                      className="object-cover w-full h-full"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-muted" />
+                  )}
                 </div>
                 <div className="flex-grow">
                   <Link href={`/product/${item.product.slug}`} className="font-semibold hover:text-primary">{item.product.name}</Link>

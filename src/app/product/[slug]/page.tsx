@@ -57,14 +57,19 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           <Card className="overflow-hidden">
             <CardContent className="p-4">
               <div className="aspect-square w-full overflow-hidden rounded-lg">
-                <Image
-                  src={mainImage.url}
-                  alt={product.name}
-                  data-ai-hint={mainImage.hint}
-                  width={800}
-                  height={800}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
+                {mainImage.url ? (
+                  <Image
+                    src={mainImage.url}
+                    alt={product.name}
+                    width={800}
+                    height={800}
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-muted flex items-center justify-center">
+                    <span className="text-muted-foreground">Asset Pending</span>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -75,14 +80,17 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 onClick={() => setMainImage(image)}
                 className={`aspect-square rounded-md overflow-hidden border-2 ${mainImage.url === image.url ? 'border-primary' : 'border-transparent'} transition-all`}
               >
-                <Image
-                  src={image.url}
-                  alt={`${product.name} thumbnail ${index + 1}`}
-                  data-ai-hint={image.hint}
-                  width={200}
-                  height={200}
-                  className="w-full h-full object-cover"
-                />
+                {image.url ? (
+                  <Image
+                    src={image.url}
+                    alt={`${product.name} thumbnail ${index + 1}`}
+                    width={200}
+                    height={200}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-muted" />
+                )}
               </button>
             ))}
           </div>
@@ -113,12 +121,12 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           <Card className="bg-muted/50">
             <CardContent className="p-4 space-y-3 text-sm">
               <div className="flex items-center gap-3">
-                <Truck className="h-5 w-5 text-primary" />
-                <span>Free shipping on all orders</span>
+                <ShieldCheck className="h-5 w-5 text-primary" />
+                <span>Verified Authentic Origin</span>
               </div>
               <div className="flex items-center gap-3">
-                <ShieldCheck className="h-5 w-5 text-primary" />
-                <span>2-year warranty included</span>
+                <Truck className="h-5 w-5 text-primary" />
+                <span>Global Elite Logistics</span>
               </div>
             </CardContent>
           </Card>
