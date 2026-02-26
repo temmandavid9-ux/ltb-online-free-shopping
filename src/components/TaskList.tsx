@@ -12,11 +12,11 @@ import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink } from 'lucide-react';
+import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
-const TASK_DURATION_SECONDS = 600; // 10 minutes per stage
+const TASK_DURATION_SECONDS = 600; // 10 minutes verification
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
@@ -27,11 +27,11 @@ export default function TaskList() {
   const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
   const { data: userData, isLoading: isUserDataLoading } = useDoc<UserProfile>(userDocRef);
 
-  // Sequential task state: 0 = YouTube, 1 = Instagram, 2 = Twitch, 3 = All Completed
-  const [currentStep, setCurrentStep] = useState<number>(0);
   const [activeTimer, setActiveTimer] = useState<boolean>(false);
   const [countdown, setCountdown] = useState(TASK_DURATION_SECONDS);
+  const [activeStep, setActiveStep] = useState<number | null>(null);
 
+  // Check if the overall sequence was completed today
   const isCompletedToday = useMemo(() => {
     if (!userData?.lastCompletedDate) return false;
     const lastDate = new Date(userData.lastCompletedDate).toDateString();
@@ -39,42 +39,39 @@ export default function TaskList() {
     return lastDate === today;
   }, [userData]);
 
-  // Sync current step with taskProgress if it's still today
-  useEffect(() => {
-    if (userData) {
-      if (isCompletedToday) {
-        // If completed today, show step 3 (Completed state)
-        setCurrentStep(3);
-      } else {
-        // If NOT completed today, but DB progress is 3, it means it's a new day and we need to start over
-        const dbProgress = userData.taskProgress || 0;
-        setCurrentStep(dbProgress === 3 ? 0 : dbProgress);
-      }
-    }
+  // Determine the current step index (0, 1, 2)
+  const currentStepIndex = useMemo(() => {
+    if (isCompletedToday) return 3;
+    if (!userData?.step1Status) return 0;
+    if (!userData?.step2Status) return 1;
+    if (!userData?.step3Status) return 2;
+    return 3;
   }, [userData, isCompletedToday]);
 
   const handleStageComplete = useCallback(() => {
-    if (!user || !userData || !userDocRef) return;
+    if (!user || !userData || !userDocRef || activeStep === null) return;
 
-    const stage = currentStep;
-    let reward = 0.33;
+    const stage = activeStep;
+    let reward = stage === 2 ? 0.34 : 0.33;
     let updates: Partial<UserProfile> = {};
 
-    // Logic for Stage 3 (Final)
+    // Update specific step status
+    if (stage === 0) updates.step1Status = true;
+    if (stage === 1) updates.step2Status = true;
     if (stage === 2) {
-      reward = 0.34; // Final stage completes the $1.00
+      updates.step3Status = true;
+      
+      // Finalize Daily PACK
       const today = new Date();
       const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
-      
       let newStreak = userData.streakCount || 0;
-      
+
       if (lastDate) {
         const yesterday = new Date();
         yesterday.setDate(yesterday.getDate() - 1);
-        
         if (lastDate.toDateString() === yesterday.toDateString()) {
           newStreak += 1;
-        } else if (lastDate.toDateString() !== today.toDateString()) {
+        } else {
           newStreak = 1;
         }
       } else {
@@ -83,53 +80,43 @@ export default function TaskList() {
 
       updates.lastCompletedDate = today.toISOString();
       updates.streakCount = newStreak;
-      updates.taskProgress = 3;
 
+      // Handle Elite Unlocking (365 days)
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = today.toISOString();
         updates.eliteMonthlyCounter = 0;
         updates.eliteRewardsAvailable = 0;
-        toast({
-          title: t('tasks.toast.eliteUnlockedTitle'),
-          description: t('tasks.toast.eliteUnlockedDesc'),
-        });
+        toast({ title: "ELITE MODE ACTIVATED", description: "365-day milestone achieved. Permanent Elite status secured." });
       }
 
+      // Handle Elite Monthly Cycle (30 days = $25)
       if (userData.eliteUnlocked || updates.eliteUnlocked) {
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
-
         if (newMonthlyCounter >= 30) {
           newMonthlyCounter = 0;
           newRewards += 1;
-          toast({
-            title: t('tasks.toast.giftCardEarned'),
-          });
+          toast({ title: "MONTHLY BONUS EARNED", description: "$25 Gift Card credited to your account." });
         }
         updates.eliteMonthlyCounter = newMonthlyCounter;
         updates.eliteRewardsAvailable = newRewards;
       }
-      
-      toast({
-        title: "Daily Sequence Finalized",
-        description: `Total $1.00 reward secured. Streak: Day ${newStreak}.`,
-      });
-    } else {
-      // Logic for Stage 1 & 2
-      updates.taskProgress = stage + 1;
-      toast({
-        title: `Stage ${stage + 1} Secured`,
-        description: `+$${reward.toFixed(2)} added to your registry. Next stage unlocked.`,
-      });
     }
 
+    // Increment balance
     updates.balance = (userData.balance || 0) + reward;
     updateDocumentNonBlocking(userDocRef, updates);
     
     setActiveTimer(false);
+    setActiveStep(null);
     setCountdown(TASK_DURATION_SECONDS);
-  }, [user, userData, userDocRef, t, toast, currentStep]);
+
+    toast({
+      title: "Step Secured",
+      description: `+$${reward.toFixed(2)} credited. Sequence advanced.`,
+    });
+  }, [user, userData, userDocRef, toast, activeStep]);
 
   useEffect(() => {
     if (!activeTimer) return;
@@ -141,26 +128,42 @@ export default function TaskList() {
     return () => clearInterval(timer);
   }, [activeTimer, countdown, handleStageComplete]);
 
+  // Reset steps if it's a new day
+  useEffect(() => {
+    if (userData && !isCompletedToday) {
+      if (userData.step1Status || userData.step2Status || userData.step3Status) {
+        // Only reset if it's not today's completion data
+        // To be safe, we check if the lastCompletedDate is not today
+        updateDocumentNonBlocking(userDocRef!, {
+          step1Status: false,
+          step2Status: false,
+          step3Status: false
+        });
+      }
+    }
+  }, [userData, isCompletedToday, userDocRef]);
+
   const handleStartSubTask = (stepIndex: number, url: string) => {
-    if (isCompletedToday) return;
-    if (stepIndex !== currentStep) return;
+    if (isCompletedToday || activeTimer) return;
+    if (stepIndex !== currentStepIndex) return;
     
     window.open(url, '_blank', 'noopener,noreferrer');
+    setActiveStep(stepIndex);
     setCountdown(TASK_DURATION_SECONDS);
     setActiveTimer(true);
   };
 
-  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center">{t('tasks.loading')}</div>;
-  if (!user || !userData) return <p className="p-24 text-center">{t('tasks.loginPrompt')}</p>;
+  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center">Loading Registry...</div>;
+  if (!user || !userData) return <p className="p-24 text-center">Authentication Required.</p>;
 
   const minutes = Math.floor(countdown / 60);
   const seconds = countdown % 60;
   const countdownText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
   const channels = [
-    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Registry Step 1 (+$0.33)' },
-    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: 'Registry Step 2 (+$0.33)' },
-    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: 'Final Verification (+$0.34)' }
+    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Registry Step 1 (+$0.33)', status: userData.step1Status },
+    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: 'Registry Step 2 (+$0.33)', status: userData.step2Status },
+    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: 'Final Verification (+$0.34)', status: userData.step3Status }
   ];
 
   return (
@@ -170,10 +173,10 @@ export default function TaskList() {
           <div>
             <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
               {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-              {userData.eliteUnlocked ? "Elite Sequence" : "Daily Sequential Registry"}
+              {userData.eliteUnlocked ? "Elite Monthly Registry" : "Daily Sequential Registry"}
             </CardTitle>
             <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">
-              Stages yield fractional rewards ($0.33). Complete all 3 for the full $1.00 daily credit.
+              Sequential Execution Required. Full PACK: $1.00 Total Daily Reward.
             </CardDescription>
           </div>
           <div className="text-left sm:text-right">
@@ -213,29 +216,41 @@ export default function TaskList() {
             <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Execution Sequence</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {channels.map((channel) => {
-                const isLocked = channel.id > currentStep && !isCompletedToday;
-                const isCurrent = channel.id === currentStep && !isCompletedToday && !activeTimer;
-                const isVerifying = channel.id === currentStep && activeTimer;
-                const isDone = channel.id < currentStep || isCompletedToday;
+                const isSecured = channel.status || (isCompletedToday && channel.id <= 2);
+                const isLocked = channel.id > currentStepIndex && !isCompletedToday;
+                const isActivating = channel.id === currentStepIndex && activeTimer;
+                const isAvailable = channel.id === currentStepIndex && !activeTimer && !isCompletedToday;
 
                 return (
-                  <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 overflow-hidden ${isVerifying ? 'border-primary animate-pulse' : isDone ? 'border-primary/40 bg-primary/5' : isLocked ? 'opacity-50 grayscale bg-muted/20' : 'border-black/5'}`}>
+                  <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 ${isSecured ? 'border-primary/40 bg-primary/5' : isActivating ? 'border-primary animate-pulse' : isLocked ? 'opacity-50 grayscale bg-muted/20' : 'border-black/5 bg-white'}`}>
                     <CardContent className="p-6 text-center space-y-4">
-                      <div className={`mx-auto w-16 h-16 rounded-2xl flex items-center justify-center transition-all ${isDone ? 'bg-primary text-white scale-90' : isLocked ? 'bg-muted text-muted-foreground' : 'bg-secondary text-foreground'}`}>
-                        {isLocked ? <Lock className="w-8 h-8" /> : <channel.icon className="w-8 h-8" />}
+                      <div className={`mx-auto w-16 h-16 rounded-2xl flex items-center justify-center transition-all ${isSecured ? 'bg-primary text-white' : isLocked ? 'bg-muted text-muted-foreground' : 'bg-secondary text-foreground'}`}>
+                        {isLocked ? <Lock className="w-8 h-8" /> : isSecured ? <ShieldCheck className="w-8 h-8" /> : <channel.icon className="w-8 h-8" />}
                       </div>
                       <div>
                         <h4 className="font-black text-[10px] uppercase tracking-widest">{channel.title}</h4>
                         <p className="text-[9px] font-bold text-muted-foreground/60 mt-1">{channel.desc}</p>
                       </div>
-                      <Button 
-                        onClick={() => handleStartSubTask(channel.id, channel.url)}
-                        variant={isDone ? "ghost" : isLocked ? "secondary" : "outline"}
-                        className="w-full rounded-xl h-10 text-[9px] font-black uppercase tracking-widest"
-                        disabled={isLocked || isDone || activeTimer}
-                      >
-                        {isDone ? <><CheckCircle className="w-3 h-3 mr-2 text-primary" /> Secured</> : isLocked ? "Locked" : isVerifying ? "Verifying..." : <><ExternalLink className="w-3 h-3 mr-2" /> Start Stage</>}
-                      </Button>
+                      <div className="pt-2">
+                        {isSecured ? (
+                          <div className="text-[10px] font-black text-primary uppercase tracking-widest flex items-center justify-center gap-1">
+                            <CheckCircle className="w-3 h-3" /> Status: Secured
+                          </div>
+                        ) : isLocked ? (
+                          <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">
+                            Locked
+                          </div>
+                        ) : (
+                          <Button 
+                            onClick={() => handleStartSubTask(channel.id, channel.url)}
+                            variant="outline"
+                            className="w-full rounded-xl h-10 text-[9px] font-black uppercase tracking-widest"
+                            disabled={activeTimer}
+                          >
+                            {isActivating ? "Verifying..." : <><ExternalLink className="w-3 h-3 mr-2" /> Start Stage</>}
+                          </Button>
+                        )}
+                      </div>
                     </CardContent>
                   </Card>
                 );
@@ -243,45 +258,39 @@ export default function TaskList() {
             </div>
           </div>
 
-          <div className="text-center py-12">
-            {activeTimer ? (
-              <div className="space-y-8 animate-in zoom-in duration-500">
-                <div className="inline-flex items-center gap-3 px-6 py-3 bg-primary/10 text-primary rounded-full text-[10px] font-black uppercase tracking-widest">
-                  <Zap className="w-4 h-4 animate-bounce" />
-                  Stage {currentStep + 1} Verification Active
-                </div>
-                <div className="text-8xl font-black font-headline tracking-tighter tabular-nums text-foreground">
-                  {countdownText}
-                </div>
-                <p className="text-xs text-muted-foreground font-black uppercase tracking-[0.2em] max-w-sm mx-auto leading-relaxed">
-                  Stay on page to verify engagement. Fractional reward credited after verification.
-                </p>
+          {activeTimer && (
+            <div className="text-center py-12 space-y-8 animate-in zoom-in duration-500">
+              <div className="inline-flex items-center gap-3 px-6 py-3 bg-primary/10 text-primary rounded-full text-[10px] font-black uppercase tracking-widest">
+                <Zap className="w-4 h-4 animate-bounce" />
+                Stage {activeStep! + 1} Verification Active
               </div>
-            ) : isCompletedToday ? (
-              <div className="space-y-6 animate-in fade-in duration-1000">
-                <div className="mx-auto w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                  <CheckCircle className="w-14 h-14 text-primary" />
-                </div>
-                <h3 className="text-3xl font-black luxury-text-gradient">Daily Sequence Finalized</h3>
-                <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">Streak updated. Return in 24 hours.</p>
+              <div className="text-8xl font-black font-headline tracking-tighter tabular-nums text-foreground">
+                {countdownText}
               </div>
-            ) : (
-              <div className="space-y-4">
-                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest italic">
-                  Current Target: Stage {currentStep + 1}
-                </p>
+              <p className="text-xs text-muted-foreground font-black uppercase tracking-[0.2em] max-w-sm mx-auto leading-relaxed">
+                Verification Required. Engage with social media content to secure fractional reward.
+              </p>
+            </div>
+          )}
+
+          {isCompletedToday && (
+            <div className="text-center py-12 space-y-6 animate-in fade-in duration-1000">
+              <div className="mx-auto w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                <CheckCircle className="w-14 h-14 text-primary" />
               </div>
-            )}
-          </div>
+              <h3 className="text-3xl font-black luxury-text-gradient">Daily PACK Finalized</h3>
+              <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">Streak: Day {userData.streakCount}. Return in 24 hours.</p>
+            </div>
+          )}
         </CardContent>
 
         <CardFooter className="bg-secondary/30 p-10 border-t border-border/50">
           <Button 
             className="w-full h-20 rounded-[2rem] text-xs font-black uppercase tracking-[0.3em] shadow-2xl transition-all active:scale-95 btn-luxury"
             disabled={activeTimer || isCompletedToday}
-            onClick={() => handleStartSubTask(currentStep, channels[currentStep].url)}
+            onClick={() => handleStartSubTask(currentStepIndex, channels[currentStepIndex].url)}
           >
-            {activeTimer ? "Verifying Current Stage..." : isCompletedToday ? "Reward Secured" : `Unlock Stage ${currentStep + 1}`}
+            {activeTimer ? "Verification in Progress..." : isCompletedToday ? "Reward Secured" : `Unlock Registry Step ${currentStepIndex + 1}`}
           </Button>
         </CardFooter>
       </Card>

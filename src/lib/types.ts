@@ -58,11 +58,13 @@ export type UserProfile = {
   username: string;
   email: string;
   balance: number;
-  taskProgress: number;
-  socialsFollowed: boolean;
   orderIds: string[];
   withdrawalIds: string[];
-  // Elite Mode Fields
+  // Task Status Fields
+  step1Status: boolean;
+  step2Status: boolean;
+  step3Status: boolean;
+  // Elite Mode & Gamification
   streakCount: number;
   lastCompletedDate: string | null;
   eliteUnlocked: boolean;

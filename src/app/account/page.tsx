@@ -38,7 +38,7 @@ export default function AccountPage() {
     const { t } = useLanguage();
     const { toast } = useToast();
     
-    // Unified 2-segment path: /users/{userId}
+    // Standardized 2-segment path: /users/{userId}
     const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
     const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
@@ -116,27 +116,19 @@ export default function AccountPage() {
             eliteStartDate: new Date().toISOString(),
             eliteMonthlyCounter: 0,
             eliteRewardsAvailable: 0,
-            redeemedRewardIds: []
+            redeemedRewardIds: [],
+            step1Status: false,
+            step2Status: false,
+            step3Status: false,
+            orderIds: userData?.orderIds || [],
+            withdrawalIds: userData?.withdrawalIds || []
         };
 
-        if (!userData) {
-            // Document doesn't exist, create it
-            setDocumentNonBlocking(userDocRef, {
-                id: user!.uid,
-                ...restoredData,
-                taskProgress: 0,
-                socialsFollowed: true,
-                orderIds: [],
-                withdrawalIds: []
-            }, { merge: false });
-        } else {
-            // Update existing
-            updateDocumentNonBlocking(userDocRef, restoredData);
-        }
+        setDocumentNonBlocking(userDocRef, restoredData, { merge: true });
 
         toast({
             title: "CEO Data Restored",
-            description: "$1,211 and Elite status have been anchored to your account.",
+            description: "$1,211 balance and Elite status have been anchored to your registry.",
         });
     };
 
