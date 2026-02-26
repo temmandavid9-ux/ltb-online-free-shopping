@@ -38,7 +38,6 @@ export default function AccountPage() {
     const { t } = useLanguage();
     const { toast } = useToast();
     
-    // Unified 2-segment path: /users/{userId}
     const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
     const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
@@ -106,7 +105,6 @@ export default function AccountPage() {
 
     const handleAddTestBalance = () => {
         if (!userDocRef || !userData) {
-            // Force initialization if document is missing
             if (user) {
                 const newUserDoc: UserProfile = {
                     id: user.uid,
@@ -126,7 +124,7 @@ export default function AccountPage() {
                     redeemedRewardIds: [],
                 };
                 setDocumentNonBlocking(userDocRef as any, newUserDoc, { merge: false });
-                toast({ title: "CEO Account Initialized", description: "Path migrated. $1,211 and Elite Status restored." });
+                toast({ title: "CEO Account Initialized", description: "$1,211 and Elite Status restored to path." });
             }
             return;
         }
@@ -147,12 +145,14 @@ export default function AccountPage() {
         return null;
     }
 
+    const currentBalance = userData?.balance ?? 0;
+
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12">
             <div>
                 <h1 className="text-4xl sm:text-5xl font-black luxury-text-gradient tracking-tighter mb-2">{t('account.title')}</h1>
-                <p className="text-muted-foreground font-medium uppercase tracking-[0.3em] text-[10px]">{userData?.username || user.email} • {user.email}</p>
+                <p className="text-muted-foreground font-medium uppercase tracking-[0.3em] text-[10px]">{userData?.username || user.displayName || user.email} • {user.email}</p>
             </div>
             <div className="flex gap-3">
                 <Button onClick={handleAddTestBalance} variant="outline" className="rounded-full font-black uppercase tracking-widest text-[9px] h-12 px-6 border-primary/20 text-primary">
@@ -194,7 +194,7 @@ export default function AccountPage() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-4xl font-black mb-6">${userData?.balance?.toLocaleString(undefined, { minimumFractionDigits: 2 }) || '0.00'}</div>
+                        <div className="text-4xl font-black mb-6">${currentBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
                          <Button className="w-full rounded-2xl h-14 font-black uppercase tracking-widest text-[10px] btn-luxury" asChild>
                             <Link href="/wallet">{t('account.manageWallet')} <ArrowRight className="ml-2 h-4 w-4"/></Link>
                         </Button>

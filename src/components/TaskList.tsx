@@ -1,4 +1,3 @@
-
 'use client';
 import {
   useUser,
@@ -13,7 +12,7 @@ import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Youtube, CheckCircle, Zap, Crown, Trophy } from 'lucide-react';
+import { Youtube, CheckCircle, Zap, Crown, Trophy, ExternalLink, ShieldCheck, Eye } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -26,12 +25,16 @@ export default function TaskList() {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  // Corrected 2-segment path for profile document
   const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
   const { data: userData, isLoading: isUserDataLoading } = useDoc<UserProfile>(userDocRef);
 
   const [activeTimer, setActiveTimer] = useState<boolean>(false);
   const [countdown, setCountdown] = useState(TASK_DURATION_SECONDS);
+  const [visitedChannels, setVisitedChannels] = useState<Record<string, boolean>>({
+    youtube: false,
+    registry: false,
+    lookbook: false
+  });
 
   const isCompletedToday = useMemo(() => {
     if (!userData?.lastCompletedDate) return false;
@@ -48,7 +51,6 @@ export default function TaskList() {
     
     let newStreak = userData.streakCount || 0;
     
-    // Streak logic
     if (lastDate) {
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
@@ -68,7 +70,6 @@ export default function TaskList() {
       streakCount: newStreak,
     };
 
-    // Elite Unlock Check (365 days)
     if (!userData.eliteUnlocked && newStreak >= 365) {
       updates.eliteUnlocked = true;
       updates.eliteStartDate = today.toISOString();
@@ -80,7 +81,6 @@ export default function TaskList() {
       });
     }
 
-    // Elite Monthly Progress (30 days cycle)
     if (userData.eliteUnlocked || updates.eliteUnlocked) {
       let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
       let newRewards = userData.eliteRewardsAvailable || 0;
@@ -104,6 +104,7 @@ export default function TaskList() {
     });
     
     setActiveTimer(false);
+    setVisitedChannels({ youtube: false, registry: false, lookbook: false });
   }, [user, userData, userDocRef, t, toast]);
 
   useEffect(() => {
@@ -116,12 +117,22 @@ export default function TaskList() {
     return () => clearInterval(timer);
   }, [activeTimer, countdown, handleCompleteTask]);
 
-  const handleStartTask = () => {
+  const handleVisitChannel = (channel: string, url: string) => {
+    setVisitedChannels(prev => ({ ...prev, [channel]: true }));
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const allVisited = Object.values(visitedChannels).every(v => v);
+
+  const handleStartTimer = () => {
     if (isCompletedToday) {
       toast({ variant: "destructive", title: t('tasks.toast.alreadyCompleted') });
       return;
     }
-    window.open("https://youtube.com/@Eden-s8u", '_blank', 'noopener,noreferrer');
+    if (!allVisited) {
+      toast({ variant: "destructive", title: "Engagement Required", description: "Please engage with all 3 task media items first." });
+      return;
+    }
     setCountdown(TASK_DURATION_SECONDS);
     setActiveTimer(true);
   };
@@ -134,19 +145,19 @@ export default function TaskList() {
   const countdownText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-10">
       <Card className="overflow-hidden border-2 border-primary/20 bg-gradient-to-br from-background to-secondary/10 shadow-2xl rounded-[3rem]">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 p-10 pb-7">
+        <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-10 pb-7">
           <div>
             <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
               {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
               {userData.eliteUnlocked ? t('tasks.eliteActive') : t('tasks.pageTitle')}
             </CardTitle>
-            <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">{t('tasks.pageDescription')}</CardDescription>
+            <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">Complete the daily PACK to earn $1.00</CardDescription>
           </div>
-          <div className="text-right">
-            <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Current Reward</div>
-            <div className="text-4xl font-black text-primary">${DAILY_REWARD.toFixed(2)}</div>
+          <div className="text-left sm:text-right">
+            <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Elite Accumulation</div>
+            <div className="text-4xl font-black text-primary">${(userData.balance || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
           </div>
         </CardHeader>
         
@@ -161,9 +172,6 @@ export default function TaskList() {
                 <span className="text-xs font-black text-muted-foreground">{userData.streakCount || 0} / 365 Days</span>
               </div>
               <Progress value={((userData.streakCount || 0) / 365) * 100} className="h-4 bg-secondary rounded-full" />
-              <p className="mt-4 text-[10px] font-black text-muted-foreground/60 uppercase tracking-widest">
-                {t('account.eliteStreak', { streak: userData.streakCount || 0 })}
-              </p>
             </div>
 
             {userData.eliteUnlocked && (
@@ -171,16 +179,44 @@ export default function TaskList() {
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <Zap className="w-6 h-6 text-primary" />
-                    <span className="text-sm font-black uppercase tracking-widest">Elite Monthly Bonus</span>
+                    <span className="text-sm font-black uppercase tracking-widest">Gift Card Cycle</span>
                   </div>
                   <span className="text-xs font-black text-primary">{userData.eliteMonthlyCounter || 0} / 30 Days</span>
                 </div>
                 <Progress value={((userData.eliteMonthlyCounter || 0) / 30) * 100} className="h-4 bg-secondary rounded-full" />
-                <p className="mt-4 text-[10px] font-black text-primary uppercase tracking-widest">
-                  {t('tasks.eliteMonthlyStatus', { count: userData.eliteMonthlyCounter || 0 })}
-                </p>
               </div>
             )}
+          </div>
+
+          <div className="space-y-6">
+            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Engagement Media PACK (3/3)</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { id: 'youtube', title: 'Official Channel', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Interact with latest media.' },
+                { id: 'registry', title: 'Asset Registry', icon: ShieldCheck, url: '/admin/image-viewer', desc: 'Verify catalog integrity.' },
+                { id: 'lookbook', title: 'Elite Lookbook', icon: Eye, url: '/', desc: 'Study signature selections.' }
+              ].map((channel) => (
+                <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 overflow-hidden ${visitedChannels[channel.id] ? 'border-primary/40 bg-primary/5' : 'border-black/5 hover:border-black/10'}`}>
+                  <CardContent className="p-6 text-center space-y-4">
+                    <div className={`mx-auto w-16 h-16 rounded-2xl flex items-center justify-center transition-all ${visitedChannels[channel.id] ? 'bg-primary text-white scale-90' : 'bg-secondary text-foreground'}`}>
+                      <channel.icon className="w-8 h-8" />
+                    </div>
+                    <div>
+                      <h4 className="font-black text-xs uppercase tracking-widest">{channel.title}</h4>
+                      <p className="text-[9px] font-bold text-muted-foreground/60 mt-1">{channel.desc}</p>
+                    </div>
+                    <Button 
+                      onClick={() => handleVisitChannel(channel.id, channel.url)}
+                      variant={visitedChannels[channel.id] ? "ghost" : "outline"}
+                      className="w-full rounded-xl h-10 text-[9px] font-black uppercase tracking-widest"
+                      disabled={isCompletedToday || activeTimer}
+                    >
+                      {visitedChannels[channel.id] ? <><CheckCircle className="w-3 h-3 mr-2 text-primary" /> Engaged</> : <><ExternalLink className="w-3 h-3 mr-2" /> Visit Channel</>}
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
 
           <div className="text-center py-12">
@@ -203,17 +239,15 @@ export default function TaskList() {
                   <CheckCircle className="w-14 h-14 text-primary" />
                 </div>
                 <h3 className="text-3xl font-black luxury-text-gradient">{t('tasks.allCompletedTitle')}</h3>
-                <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">{t('tasks.allCompletedDescription')}</p>
+                <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">Daily $1 reward secured. Return in 24 hours.</p>
               </div>
             ) : (
-              <div className="space-y-8">
-                <div className="mx-auto w-28 h-28 bg-white rounded-[3rem] flex items-center justify-center border-4 border-white shadow-2xl">
-                  <Youtube className="w-14 h-14 text-primary" />
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-black">{t('tasks.startPrompt')}</h3>
-                  <p className="text-[10px] font-black text-muted-foreground/60 uppercase tracking-widest">Engage with our curated content to secure your daily reward.</p>
-                </div>
+              <div className="space-y-4">
+                {!allVisited ? (
+                  <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Engage with all 3 media items to unlock verification.</p>
+                ) : (
+                  <p className="text-[10px] font-black text-primary uppercase tracking-widest">All media engaged. You may now start verification.</p>
+                )}
               </div>
             )}
           </div>
@@ -222,10 +256,10 @@ export default function TaskList() {
         <CardFooter className="bg-secondary/30 p-10 border-t border-border/50">
           <Button 
             className="w-full h-20 rounded-[2rem] text-xs font-black uppercase tracking-[0.3em] shadow-2xl transition-all active:scale-95 btn-luxury"
-            disabled={activeTimer || isCompletedToday}
-            onClick={handleStartTask}
+            disabled={activeTimer || isCompletedToday || !allVisited}
+            onClick={handleStartTimer}
           >
-            {activeTimer ? t('tasks.timerActive') : isCompletedToday ? t('tasks.completed') : t('tasks.startButton', { reward: DAILY_REWARD.toFixed(2) })}
+            {activeTimer ? t('tasks.timerActive') : isCompletedToday ? t('tasks.completed') : `Unlock Daily Reward ($1.00)`}
           </Button>
         </CardFooter>
       </Card>
