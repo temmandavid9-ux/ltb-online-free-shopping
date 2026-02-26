@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useUser, useFirestore, useDoc, useMemoFirebase, updateDocumentNonBlocking, setDocumentNonBlocking, useCollection } from "@/firebase";
@@ -12,7 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Alert, AlertDescription, AlertTitle } from "@/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
@@ -35,7 +34,7 @@ export default function WalletPage() {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  // Corrected 2-segment path
+  // Corrected 2-segment path aligned with security rules
   const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
   const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
@@ -125,7 +124,7 @@ export default function WalletPage() {
                 <DollarSign className="w-5 h-5 text-primary" />
             </CardHeader>
             <CardContent>
-                <div className="text-5xl font-black">${currentBalance.toLocaleString()}</div>
+                <div className="text-5xl font-black">${currentBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
             </CardContent>
           </Card>
           <Card className="rounded-[3rem] shadow-xl overflow-hidden border-black/5">
