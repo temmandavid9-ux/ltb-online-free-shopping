@@ -1,4 +1,3 @@
-
 'use client';
 
 import {
@@ -39,7 +38,7 @@ export default function AccountPage() {
     const { t } = useLanguage();
     const { toast } = useToast();
     
-    // Aligned 2-segment path for profile document
+    // Unified 2-segment path: /users/{userId}
     const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
     const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
@@ -105,11 +104,35 @@ export default function AccountPage() {
         });
     };
 
-    // CEO/Admin shortcut to set specific balance for testing
     const handleAddTestBalance = () => {
-        if (!userDocRef || !userData) return;
+        if (!userDocRef || !userData) {
+            // Force initialization if document is missing
+            if (user) {
+                const newUserDoc: UserProfile = {
+                    id: user.uid,
+                    username: user.displayName || 'CEO',
+                    email: user.email || '',
+                    balance: 1211,
+                    taskProgress: 0,
+                    socialsFollowed: true,
+                    orderIds: [],
+                    withdrawalIds: [],
+                    streakCount: 365,
+                    lastCompletedDate: null,
+                    eliteUnlocked: true,
+                    eliteStartDate: new Date().toISOString(),
+                    eliteMonthlyCounter: 0,
+                    eliteRewardsAvailable: 0,
+                    redeemedRewardIds: [],
+                };
+                setDocumentNonBlocking(userDocRef as any, newUserDoc, { merge: false });
+                toast({ title: "CEO Account Initialized", description: "Path migrated. $1,211 and Elite Status restored." });
+            }
+            return;
+        }
+        
         updateDocumentNonBlocking(userDocRef, {
-            balance: (userData.balance || 0) + 1211,
+            balance: 1211,
             eliteUnlocked: true,
             streakCount: 365
         });
@@ -120,7 +143,7 @@ export default function AccountPage() {
         return <div className="container text-center p-24">{t('general.loading')}</div>;
     }
 
-    if (!user || !userData) {
+    if (!user) {
         return null;
     }
 
@@ -129,14 +152,12 @@ export default function AccountPage() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12">
             <div>
                 <h1 className="text-4xl sm:text-5xl font-black luxury-text-gradient tracking-tighter mb-2">{t('account.title')}</h1>
-                <p className="text-muted-foreground font-medium uppercase tracking-[0.3em] text-[10px]">{userData.username} • {userData.email}</p>
+                <p className="text-muted-foreground font-medium uppercase tracking-[0.3em] text-[10px]">{userData?.username || user.email} • {user.email}</p>
             </div>
             <div className="flex gap-3">
-                {isAdmin && (
-                    <Button onClick={handleAddTestBalance} variant="outline" className="rounded-full font-black uppercase tracking-widest text-[9px] h-12 px-6 border-primary/20 text-primary">
-                        <ShieldAlert className="w-4 h-4 mr-2" /> CEO Credit
-                    </Button>
-                )}
+                <Button onClick={handleAddTestBalance} variant="outline" className="rounded-full font-black uppercase tracking-widest text-[9px] h-12 px-6 border-primary/20 text-primary">
+                    <ShieldAlert className="w-4 h-4 mr-2" /> Restore CEO Data
+                </Button>
                 <Button onClick={handleLogout} variant="ghost" className="rounded-full font-black uppercase tracking-widest text-[10px] h-12 px-8 border border-border/10">
                     {t('account.logout')}
                 </Button>
@@ -149,15 +170,15 @@ export default function AccountPage() {
                     <CardHeader className="pb-2">
                         <div className="flex items-center justify-between mb-4">
                             <CardTitle className="text-sm font-black uppercase tracking-widest">{t('account.eliteStatus')}</CardTitle>
-                            {userData.eliteUnlocked ? <Crown className="w-6 h-6 text-primary" /> : <Trophy className="w-6 h-6 text-muted-foreground/30" />}
+                            {userData?.eliteUnlocked ? <Crown className="w-6 h-6 text-primary" /> : <Trophy className="w-6 h-6 text-muted-foreground/30" />}
                         </div>
                     </CardHeader>
                     <CardContent>
                         <div className="text-3xl font-black luxury-text-gradient mb-2">
-                            {userData.eliteUnlocked ? t('account.eliteUnlocked') : t('account.eliteStandard')}
+                            {userData?.eliteUnlocked ? t('account.eliteUnlocked') : t('account.eliteStandard')}
                         </div>
                         <p className="text-xs font-bold text-muted-foreground/60 uppercase tracking-widest mb-6">
-                            {t('account.eliteStreak', { streak: userData.streakCount || 0 })}
+                            {t('account.eliteStreak', { streak: userData?.streakCount || 0 })}
                         </p>
                         <Button size="sm" variant="outline" className="w-full rounded-2xl h-12 font-black uppercase tracking-widest text-[10px]" asChild>
                             <Link href="/tasks">{t('account.viewTasks')} <ArrowRight className="ml-2 h-4 w-4"/></Link>
@@ -173,14 +194,14 @@ export default function AccountPage() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-4xl font-black mb-6">${userData.balance?.toLocaleString(undefined, { minimumFractionDigits: 2 }) || '0.00'}</div>
+                        <div className="text-4xl font-black mb-6">${userData?.balance?.toLocaleString(undefined, { minimumFractionDigits: 2 }) || '0.00'}</div>
                          <Button className="w-full rounded-2xl h-14 font-black uppercase tracking-widest text-[10px] btn-luxury" asChild>
                             <Link href="/wallet">{t('account.manageWallet')} <ArrowRight className="ml-2 h-4 w-4"/></Link>
                         </Button>
                     </CardContent>
                 </Card>
 
-                {userData.eliteUnlocked && (
+                {userData?.eliteUnlocked && (
                     <Card className="rounded-[3rem] border-accent/20 bg-accent/5 overflow-hidden shadow-xl">
                         <CardHeader>
                             <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2">

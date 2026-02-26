@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -24,9 +23,11 @@ export default function Header() {
   const firestore = useFirestore();
   const { t, setLocale, locale } = useLanguage();
 
-  // Standardized 2-segment path for profile document
+  // Unified 2-segment path: /users/{userId}
   const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
   const { data: userData } = useDoc<UserProfile>(userDocRef);
+
+  const balance = userData?.balance ?? 0;
 
   return (
     <header className="glass-header">
@@ -72,16 +73,16 @@ export default function Header() {
 
             {isUserLoading ? (
               <div className="h-10 w-32 md:h-12 md:w-36 bg-muted rounded-full animate-pulse" />
-            ) : user && userData ? (
+            ) : user ? (
               <div className="flex items-center gap-2 md:gap-4">
                  <Link href="/wallet" className="flex items-center gap-2 px-3 sm:px-5 py-2 md:py-2.5 bg-black text-white rounded-full hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.3)] transition-all transform active:scale-95 btn-luxury">
                     <Wallet className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
-                    <span className="text-[9px] sm:text-xs font-black uppercase tracking-widest">${userData.balance?.toLocaleString() || '0.00'}</span>
+                    <span className="text-[9px] sm:text-xs font-black uppercase tracking-widest">${balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
                  </Link>
                 <Link href="/account">
                   <Button variant="outline" className="rounded-full h-10 md:h-12 gap-3 px-3 md:px-6 border-foreground/5 hover:bg-secondary/50 transition-all shadow-sm">
                     <UserIcon className="h-4 w-4" />
-                    <span className="max-w-[60px] sm:max-w-[120px] truncate text-[9px] md:text-[11px] font-black uppercase tracking-[0.1em]">{userData.username}</span>
+                    <span className="max-w-[60px] sm:max-w-[120px] truncate text-[9px] md:text-[11px] font-black uppercase tracking-[0.1em]">{userData?.username || 'Profile'}</span>
                   </Button>
                 </Link>
               </div>

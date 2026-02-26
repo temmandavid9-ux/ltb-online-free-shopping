@@ -34,7 +34,7 @@ export default function WalletPage() {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  // Corrected 2-segment path aligned with security rules
+  // Unified 2-segment path: /users/{userId}
   const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
   const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
@@ -78,7 +78,6 @@ export default function WalletPage() {
 
     const newBalance = userData.balance - values.amount;
     
-    // Create withdrawal request
     const withdrawalId = `wd_${new Date().getTime()}`;
     const withdrawalRef = doc(firestore, 'withdrawals', withdrawalId);
     const newWithdrawal = {
@@ -92,7 +91,6 @@ export default function WalletPage() {
     };
     setDocumentNonBlocking(withdrawalRef, newWithdrawal, { merge: false });
 
-    // Update user's balance
     if(userDocRef) {
         updateDocumentNonBlocking(userDocRef, { balance: newBalance });
     }
