@@ -16,7 +16,7 @@ import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, ExternalLi
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
-const TASK_DURATION_SECONDS = 600; // 10 minutes verification as per Elite requirements
+const TASK_DURATION_SECONDS = 600; // 10 minutes verification
 const DAILY_REWARD = 1.00;
 
 export default function TaskList() {
@@ -25,7 +25,6 @@ export default function TaskList() {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  // Standardized 2-segment path: /users/{userId}
   const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
   const { data: userData, isLoading: isUserDataLoading } = useDoc<UserProfile>(userDocRef);
 
@@ -52,7 +51,6 @@ export default function TaskList() {
     
     let newStreak = userData.streakCount || 0;
     
-    // Streak logic: check if last completion was yesterday
     if (lastDate) {
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
@@ -60,7 +58,7 @@ export default function TaskList() {
       if (lastDate.toDateString() === yesterday.toDateString()) {
         newStreak += 1;
       } else if (lastDate.toDateString() !== today.toDateString()) {
-        newStreak = 1; // Reset to 1 if a day was missed
+        newStreak = 1;
       }
     } else {
       newStreak = 1;
@@ -72,7 +70,6 @@ export default function TaskList() {
       streakCount: newStreak,
     };
 
-    // Elite Unlock Milestone (365 Days)
     if (!userData.eliteUnlocked && newStreak >= 365) {
       updates.eliteUnlocked = true;
       updates.eliteStartDate = today.toISOString();
@@ -84,7 +81,6 @@ export default function TaskList() {
       });
     }
 
-    // Elite Monthly Gift Card Cycle (30 Days)
     if (userData.eliteUnlocked || updates.eliteUnlocked) {
       let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
       let newRewards = userData.eliteRewardsAvailable || 0;
@@ -137,7 +133,7 @@ export default function TaskList() {
       toast({ 
         variant: "destructive", 
         title: "Engagement Required", 
-        description: "Please visit all 3 required media channels (YouTube, Instagram, Twitch) to begin verification." 
+        description: "Please engage with all 3 media channels to begin verification." 
       });
       return;
     }
@@ -159,14 +155,14 @@ export default function TaskList() {
           <div>
             <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
               {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-              {userData.eliteUnlocked ? "Elite Verification Active" : t('tasks.pageTitle')}
+              {userData.eliteUnlocked ? "Elite Verification" : "Daily Task Registry"}
             </CardTitle>
             <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">
-              Complete the daily social media trinity to build your streak.
+              Verified multi-channel engagement required for reward distribution.
             </CardDescription>
           </div>
           <div className="text-left sm:text-right">
-            <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Current Earnings</div>
+            <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Status Balance</div>
             <div className="text-4xl font-black text-primary">${(userData.balance || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
           </div>
         </CardHeader>
@@ -177,7 +173,7 @@ export default function TaskList() {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <Trophy className="w-6 h-6 text-primary" />
-                  <span className="text-sm font-black uppercase tracking-widest">Streak Progress</span>
+                  <span className="text-sm font-black uppercase tracking-widest">Streak Tracker</span>
                 </div>
                 <span className="text-xs font-black text-muted-foreground">{userData.streakCount || 0} / 365 Days</span>
               </div>
@@ -189,7 +185,7 @@ export default function TaskList() {
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <Zap className="w-6 h-6 text-primary" />
-                    <span className="text-sm font-black uppercase tracking-widest">Monthly Bonus</span>
+                    <span className="text-sm font-black uppercase tracking-widest">Monthly Bonus Cycle</span>
                   </div>
                   <span className="text-xs font-black text-primary">{userData.eliteMonthlyCounter || 0} / 30 Days</span>
                 </div>
@@ -199,12 +195,12 @@ export default function TaskList() {
           </div>
 
           <div className="space-y-6">
-            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Engagement Trinity</h3>
+            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Daily Social Trinity</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { id: 'youtube', title: 'YouTube', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Watch latest verified media.' },
-                { id: 'instagram', title: 'Instagram', icon: Instagram, url: 'https://instagram.com/', desc: 'Follow visual showcases.' },
-                { id: 'twitch', title: 'Twitch', icon: Twitch, url: 'https://twitch.tv/', desc: 'Join live engagement streams.' }
+                { id: 'youtube', title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Registry Media Stream' },
+                { id: 'instagram', title: 'Instagram Official', icon: Instagram, url: 'https://instagram.com/', desc: 'Visual Asset Registry' },
+                { id: 'twitch', title: 'Twitch Live', icon: Twitch, url: 'https://twitch.tv/', desc: 'Real-time Engagement' }
               ].map((channel) => (
                 <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 overflow-hidden ${visitedChannels[channel.id] ? 'border-primary/40 bg-primary/5' : 'border-black/5 hover:border-black/10'}`}>
                   <CardContent className="p-6 text-center space-y-4">
@@ -212,7 +208,7 @@ export default function TaskList() {
                       <channel.icon className="w-8 h-8" />
                     </div>
                     <div>
-                      <h4 className="font-black text-xs uppercase tracking-widest">{channel.title}</h4>
+                      <h4 className="font-black text-[10px] uppercase tracking-widest">{channel.title}</h4>
                       <p className="text-[9px] font-bold text-muted-foreground/60 mt-1">{channel.desc}</p>
                     </div>
                     <Button 
@@ -221,7 +217,7 @@ export default function TaskList() {
                       className="w-full rounded-xl h-10 text-[9px] font-black uppercase tracking-widest"
                       disabled={isCompletedToday || activeTimer}
                     >
-                      {visitedChannels[channel.id] ? <><CheckCircle className="w-3 h-3 mr-2 text-primary" /> Visited</> : <><ExternalLink className="w-3 h-3 mr-2" /> Visit Channel</>}
+                      {visitedChannels[channel.id] ? <><CheckCircle className="w-3 h-3 mr-2 text-primary" /> Engaged</> : <><ExternalLink className="w-3 h-3 mr-2" /> Open Link</>}
                     </Button>
                   </CardContent>
                 </Card>
@@ -234,13 +230,13 @@ export default function TaskList() {
               <div className="space-y-8 animate-in zoom-in duration-500">
                 <div className="inline-flex items-center gap-3 px-6 py-3 bg-primary/10 text-primary rounded-full text-[10px] font-black uppercase tracking-widest">
                   <Zap className="w-4 h-4 animate-bounce" />
-                  Verification Active
+                  Verification Sequence Active
                 </div>
                 <div className="text-8xl font-black font-headline tracking-tighter tabular-nums text-foreground">
                   {countdownText}
                 </div>
                 <p className="text-xs text-muted-foreground font-black uppercase tracking-[0.2em] max-w-sm mx-auto leading-relaxed">
-                  Engagement verified. Reward will be added to your balance shortly.
+                  Stay on page to complete verification. Reward assigned upon completion.
                 </p>
               </div>
             ) : isCompletedToday ? (
@@ -248,15 +244,15 @@ export default function TaskList() {
                 <div className="mx-auto w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                   <CheckCircle className="w-14 h-14 text-primary" />
                 </div>
-                <h3 className="text-3xl font-black luxury-text-gradient">{t('tasks.allCompletedTitle')}</h3>
-                <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">Secure return in 24 hours.</p>
+                <h3 className="text-3xl font-black luxury-text-gradient">Task Finalized</h3>
+                <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">Streak updated. Return in 24 hours.</p>
               </div>
             ) : (
               <div className="space-y-4">
                 {!allVisited ? (
-                  <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest italic">Engage with all platforms to unlock the daily reward.</p>
+                  <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest italic">Initialize all channels to unlock verification.</p>
                 ) : (
-                  <p className="text-[10px] font-black text-primary uppercase tracking-widest animate-pulse">Ready for verification. Click button below.</p>
+                  <p className="text-[10px] font-black text-primary uppercase tracking-widest animate-pulse">Channels ready. Initialize reward timer below.</p>
                 )}
               </div>
             )}
@@ -269,7 +265,7 @@ export default function TaskList() {
             disabled={activeTimer || isCompletedToday || !allVisited}
             onClick={handleStartTimer}
           >
-            {activeTimer ? "Verification Running..." : isCompletedToday ? "Reward Secured" : "Unlock $1.00 Reward"}
+            {activeTimer ? "Verifying..." : isCompletedToday ? "Reward Secured" : "Unlock $1.00 Reward"}
           </Button>
         </CardFooter>
       </Card>

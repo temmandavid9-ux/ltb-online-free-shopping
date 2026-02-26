@@ -34,7 +34,6 @@ export default function WalletPage() {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  // Unified 2-segment path: /users/{userId}
   const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
   const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
@@ -77,7 +76,6 @@ export default function WalletPage() {
     }
 
     const newBalance = userData.balance - values.amount;
-    
     const withdrawalId = `wd_${new Date().getTime()}`;
     const withdrawalRef = doc(firestore, 'withdrawals', withdrawalId);
     const newWithdrawal = {
