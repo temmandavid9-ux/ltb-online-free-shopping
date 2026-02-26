@@ -12,11 +12,11 @@ import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, ExternalLink } from 'lucide-react';
+import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
-const TASK_DURATION_SECONDS = 600; // 10 minutes verification
+const TASK_DURATION_SECONDS = 600; // 10 minutes per stage
 const DAILY_REWARD = 1.00;
 
 export default function TaskList() {
@@ -28,12 +28,14 @@ export default function TaskList() {
   const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
   const { data: userData, isLoading: isUserDataLoading } = useDoc<UserProfile>(userDocRef);
 
+  // Sequential task state: 0 = YouTube, 1 = Instagram, 2 = Twitch, 3 = All Completed
+  const [currentStep, setCurrentStep] = useState<number>(0);
   const [activeTimer, setActiveTimer] = useState<boolean>(false);
   const [countdown, setCountdown] = useState(TASK_DURATION_SECONDS);
-  const [visitedChannels, setVisitedChannels] = useState<Record<string, boolean>>({
-    youtube: false,
-    instagram: false,
-    twitch: false
+  const [stepStatus, setStepStatus] = useState<Record<number, 'pending' | 'verifying' | 'completed'>>({
+    0: 'pending',
+    1: 'pending',
+    2: 'pending'
   });
 
   const isCompletedToday = useMemo(() => {
@@ -43,7 +45,7 @@ export default function TaskList() {
     return lastDate === today;
   }, [userData]);
 
-  const handleCompleteTask = useCallback(() => {
+  const handleFinalizeTask = useCallback(() => {
     if (!user || !userData || !userDocRef) return;
 
     const today = new Date();
@@ -104,39 +106,33 @@ export default function TaskList() {
     });
     
     setActiveTimer(false);
-    setVisitedChannels({ youtube: false, instagram: false, twitch: false });
+    setCurrentStep(3);
   }, [user, userData, userDocRef, t, toast]);
 
   useEffect(() => {
     if (!activeTimer) return;
     if (countdown <= 0) {
-      handleCompleteTask();
+      setStepStatus(prev => ({ ...prev, [currentStep]: 'completed' }));
+      setActiveTimer(false);
+      
+      if (currentStep < 2) {
+        toast({ title: `Task ${currentStep + 1} Secured`, description: "Next engagement channel unlocked." });
+        setCurrentStep(prev => prev + 1);
+      } else {
+        handleFinalizeTask();
+      }
       return;
     }
     const timer = setInterval(() => setCountdown(prev => prev - 1), 1000);
     return () => clearInterval(timer);
-  }, [activeTimer, countdown, handleCompleteTask]);
+  }, [activeTimer, countdown, currentStep, handleFinalizeTask, toast]);
 
-  const handleVisitChannel = (channel: string, url: string) => {
-    setVisitedChannels(prev => ({ ...prev, [channel]: true }));
+  const handleStartSubTask = (stepIndex: number, url: string) => {
+    if (isCompletedToday) return;
+    if (stepIndex !== currentStep) return;
+    
     window.open(url, '_blank', 'noopener,noreferrer');
-  };
-
-  const allVisited = Object.values(visitedChannels).every(v => v);
-
-  const handleStartTimer = () => {
-    if (isCompletedToday) {
-      toast({ variant: "destructive", title: t('tasks.toast.alreadyCompleted') });
-      return;
-    }
-    if (!allVisited) {
-      toast({ 
-        variant: "destructive", 
-        title: "Engagement Required", 
-        description: "Please engage with all 3 media channels to begin verification." 
-      });
-      return;
-    }
+    setStepStatus(prev => ({ ...prev, [stepIndex]: 'verifying' }));
     setCountdown(TASK_DURATION_SECONDS);
     setActiveTimer(true);
   };
@@ -148,6 +144,12 @@ export default function TaskList() {
   const seconds = countdown % 60;
   const countdownText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
+  const channels = [
+    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Engagement Step 1' },
+    { id: 1, title: 'Instagram Official', icon: Instagram, url: 'https://instagram.com/', desc: 'Engagement Step 2' },
+    { id: 2, title: 'Twitch Live', icon: Twitch, url: 'https://twitch.tv/', desc: 'Final Verification' }
+  ];
+
   return (
     <div className="space-y-10">
       <Card className="overflow-hidden border-2 border-primary/20 bg-gradient-to-br from-background to-secondary/10 shadow-2xl rounded-[3rem]">
@@ -155,10 +157,10 @@ export default function TaskList() {
           <div>
             <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
               {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-              {userData.eliteUnlocked ? "Elite Verification" : "Daily Task Registry"}
+              {userData.eliteUnlocked ? "Elite Sequence" : "Daily Sequential Registry"}
             </CardTitle>
             <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">
-              Verified multi-channel engagement required for reward distribution.
+              Tasks must be completed in order. Each requires 10 minutes of verified interaction.
             </CardDescription>
           </div>
           <div className="text-left sm:text-right">
@@ -195,33 +197,36 @@ export default function TaskList() {
           </div>
 
           <div className="space-y-6">
-            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Daily Social Trinity</h3>
+            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Execution Sequence</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                { id: 'youtube', title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Registry Media Stream' },
-                { id: 'instagram', title: 'Instagram Official', icon: Instagram, url: 'https://instagram.com/', desc: 'Visual Asset Registry' },
-                { id: 'twitch', title: 'Twitch Live', icon: Twitch, url: 'https://twitch.tv/', desc: 'Real-time Engagement' }
-              ].map((channel) => (
-                <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 overflow-hidden ${visitedChannels[channel.id] ? 'border-primary/40 bg-primary/5' : 'border-black/5 hover:border-black/10'}`}>
-                  <CardContent className="p-6 text-center space-y-4">
-                    <div className={`mx-auto w-16 h-16 rounded-2xl flex items-center justify-center transition-all ${visitedChannels[channel.id] ? 'bg-primary text-white scale-90' : 'bg-secondary text-foreground'}`}>
-                      <channel.icon className="w-8 h-8" />
-                    </div>
-                    <div>
-                      <h4 className="font-black text-[10px] uppercase tracking-widest">{channel.title}</h4>
-                      <p className="text-[9px] font-bold text-muted-foreground/60 mt-1">{channel.desc}</p>
-                    </div>
-                    <Button 
-                      onClick={() => handleVisitChannel(channel.id, channel.url)}
-                      variant={visitedChannels[channel.id] ? "ghost" : "outline"}
-                      className="w-full rounded-xl h-10 text-[9px] font-black uppercase tracking-widest"
-                      disabled={isCompletedToday || activeTimer}
-                    >
-                      {visitedChannels[channel.id] ? <><CheckCircle className="w-3 h-3 mr-2 text-primary" /> Engaged</> : <><ExternalLink className="w-3 h-3 mr-2" /> Open Link</>}
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
+              {channels.map((channel) => {
+                const isLocked = channel.id > currentStep && !isCompletedToday;
+                const isCurrent = channel.id === currentStep && !isCompletedToday && !activeTimer;
+                const isVerifying = channel.id === currentStep && activeTimer;
+                const isDone = channel.id < currentStep || isCompletedToday;
+
+                return (
+                  <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 overflow-hidden ${isVerifying ? 'border-primary animate-pulse' : isDone ? 'border-primary/40 bg-primary/5' : isLocked ? 'opacity-50 grayscale bg-muted/20' : 'border-black/5'}`}>
+                    <CardContent className="p-6 text-center space-y-4">
+                      <div className={`mx-auto w-16 h-16 rounded-2xl flex items-center justify-center transition-all ${isDone ? 'bg-primary text-white scale-90' : isLocked ? 'bg-muted text-muted-foreground' : 'bg-secondary text-foreground'}`}>
+                        {isLocked ? <Lock className="w-8 h-8" /> : <channel.icon className="w-8 h-8" />}
+                      </div>
+                      <div>
+                        <h4 className="font-black text-[10px] uppercase tracking-widest">{channel.title}</h4>
+                        <p className="text-[9px] font-bold text-muted-foreground/60 mt-1">{channel.desc}</p>
+                      </div>
+                      <Button 
+                        onClick={() => handleStartSubTask(channel.id, channel.url)}
+                        variant={isDone ? "ghost" : isLocked ? "secondary" : "outline"}
+                        className="w-full rounded-xl h-10 text-[9px] font-black uppercase tracking-widest"
+                        disabled={isLocked || isDone || activeTimer}
+                      >
+                        {isDone ? <><CheckCircle className="w-3 h-3 mr-2 text-primary" /> Secured</> : isLocked ? "Locked" : isVerifying ? "Verifying..." : <><ExternalLink className="w-3 h-3 mr-2" /> Start Stage</>}
+                      </Button>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           </div>
 
@@ -230,13 +235,13 @@ export default function TaskList() {
               <div className="space-y-8 animate-in zoom-in duration-500">
                 <div className="inline-flex items-center gap-3 px-6 py-3 bg-primary/10 text-primary rounded-full text-[10px] font-black uppercase tracking-widest">
                   <Zap className="w-4 h-4 animate-bounce" />
-                  Verification Sequence Active
+                  Stage {currentStep + 1} Verification Active
                 </div>
                 <div className="text-8xl font-black font-headline tracking-tighter tabular-nums text-foreground">
                   {countdownText}
                 </div>
                 <p className="text-xs text-muted-foreground font-black uppercase tracking-[0.2em] max-w-sm mx-auto leading-relaxed">
-                  Stay on page to complete verification. Reward assigned upon completion.
+                  Stay on page to verify engagement. Reward claimed after final stage.
                 </p>
               </div>
             ) : isCompletedToday ? (
@@ -244,16 +249,14 @@ export default function TaskList() {
                 <div className="mx-auto w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                   <CheckCircle className="w-14 h-14 text-primary" />
                 </div>
-                <h3 className="text-3xl font-black luxury-text-gradient">Task Finalized</h3>
+                <h3 className="text-3xl font-black luxury-text-gradient">Daily Sequence Finalized</h3>
                 <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">Streak updated. Return in 24 hours.</p>
               </div>
             ) : (
               <div className="space-y-4">
-                {!allVisited ? (
-                  <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest italic">Initialize all channels to unlock verification.</p>
-                ) : (
-                  <p className="text-[10px] font-black text-primary uppercase tracking-widest animate-pulse">Channels ready. Initialize reward timer below.</p>
-                )}
+                <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest italic">
+                  Current Target: Stage {currentStep + 1}
+                </p>
               </div>
             )}
           </div>
@@ -262,10 +265,10 @@ export default function TaskList() {
         <CardFooter className="bg-secondary/30 p-10 border-t border-border/50">
           <Button 
             className="w-full h-20 rounded-[2rem] text-xs font-black uppercase tracking-[0.3em] shadow-2xl transition-all active:scale-95 btn-luxury"
-            disabled={activeTimer || isCompletedToday || !allVisited}
-            onClick={handleStartTimer}
+            disabled={activeTimer || isCompletedToday}
+            onClick={() => handleStartSubTask(currentStep, channels[currentStep].url)}
           >
-            {activeTimer ? "Verifying..." : isCompletedToday ? "Reward Secured" : "Unlock $1.00 Reward"}
+            {activeTimer ? "Verifying Current Stage..." : isCompletedToday ? "Reward Secured" : `Unlock Stage ${currentStep + 1}`}
           </Button>
         </CardFooter>
       </Card>
