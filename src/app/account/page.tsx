@@ -36,7 +36,7 @@ export default function AccountPage() {
     const { t } = useLanguage();
     const { toast } = useToast();
     
-    const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
+    const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid, 'profile', 'data') : null, [firestore, user]);
     const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
     const ordersQuery = useMemoFirebase(() => user ? query(collection(firestore, 'orders'), where('userId', '==', user.uid)) : null, [firestore, user]);
@@ -151,7 +151,7 @@ export default function AccountPage() {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-4xl font-black mb-6">${userData.walletBalance?.toFixed(2) || '0.00'}</div>
+                        <div className="text-4xl font-black mb-6">${userData.balance?.toFixed(2) || '0.00'}</div>
                          <Button className="w-full rounded-2xl h-14 font-black uppercase tracking-widest text-[10px] btn-luxury" asChild>
                             <Link href="/wallet">{t('account.manageWallet')} <ArrowRight className="ml-2 h-4 w-4"/></Link>
                         </Button>

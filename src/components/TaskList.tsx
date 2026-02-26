@@ -6,7 +6,7 @@ import {
   useMemoFirebase,
   updateDocumentNonBlocking,
 } from '@/firebase';
-import { doc, writeBatch } from 'firebase/firestore';
+import { doc } from 'firebase/firestore';
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
@@ -25,7 +25,7 @@ export default function TaskList() {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
+  const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid, 'profile', 'data') : null), [firestore, user]);
   const { data: userData, isLoading: isUserDataLoading } = useDoc<UserProfile>(userDocRef);
 
   const [activeTimer, setActiveTimer] = useState<boolean>(false);
@@ -61,7 +61,7 @@ export default function TaskList() {
     }
 
     const updates: Partial<UserProfile> = {
-      walletBalance: (userData.walletBalance || 0) + DAILY_REWARD,
+      balance: (userData.balance || 0) + DAILY_REWARD,
       lastCompletedDate: today.toISOString(),
       streakCount: newStreak,
     };

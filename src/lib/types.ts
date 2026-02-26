@@ -57,7 +57,7 @@ export type UserProfile = {
   id: string;
   username: string;
   email: string;
-  walletBalance: number;
+  balance: number;
   taskProgress: number;
   socialsFollowed: boolean;
   orderIds: string[];

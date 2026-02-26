@@ -24,6 +24,7 @@ import { collection, doc, arrayUnion } from 'firebase/firestore';
 import { useEffect } from 'react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useLanguage } from '@/context/LanguageContext';
+import type { UserProfile } from '@/lib/types';
 
 const shippingSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -43,8 +44,8 @@ export default function CheckoutPage() {
   const firestore = useFirestore();
   const { t } = useLanguage();
 
-  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
-  const { data: userData, isLoading: isUserDocLoading } = useDoc<any>(userDocRef);
+  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid, 'profile', 'data') : null, [firestore, user]);
+  const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
   const form = useForm<z.infer<typeof checkoutSchema>>({
     resolver: zodResolver(checkoutSchema),
@@ -74,17 +75,16 @@ export default function CheckoutPage() {
         return;
     }
 
-    if (userData.walletBalance < basketTotal) {
+    if (userData.balance < basketTotal) {
       toast({
         variant: "destructive",
         title: t('checkout.insufficientFundsTitle'),
-        description: t('checkout.toast.insufficientFunds', { balance: userData.walletBalance.toLocaleString(), total: basketTotal.toLocaleString() }),
+        description: t('checkout.toast.insufficientFunds', { balance: userData.balance.toLocaleString(), total: basketTotal.toLocaleString() }),
       });
       return;
     }
 
     const ordersCollection = collection(firestore, 'orders');
-    const userRef = doc(firestore, 'users', user.uid);
     const newOrderIds: string[] = [];
     const genericOrderId = `order_${new Date().getTime()}`;
 
@@ -104,12 +104,14 @@ export default function CheckoutPage() {
         newOrderIds.push(orderId);
     });
     
-    // Deduct from wallet and update order history
-    const newBalance = userData.walletBalance - basketTotal;
-    updateDocumentNonBlocking(userRef, {
-        orderIds: arrayUnion(...newOrderIds),
-        walletBalance: newBalance,
-    });
+    // Update balance and order history
+    if (userDocRef) {
+        const newBalance = userData.balance - basketTotal;
+        updateDocumentNonBlocking(userDocRef, {
+            orderIds: arrayUnion(...newOrderIds),
+            balance: newBalance,
+        });
+    }
     
     toast({
         title: t('checkout.toast.successTitle'),
@@ -129,8 +131,8 @@ export default function CheckoutPage() {
     return null;
   }
 
-  const walletBalance = userData?.walletBalance || 0;
-  const canAfford = walletBalance >= basketTotal;
+  const currentBalance = userData?.balance || 0;
+  const canAfford = currentBalance >= basketTotal;
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -202,11 +204,11 @@ export default function CheckoutPage() {
                <div className="space-y-2">
                  <div className="flex justify-between">
                     <span>{t('checkout.walletBalance')}</span>
-                    <span>${walletBalance.toLocaleString()}</span>
+                    <span>${currentBalance.toLocaleString()}</span>
                  </div>
                  <div className={`flex justify-between font-medium ${canAfford ? 'text-green-600' : 'text-red-600'}`}>
                     <span>{t('checkout.remainingBalance')}</span>
-                    <span>${(walletBalance - basketTotal).toLocaleString()}</span>
+                    <span>${(currentBalance - basketTotal).toLocaleString()}</span>
                  </div>
                </div>
 

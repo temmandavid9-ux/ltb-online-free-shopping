@@ -15,6 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import type { UserProfile } from '@/lib/types';
 
 export default function Header() {
   const { itemCount } = useRedeem();
@@ -22,8 +23,8 @@ export default function Header() {
   const firestore = useFirestore();
   const { t, setLocale, locale } = useLanguage();
 
-  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
-  const { data: userData } = useDoc<any>(userDocRef);
+  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid, 'profile', 'data') : null, [firestore, user]);
+  const { data: userData } = useDoc<UserProfile>(userDocRef);
 
   return (
     <header className="glass-header">
@@ -73,7 +74,7 @@ export default function Header() {
               <div className="flex items-center gap-2 md:gap-4">
                  <Link href="/wallet" className="hidden sm:flex items-center gap-2 px-5 py-2.5 bg-black text-white rounded-full hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.3)] transition-all transform active:scale-95 btn-luxury">
                     <Wallet className="h-4 w-4 text-primary" />
-                    <span className="text-xs font-black uppercase tracking-widest">${userData.walletBalance?.toLocaleString() || '0.00'}</span>
+                    <span className="text-xs font-black uppercase tracking-widest">${userData.balance?.toLocaleString() || '0.00'}</span>
                  </Link>
                 <Link href="/account">
                   <Button variant="outline" className="rounded-full h-10 md:h-12 gap-3 px-4 md:px-6 border-foreground/5 hover:bg-secondary/50 transition-all shadow-sm">

@@ -4,75 +4,30 @@ service cloud.firestore {
 
     /**
      * SHOP SPHERE: ELITE MONTHLY GIFT CARD SYSTEM - SECURITY ARCHITECTURE
-     *
-     * Core Philosophy:
-     * This ruleset enforces a strict user-ownership model for all reward-related data. 
-     * Users are granted full control over their own progress tracking and redemption 
-     * history, while sensitive system assets like gift card codes are entirely 
-     * restricted from client-side access.
-     *
-     * Data Structure:
-     * - /users/{userId}/profile: A single document per user containing their 
-     *   balance, streak, and Elite Mode progress.
-     * - /users/{userId}/rewardRedemptions/{redemptionId}: A subcollection logging 
-     *   each individual gift card claimed by the user.
-     * - /giftCardCodes/{code}: A top-level collection of system-managed gift card 
-     *   assets, inaccessible to standard users.
-     *
-     * Key Security Decisions:
-     * 1. Path-Based Ownership: Authorization is primarily determined by the 
-     *    {userId} wildcard in the document path matching the request.auth.uid.
-     * 2. Prototyping Flexibility: While authorization is strictly enforced, 
-     *    schema validation is limited to relational integrity (IDs and ownership 
-     *    links) to allow for rapid UI/UX iteration.
-     * 3. Server-Only Gift Cards: The /giftCardCodes collection is locked down. 
-     *    Redemption logic is assumed to be handled by secure Cloud Functions 
-     *    operating with administrative privileges.
-     * 4. Relational Integrity: On document creation, the system ensures that 
-     *    internal 'userId' or 'id' fields match the authenticated user's ID 
-     *    to prevent data impersonation.
      */
 
-    // --- GLOBAL HELPER FUNCTIONS ---
-
-    /** @description Checks if the user is authenticated with a valid UID. */
     function isSignedIn() {
       return request.auth != null;
     }
 
-    /** @description Checks if the authenticated user matches the provided userId. */
     function isOwner(userId) {
       return isSignedIn() && request.auth.uid == userId;
     }
 
-    /** @description Checks ownership and ensures the document exists for state changes. */
     function isExistingOwner(userId) {
       return resource != null && isOwner(userId);
     }
 
-    // --- COLLECTION RULES ---
-
     /**
-     * @description Rules for the User's core profile, streak data, and Elite status.
-     * @path /users/{userId}/profile
-     * @allow (create) User 'abc' creates document '/users/abc/profile' with data { id: 'abc' }.
-     * @deny (update) User 'abc' attempts to change the 'id' field to 'xyz'.
-     * @principle Enforces path-based ownership and ensures relational integrity of the user ID.
+     * User profile data at sub-path aligned with backend.json
      */
-    match /users/{userId}/profile {
-      allow get, list: if isOwner(userId);
-      allow create: if isOwner(userId) && request.resource.data.id == userId;
-      allow update: if isExistingOwner(userId) && request.resource.data.id == resource.data.id;
+    match /users/{userId}/profile/data {
+      allow get: if isOwner(userId);
+      allow create: if isOwner(userId);
+      allow update: if isExistingOwner(userId);
       allow delete: if isExistingOwner(userId);
     }
 
-    /**
-     * @description Rules for logging user-specific gift card redemption events.
-     * @path /users/{userId}/rewardRedemptions/{redemptionId}
-     * @allow (get) User 'abc' reads their own redemption log at '/users/abc/rewardRedemptions/red_123'.
-     * @deny (list) User 'abc' attempts to list redemptions for user 'xyz'.
-     * @principle Uses hierarchical pathing to isolate private user transaction history.
-     */
     match /users/{userId}/rewardRedemptions/{redemptionId} {
       allow get, list: if isOwner(userId);
       allow create: if isOwner(userId) && request.resource.data.userId == userId;
@@ -80,19 +35,27 @@ service cloud.firestore {
       allow delete: if isExistingOwner(userId);
     }
 
-    /**
-     * @description Rules for the pool of available gift card codes.
-     * @path /giftCardCodes/{giftCardCodeId}
-     * @allow (none) No client-side operations permitted.
-     * @deny (get) Authenticated user tries to fetch a gift card code to bypass redemption logic.
-     * @principle Protects sensitive system inventory; management is reserved for backend services.
-     */
     match /giftCardCodes/{giftCardCodeId} {
       allow read, write: if false; 
     }
 
-    // --- GLOBAL DENY-ALL ---
-    // Explicitly deny access to any other paths not defined above.
+    match /orders/{orderId} {
+      allow get: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow list: if isSignedIn() && request.query.limit <= 100; // Simplified for MVP
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+    }
+
+    match /withdrawals/{withdrawalId} {
+      allow get: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow list: if isSignedIn() && request.query.limit <= 100;
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+    }
+
+    // Role check for admin status
+    match /roles_admin/{userId} {
+      allow get: if isSignedIn();
+    }
+
     match /{path=**} {
       allow read, write: if false;
     }

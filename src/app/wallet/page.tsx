@@ -16,7 +16,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { DollarSign, WalletCards, Landmark } from "lucide-react";
-import type { Withdrawal } from "@/lib/types";
+import type { Withdrawal, UserProfile } from "@/lib/types";
 import { useLanguage } from "@/context/LanguageContext";
 
 const MIN_WITHDRAWAL_AMOUNT = 80;
@@ -34,8 +34,8 @@ export default function WalletPage() {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
-  const { data: userData, isLoading: isUserDocLoading } = useDoc<any>(userDocRef);
+  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid, 'profile', 'data') : null, [firestore, user]);
+  const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
   const withdrawalsQuery = useMemoFirebase(() => user ? query(collection(firestore, 'withdrawals'), where('userId', '==', user.uid)) : null, [firestore, user]);
   const { data: withdrawalsData, isLoading: areWithdrawalsLoading } = useCollection<Withdrawal>(withdrawalsQuery);
@@ -66,7 +66,7 @@ export default function WalletPage() {
 
   const onSubmit = (values: z.infer<typeof withdrawalSchema>) => {
     if (!user || !userData) return;
-    if (userData.walletBalance < values.amount) {
+    if (userData.balance < values.amount) {
         toast({ variant: 'destructive', title: t('wallet.toast.insufficientFundsTitle'), description: t('wallet.toast.insufficientFundsDescription') });
         return;
     }
@@ -75,7 +75,7 @@ export default function WalletPage() {
         return;
     }
 
-    const newBalance = userData.walletBalance - values.amount;
+    const newBalance = userData.balance - values.amount;
     
     // Create withdrawal request
     const withdrawalId = `wd_${new Date().getTime()}`;
@@ -93,7 +93,7 @@ export default function WalletPage() {
 
     // Update user's balance
     if(userDocRef) {
-        updateDocumentNonBlocking(userDocRef, { walletBalance: newBalance });
+        updateDocumentNonBlocking(userDocRef, { balance: newBalance });
     }
 
     toast({ title: t('wallet.toast.successTitle'), description: t('wallet.toast.successDescription') });
@@ -106,8 +106,8 @@ export default function WalletPage() {
   
   if (!user) return null;
 
-  const walletBalance = userData?.walletBalance || 0;
-  const canWithdraw = walletBalance >= MIN_WITHDRAWAL_AMOUNT;
+  const currentBalance = userData?.balance || 0;
+  const canWithdraw = currentBalance >= MIN_WITHDRAWAL_AMOUNT;
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -123,7 +123,7 @@ export default function WalletPage() {
                 <DollarSign className="w-4 h-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-                <div className="text-4xl font-bold">${walletBalance.toLocaleString()}</div>
+                <div className="text-4xl font-bold">${currentBalance.toLocaleString()}</div>
             </CardContent>
           </Card>
           <Card>

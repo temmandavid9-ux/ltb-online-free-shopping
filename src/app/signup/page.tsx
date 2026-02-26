@@ -53,17 +53,17 @@ export default function SignupPage() {
       const newUser = userCredential.user;
 
       if (newUser) {
-        const userRef = doc(firestore, "users", newUser.uid);
+        // Path aligned with backend.json and firestore.rules
+        const userRef = doc(firestore, "users", newUser.uid, "profile", "data");
         const newUserDoc: UserProfile = {
           id: newUser.uid,
           username: values.username,
           email: values.email,
-          walletBalance: 0,
+          balance: 0,
           taskProgress: 0,
           socialsFollowed: false,
           orderIds: [],
           withdrawalIds: [],
-          // Elite Mode Init
           streakCount: 0,
           lastCompletedDate: null,
           eliteUnlocked: false,
