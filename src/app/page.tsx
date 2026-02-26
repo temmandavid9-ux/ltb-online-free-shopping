@@ -16,9 +16,9 @@ import { Sparkles, Trophy, ShieldCheck, Zap, Crown } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 
 const MASTER_ASSETS = [
-  { id: '1', title: 'Prestige Collection', desc: 'The definitive standard of luxury verified by Eden 0².', url: "https://image2url.com/r2/default/files/1771940966609-b927061a-b8ae-4d96-b236-35a78c784bae.avif", color: 'bg-stone-950' },
-  { id: '2', title: 'Elite Collection', desc: 'Zenith of refinement and verified status.', url: "https://image2url.com/r2/default/files/1771941181225-7311e871-65d3-4eb5-9dad-4790de51d52e.avif", color: 'bg-neutral-900' },
-  { id: '3', title: 'Signature Selection', desc: 'Peak aesthetics for the global elite.', url: "https://image2url.com/r2/default/files/1771941212937-8689c1de-14dc-47b6-a70d-d43cbf98c2e6.avif", color: 'bg-black' }
+  { id: '1', title: 'Prestige Collection', desc: 'The definitive standard of luxury verified by Eden 0².', url: "https://image2url.com/r2/default/files/1771940966609-b927061a-b8ae-4d96-b236-35a78c784bae.avif", color: 'bg-emerald-950' },
+  { id: '2', title: 'Elite Collection', desc: 'Zenith of refinement and verified status.', url: "https://image2url.com/r2/default/files/1771941181225-7311e871-65d3-4eb5-9dad-4790de51d52e.avif", color: 'bg-green-950' },
+  { id: '3', title: 'Signature Selection', desc: 'Peak aesthetics for the global elite.', url: "https://image2url.com/r2/default/files/1771941212937-8689c1de-14dc-47b6-a70d-d43cbf98c2e6.avif", color: 'bg-emerald-900' }
 ];
 
 export default function Home() {
@@ -111,7 +111,7 @@ export default function Home() {
           <div className="flex items-end justify-between mb-12">
             <div className="flex items-center gap-5">
               <div className="p-5 bg-white shadow-xl rounded-[2rem]">
-                <Crown className="w-10 h-10 text-black" />
+                <Crown className="w-10 h-10 text-primary" />
               </div>
               <div>
                 <h2 className="text-4xl font-black font-headline tracking-tighter luxury-text-gradient">Heritage Elite Series</h2>
