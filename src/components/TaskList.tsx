@@ -146,8 +146,8 @@ export default function TaskList() {
 
   const channels = [
     { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Engagement Step 1' },
-    { id: 1, title: 'Instagram Official', icon: Instagram, url: 'https://instagram.com/', desc: 'Engagement Step 2' },
-    { id: 2, title: 'Twitch Live', icon: Twitch, url: 'https://twitch.tv/', desc: 'Final Verification' }
+    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: 'Engagement Step 2' },
+    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: 'Final Verification' }
   ];
 
   return (

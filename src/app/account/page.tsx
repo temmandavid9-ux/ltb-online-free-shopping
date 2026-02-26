@@ -158,8 +158,8 @@ export default function AccountPage() {
                 <p className="text-muted-foreground font-medium uppercase tracking-[0.3em] text-[10px]">{userData?.username || user.displayName || user.email} • {user.email}</p>
             </div>
             <div className="flex gap-3">
-                <Button onClick={handleRestoreCEOData} variant="outline" className="rounded-full font-black uppercase tracking-widest text-[9px] h-12 px-6 border-primary/20 text-primary">
-                    <ShieldAlert className="w-4 h-4 mr-2" /> Restore CEO Data
+                <Button onClick={handleRestoreCEOData} variant="outline" className="rounded-full font-black uppercase tracking-widest text-[9px] h-12 px-6 border-primary/20 text-primary hover:bg-primary hover:text-white transition-all shadow-lg">
+                    <ShieldAlert className="w-4 h-4 mr-2" /> RESTORE CEO DATA ($1,211)
                 </Button>
                 <Button onClick={handleLogout} variant="ghost" className="rounded-full font-black uppercase tracking-widest text-[10px] h-12 px-8 border border-border/10">
                     {t('account.logout')}
