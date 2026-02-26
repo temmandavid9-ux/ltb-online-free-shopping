@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useRedeem } from '@/context/CartContext';
@@ -44,7 +45,8 @@ export default function CheckoutPage() {
   const firestore = useFirestore();
   const { t } = useLanguage();
 
-  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid, 'profile') : null, [firestore, user]);
+  // Corrected 2-segment path
+  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
   const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
   const form = useForm<z.infer<typeof checkoutSchema>>({

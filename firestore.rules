@@ -1,3 +1,4 @@
+
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -23,9 +24,9 @@ service cloud.firestore {
     }
 
     /**
-     * User profile data at path aligned with backend.json
+     * User profile data at standardized 2-segment path
      */
-    match /users/{userId}/profile {
+    match /users/{userId} {
       allow get: if isOwner(userId) || isAdmin();
       allow create: if isOwner(userId);
       allow update: if isExistingOwner(userId);

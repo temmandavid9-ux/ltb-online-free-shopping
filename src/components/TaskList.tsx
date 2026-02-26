@@ -1,3 +1,4 @@
+
 'use client';
 import {
   useUser,
@@ -25,7 +26,8 @@ export default function TaskList() {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid, 'profile') : null), [firestore, user]);
+  // Corrected 2-segment path for profile document
+  const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
   const { data: userData, isLoading: isUserDataLoading } = useDoc<UserProfile>(userDocRef);
 
   const [activeTimer, setActiveTimer] = useState<boolean>(false);

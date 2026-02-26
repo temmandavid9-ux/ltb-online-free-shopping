@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useUser, useFirestore, useDoc, useMemoFirebase, updateDocumentNonBlocking, setDocumentNonBlocking, useCollection } from "@/firebase";
@@ -11,7 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/alert";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
@@ -34,7 +35,8 @@ export default function WalletPage() {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid, 'profile') : null, [firestore, user]);
+  // Corrected 2-segment path
+  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
   const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 
   const withdrawalsQuery = useMemoFirebase(() => user ? query(collection(firestore, 'withdrawals'), where('userId', '==', user.uid)) : null, [firestore, user]);

@@ -1,7 +1,9 @@
+
 'use client';
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,7 +21,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth, useFirestore, useUser, setDocumentNonBlocking } from "@/firebase";
 import { doc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useEffect } from "react";
+import { useEffect as useIsomorphicLayoutEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import type { UserProfile } from "@/lib/types";
 
@@ -53,8 +55,8 @@ export default function SignupPage() {
       const newUser = userCredential.user;
 
       if (newUser) {
-        // Path aligned with backend.json and firestore.rules
-        const userRef = doc(firestore, "users", newUser.uid, "profile");
+        // Aligned path with security rules: /users/{userId}
+        const userRef = doc(firestore, "users", newUser.uid);
         const newUserDoc: UserProfile = {
           id: newUser.uid,
           username: values.username,

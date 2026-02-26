@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -23,7 +24,8 @@ export default function Header() {
   const firestore = useFirestore();
   const { t, setLocale, locale } = useLanguage();
 
-  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid, 'profile') : null, [firestore, user]);
+  // Standardized 2-segment path for profile document
+  const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
   const { data: userData } = useDoc<UserProfile>(userDocRef);
 
   return (
