@@ -38,7 +38,7 @@ export default function AccountPage() {
     const { t } = useLanguage();
     const { toast } = useToast();
     
-    // Standardized path: /users/{userId}
+    // Unified 2-segment path: /users/{userId}
     const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
     const { data: userData, isLoading: isUserDocLoading } = useDoc<UserProfile>(userDocRef);
 

@@ -16,7 +16,7 @@ import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, ExternalLi
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
-const TASK_DURATION_SECONDS = 600; // 10 minutes verification
+const TASK_DURATION_SECONDS = 600; // 10 minutes verification as per Elite requirements
 const DAILY_REWARD = 1.00;
 
 export default function TaskList() {
@@ -25,6 +25,7 @@ export default function TaskList() {
   const { toast } = useToast();
   const { t } = useLanguage();
 
+  // Standardized 2-segment path: /users/{userId}
   const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
   const { data: userData, isLoading: isUserDataLoading } = useDoc<UserProfile>(userDocRef);
 
@@ -51,6 +52,7 @@ export default function TaskList() {
     
     let newStreak = userData.streakCount || 0;
     
+    // Streak logic: check if last completion was yesterday
     if (lastDate) {
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
@@ -58,7 +60,7 @@ export default function TaskList() {
       if (lastDate.toDateString() === yesterday.toDateString()) {
         newStreak += 1;
       } else if (lastDate.toDateString() !== today.toDateString()) {
-        newStreak = 1;
+        newStreak = 1; // Reset to 1 if a day was missed
       }
     } else {
       newStreak = 1;
@@ -70,6 +72,7 @@ export default function TaskList() {
       streakCount: newStreak,
     };
 
+    // Elite Unlock Milestone (365 Days)
     if (!userData.eliteUnlocked && newStreak >= 365) {
       updates.eliteUnlocked = true;
       updates.eliteStartDate = today.toISOString();
@@ -81,6 +84,7 @@ export default function TaskList() {
       });
     }
 
+    // Elite Monthly Gift Card Cycle (30 Days)
     if (userData.eliteUnlocked || updates.eliteUnlocked) {
       let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
       let newRewards = userData.eliteRewardsAvailable || 0;
@@ -130,7 +134,11 @@ export default function TaskList() {
       return;
     }
     if (!allVisited) {
-      toast({ variant: "destructive", title: "Engagement Required", description: "Please engage with all 3 task media items (YouTube, Instagram, Twitch) first." });
+      toast({ 
+        variant: "destructive", 
+        title: "Engagement Required", 
+        description: "Please visit all 3 required media channels (YouTube, Instagram, Twitch) to begin verification." 
+      });
       return;
     }
     setCountdown(TASK_DURATION_SECONDS);
@@ -151,12 +159,14 @@ export default function TaskList() {
           <div>
             <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
               {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-              {userData.eliteUnlocked ? t('tasks.eliteActive') : t('tasks.pageTitle')}
+              {userData.eliteUnlocked ? "Elite Verification Active" : t('tasks.pageTitle')}
             </CardTitle>
-            <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">Complete the daily social media PACK to earn $1.00</CardDescription>
+            <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">
+              Complete the daily social media trinity to build your streak.
+            </CardDescription>
           </div>
           <div className="text-left sm:text-right">
-            <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Elite Accumulation</div>
+            <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Current Earnings</div>
             <div className="text-4xl font-black text-primary">${(userData.balance || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
           </div>
         </CardHeader>
@@ -167,7 +177,7 @@ export default function TaskList() {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <Trophy className="w-6 h-6 text-primary" />
-                  <span className="text-sm font-black uppercase tracking-widest">Master Streak</span>
+                  <span className="text-sm font-black uppercase tracking-widest">Streak Progress</span>
                 </div>
                 <span className="text-xs font-black text-muted-foreground">{userData.streakCount || 0} / 365 Days</span>
               </div>
@@ -179,7 +189,7 @@ export default function TaskList() {
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <Zap className="w-6 h-6 text-primary" />
-                    <span className="text-sm font-black uppercase tracking-widest">Gift Card Cycle</span>
+                    <span className="text-sm font-black uppercase tracking-widest">Monthly Bonus</span>
                   </div>
                   <span className="text-xs font-black text-primary">{userData.eliteMonthlyCounter || 0} / 30 Days</span>
                 </div>
@@ -189,7 +199,7 @@ export default function TaskList() {
           </div>
 
           <div className="space-y-6">
-            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Social Media PACK (3/3)</h3>
+            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Engagement Trinity</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { id: 'youtube', title: 'YouTube', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Watch latest verified media.' },
@@ -230,7 +240,7 @@ export default function TaskList() {
                   {countdownText}
                 </div>
                 <p className="text-xs text-muted-foreground font-black uppercase tracking-[0.2em] max-w-sm mx-auto leading-relaxed">
-                  {t('tasks.stayOnPage')}
+                  Engagement verified. Reward will be added to your balance shortly.
                 </p>
               </div>
             ) : isCompletedToday ? (
@@ -239,14 +249,14 @@ export default function TaskList() {
                   <CheckCircle className="w-14 h-14 text-primary" />
                 </div>
                 <h3 className="text-3xl font-black luxury-text-gradient">{t('tasks.allCompletedTitle')}</h3>
-                <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">Daily $1 reward secured. Return in 24 hours.</p>
+                <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">Secure return in 24 hours.</p>
               </div>
             ) : (
               <div className="space-y-4">
                 {!allVisited ? (
-                  <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Engage with all 3 media platforms to unlock verification.</p>
+                  <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest italic">Engage with all platforms to unlock the daily reward.</p>
                 ) : (
-                  <p className="text-[10px] font-black text-primary uppercase tracking-widest">Social media engaged. You may now start verification.</p>
+                  <p className="text-[10px] font-black text-primary uppercase tracking-widest animate-pulse">Ready for verification. Click button below.</p>
                 )}
               </div>
             )}
@@ -259,7 +269,7 @@ export default function TaskList() {
             disabled={activeTimer || isCompletedToday || !allVisited}
             onClick={handleStartTimer}
           >
-            {activeTimer ? t('tasks.timerActive') : isCompletedToday ? t('tasks.completed') : `Unlock Daily Reward ($1.00)`}
+            {activeTimer ? "Verification Running..." : isCompletedToday ? "Reward Secured" : "Unlock $1.00 Reward"}
           </Button>
         </CardFooter>
       </Card>
