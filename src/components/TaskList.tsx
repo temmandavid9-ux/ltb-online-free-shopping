@@ -41,10 +41,15 @@ export default function TaskList() {
 
   // Sync current step with taskProgress if it's still today
   useEffect(() => {
-    if (userData && !isCompletedToday) {
-      setCurrentStep(userData.taskProgress || 0);
-    } else if (isCompletedToday) {
-      setCurrentStep(3);
+    if (userData) {
+      if (isCompletedToday) {
+        // If completed today, show step 3 (Completed state)
+        setCurrentStep(3);
+      } else {
+        // If NOT completed today, but DB progress is 3, it means it's a new day and we need to start over
+        const dbProgress = userData.taskProgress || 0;
+        setCurrentStep(dbProgress === 3 ? 0 : dbProgress);
+      }
     }
   }, [userData, isCompletedToday]);
 
