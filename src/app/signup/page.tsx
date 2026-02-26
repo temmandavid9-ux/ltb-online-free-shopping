@@ -21,6 +21,7 @@ import { doc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import type { UserProfile } from "@/lib/types";
 
 const signupSchema = z.object({
   username: z.string().min(3, { message: "Username must be at least 3 characters." }),
@@ -53,7 +54,7 @@ export default function SignupPage() {
 
       if (newUser) {
         const userRef = doc(firestore, "users", newUser.uid);
-        const newUserDoc = {
+        const newUserDoc: UserProfile = {
           id: newUser.uid,
           username: values.username,
           email: values.email,
@@ -62,7 +63,14 @@ export default function SignupPage() {
           socialsFollowed: false,
           orderIds: [],
           withdrawalIds: [],
-          tasks: [],
+          // Elite Mode Init
+          streakCount: 0,
+          lastCompletedDate: null,
+          eliteUnlocked: false,
+          eliteStartDate: null,
+          eliteMonthlyCounter: 0,
+          eliteRewardsAvailable: 0,
+          redeemedRewardIds: [],
         };
         
         setDocumentNonBlocking(userRef, newUserDoc, { merge: false });

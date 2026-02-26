@@ -2,87 +2,22 @@
 import {
   useUser,
   useFirestore,
-  useCollection,
+  useDoc,
   useMemoFirebase,
   updateDocumentNonBlocking,
-  useDoc,
 } from '@/firebase';
-import { collection, doc, writeBatch } from 'firebase/firestore';
+import { doc, writeBatch } from 'firebase/firestore';
 import { useEffect, useState, useMemo, useCallback } from 'react';
-import type { Task } from '@/lib/types';
+import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Instagram, Youtube, Twitch, CheckCircle, Lock } from 'lucide-react';
+import { Youtube, CheckCircle, Zap, Crown, Trophy } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
-const TASK_DEFINITIONS = [
-  { id: 'youtube', name: 'YouTube', icon: Youtube, description: 'Watch our new YouTube video.', reward: 0.33 },
-  { id: 'instagram', name: 'Instagram', icon: Instagram, description: 'Check out our latest Instagram posts.', reward: 0.33 },
-  { id: 'twitch', name: 'Twitch', icon: Twitch, description: 'Join our stream on Twitch.', reward: 0.34 },
-];
-
-const TASK_LINKS = {
-  youtube: "https://youtube.com/@Eden-s8u",
-  instagram: "https://instagram.com/eden022026",
-  twitch: "https://twitch.tv/edenonlineshoppingstore"
-};
-
-// NOTE: Timer is set to 600 seconds (10 minutes).
-const TASK_DURATION_SECONDS = 600;
-
-
-function InitialSocialFollow() {
-    const { user } = useUser();
-    const firestore = useFirestore();
-    const { toast } = useToast();
-    const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
-    const { t } = useLanguage();
-
-    const handleConfirmation = () => {
-        if (userDocRef) {
-            updateDocumentNonBlocking(userDocRef, { socialsFollowed: true });
-            toast({
-                title: t('tasks.initialFollow.toast.successTitle'),
-                description: t('tasks.initialFollow.toast.successDescription'),
-            });
-        }
-    };
-
-    return (
-        <Card>
-            <CardHeader>
-                <CardTitle>{t('tasks.initialFollow.title')}</CardTitle>
-                <CardDescription>{t('tasks.initialFollow.description')}</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {TASK_DEFINITIONS.map(task => (
-                        <Card key={task.id} className="flex items-center justify-between p-4">
-                            <div className="flex items-center gap-4">
-                                <task.icon className="w-8 h-8 text-primary" />
-                                <span className="font-semibold">{task.name}</span>
-                            </div>
-                            <Button asChild variant="outline">
-                                <a href={TASK_LINKS[task.id as keyof typeof TASK_LINKS]} target="_blank" rel="noopener noreferrer">
-                                    {t('tasks.initialFollow.followButton')}
-                                </a>
-                            </Button>
-                        </Card>
-                    ))}
-                </div>
-            </CardContent>
-            <CardFooter className="flex-col items-stretch gap-4">
-                 <p className="text-sm text-center text-muted-foreground">{t('tasks.initialFollow.confirmationPrompt')}</p>
-                <Button onClick={handleConfirmation} size="lg">
-                    {t('tasks.initialFollow.confirmButton')}
-                </Button>
-            </CardFooter>
-        </Card>
-    );
-}
+const TASK_DURATION_SECONDS = 600; // 10 minutes verification
+const DAILY_REWARD = 1.00;
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
@@ -90,318 +25,208 @@ export default function TaskList() {
   const { toast } = useToast();
   const { t } = useLanguage();
 
-  const tasksCollectionRef = useMemoFirebase(
-    () => (user ? collection(firestore, 'users', user.uid, 'tasks') : null),
-    [firestore, user]
-  );
-  const { data: tasks, isLoading: areTasksLoading } = useCollection<Task>(tasksCollectionRef);
-
   const userDocRef = useMemoFirebase(() => (user ? doc(firestore, 'users', user.uid) : null), [firestore, user]);
-  const { data: userData, isLoading: isUserDataLoading } = useDoc(userDocRef);
+  const { data: userData, isLoading: isUserDataLoading } = useDoc<UserProfile>(userDocRef);
 
-  const [activeTimerTaskId, setActiveTimerTaskId] = useState<string | null>(null);
+  const [activeTimer, setActiveTimer] = useState<boolean>(false);
   const [countdown, setCountdown] = useState(TASK_DURATION_SECONDS);
-  const [unlockTimeMessage, setUnlockTimeMessage] = useState<string>('');
-  
-  const sortedTasks = useMemo(() => {
-    if (!tasks) return [];
-    const definedTaskIds = new Set(TASK_DEFINITIONS.map(t => t.id));
-    return tasks
-      .filter(task => definedTaskIds.has(task.name.toLowerCase()))
-      .sort((a, b) => {
-        const aIndex = TASK_DEFINITIONS.findIndex(t => t.id === a.name.toLowerCase());
-        const bIndex = TASK_DEFINITIONS.findIndex(t => t.id === b.name.toLowerCase());
-        return aIndex - bIndex;
-    });
-  }, [tasks]);
 
-  const firstIncompleteTaskIndex = useMemo(() => {
-      return sortedTasks.findIndex(t => !t.completed);
-  }, [sortedTasks]);
+  const isCompletedToday = useMemo(() => {
+    if (!userData?.lastCompletedDate) return false;
+    const lastDate = new Date(userData.lastCompletedDate).toDateString();
+    const today = new Date().toDateString();
+    return lastDate === today;
+  }, [userData]);
 
-  const [activeTab, setActiveTab] = useState<string>(TASK_DEFINITIONS[0].id);
+  const handleCompleteTask = useCallback(() => {
+    if (!user || !userData || !userDocRef) return;
 
-  useEffect(() => {
-    if (sortedTasks.length > 0 && firstIncompleteTaskIndex !== -1) {
-        const firstIncompleteTaskId = sortedTasks[firstIncompleteTaskIndex].id;
-        setActiveTab(firstIncompleteTaskId);
+    const today = new Date();
+    const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
+    
+    let newStreak = userData.streakCount || 0;
+    
+    // Streak logic
+    if (lastDate) {
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      
+      if (lastDate.toDateString() === yesterday.toDateString()) {
+        newStreak += 1;
+      } else if (lastDate.toDateString() !== today.toDateString()) {
+        newStreak = 1;
+      }
+    } else {
+      newStreak = 1;
     }
-  }, [sortedTasks, firstIncompleteTaskIndex]);
 
-  const allTasksCompletedToday = useMemo(() => sortedTasks.length > 0 && sortedTasks.every(t => t.completed), [sortedTasks]);
-  
-  const lastCompletedTask = useMemo(() => {
-      if (!allTasksCompletedToday || !sortedTasks.length) return null;
-      return sortedTasks.reduce((latest, current) => {
-          if (!latest.nextTaskUnlockTime || (current.nextTaskUnlockTime && new Date(current.nextTaskUnlockTime) > new Date(latest.nextTaskUnlockTime))) {
-              return current;
-          }
-          return latest;
+    const updates: Partial<UserProfile> = {
+      walletBalance: (userData.walletBalance || 0) + DAILY_REWARD,
+      lastCompletedDate: today.toISOString(),
+      streakCount: newStreak,
+    };
+
+    // Elite Unlock Check (365 days)
+    if (!userData.eliteUnlocked && newStreak >= 365) {
+      updates.eliteUnlocked = true;
+      updates.eliteStartDate = today.toISOString();
+      updates.eliteMonthlyCounter = 0;
+      updates.eliteRewardsAvailable = 0;
+      toast({
+        title: t('tasks.toast.eliteUnlockedTitle'),
+        description: t('tasks.toast.eliteUnlockedDesc'),
       });
-  }, [allTasksCompletedToday, sortedTasks]);
+    }
 
-  const handleCompleteTask = useCallback((taskId: string) => {
-    if (!user || !userData || !firestore) return;
-    
-    const task = sortedTasks.find(t => t.id === taskId);
-    if (!task) return;
+    // Elite Monthly Progress (30 days cycle)
+    if (userData.eliteUnlocked || updates.eliteUnlocked) {
+      let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
+      let newRewards = userData.eliteRewardsAvailable || 0;
 
-    const taskRef = doc(firestore, 'users', user.uid, 'tasks', taskId);
-    
-    const currentTaskIndex = sortedTasks.findIndex(t => t.id === taskId);
-    const isLastTask = currentTaskIndex === sortedTasks.length - 1;
-
-    const updates: Partial<Task> = { completed: true };
-    
-    if (isLastTask) {
-        const unlockTime = new Date();
-        unlockTime.setHours(unlockTime.getHours() + 24);
-        const batch = writeBatch(firestore);
-        sortedTasks.forEach(t => {
-            const singleTaskRef = doc(firestore, 'users', user.uid, 'tasks', t.id);
-            batch.update(singleTaskRef, { nextTaskUnlockTime: unlockTime.toISOString() });
+      if (newMonthlyCounter >= 30) {
+        newMonthlyCounter = 0;
+        newRewards += 1;
+        toast({
+          title: t('tasks.toast.giftCardEarned'),
         });
-        if (userDocRef) {
-            batch.update(userDocRef, { taskProgress: 100 });
-        }
-        batch.commit().catch(e => console.error("Failed to set unlock times", e));
+      }
+      updates.eliteMonthlyCounter = newMonthlyCounter;
+      updates.eliteRewardsAvailable = newRewards;
     }
 
-    updateDocumentNonBlocking(taskRef, updates);
-
-    const newBalance = (userData.walletBalance || 0) + task.reward;
-    const completedTasksCount = sortedTasks.filter(t => t.completed).length + 1;
-    const newTaskProgress = (completedTasksCount / sortedTasks.length) * 100;
-    
-    if(userDocRef) {
-        updateDocumentNonBlocking(userDocRef, { walletBalance: newBalance, taskProgress: isLastTask ? 100 : newTaskProgress });
-    }
+    updateDocumentNonBlocking(userDocRef, updates);
     
     toast({
-        title: t('tasks.taskCompleted', { reward: `$${task.reward.toLocaleString()}` }),
+      title: t('tasks.taskCompleted', { reward: `$${DAILY_REWARD.toFixed(2)}` }),
+      description: t('tasks.toast.streakMaintained', { streak: newStreak }),
     });
     
-    setActiveTimerTaskId(null);
+    setActiveTimer(false);
+  }, [user, userData, userDocRef, t, toast]);
 
-  }, [user, userData, firestore, sortedTasks, toast, userDocRef, t]);
-
-
-  // Initialize or reset tasks
   useEffect(() => {
-    if (!user || !firestore || areTasksLoading || !userData || !tasks) return;
-    if (!userData.socialsFollowed) return;
-
-    const definitionTaskIds = new Set(TASK_DEFINITIONS.map(d => d.id));
-    const firestoreTaskIds = new Set(tasks.map(t => t.id));
-
-    const setsAreEqual = definitionTaskIds.size === firestoreTaskIds.size && [...definitionTaskIds].every(id => firestoreTaskIds.has(id));
-
-    if (!setsAreEqual) {
-        // Mismatch found, re-initialize. This will wipe old tasks (like 'facebook') and create the correct ones with correct rewards.
-        const batch = writeBatch(firestore);
-        tasks.forEach(task => batch.delete(doc(firestore, 'users', user.uid, 'tasks', task.id)));
-        TASK_DEFINITIONS.forEach(taskDef => {
-            const taskRef = doc(firestore, 'users', user.uid, 'tasks', taskDef.id);
-            const newTask: Omit<Task, 'id'> = {
-              userId: user.uid,
-              name: taskDef.name,
-              completed: false,
-              reward: taskDef.reward,
-            };
-            batch.set(taskRef, newTask);
-        });
-        if (userDocRef) {
-            batch.update(userDocRef, { taskProgress: 0 });
-        }
-        batch.commit().catch(e => console.error("Failed to reinitialize tasks", e));
-        return; // Exit after re-initializing
-    }
-
-    // Daily reset logic
-    const allTasksCompleted = tasks.length > 0 && tasks.every(t => t.completed);
-    if (allTasksCompleted) {
-        const lastTask = tasks.reduce((latest, current) => 
-            !latest.nextTaskUnlockTime || (current.nextTaskUnlockTime && new Date(current.nextTaskUnlockTime) > new Date(latest.nextTaskUnlockTime)) ? current : latest
-        );
-
-        if (lastTask?.nextTaskUnlockTime && new Date() > new Date(lastTask.nextTaskUnlockTime)) {
-            const batch = writeBatch(firestore);
-            tasks.forEach(task => {
-                const taskRef = doc(firestore, 'users', user.uid, 'tasks', task.id);
-                batch.update(taskRef, { completed: false, nextTaskUnlockTime: null, taskStartTime: null });
-            });
-            if(userDocRef) {
-                batch.update(userDocRef, { taskProgress: 0 });
-            }
-            batch.commit().catch(e => console.error("Failed to reset tasks", e));
-        }
-    }
-}, [user, firestore, areTasksLoading, userData, tasks, userDocRef]);
-
-  // Check for in-progress task on load or when tasks data changes.
-  useEffect(() => {
-    if (areTasksLoading || !tasks || activeTimerTaskId) return;
-
-    const inProgressTask = sortedTasks.find(t => t.taskStartTime && !t.completed);
-    if (inProgressTask) {
-        const startTime = new Date(inProgressTask.taskStartTime!).getTime();
-        const timeElapsed = (new Date().getTime() - startTime) / 1000;
-        
-        if (timeElapsed >= TASK_DURATION_SECONDS) {
-            handleCompleteTask(inProgressTask.id);
-        } else {
-            const remainingTime = TASK_DURATION_SECONDS - timeElapsed;
-            setActiveTimerTaskId(inProgressTask.id);
-            setCountdown(Math.ceil(remainingTime));
-        }
-    }
-  }, [tasks, areTasksLoading, sortedTasks, activeTimerTaskId, handleCompleteTask]);
-
-  // Timer countdown effect
-  useEffect(() => {
-    if (!activeTimerTaskId) return;
-
+    if (!activeTimer) return;
     if (countdown <= 0) {
-      handleCompleteTask(activeTimerTaskId);
+      handleCompleteTask();
       return;
     }
-
-    const timer = setInterval(() => {
-      setCountdown(prev => prev - 1);
-    }, 1000);
-
+    const timer = setInterval(() => setCountdown(prev => prev - 1), 1000);
     return () => clearInterval(timer);
-  }, [activeTimerTaskId, countdown, handleCompleteTask]);
+  }, [activeTimer, countdown, handleCompleteTask]);
 
-  // Daily completion message effect
-  useEffect(() => {
-    if (allTasksCompletedToday && lastCompletedTask?.nextTaskUnlockTime) {
-      const date = new Date(lastCompletedTask.nextTaskUnlockTime);
-      setUnlockTimeMessage(t('tasks.unlockTime', { date: date.toLocaleString() }));
+  const handleStartTask = () => {
+    if (isCompletedToday) {
+      toast({ variant: "destructive", title: t('tasks.toast.alreadyCompleted') });
+      return;
     }
-  }, [allTasksCompletedToday, lastCompletedTask, t]);
-
-  const handleStartTask = (task: Task) => {
-    if (activeTimerTaskId || allTasksCompletedToday || !user || !firestore) return;
-
-    const currentTaskIndex = sortedTasks.findIndex(t => t.id === task.id);
-    if (currentTaskIndex !== firstIncompleteTaskIndex) {
-        toast({
-            variant: "destructive",
-            title: t('tasks.toast.orderRequired'),
-        });
-        return;
-    }
-    
-    const taskLink = TASK_LINKS[task.name.toLowerCase() as keyof typeof TASK_LINKS];
-    if (taskLink) {
-        window.open(taskLink, '_blank', 'noopener,noreferrer');
-    }
-
-    toast({
-        title: t('tasks.toast.inProgressTitle'),
-        description: t('tasks.toast.inProgressDescription'),
-    });
-    
+    window.open("https://youtube.com/@Eden-s8u", '_blank', 'noopener,noreferrer');
     setCountdown(TASK_DURATION_SECONDS);
-    setActiveTimerTaskId(task.id);
-    const taskRef = doc(firestore, 'users', user.uid, 'tasks', task.id);
-    updateDocumentNonBlocking(taskRef, { taskStartTime: new Date().toISOString() });
+    setActiveTimer(true);
   };
-  
-  if (isUserLoading || isUserDataLoading || areTasksLoading) {
-    return <div>{t('tasks.loading')}</div>;
-  }
-  
-  if (!user || !userData) {
-    return <p>{t('tasks.loginPrompt')}</p>
-  }
-  
-  if (!userData.socialsFollowed) {
-      return <InitialSocialFollow />;
-  }
 
-  if (allTasksCompletedToday && lastCompletedTask) {
-      return (
-          <Card className="text-center p-8">
-              <CardHeader>
-                  <CheckCircle className="mx-auto h-12 w-12 text-green-500"/>
-                  <CardTitle className="mt-4">{t('tasks.allCompletedTitle')}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                  <p className="text-muted-foreground">{t('tasks.allCompletedDescription')}</p>
-                  <p className="font-bold mt-2">{unlockTimeMessage}</p>
-              </CardContent>
-          </Card>
-      )
-  }
+  if (isUserLoading || isUserDataLoading) return <div className="p-8 text-center">{t('tasks.loading')}</div>;
+  if (!user || !userData) return <p className="p-8 text-center">{t('tasks.loginPrompt')}</p>;
 
   const minutes = Math.floor(countdown / 60);
   const seconds = countdown % 60;
   const countdownText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
   return (
-    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-      <TabsList className="grid w-full grid-cols-3">
-        {TASK_DEFINITIONS.map((taskDef, index) => {
-          const taskData = sortedTasks.find(t => t.name.toLowerCase() === taskDef.id);
-          const isLocked = !taskData || (firstIncompleteTaskIndex !== -1 && index > firstIncompleteTaskIndex);
+    <div className="space-y-6">
+      <Card className="overflow-hidden border-2 border-primary/20 bg-gradient-to-br from-background to-secondary/10 shadow-2xl">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-7">
+          <div>
+            <CardTitle className="text-2xl font-black luxury-text-gradient flex items-center gap-3">
+              {userData.eliteUnlocked ? <Crown className="w-8 h-8 text-primary animate-pulse" /> : <Zap className="w-8 h-8 text-primary" />}
+              {userData.eliteUnlocked ? t('tasks.eliteActive') : t('tasks.pageTitle')}
+            </CardTitle>
+            <CardDescription className="mt-2 font-medium">{t('tasks.pageDescription')}</CardDescription>
+          </div>
+          <div className="text-right">
+            <div className="text-xs font-black uppercase tracking-widest text-muted-foreground mb-1">Current Reward</div>
+            <div className="text-3xl font-black text-primary">${DAILY_REWARD.toFixed(2)}</div>
+          </div>
+        </CardHeader>
+        
+        <CardContent className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-black/5 rounded-3xl p-6 border border-border/50">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <Trophy className="w-5 h-5 text-primary" />
+                  <span className="text-sm font-black uppercase tracking-widest">Master Streak</span>
+                </div>
+                <span className="text-xs font-bold text-muted-foreground">{userData.streakCount || 0} / 365 Days</span>
+              </div>
+              <Progress value={((userData.streakCount || 0) / 365) * 100} className="h-3 bg-secondary" />
+              <p className="mt-3 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
+                {t('account.eliteStreak', { streak: userData.streakCount || 0 })}
+              </p>
+            </div>
 
-          return (
-            <TabsTrigger key={taskDef.id} value={taskDef.id} disabled={isLocked}>
-              {taskData?.completed ? <CheckCircle className="w-4 h-4 mr-2 text-green-500" /> : isLocked ? <Lock className="w-4 h-4 mr-2" /> : <taskDef.icon className="w-4 h-4 mr-2" />}
-              {taskDef.name}
-            </TabsTrigger>
-          );
-        })}
-      </TabsList>
-      {TASK_DEFINITIONS.map((taskDef, index) => {
-          const task = sortedTasks.find(t => t.name.toLowerCase() === taskDef.id);
-          if (!task) return null;
+            {userData.eliteUnlocked && (
+              <div className="bg-primary/5 rounded-3xl p-6 border border-primary/20">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <Zap className="w-5 h-5 text-primary" />
+                    <span className="text-sm font-black uppercase tracking-widest">Elite Monthly Bonus</span>
+                  </div>
+                  <span className="text-xs font-bold text-primary">{userData.eliteMonthlyCounter || 0} / 30 Days</span>
+                </div>
+                <Progress value={((userData.eliteMonthlyCounter || 0) / 30) * 100} className="h-3 bg-secondary" />
+                <p className="mt-3 text-[10px] font-bold text-primary uppercase tracking-widest">
+                  {t('tasks.eliteMonthlyStatus', { count: userData.eliteMonthlyCounter || 0 })}
+                </p>
+              </div>
+            )}
+          </div>
 
-          const isTimerActiveForThisTask = activeTimerTaskId === task.id;
-          const isTaskUnlocked = firstIncompleteTaskIndex === index;
-          const isButtonDisabled = !!activeTimerTaskId || task.completed || !isTaskUnlocked;
+          <div className="text-center py-8">
+            {activeTimer ? (
+              <div className="space-y-6 animate-in zoom-in duration-500">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-xs font-black uppercase tracking-widest">
+                  <Zap className="w-4 h-4 animate-bounce" />
+                  Verification Active
+                </div>
+                <div className="text-7xl font-black font-mono tracking-tighter tabular-nums text-foreground">
+                  {countdownText}
+                </div>
+                <p className="text-sm text-muted-foreground font-medium max-w-sm mx-auto leading-relaxed">
+                  {t('tasks.stayOnPage')}
+                </p>
+              </div>
+            ) : isCompletedToday ? (
+              <div className="space-y-4 animate-in fade-in duration-1000">
+                <div className="mx-auto w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                  <CheckCircle className="w-12 h-12 text-primary" />
+                </div>
+                <h3 className="text-2xl font-black luxury-text-gradient">{t('tasks.allCompletedTitle')}</h3>
+                <p className="text-muted-foreground text-sm font-medium">{t('tasks.allCompletedDescription')}</p>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                <div className="mx-auto w-24 h-24 bg-secondary rounded-[2.5rem] flex items-center justify-center border-4 border-white shadow-xl">
+                  <Youtube className="w-12 h-12 text-primary" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-bold">{t('tasks.startPrompt')}</h3>
+                  <p className="text-sm text-muted-foreground">Engage with our curated content to secure your daily reward.</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </CardContent>
 
-          return (
-             <TabsContent key={taskDef.id} value={taskDef.id}>
-                <Card>
-                    <CardHeader>
-                        <CardTitle className="flex items-center gap-2"><taskDef.icon/> {task.name}</CardTitle>
-                        <CardDescription>{taskDef.description}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4 text-center">
-                        {isTimerActiveForThisTask ? (
-                            <>
-                                <p className="text-lg font-semibold">{t('tasks.inProgress')}</p>
-                                <div className="space-y-2">
-                                    <Progress value={( (TASK_DURATION_SECONDS - countdown) / TASK_DURATION_SECONDS) * 100} className="w-full"/>
-                                    <p className="text-2xl font-mono font-bold">{countdownText}</p>
-                                    <p className="text-muted-foreground text-sm">{t('tasks.stayOnPage')}</p>
-                                </div>
-                            </>
-                        ) : task.completed ? (
-                             <div className="flex items-center justify-center gap-2 text-green-600 font-medium"><CheckCircle /> {t('tasks.taskCompleted', { reward: `$${task.reward.toLocaleString()}` })}</div>
-                        ) : (
-                             <p className="text-muted-foreground">{isTaskUnlocked ? t('tasks.startPrompt') : t('tasks.unlockPrompt')}</p>
-                        )}
-                    </CardContent>
-                    <CardFooter>
-                        <Button 
-                            className="w-full" 
-                            disabled={isButtonDisabled} 
-                            onClick={() => handleStartTask(task)}
-                        >
-                            {task.completed ? <><CheckCircle className="mr-2 h-4 w-4"/> {t('tasks.completed')}</> 
-                            : !isTaskUnlocked ? <><Lock className="mr-2 h-4 w-4"/> {t('tasks.locked')}</> 
-                            : isTimerActiveForThisTask ? t('tasks.timerActive')
-                            : t('tasks.startButton', { reward: `$${task.reward.toLocaleString()}`})}
-                        </Button>
-                    </CardFooter>
-                </Card>
-             </TabsContent>
-          )
-      })}
-    </Tabs>
+        <CardFooter className="bg-secondary/50 p-8 border-t border-border/50">
+          <Button 
+            className="w-full h-16 rounded-2xl text-lg font-black uppercase tracking-[0.2em] shadow-xl transition-all active:scale-95 btn-luxury"
+            disabled={activeTimer || isCompletedToday}
+            onClick={handleStartTask}
+          >
+            {activeTimer ? t('tasks.timerActive') : isCompletedToday ? t('tasks.completed') : t('tasks.startButton', { reward: DAILY_REWARD.toFixed(2) })}
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }

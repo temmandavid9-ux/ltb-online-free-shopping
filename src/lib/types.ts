@@ -23,35 +23,60 @@ export type RedeemItem = {
   quantity: number;
 };
 
-// This matches docs/backend.json Order
 export type Order = {
     id: string;
     userId: string;
     product: string;
     price: number;
-    status: string; // 'Pending', 'Approved', 'Rejected', 'Completed'
-    date: string; // ISO String
+    status: string; 
+    date: string; 
     image: string;
 };
 
-// This matches docs/backend.json Withdrawal
 export type Withdrawal = {
     id: string;
     userId: string;
     amount: number;
     paymentMethod: string;
     accountDetails: string;
-    status: string; // 'Pending', 'Approved', 'Rejected'
-    date: string; // ISO String
+    status: string; 
+    date: string; 
 };
 
-// This matches docs/backend.json Task
 export type Task = {
-    id: string; // e.g. 'facebook'
+    id: string; 
     userId: string;
     name: string;
     completed: boolean;
     reward: number;
-    taskStartTime?: string; // ISO String
-    nextTaskUnlockTime?: string; // ISO String
+    taskStartTime?: string; 
+    nextTaskUnlockTime?: string; 
+};
+
+export type UserProfile = {
+  id: string;
+  username: string;
+  email: string;
+  walletBalance: number;
+  taskProgress: number;
+  socialsFollowed: boolean;
+  orderIds: string[];
+  withdrawalIds: string[];
+  // Elite Mode Fields
+  streakCount: number;
+  lastCompletedDate: string | null;
+  eliteUnlocked: boolean;
+  eliteStartDate: string | null;
+  eliteMonthlyCounter: number;
+  eliteRewardsAvailable: number;
+  redeemedRewardIds: string[];
+};
+
+export type RewardRedemption = {
+  id: string;
+  userId: string;
+  giftCardCodeId: string;
+  redemptionDate: string;
+  rewardType: string;
+  value: number;
 };
