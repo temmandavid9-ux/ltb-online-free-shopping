@@ -17,7 +17,6 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
 const TASK_DURATION_SECONDS = 600; // 10 minutes per stage
-const DAILY_REWARD = 1.00;
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
@@ -32,11 +31,6 @@ export default function TaskList() {
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [activeTimer, setActiveTimer] = useState<boolean>(false);
   const [countdown, setCountdown] = useState(TASK_DURATION_SECONDS);
-  const [stepStatus, setStepStatus] = useState<Record<number, 'pending' | 'verifying' | 'completed'>>({
-    0: 'pending',
-    1: 'pending',
-    2: 'pending'
-  });
 
   const isCompletedToday = useMemo(() => {
     if (!userData?.lastCompletedDate) return false;
@@ -45,94 +39,108 @@ export default function TaskList() {
     return lastDate === today;
   }, [userData]);
 
-  const handleFinalizeTask = useCallback(() => {
+  // Sync current step with taskProgress if it's still today
+  useEffect(() => {
+    if (userData && !isCompletedToday) {
+      setCurrentStep(userData.taskProgress || 0);
+    } else if (isCompletedToday) {
+      setCurrentStep(3);
+    }
+  }, [userData, isCompletedToday]);
+
+  const handleStageComplete = useCallback(() => {
     if (!user || !userData || !userDocRef) return;
 
-    const today = new Date();
-    const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
-    
-    let newStreak = userData.streakCount || 0;
-    
-    if (lastDate) {
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
+    const stage = currentStep;
+    let reward = 0.33;
+    let updates: Partial<UserProfile> = {};
+
+    // Logic for Stage 3 (Final)
+    if (stage === 2) {
+      reward = 0.34; // Final stage completes the $1.00
+      const today = new Date();
+      const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
       
-      if (lastDate.toDateString() === yesterday.toDateString()) {
-        newStreak += 1;
-      } else if (lastDate.toDateString() !== today.toDateString()) {
+      let newStreak = userData.streakCount || 0;
+      
+      if (lastDate) {
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        
+        if (lastDate.toDateString() === yesterday.toDateString()) {
+          newStreak += 1;
+        } else if (lastDate.toDateString() !== today.toDateString()) {
+          newStreak = 1;
+        }
+      } else {
         newStreak = 1;
       }
-    } else {
-      newStreak = 1;
-    }
 
-    const updates: Partial<UserProfile> = {
-      balance: (userData.balance || 0) + DAILY_REWARD,
-      lastCompletedDate: today.toISOString(),
-      streakCount: newStreak,
-    };
+      updates.lastCompletedDate = today.toISOString();
+      updates.streakCount = newStreak;
+      updates.taskProgress = 3;
 
-    if (!userData.eliteUnlocked && newStreak >= 365) {
-      updates.eliteUnlocked = true;
-      updates.eliteStartDate = today.toISOString();
-      updates.eliteMonthlyCounter = 0;
-      updates.eliteRewardsAvailable = 0;
+      if (!userData.eliteUnlocked && newStreak >= 365) {
+        updates.eliteUnlocked = true;
+        updates.eliteStartDate = today.toISOString();
+        updates.eliteMonthlyCounter = 0;
+        updates.eliteRewardsAvailable = 0;
+        toast({
+          title: t('tasks.toast.eliteUnlockedTitle'),
+          description: t('tasks.toast.eliteUnlockedDesc'),
+        });
+      }
+
+      if (userData.eliteUnlocked || updates.eliteUnlocked) {
+        let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
+        let newRewards = userData.eliteRewardsAvailable || 0;
+
+        if (newMonthlyCounter >= 30) {
+          newMonthlyCounter = 0;
+          newRewards += 1;
+          toast({
+            title: t('tasks.toast.giftCardEarned'),
+          });
+        }
+        updates.eliteMonthlyCounter = newMonthlyCounter;
+        updates.eliteRewardsAvailable = newRewards;
+      }
+      
       toast({
-        title: t('tasks.toast.eliteUnlockedTitle'),
-        description: t('tasks.toast.eliteUnlockedDesc'),
+        title: "Daily Sequence Finalized",
+        description: `Total $1.00 reward secured. Streak: Day ${newStreak}.`,
+      });
+    } else {
+      // Logic for Stage 1 & 2
+      updates.taskProgress = stage + 1;
+      toast({
+        title: `Stage ${stage + 1} Secured`,
+        description: `+$${reward.toFixed(2)} added to your registry. Next stage unlocked.`,
       });
     }
 
-    if (userData.eliteUnlocked || updates.eliteUnlocked) {
-      let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
-      let newRewards = userData.eliteRewardsAvailable || 0;
-
-      if (newMonthlyCounter >= 30) {
-        newMonthlyCounter = 0;
-        newRewards += 1;
-        toast({
-          title: t('tasks.toast.giftCardEarned'),
-        });
-      }
-      updates.eliteMonthlyCounter = newMonthlyCounter;
-      updates.eliteRewardsAvailable = newRewards;
-    }
-
+    updates.balance = (userData.balance || 0) + reward;
     updateDocumentNonBlocking(userDocRef, updates);
     
-    toast({
-      title: t('tasks.taskCompleted', { reward: `$${DAILY_REWARD.toFixed(2)}` }),
-      description: t('tasks.toast.streakMaintained', { streak: newStreak }),
-    });
-    
     setActiveTimer(false);
-    setCurrentStep(3);
-  }, [user, userData, userDocRef, t, toast]);
+    setCountdown(TASK_DURATION_SECONDS);
+  }, [user, userData, userDocRef, t, toast, currentStep]);
 
   useEffect(() => {
     if (!activeTimer) return;
     if (countdown <= 0) {
-      setStepStatus(prev => ({ ...prev, [currentStep]: 'completed' }));
-      setActiveTimer(false);
-      
-      if (currentStep < 2) {
-        toast({ title: `Task ${currentStep + 1} Secured`, description: "Next engagement channel unlocked." });
-        setCurrentStep(prev => prev + 1);
-      } else {
-        handleFinalizeTask();
-      }
+      handleStageComplete();
       return;
     }
     const timer = setInterval(() => setCountdown(prev => prev - 1), 1000);
     return () => clearInterval(timer);
-  }, [activeTimer, countdown, currentStep, handleFinalizeTask, toast]);
+  }, [activeTimer, countdown, handleStageComplete]);
 
   const handleStartSubTask = (stepIndex: number, url: string) => {
     if (isCompletedToday) return;
     if (stepIndex !== currentStep) return;
     
     window.open(url, '_blank', 'noopener,noreferrer');
-    setStepStatus(prev => ({ ...prev, [stepIndex]: 'verifying' }));
     setCountdown(TASK_DURATION_SECONDS);
     setActiveTimer(true);
   };
@@ -145,9 +153,9 @@ export default function TaskList() {
   const countdownText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
   const channels = [
-    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Engagement Step 1' },
-    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: 'Engagement Step 2' },
-    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: 'Final Verification' }
+    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Registry Step 1 (+$0.33)' },
+    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: 'Registry Step 2 (+$0.33)' },
+    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: 'Final Verification (+$0.34)' }
   ];
 
   return (
@@ -160,7 +168,7 @@ export default function TaskList() {
               {userData.eliteUnlocked ? "Elite Sequence" : "Daily Sequential Registry"}
             </CardTitle>
             <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">
-              Tasks must be completed in order. Each requires 10 minutes of verified interaction.
+              Stages yield fractional rewards ($0.33). Complete all 3 for the full $1.00 daily credit.
             </CardDescription>
           </div>
           <div className="text-left sm:text-right">
@@ -241,7 +249,7 @@ export default function TaskList() {
                   {countdownText}
                 </div>
                 <p className="text-xs text-muted-foreground font-black uppercase tracking-[0.2em] max-w-sm mx-auto leading-relaxed">
-                  Stay on page to verify engagement. Reward claimed after final stage.
+                  Stay on page to verify engagement. Fractional reward credited after verification.
                 </p>
               </div>
             ) : isCompletedToday ? (
