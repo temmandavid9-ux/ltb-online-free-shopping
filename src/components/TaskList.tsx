@@ -12,11 +12,12 @@ import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck } from 'lucide-react';
+import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
 const TASK_DURATION_SECONDS = 600; // 10 minutes verification
+const COOLDOWN_MS = 24 * 60 * 60 * 1000; // 24 hours precisely
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
@@ -30,23 +31,47 @@ export default function TaskList() {
   const [activeTimer, setActiveTimer] = useState<boolean>(false);
   const [countdown, setCountdown] = useState(TASK_DURATION_SECONDS);
   const [activeStep, setActiveStep] = useState<number | null>(null);
+  const [currentTime, setCurrentTime] = useState(Date.now());
 
-  // Check if the overall sequence was completed today
-  const isCompletedToday = useMemo(() => {
+  // Update local clock for real-time cooldown checking
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentTime(Date.now()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Strict 24-hour cooldown check
+  const isCooldownActive = useMemo(() => {
     if (!userData?.lastCompletedDate) return false;
-    const lastDate = new Date(userData.lastCompletedDate).toDateString();
-    const today = new Date().toDateString();
-    return lastDate === today;
-  }, [userData]);
+    const lastTime = new Date(userData.lastCompletedDate).getTime();
+    return (currentTime - lastTime) < COOLDOWN_MS;
+  }, [userData?.lastCompletedDate, currentTime]);
+
+  const nextUnlockTime = useMemo(() => {
+    if (!userData?.lastCompletedDate) return null;
+    return new Date(new Date(userData.lastCompletedDate).getTime() + COOLDOWN_MS);
+  }, [userData?.lastCompletedDate]);
 
   // Determine the current step index (0, 1, 2)
   const currentStepIndex = useMemo(() => {
-    if (isCompletedToday) return 3;
+    if (isCooldownActive) return 3; // All steps show as "Secured" during cooldown
     if (!userData?.step1Status) return 0;
     if (!userData?.step2Status) return 1;
     if (!userData?.step3Status) return 2;
     return 3;
-  }, [userData, isCompletedToday]);
+  }, [userData, isCooldownActive]);
+
+  // Reset steps automatically when cooldown expires
+  useEffect(() => {
+    if (userData && userDocRef && !isCooldownActive) {
+      if (userData.step1Status || userData.step2Status || userData.step3Status) {
+        updateDocumentNonBlocking(userDocRef, {
+          step1Status: false,
+          step2Status: false,
+          step3Status: false
+        });
+      }
+    }
+  }, [userData, userDocRef, isCooldownActive]);
 
   const handleStageComplete = useCallback(() => {
     if (!user || !userData || !userDocRef || activeStep === null) return;
@@ -55,7 +80,6 @@ export default function TaskList() {
     let reward = stage === 2 ? 0.34 : 0.33;
     let updates: any = {};
 
-    // Standard sequence tracking
     updates.lastStepDate = new Date().toISOString();
 
     if (stage === 0) updates.step1Status = true;
@@ -63,15 +87,14 @@ export default function TaskList() {
     if (stage === 2) {
       updates.step3Status = true;
       
-      // Finalize Daily PACK
       const today = new Date();
       const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
       let newStreak = userData.streakCount || 0;
 
+      // Streak logic: check if last completion was within 48 hours (standard streak tolerance)
       if (lastDate) {
-        const yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-        if (lastDate.toDateString() === yesterday.toDateString()) {
+        const diff = today.getTime() - lastDate.getTime();
+        if (diff < COOLDOWN_MS * 2) {
           newStreak += 1;
         } else {
           newStreak = 1;
@@ -83,7 +106,6 @@ export default function TaskList() {
       updates.lastCompletedDate = today.toISOString();
       updates.streakCount = newStreak;
 
-      // Handle Elite Unlocking (365 days)
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = today.toISOString();
@@ -92,7 +114,6 @@ export default function TaskList() {
         toast({ title: "ELITE MODE ACTIVATED", description: "365-day milestone achieved. Permanent Elite status secured." });
       }
 
-      // Handle Elite Monthly Cycle (30 days = $25)
       if (userData.eliteUnlocked || updates.eliteUnlocked) {
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
@@ -106,7 +127,7 @@ export default function TaskList() {
       }
     }
 
-    // Atomic increment for balance security
+    // Atomic increment for precision balance
     updates.balance = increment(reward);
     
     updateDocumentNonBlocking(userDocRef, updates);
@@ -131,25 +152,8 @@ export default function TaskList() {
     return () => clearInterval(timer);
   }, [activeTimer, countdown, handleStageComplete]);
 
-  // Reset steps if it's a new day and steps are from previous days
-  useEffect(() => {
-    if (userData && userDocRef) {
-      const today = new Date().toDateString();
-      const lastStepDay = userData.lastStepDate ? new Date(userData.lastStepDate).toDateString() : null;
-      
-      // If the steps were set on a different day, reset them
-      if (lastStepDay !== today && (userData.step1Status || userData.step2Status || userData.step3Status)) {
-        updateDocumentNonBlocking(userDocRef, {
-          step1Status: false,
-          step2Status: false,
-          step3Status: false
-        });
-      }
-    }
-  }, [userData, userDocRef]);
-
   const handleStartSubTask = (stepIndex: number, url: string) => {
-    if (isCompletedToday || activeTimer) return;
+    if (isCooldownActive || activeTimer) return;
     if (stepIndex !== currentStepIndex) return;
     
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -221,8 +225,8 @@ export default function TaskList() {
             <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Execution Sequence</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {channels.map((channel) => {
-                const isSecured = channel.status || (isCompletedToday && channel.id <= 2);
-                const isLocked = channel.id > currentStepIndex && !isCompletedToday;
+                const isSecured = channel.status || (isCooldownActive && channel.id <= 2);
+                const isLocked = channel.id > currentStepIndex && !isCooldownActive;
                 const isActivating = channel.id === currentStepIndex && activeTimer;
 
                 return (
@@ -277,13 +281,19 @@ export default function TaskList() {
             </div>
           )}
 
-          {isCompletedToday && (
+          {isCooldownActive && (
             <div className="text-center py-12 space-y-6 animate-in fade-in duration-1000">
               <div className="mx-auto w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                <CheckCircle className="w-14 h-14 text-primary" />
+                <Clock className="w-14 h-14 text-primary" />
               </div>
-              <h3 className="text-3xl font-black luxury-text-gradient">Daily PACK Finalized</h3>
-              <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest">Streak: Day {userData.streakCount}. Return in 24 hours.</p>
+              <h3 className="text-3xl font-black luxury-text-gradient">Daily PACK Cooldown</h3>
+              <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest mb-4">Streak: Day {userData.streakCount}. 24-hour verification window active.</p>
+              <div className="inline-flex items-center gap-2 px-6 py-2 bg-secondary rounded-full border border-border/50">
+                <Lock className="w-3 h-3 text-muted-foreground" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-foreground">
+                  Next Registry Unlocks at: {nextUnlockTime?.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </span>
+              </div>
             </div>
           )}
         </CardContent>
@@ -291,10 +301,10 @@ export default function TaskList() {
         <CardFooter className="bg-secondary/30 p-10 border-t border-border/50">
           <Button 
             className="w-full h-20 rounded-[2rem] text-xs font-black uppercase tracking-[0.3em] shadow-2xl transition-all active:scale-95 btn-luxury"
-            disabled={activeTimer || isCompletedToday}
+            disabled={activeTimer || isCooldownActive}
             onClick={() => handleStartSubTask(currentStepIndex, channels[currentStepIndex].url)}
           >
-            {activeTimer ? "Verification in Progress..." : isCompletedToday ? "Reward Secured" : `Unlock Registry Step ${currentStepIndex + 1}`}
+            {activeTimer ? "Verification in Progress..." : isCooldownActive ? "Reward Secured" : `Unlock Registry Step ${currentStepIndex + 1}`}
           </Button>
         </CardFooter>
       </Card>
