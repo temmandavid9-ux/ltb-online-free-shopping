@@ -17,12 +17,13 @@ export const findImage = (id: string) => {
     };
   }
 
-  // 2. Dynamic numeric mapping for product IDs (e.g., prod_img_450 or prod_exclusive_1)
+  // 2. Dynamic numeric mapping for product IDs (e.g., prod_exclusive_1)
+  // We extract the number from the ID
   const numericMatch = id.match(/\d+$/);
   if (numericMatch) {
     const index = parseInt(numericMatch[0]) - 1; // 0-based index
     
-    // Flatten and DEDUPLICATE all links from all-links.json
+    // Flatten and STRICTLY DEDUPLICATE all links from all-links.json
     const allVerifiedUrls = Array.from(
       new Set(
         Object.values(masterLinks.folders)
@@ -32,6 +33,7 @@ export const findImage = (id: string) => {
       )
     );
     
+    // Return the unique URL corresponding to this index
     if (allVerifiedUrls[index]) {
       return {
         url: allVerifiedUrls[index],
@@ -47,6 +49,9 @@ export const findImage = (id: string) => {
   };
 };
 
+/**
+ * Utility to get the exact count of unique verified assets in the registry.
+ */
 export const getUniqueAssetCount = () => {
   return new Set(
     Object.values(masterLinks.folders)

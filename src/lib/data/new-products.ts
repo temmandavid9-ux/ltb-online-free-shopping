@@ -14,6 +14,7 @@ const generateVerifiedCatalog = (): Product[] => {
   const categories = ['Clothes', 'Beauty', 'Watches', 'Chains', 'Wigs', 'Laptops', 'Phones', 'Shoes', 'Underwear'];
   const brands = ['Nexa', 'Stellar', 'Aperture', 'Helios', 'Zenco'];
 
+  // We generate exactly as many products as there are unique assets
   for (let i = 1; i <= uniqueCount; i++) {
     const category = categories[i % categories.length];
     const brand = brands[i % brands.length];
