@@ -51,28 +51,29 @@ export default function TaskList() {
     return new Date(new Date(userData.lastCompletedDate).getTime() + COOLDOWN_MS);
   }, [userData?.lastCompletedDate]);
 
-  // Determine the current step index (0, 1, 2)
+  /**
+   * RE-ENGINEERED UNLOCK LOGIC:
+   * 1. If in 24h lockout, index is 3 (all secured).
+   * 2. If steps are from a PREVIOUS cycle (before lastCompletedDate), index is 0 (fresh start).
+   * 3. Else, return the first incomplete step.
+   */
   const currentStepIndex = useMemo(() => {
-    if (isCooldownActive) return 3; // All steps show as "Secured" during cooldown
+    if (isCooldownActive) return 3;
+    
+    const lastComp = userData?.lastCompletedDate ? new Date(userData.lastCompletedDate).getTime() : 0;
+    const lastStep = userData?.lastStepDate ? new Date(userData.lastStepDate).getTime() : 0;
+    
+    // If the last step activity happened before the last full completion, it's a stale cycle
+    const isStaleCycle = lastStep < lastComp;
+    
+    if (isStaleCycle) return 0;
     if (!userData?.step1Status) return 0;
     if (!userData?.step2Status) return 1;
     if (!userData?.step3Status) return 2;
     return 3;
   }, [userData, isCooldownActive]);
 
-  // Reset steps automatically when 24-hour cooldown expires to allow fresh sequence
-  useEffect(() => {
-    if (userData && userDocRef && !isCooldownActive) {
-      if (userData.step1Status || userData.step2Status || userData.step3Status) {
-        updateDocumentNonBlocking(userDocRef, {
-          step1Status: false,
-          step2Status: false,
-          step3Status: false
-        });
-      }
-    }
-  }, [userData, userDocRef, isCooldownActive]);
-
+  // Handle fractional rewards and sequential unlocking
   const handleStageComplete = useCallback(() => {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
@@ -130,7 +131,7 @@ export default function TaskList() {
       }
     }
 
-    // Atomic increment for maximum wallet security
+    // ATOMIC INCREMENT: Mission-critical for precision wallet tracking
     updates.balance = increment(reward);
     
     updateDocumentNonBlocking(userDocRef, updates);
@@ -172,10 +173,15 @@ export default function TaskList() {
   const seconds = countdown % 60;
   const countdownText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
+  // Check if steps are fresh or from a previous day
+  const lastComp = userData.lastCompletedDate ? new Date(userData.lastCompletedDate).getTime() : 0;
+  const lastStep = userData.lastStepDate ? new Date(userData.lastStepDate).getTime() : 0;
+  const isStale = lastStep < lastComp;
+
   const channels = [
-    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Registry Step 1 (+$0.33)', status: userData.step1Status },
-    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: 'Registry Step 2 (+$0.33)', status: userData.step2Status },
-    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: 'Final Verification (+$0.34)', status: userData.step3Status }
+    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Registry Step 1 (+$0.33)', status: !isStale && userData.step1Status },
+    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: 'Registry Step 2 (+$0.33)', status: !isStale && userData.step2Status },
+    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: 'Final Verification (+$0.34)', status: !isStale && userData.step3Status }
   ];
 
   return (
