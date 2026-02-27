@@ -3,60 +3,51 @@ import { PlaceHolderImages } from '../placeholder-images';
 import masterLinks from '../image-assets/all-links.json';
 
 /**
- * Retrieves assets from the registry based on their ID.
- * This is the definitive source for Less Talk Business visuals.
- * Deduplicates links to ensure no repetition.
+ * Retrieves the absolute list of unique, verified URLs from the master registry.
+ * This is the definitive deduplicated source for Less Talk Business.
+ */
+export const getUniqueVerifiedUrls = () => {
+  const allUrls = Object.values(masterLinks.folders).flat();
+  return Array.from(
+    new Set(
+      allUrls
+        .map(url => url.trim())
+        .filter(url => url.startsWith('http'))
+    )
+  );
+};
+
+/**
+ * Maps a product ID to a unique URL from the deduplicated registry.
+ * Ensures that specific ID prefixes correspond to specific indices.
  */
 export const findImage = (id: string) => {
-  // 1. Check explicit ID mapping first (for Logo, etc.)
-  const image = PlaceHolderImages.find((img) => img.id === id);
-  if (image && image.imageUrl) {
-    return { 
-      url: image.imageUrl, 
-      hint: "verified" 
-    };
+  // 1. Priority: Check explicit mapping for system assets (Logo, etc.)
+  const systemImage = PlaceHolderImages.find((img) => img.id === id);
+  if (systemImage && systemImage.imageUrl) {
+    return { url: systemImage.imageUrl, hint: "verified" };
   }
 
-  // 2. Dynamic numeric mapping for product IDs (e.g., prod_exclusive_1)
-  // We extract the number from the ID
+  // 2. Dynamic Registry Mapping
+  const uniqueUrls = getUniqueVerifiedUrls();
   const numericMatch = id.match(/\d+$/);
+  
   if (numericMatch) {
-    const index = parseInt(numericMatch[0]) - 1; // 0-based index
-    
-    // Flatten and STRICTLY DEDUPLICATE all links from all-links.json
-    const allVerifiedUrls = Array.from(
-      new Set(
-        Object.values(masterLinks.folders)
-          .flat()
-          .map(url => url.trim())
-          .filter(url => url.startsWith('http'))
-      )
-    );
-    
-    // Return the unique URL corresponding to this index
-    if (allVerifiedUrls[index]) {
+    const index = parseInt(numericMatch[0]) - 1;
+    // We strictly use the index to ensure NO REPETITION across the store
+    if (uniqueUrls[index]) {
       return {
-        url: allVerifiedUrls[index],
+        url: uniqueUrls[index],
         hint: "verified"
       };
     }
   }
 
-  // Assets not in registry remain in "Pending" state
+  // Fallback for unmatched assets
   return { 
     url: '', 
     hint: "verified" 
   };
 };
 
-/**
- * Utility to get the exact count of unique verified assets in the registry.
- */
-export const getUniqueAssetCount = () => {
-  return new Set(
-    Object.values(masterLinks.folders)
-      .flat()
-      .map(url => url.trim())
-      .filter(url => url.startsWith('http'))
-  ).size;
-};
+export const getUniqueAssetCount = () => getUniqueVerifiedUrls().length;

@@ -1,38 +1,39 @@
 
 import type { Product } from '../types';
-import { findImage, getUniqueAssetCount } from './find-image';
+import { getUniqueVerifiedUrls } from './find-image';
 
 /**
- * Generates products dynamically based on the unique links available in all-links.json.
- * This ensures NO REPETITION of images in the store.
+ * Generates the master product catalog dynamically based on unique registry links.
+ * This ensures that EVERY unique link in all-links.json is represented exactly once.
  */
 const generateVerifiedCatalog = (): Product[] => {
-  const uniqueCount = getUniqueAssetCount();
+  const uniqueUrls = getUniqueVerifiedUrls();
   const catalog: Product[] = [];
   
-  // Categories to distribute products across
+  // Categorization Logic: Distribute unique assets across available store sections
   const categories = ['Clothes', 'Beauty', 'Watches', 'Chains', 'Wigs', 'Laptops', 'Phones', 'Shoes', 'Underwear'];
   const brands = ['Nexa', 'Stellar', 'Aperture', 'Helios', 'Zenco'];
 
-  // We generate exactly as many products as there are unique assets
-  for (let i = 1; i <= uniqueCount; i++) {
+  uniqueUrls.forEach((url, i) => {
+    const index = i + 1; // 1-based for IDs
     const category = categories[i % categories.length];
     const brand = brands[i % brands.length];
     
     catalog.push({
-      id: `prod_exclusive_${i}`,
-      slug: `exclusive-verified-item-${i}`,
-      name: `Exclusive Masterpiece #${i}`,
-      description: `A unique, verified asset from the Less Talk Business registry. Representing the pinnacle of quality and status. Authenticity Code: LTB-VER-${i}.`,
+      id: `prod_verified_${index}`,
+      slug: `exclusive-item-${index}`,
+      name: `Exclusive Masterpiece #${index}`,
+      description: `A unique, verified asset from the Less Talk Business registry. Representing the pinnacle of quality and status. Authenticity Code: LTB-VER-${index}.`,
       category: category,
-      price: Math.floor(Math.random() * (1500 - 150 + 1)) + 150,
+      price: Math.floor(Math.random() * (1200 - 150 + 1)) + 150,
       brand: brand,
-      images: [findImage(`prod_exclusive_${i}`)],
+      images: [{ url, hint: "verified" }],
       stock: Math.floor(Math.random() * 15) + 5,
       rating: Number((4.7 + Math.random() * 0.3).toFixed(1)),
       reviewCount: Math.floor(Math.random() * 400) + 100
     });
-  }
+  });
+
   return catalog;
 };
 

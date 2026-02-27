@@ -1,16 +1,11 @@
+
 import type { Product, Category } from '../types';
 import { Shirt, Laptop, Watch, Dna, Footprints, Layers, Smartphone, Link as LinkIcon, Palette } from 'lucide-react';
-import { beautyProducts } from './beauty';
-import { chainProducts } from './chains';
-import { clothesProducts } from './clothes';
-import { laptopProducts } from './laptops';
-import { phoneProducts } from './phones';
-import { shoeProducts } from './shoes';
-import { underwearProducts } from './underwear';
-import { watchProducts } from './watches';
-import { wigProducts } from './wigs';
 import { newProducts } from './new-products';
 
+/**
+ * Master Category Configuration
+ */
 export const categories: Category[] = [
   { id: 'cat1', name: 'Clothes', icon: Shirt },
   { id: 'cat2', name: 'Wigs', icon: Dna },
@@ -23,19 +18,13 @@ export const categories: Category[] = [
   { id: 'cat9', name: 'Beauty', icon: Palette },
 ];
 
-export const brands: string[] = ['Zenco', 'Stellar', 'Nexa', 'Orion', 'Helios', 'iDino', 'Aperture', 'Denim Edge', 'Alpine Ridge', 'Velocity', 'Tempo', 'Zenith', 'SilkFlow', 'Eon', 'Nova', 'Crimson', 'Eco', 'Stride', 'Vivid', 'Chrono'];
-
+/**
+ * Master Product Catalog
+ * composited exclusively from the verified unique links in all-links.json.
+ * This ensures NO REPETITION and full utilization of the 900+ assets.
+ */
 export const products: Product[] = [
-    ...watchProducts,
-    ...laptopProducts,
-    ...clothesProducts,
-    ...shoeProducts,
-    ...phoneProducts,
-    ...wigProducts,
-    ...chainProducts,
-    ...underwearProducts,
-    ...beautyProducts,
-    ...newProducts,
+    ...newProducts
 ];
 
-    
+export const brands: string[] = Array.from(new Set(products.map(p => p.brand)));
