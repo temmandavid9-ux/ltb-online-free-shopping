@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { Search, ListChecks, Wallet, User as UserIcon, Globe, ShoppingBag } from 'lucide-react';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { useRedeem } from '@/context/CartContext';
 import { useUser, useFirestore, useDoc, useMemoFirebase } from '@/firebase';
@@ -17,13 +16,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import type { UserProfile } from '@/lib/types';
 
+const BrandLogo = () => (
+  <svg viewBox="0 0 100 100" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 30C20 24.4772 24.4772 20 30 20H70C75.5228 20 80 24.4772 80 30V60C80 65.5228 75.5228 70 70 70H45L25 85V70C22.2386 70 20 67.7614 20 65V30Z" fill="white"/>
+    <path d="M35 45L50 35L65 45V55L50 65L35 55V45Z" fill="#10b981"/>
+    <path d="M50 35V65" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+);
+
 export default function Header() {
   const { itemCount } = useRedeem();
   const { user, isUserLoading } = useUser();
   const firestore = useFirestore();
   const { t, setLocale, locale } = useLanguage();
 
-  // Unified 2-segment path: /users/{userId}
   const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
   const { data: userData } = useDoc<UserProfile>(userDocRef);
 
@@ -35,10 +41,13 @@ export default function Header() {
         <div className="flex items-center justify-between h-20 md:h-24 gap-4 md:gap-8">
           <div className="shrink-0">
             <Link href="/" className="flex items-center gap-3 md:gap-4 group">
-              <div className="relative w-10 h-10 md:w-12 md:h-12 overflow-hidden rounded-2xl bg-black flex items-center justify-center shadow-xl shadow-black/10 group-hover:scale-105 transition-transform">
-                <Image src="https://image2url.com/r2/default/images/1771070780543-14ed69a5-dd31-45fd-b42b-250e069cc2c5.png" alt="Less Talk Business Logo" fill className="object-contain p-2" />
+              <div className="relative w-10 h-10 md:w-12 md:h-12 overflow-hidden rounded-2xl bg-black flex items-center justify-center shadow-xl shadow-black/10 group-hover:scale-105 transition-transform p-1.5">
+                <BrandLogo />
               </div>
-              <span className="font-black text-2xl md:text-3xl font-headline tracking-tighter uppercase hidden sm:block luxury-text-gradient">Less Talk Business</span>
+              <div className="flex flex-col">
+                <span className="font-black text-xl md:text-2xl font-headline tracking-tighter uppercase leading-none luxury-text-gradient">Less Talk</span>
+                <span className="font-black text-xs md:text-sm tracking-[0.3em] uppercase text-primary leading-none">Business</span>
+              </div>
             </Link>
           </div>
           
