@@ -4,18 +4,18 @@ import { getUniqueVerifiedUrls } from './find-image';
 
 /**
  * Generates the master product catalog dynamically based on unique registry links.
- * This ensures that EVERY unique link in all-links.json is represented exactly once.
+ * Every unique link in all-links.json is represented exactly once as a unique product.
  */
 const generateVerifiedCatalog = (): Product[] => {
   const uniqueUrls = getUniqueVerifiedUrls();
   const catalog: Product[] = [];
   
-  // Categorization Logic: Distribute unique assets across available store sections
-  const categories = ['Clothes', 'Beauty', 'Watches', 'Chains', 'Wigs', 'Laptops', 'Phones', 'Shoes', 'Underwear'];
+  // Store Categories for distribution
+  const categories = ['Clothes', 'Wigs', 'Laptops', 'Shoes', 'Watches', 'Underwear', 'Chains', 'Phones', 'Beauty'];
   const brands = ['Nexa', 'Stellar', 'Aperture', 'Helios', 'Zenco'];
 
   uniqueUrls.forEach((url, i) => {
-    const index = i + 1; // 1-based for IDs
+    const index = i + 1;
     const category = categories[i % categories.length];
     const brand = brands[i % brands.length];
     

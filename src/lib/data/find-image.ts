@@ -1,5 +1,4 @@
 
-import { PlaceHolderImages } from '../placeholder-images';
 import masterLinks from '../image-assets/all-links.json';
 
 /**
@@ -7,34 +6,38 @@ import masterLinks from '../image-assets/all-links.json';
  * This is the definitive deduplicated source for Less Talk Business.
  */
 export const getUniqueVerifiedUrls = () => {
+  // Flatten all folders into one array
   const allUrls = Object.values(masterLinks.folders).flat();
-  return Array.from(
-    new Set(
-      allUrls
-        .map(url => url.trim())
-        .filter(url => url.startsWith('http'))
-    )
+  
+  // Clean and Deduplicate using a Set
+  const uniqueSet = new Set(
+    allUrls
+      .map(url => url.trim())
+      .filter(url => url.startsWith('http'))
   );
+  
+  return Array.from(uniqueSet);
 };
 
 /**
- * Maps a product ID to a unique URL from the deduplicated registry.
- * Ensures that specific ID prefixes correspond to specific indices.
+ * Maps an ID to a unique URL.
+ * Note: For the dynamic catalog, we pass the URL directly in the product data.
+ * This function remains for legacy or system asset resolution.
  */
 export const findImage = (id: string) => {
-  // 1. Priority: Check explicit mapping for system assets (Logo, etc.)
-  const systemImage = PlaceHolderImages.find((img) => img.id === id);
-  if (systemImage && systemImage.imageUrl) {
-    return { url: systemImage.imageUrl, hint: "verified" };
+  // Use the briefcase logo link if specifically requested
+  if (id === 'master_logo') {
+    return {
+      url: "https://image2url.com/r2/default/images/1772178137302-2b78055d-a492-42f2-ab5c-2f9d1cb163cc.png",
+      hint: "logo"
+    };
   }
 
-  // 2. Dynamic Registry Mapping
   const uniqueUrls = getUniqueVerifiedUrls();
   const numericMatch = id.match(/\d+$/);
   
   if (numericMatch) {
     const index = parseInt(numericMatch[0]) - 1;
-    // We strictly use the index to ensure NO REPETITION across the store
     if (uniqueUrls[index]) {
       return {
         url: uniqueUrls[index],
@@ -43,7 +46,6 @@ export const findImage = (id: string) => {
     }
   }
 
-  // Fallback for unmatched assets
   return { 
     url: '', 
     hint: "verified" 
