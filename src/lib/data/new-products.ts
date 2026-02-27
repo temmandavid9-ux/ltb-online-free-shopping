@@ -8,32 +8,31 @@ const generateBatch = (start: number, end: number, category: string = 'Beauty', 
       id: `prod_exclusive_${i}`,
       slug: `exclusive-arrival-${i}`,
       name: `${baseName} #${i}`,
-      description: `An elite-tier masterwork from the Less Talk Business registry. This item represents the zenith of craftsmanship and verified exclusivity. Unique code: ${i}.`,
+      description: `An elite-tier masterwork from the Less Talk Business registry. This item represents the zenith of craftsmanship and verified exclusivity. Unique code: LTB-EX-${i}.`,
       category: category,
       price: Math.floor(Math.random() * (1200 - 150 + 1)) + 150,
       brand: ['Nexa', 'Stellar', 'Aperture', 'Helios', 'Zenco'][Math.floor(Math.random() * 5)],
       images: [findImage(`prod_img_${i}`)],
       stock: Math.floor(Math.random() * 20) + 5,
-      rating: 4.8 + Math.random() * 0.2,
-      reviewCount: Math.floor(Math.random() * 150) + 50
+      rating: Number((4.7 + Math.random() * 0.3).toFixed(1)),
+      reviewCount: Math.floor(Math.random() * 500) + 100
     });
   }
   return batch;
 };
 
+// CEO Expansion: Generating items to match the 900+ asset additions
 export const newProducts: Product[] = [
-  ...generateBatch(411, 424, 'Clothes', 'Executive Collection'),
-  ...generateBatch(425, 450, 'Beauty', 'Premium Selection'),
-  ...generateBatch(451, 477, 'Clothes', 'Performance Elite'),
-  ...generateBatch(478, 504, 'Watches', 'Lifestyle Master'),
-  ...generateBatch(505, 528, 'Chains', 'Curated Luxury'),
-  ...generateBatch(529, 553, 'Wigs', 'Signature Piece'),
-  ...generateBatch(554, 576, 'Beauty', 'Heritage Elite'),
-  ...generateBatch(577, 604, 'Beauty', 'Supreme Executive'),
-  ...generateBatch(605, 631, 'Beauty', 'Elite Curated'),
-  ...generateBatch(632, 658, 'Clothes', 'Prestige Curated'),
-  ...generateBatch(659, 713, 'Beauty', 'Prestige Curated II'),
-  ...generateBatch(714, 742, 'Beauty', 'Prestige Curated III'),
-  ...generateBatch(743, 770, 'Beauty', 'Elite Curated IV'),
-  ...generateBatch(771, 798, 'Beauty', 'Elite Curated V')
+  ...generateBatch(411, 450, 'Clothes', 'Executive Collection'),
+  ...generateBatch(451, 500, 'Beauty', 'Premium Selection'),
+  ...generateBatch(501, 550, 'Clothes', 'Performance Elite'),
+  ...generateBatch(551, 600, 'Watches', 'Lifestyle Master'),
+  ...generateBatch(601, 650, 'Chains', 'Curated Luxury'),
+  ...generateBatch(651, 700, 'Wigs', 'Signature Piece'),
+  ...generateBatch(701, 750, 'Beauty', 'Heritage Elite'),
+  ...generateBatch(751, 800, 'Beauty', 'Supreme Executive'),
+  ...generateBatch(801, 850, 'Laptops', 'Tech Elite'),
+  ...generateBatch(851, 900, 'Phones', 'Communication Master'),
+  ...generateBatch(901, 950, 'Shoes', 'Stride Excellence'),
+  ...generateBatch(951, 1000, 'Beauty', 'Elite Curated Masterwork')
 ];

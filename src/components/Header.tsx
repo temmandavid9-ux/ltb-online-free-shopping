@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -17,6 +16,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { UserProfile } from '@/lib/types';
+
+const MASTER_LOGO = "https://image2url.com/r2/default/images/1772178137302-2b78055d-a492-42f2-ab5c-2f9d1cb163cc.png";
 
 export default function Header() {
   const { itemCount } = useRedeem();
@@ -37,11 +38,12 @@ export default function Header() {
             <Link href="/" className="flex items-center gap-3 md:gap-4 group">
               <div className="relative w-12 h-12 md:w-14 md:h-14 overflow-hidden rounded-2xl bg-white flex items-center justify-center shadow-xl shadow-black/5 group-hover:scale-105 transition-transform p-1">
                 <Image 
-                  src="https://image2url.com/r2/default/images/1772178137302-2b78055d-a492-42f2-ab5c-2f9d1cb163cc.png" 
+                  src={MASTER_LOGO} 
                   alt="Less Talk Business Logo" 
                   width={100} 
                   height={100}
                   className="object-contain w-full h-full"
+                  priority
                 />
               </div>
               <div className="flex flex-col">

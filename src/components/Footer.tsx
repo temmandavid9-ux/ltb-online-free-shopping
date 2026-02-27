@@ -1,9 +1,10 @@
-
 'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
+
+const MASTER_LOGO = "https://image2url.com/r2/default/images/1772178137302-2b78055d-a492-42f2-ab5c-2f9d1cb163cc.png";
 
 const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 1.4 3.3 4.4 3.3 4.4s-1.4-1.4-2.8-1.2c-1.5-1.1-3.3-1.8-5.2-1.8-3.3 0-6.1 2.7-6.1 6.1 0 2.1 1 4 2.6 5.2-1.4 0-2.6-.5-3.6-1.1v.2c0 3.3 2.3 6.1 5.4 6.7-.6.2-1.2.2-1.8.1.9 2.7 3.4 4.7 6.4 4.7-2.7 2.1-6.1 3.3-9.8 3.3-.6 0-1.2-.1-1.8-.3 3.4 2.2 7.5 3.5 11.8 3.5 14.2 0 22-11.8 22-22v-1z" /></svg>
@@ -25,7 +26,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center space-x-4 mb-4 group">
               <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden p-1 shadow-sm">
                 <Image 
-                  src="https://image2url.com/r2/default/images/1772178137302-2b78055d-a492-42f2-ab5c-2f9d1cb163cc.png" 
+                  src={MASTER_LOGO} 
                   alt="Less Talk Business Logo" 
                   width={60} 
                   height={60}
