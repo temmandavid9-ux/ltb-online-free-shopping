@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Search, ListChecks, Wallet, User as UserIcon, Globe, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRedeem } from '@/context/CartContext';
@@ -15,14 +16,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import type { UserProfile } from '@/lib/types';
-
-const BrandLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M20 30C20 24.4772 24.4772 20 30 20H70C75.5228 20 80 24.4772 80 30V60C80 65.5228 75.5228 70 70 70H45L25 85V70C22.2386 70 20 67.7614 20 65V30Z" fill="white"/>
-    <path d="M35 45L50 35L65 45V55L50 65L35 55V45Z" fill="#10b981"/>
-    <path d="M50 35V65" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-  </svg>
-);
 
 export default function Header() {
   const { itemCount } = useRedeem();
@@ -41,8 +34,14 @@ export default function Header() {
         <div className="flex items-center justify-between h-20 md:h-24 gap-4 md:gap-8">
           <div className="shrink-0">
             <Link href="/" className="flex items-center gap-3 md:gap-4 group">
-              <div className="relative w-10 h-10 md:w-12 md:h-12 overflow-hidden rounded-2xl bg-black flex items-center justify-center shadow-xl shadow-black/10 group-hover:scale-105 transition-transform p-1.5">
-                <BrandLogo />
+              <div className="relative w-12 h-12 md:w-14 md:h-14 overflow-hidden rounded-2xl bg-white flex items-center justify-center shadow-xl shadow-black/5 group-hover:scale-105 transition-transform p-1">
+                <Image 
+                  src="https://image2url.com/r2/default/files/1771946086570-f7186a72-9969-4d98-b6b3-29766a988b20.webp" 
+                  alt="Less Talk Business Logo" 
+                  width={100} 
+                  height={100}
+                  className="object-contain w-full h-full"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-black text-xl md:text-2xl font-headline tracking-tighter uppercase leading-none luxury-text-gradient">Less Talk</span>

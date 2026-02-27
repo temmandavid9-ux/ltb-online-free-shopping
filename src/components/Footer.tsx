@@ -1,14 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
-
-const BrandLogo = () => (
-  <svg viewBox="0 0 100 100" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M20 30C20 24.4772 24.4772 20 30 20H70C75.5228 20 80 24.4772 80 30V60C80 65.5228 75.5228 70 70 70H45L25 85V70C22.2386 70 20 67.7614 20 65V30Z" fill="currentColor"/>
-    <path d="M35 45L50 35L65 45V55L50 65L35 55V45Z" fill="#10b981"/>
-  </svg>
-);
 
 const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 1.4 3.3 4.4 3.3 4.4s-1.4-1.4-2.8-1.2c-1.5-1.1-3.3-1.8-5.2-1.8-3.3 0-6.1 2.7-6.1 6.1 0 2.1 1 4 2.6 5.2-1.4 0-2.6-.5-3.6-1.1v.2c0 3.3 2.3 6.1 5.4 6.7-.6.2-1.2.2-1.8.1.9 2.7 3.4 4.7 6.4 4.7-2.7 2.1-6.1 3.3-9.8 3.3-.6 0-1.2-.1-1.8-.3 3.4 2.2 7.5 3.5 11.8 3.5 14.2 0 22-11.8 22-22v-1z" /></svg>
@@ -28,8 +22,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center space-x-4 mb-4 group">
-              <div className="w-12 h-12 bg-black rounded-xl p-1.5 flex items-center justify-center text-white group-hover:scale-105 transition-transform">
-                <BrandLogo />
+              <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden p-1 shadow-sm">
+                <Image 
+                  src="https://image2url.com/r2/default/files/1771946086570-f7186a72-9969-4d98-b6b3-29766a988b20.webp" 
+                  alt="Less Talk Business Logo" 
+                  width={60} 
+                  height={60}
+                  className="object-contain w-full h-full"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-black text-2xl font-headline luxury-text-gradient">Less Talk</span>
