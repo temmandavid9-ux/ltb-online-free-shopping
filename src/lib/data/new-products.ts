@@ -1,37 +1,38 @@
 
 import type { Product } from '../types';
-import { findImage } from './find-image';
+import { findImage, getUniqueAssetCount } from './find-image';
 
-const generateBatch = (start: number, end: number, category: string = 'Beauty', baseName: string = 'Exclusive Arrival'): Product[] => {
-  const batch: Product[] = [];
-  for (let i = start; i <= end; i++) {
-    batch.push({
+/**
+ * Generates products dynamically based on the unique links available in all-links.json.
+ * This ensures NO REPETITION of images in the store.
+ */
+const generateVerifiedCatalog = (): Product[] => {
+  const uniqueCount = getUniqueAssetCount();
+  const catalog: Product[] = [];
+  
+  // Categories to distribute products across
+  const categories = ['Clothes', 'Beauty', 'Watches', 'Chains', 'Wigs', 'Laptops', 'Phones', 'Shoes', 'Underwear'];
+  const brands = ['Nexa', 'Stellar', 'Aperture', 'Helios', 'Zenco'];
+
+  for (let i = 1; i <= uniqueCount; i++) {
+    const category = categories[i % categories.length];
+    const brand = brands[i % brands.length];
+    
+    catalog.push({
       id: `prod_exclusive_${i}`,
-      slug: `exclusive-arrival-${i}`,
-      name: `${baseName} #${i}`,
-      description: `An elite-tier masterwork from the Less Talk Business registry. This item represents the zenith of craftsmanship and verified exclusivity. Unique code: LTB-EX-${i}.`,
+      slug: `exclusive-verified-item-${i}`,
+      name: `Exclusive Masterpiece #${i}`,
+      description: `A unique, verified asset from the Less Talk Business registry. Representing the pinnacle of quality and status. Authenticity Code: LTB-VER-${i}.`,
       category: category,
-      price: Math.floor(Math.random() * (1200 - 150 + 1)) + 150,
-      brand: ['Nexa', 'Stellar', 'Aperture', 'Helios', 'Zenco'][Math.floor(Math.random() * 5)],
-      images: [findImage(`prod_img_${i}`)],
-      stock: Math.floor(Math.random() * 20) + 5,
+      price: Math.floor(Math.random() * (1500 - 150 + 1)) + 150,
+      brand: brand,
+      images: [findImage(`prod_exclusive_${i}`)],
+      stock: Math.floor(Math.random() * 15) + 5,
       rating: Number((4.7 + Math.random() * 0.3).toFixed(1)),
-      reviewCount: Math.floor(Math.random() * 500) + 100
+      reviewCount: Math.floor(Math.random() * 400) + 100
     });
   }
-  return batch;
+  return catalog;
 };
 
-// CEO Expansion: Generating 1000 items to accommodate all unique verified links
-export const newProducts: Product[] = [
-  ...generateBatch(1, 100, 'Clothes', 'Executive Collection'),
-  ...generateBatch(101, 200, 'Beauty', 'Premium Selection'),
-  ...generateBatch(201, 300, 'Clothes', 'Performance Elite'),
-  ...generateBatch(301, 400, 'Watches', 'Lifestyle Master'),
-  ...generateBatch(401, 500, 'Chains', 'Curated Luxury'),
-  ...generateBatch(501, 600, 'Wigs', 'Signature Piece'),
-  ...generateBatch(601, 700, 'Beauty', 'Heritage Elite'),
-  ...generateBatch(701, 800, 'Beauty', 'Supreme Executive'),
-  ...generateBatch(801, 900, 'Laptops', 'Tech Elite'),
-  ...generateBatch(901, 1000, 'Phones', 'Communication Master')
-];
+export const newProducts: Product[] = generateVerifiedCatalog();

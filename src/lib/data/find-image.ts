@@ -17,13 +17,12 @@ export const findImage = (id: string) => {
     };
   }
 
-  // 2. Dynamic numeric mapping for product IDs (e.g., prod_img_450)
+  // 2. Dynamic numeric mapping for product IDs (e.g., prod_img_450 or prod_exclusive_1)
   const numericMatch = id.match(/\d+$/);
   if (numericMatch) {
     const index = parseInt(numericMatch[0]) - 1; // 0-based index
     
-    // Flatten all folder arrays into a single master list and DEDUPLICATE
-    // This ensures that even if links are repeated in all-links.json, they appear only once in store
+    // Flatten and DEDUPLICATE all links from all-links.json
     const allVerifiedUrls = Array.from(
       new Set(
         Object.values(masterLinks.folders)
@@ -46,4 +45,13 @@ export const findImage = (id: string) => {
     url: '', 
     hint: "verified" 
   };
+};
+
+export const getUniqueAssetCount = () => {
+  return new Set(
+    Object.values(masterLinks.folders)
+      .flat()
+      .map(url => url.trim())
+      .filter(url => url.startsWith('http'))
+  ).size;
 };
