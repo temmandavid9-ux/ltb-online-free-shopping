@@ -1,10 +1,11 @@
+
 import { PlaceHolderImages } from '../placeholder-images';
 import masterLinks from '../image-assets/all-links.json';
 
 /**
  * Retrieves assets from the registry based on their ID.
  * This is the definitive source for Less Talk Business visuals.
- * Checks placeholder-images.json first, then flattens all-links.json for dynamic mapping.
+ * Deduplicates links to ensure no repetition.
  */
 export const findImage = (id: string) => {
   // 1. Check explicit ID mapping first (for Logo, etc.)
@@ -12,7 +13,7 @@ export const findImage = (id: string) => {
   if (image && image.imageUrl) {
     return { 
       url: image.imageUrl, 
-      hint: image.imageHint 
+      hint: "verified" 
     };
   }
 
@@ -21,12 +22,20 @@ export const findImage = (id: string) => {
   if (numericMatch) {
     const index = parseInt(numericMatch[0]) - 1; // 0-based index
     
-    // Flatten all folder arrays into a single master list for sequential mapping
-    const allVerifiedUrls = Object.values(masterLinks.folders).flat();
+    // Flatten all folder arrays into a single master list and DEDUPLICATE
+    // This ensures that even if links are repeated in all-links.json, they appear only once in store
+    const allVerifiedUrls = Array.from(
+      new Set(
+        Object.values(masterLinks.folders)
+          .flat()
+          .map(url => url.trim())
+          .filter(url => url.startsWith('http'))
+      )
+    );
     
     if (allVerifiedUrls[index]) {
       return {
-        url: allVerifiedUrls[index].trim(),
+        url: allVerifiedUrls[index],
         hint: "verified"
       };
     }

@@ -1,3 +1,4 @@
+
 'use client';
 import {
   useUser,
@@ -51,12 +52,6 @@ export default function TaskList() {
     return new Date(new Date(userData.lastCompletedDate).getTime() + COOLDOWN_MS);
   }, [userData?.lastCompletedDate]);
 
-  /**
-   * RE-ENGINEERED UNLOCK LOGIC:
-   * 1. If in 24h lockout, index is 3 (all secured).
-   * 2. If steps are from a PREVIOUS cycle (before lastCompletedDate), index is 0 (fresh start).
-   * 3. Else, return the first incomplete step.
-   */
   const currentStepIndex = useMemo(() => {
     if (isCooldownActive) return 3;
     
@@ -73,7 +68,6 @@ export default function TaskList() {
     return 3;
   }, [userData, isCooldownActive]);
 
-  // Handle fractional rewards and sequential unlocking
   const handleStageComplete = useCallback(() => {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
@@ -93,7 +87,6 @@ export default function TaskList() {
       const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
       let newStreak = userData.streakCount || 0;
 
-      // Streak logic: check if last completion was within 48 hours
       if (lastDate) {
         const diff = today.getTime() - lastDate.getTime();
         if (diff < COOLDOWN_MS * 2) {
@@ -108,7 +101,6 @@ export default function TaskList() {
       updates.lastCompletedDate = today.toISOString();
       updates.streakCount = newStreak;
 
-      // Elite Mode Activation at 365 Days
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = today.toISOString();
@@ -117,7 +109,6 @@ export default function TaskList() {
         toast({ title: "ELITE MODE ACTIVATED", description: "365-day milestone achieved. Permanent Elite status secured." });
       }
 
-      // Elite Monthly Bonus Cycle (30 Days = $25 Gift Card)
       if (userData.eliteUnlocked || updates.eliteUnlocked) {
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
@@ -131,7 +122,7 @@ export default function TaskList() {
       }
     }
 
-    // ATOMIC INCREMENT: Mission-critical for precision wallet tracking
+    // MISSION CRITICAL: Atomic Increment for absolute precision
     updates.balance = increment(reward);
     
     updateDocumentNonBlocking(userDocRef, updates);
@@ -173,7 +164,6 @@ export default function TaskList() {
   const seconds = countdown % 60;
   const countdownText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
-  // Check if steps are fresh or from a previous day
   const lastComp = userData.lastCompletedDate ? new Date(userData.lastCompletedDate).getTime() : 0;
   const lastStep = userData.lastStepDate ? new Date(userData.lastStepDate).getTime() : 0;
   const isStale = lastStep < lastComp;

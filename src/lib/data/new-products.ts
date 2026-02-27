@@ -1,3 +1,4 @@
+
 import type { Product } from '../types';
 import { findImage } from './find-image';
 
@@ -21,18 +22,16 @@ const generateBatch = (start: number, end: number, category: string = 'Beauty', 
   return batch;
 };
 
-// CEO Expansion: Generating items to match the 900+ asset additions
+// CEO Expansion: Generating 1000 items to accommodate all unique verified links
 export const newProducts: Product[] = [
-  ...generateBatch(411, 450, 'Clothes', 'Executive Collection'),
-  ...generateBatch(451, 500, 'Beauty', 'Premium Selection'),
-  ...generateBatch(501, 550, 'Clothes', 'Performance Elite'),
-  ...generateBatch(551, 600, 'Watches', 'Lifestyle Master'),
-  ...generateBatch(601, 650, 'Chains', 'Curated Luxury'),
-  ...generateBatch(651, 700, 'Wigs', 'Signature Piece'),
-  ...generateBatch(701, 750, 'Beauty', 'Heritage Elite'),
-  ...generateBatch(751, 800, 'Beauty', 'Supreme Executive'),
-  ...generateBatch(801, 850, 'Laptops', 'Tech Elite'),
-  ...generateBatch(851, 900, 'Phones', 'Communication Master'),
-  ...generateBatch(901, 950, 'Shoes', 'Stride Excellence'),
-  ...generateBatch(951, 1000, 'Beauty', 'Elite Curated Masterwork')
+  ...generateBatch(1, 100, 'Clothes', 'Executive Collection'),
+  ...generateBatch(101, 200, 'Beauty', 'Premium Selection'),
+  ...generateBatch(201, 300, 'Clothes', 'Performance Elite'),
+  ...generateBatch(301, 400, 'Watches', 'Lifestyle Master'),
+  ...generateBatch(401, 500, 'Chains', 'Curated Luxury'),
+  ...generateBatch(501, 600, 'Wigs', 'Signature Piece'),
+  ...generateBatch(601, 700, 'Beauty', 'Heritage Elite'),
+  ...generateBatch(701, 800, 'Beauty', 'Supreme Executive'),
+  ...generateBatch(801, 900, 'Laptops', 'Tech Elite'),
+  ...generateBatch(901, 1000, 'Phones', 'Communication Master')
 ];
