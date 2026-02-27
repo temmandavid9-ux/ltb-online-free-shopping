@@ -1,4 +1,3 @@
-
 import type { Product } from '../types';
 import { getUniqueVerifiedUrls } from './find-image';
 
@@ -20,10 +19,10 @@ const generateVerifiedCatalog = (): Product[] => {
     const brand = brands[i % brands.length];
     
     catalog.push({
-      id: `prod_verified_${index}`,
+      id: `exclusive_arrival_${index}`,
       slug: `exclusive-item-${index}`,
       name: `Exclusive Masterpiece #${index}`,
-      description: `A unique, verified asset from the Less Talk Business registry. Representing the pinnacle of quality and status. Authenticity Code: LTB-VER-${index}.`,
+      description: `A unique, verified asset from the Less Talk Business registry. Representing the pinnacle of quality and status. Authenticity Code: LTB-VER-${index}. Verified by CEO.`,
       category: category,
       price: Math.floor(Math.random() * (1200 - 150 + 1)) + 150,
       brand: brand,
