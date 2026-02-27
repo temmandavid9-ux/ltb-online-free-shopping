@@ -1,3 +1,4 @@
+
 import masterLinks from '../image-assets/all-links.json';
 
 /**
@@ -33,11 +34,12 @@ export const findImage = (id: string) => {
 
   const uniqueUrls = getUniqueVerifiedUrls();
   
-  // Extract number from end of ID (e.g., prod_img_123 -> index 122)
+  // Extract number from end of ID (e.g., exclusive_arrival_123 -> index 122)
   const numericMatch = id.match(/\d+$/);
   
   if (numericMatch) {
     const index = parseInt(numericMatch[0]) - 1;
+    // We strictly map based on the deduplicated master list
     if (uniqueUrls[index]) {
       return {
         url: uniqueUrls[index],
