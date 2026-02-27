@@ -17,7 +17,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
 const TASK_DURATION_SECONDS = 600; // 10 minutes verification
-const COOLDOWN_MS = 24 * 60 * 60 * 1000; // 24 hours precisely
+const COOLDOWN_MS = 24 * 60 * 60 * 1000; // Strict 24-hour lockout
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
@@ -33,13 +33,13 @@ export default function TaskList() {
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [currentTime, setCurrentTime] = useState(Date.now());
 
-  // Update local clock for real-time cooldown checking
+  // Update local clock for real-time cooldown tracking
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(Date.now()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-  // Strict 24-hour cooldown check
+  // Strict 24-hour cooldown check from the last FULL sequence completion
   const isCooldownActive = useMemo(() => {
     if (!userData?.lastCompletedDate) return false;
     const lastTime = new Date(userData.lastCompletedDate).getTime();
@@ -60,7 +60,7 @@ export default function TaskList() {
     return 3;
   }, [userData, isCooldownActive]);
 
-  // Reset steps automatically when cooldown expires
+  // Reset steps automatically when 24-hour cooldown expires to allow fresh sequence
   useEffect(() => {
     if (userData && userDocRef && !isCooldownActive) {
       if (userData.step1Status || userData.step2Status || userData.step3Status) {
@@ -77,6 +77,7 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
+    // Sequential Rewards: Step 1: $0.33, Step 2: $0.33, Final: $0.34 (Total $1.00)
     let reward = stage === 2 ? 0.34 : 0.33;
     let updates: any = {};
 
@@ -91,7 +92,7 @@ export default function TaskList() {
       const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
       let newStreak = userData.streakCount || 0;
 
-      // Streak logic: check if last completion was within 48 hours (standard streak tolerance)
+      // Streak logic: check if last completion was within 48 hours
       if (lastDate) {
         const diff = today.getTime() - lastDate.getTime();
         if (diff < COOLDOWN_MS * 2) {
@@ -106,6 +107,7 @@ export default function TaskList() {
       updates.lastCompletedDate = today.toISOString();
       updates.streakCount = newStreak;
 
+      // Elite Mode Activation at 365 Days
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = today.toISOString();
@@ -114,6 +116,7 @@ export default function TaskList() {
         toast({ title: "ELITE MODE ACTIVATED", description: "365-day milestone achieved. Permanent Elite status secured." });
       }
 
+      // Elite Monthly Bonus Cycle (30 Days = $25 Gift Card)
       if (userData.eliteUnlocked || updates.eliteUnlocked) {
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
@@ -127,7 +130,7 @@ export default function TaskList() {
       }
     }
 
-    // Atomic increment for precision balance
+    // Atomic increment for maximum wallet security
     updates.balance = increment(reward);
     
     updateDocumentNonBlocking(userDocRef, updates);
@@ -138,7 +141,7 @@ export default function TaskList() {
 
     toast({
       title: "Step Secured",
-      description: `+$${reward.toFixed(2)} credited. Sequence advanced.`,
+      description: `+$${reward.toFixed(2)} credited to your status balance. Sequence advanced.`,
     });
   }, [user, userData, userDocRef, toast, activeStep]);
 
