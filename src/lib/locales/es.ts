@@ -26,7 +26,7 @@ export const es = {
   "footer.careers": "Carreras",
   "footer.privacyPolicy": "Política de Privacidad",
   "footer.termsOfService": "Términos de Servicio",
-  "footer.copyright": "© {year} Eden 0². Todos los derechos reservados.",
+  "footer.copyright": "© {year} Less Talk Business. Todos los derechos reservados.",
 
   // General
   "general.loading": "Cargando...",

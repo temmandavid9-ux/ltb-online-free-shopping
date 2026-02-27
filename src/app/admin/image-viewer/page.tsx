@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -17,7 +16,7 @@ export default function ImageViewerPage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold font-headline mb-4">Eden 0² Asset Registry</h1>
+      <h1 className="text-4xl font-bold font-headline mb-4">Less Talk Business Asset Registry</h1>
       <p className="text-muted-foreground mb-12">CEO, every link you send is registered here for real-time verification.</p>
 
       {Object.entries(masterLinks.folders).map(([category, urls]) => (

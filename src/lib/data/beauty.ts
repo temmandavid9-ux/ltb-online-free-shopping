@@ -1,4 +1,3 @@
-
 import type { Product } from '../types';
 import { findImage } from './find-image';
 
@@ -51,7 +50,7 @@ export const beautyProducts: Product[] = [
     id: 'prod_4',
     slug: 'product-4',
     name: 'Aperture Flawless Finish',
-    description: 'Ultimate quality verified by Eden 0².',
+    description: 'Ultimate quality verified by Less Talk Business.',
     category: 'Beauty',
     price: 48,
     brand: 'Aperture',

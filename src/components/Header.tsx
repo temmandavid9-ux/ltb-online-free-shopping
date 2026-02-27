@@ -36,9 +36,9 @@ export default function Header() {
           <div className="shrink-0">
             <Link href="/" className="flex items-center gap-3 md:gap-4 group">
               <div className="relative w-10 h-10 md:w-12 md:h-12 overflow-hidden rounded-2xl bg-black flex items-center justify-center shadow-xl shadow-black/10 group-hover:scale-105 transition-transform">
-                <Image src="https://image2url.com/r2/default/images/1771070780543-14ed69a5-dd31-45fd-b42b-250e069cc2c5.png" alt="Eden 0² Logo" fill className="object-contain p-2" />
+                <Image src="https://image2url.com/r2/default/images/1771070780543-14ed69a5-dd31-45fd-b42b-250e069cc2c5.png" alt="Less Talk Business Logo" fill className="object-contain p-2" />
               </div>
-              <span className="font-black text-2xl md:text-3xl font-headline tracking-tighter uppercase hidden sm:block luxury-text-gradient">Eden 0²</span>
+              <span className="font-black text-2xl md:text-3xl font-headline tracking-tighter uppercase hidden sm:block luxury-text-gradient">Less Talk Business</span>
             </Link>
           </div>
           

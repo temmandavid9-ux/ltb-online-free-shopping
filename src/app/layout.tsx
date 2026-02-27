@@ -8,7 +8,7 @@ import { FirebaseClientProvider } from '@/firebase';
 import { LanguageProvider } from '@/context/LanguageContext';
 
 export const metadata: Metadata = {
-  title: 'Eden 0² - Professional Reward-Based Ecommerce Platform',
+  title: 'Less Talk Business - Professional Reward-Based Ecommerce Platform',
   description: 'A professional reward-based ecommerce web platform.',
 };
 
