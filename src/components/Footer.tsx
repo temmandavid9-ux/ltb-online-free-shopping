@@ -24,7 +24,7 @@ export default function Footer() {
             <Link href="/" className="flex items-center space-x-4 mb-4 group">
               <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden p-1 shadow-sm">
                 <Image 
-                  src="https://image2url.com/r2/default/files/1771946086570-f7186a72-9969-4d98-b6b3-29766a988b20.webp" 
+                  src="https://image2url.com/r2/default/images/1772178137302-2b78055d-a492-42f2-ab5c-2f9d1cb163cc.png" 
                   alt="Less Talk Business Logo" 
                   width={60} 
                   height={60}

@@ -36,7 +36,7 @@ export default function Header() {
             <Link href="/" className="flex items-center gap-3 md:gap-4 group">
               <div className="relative w-12 h-12 md:w-14 md:h-14 overflow-hidden rounded-2xl bg-white flex items-center justify-center shadow-xl shadow-black/5 group-hover:scale-105 transition-transform p-1">
                 <Image 
-                  src="https://image2url.com/r2/default/files/1771946086570-f7186a72-9969-4d98-b6b3-29766a988b20.webp" 
+                  src="https://image2url.com/r2/default/images/1772178137302-2b78055d-a492-42f2-ab5c-2f9d1cb163cc.png" 
                   alt="Less Talk Business Logo" 
                   width={100} 
                   height={100}
