@@ -5,7 +5,7 @@ export const en = {
   "header.redeemBasket": "Redeem Basket",
   "header.login": "Login",
   "header.signUp": "Sign Up",
-  "header.account": "Account",
+  "header.account": "My Account",
   "header.searchPlaceholder": "Search products...",
   "header.greeting": "CEO {username}",
 
@@ -81,7 +81,7 @@ export const en = {
   "account.editProfile": "Modify Profile",
   "account.walletTitle": "Account Balance",
   "account.walletDescription": "Total accumulated verified rewards.",
-  "account.manageWallet": "Asset Withdrawal",
+  "account.manageWallet": "Manage Wallet",
   "account.tasksTitle": "Daily Task Sequence",
   "account.tasksDescription": "Progress on sequential verification stages.",
   "account.viewTasks": "Open Tasks",
@@ -164,7 +164,7 @@ export const en = {
   "tasks.initialFollow.toast.successDescription": "Daily tasks and streak tracking are now active.",
 
   // Wallet Page
-  "wallet.title": "Executive Wallet",
+  "wallet.title": "Wallet",
   "wallet.description": "Manage your secured funds and audit transaction history.",
   "wallet.balanceTitle": "Account Balance",
   "wallet.withdrawalTitle": "Initiate Withdrawal",
