@@ -118,7 +118,7 @@ export default function AccountPage() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12">
             <div>
                 <h1 className="text-4xl sm:text-5xl font-black luxury-text-gradient tracking-tighter mb-2">{t('account.title')}</h1>
-                <p className="text-muted-foreground font-medium uppercase tracking-[0.3em] text-[10px]">
+                <p className="text-muted-foreground font-black uppercase tracking-[0.3em] text-[10px]">
                     {userData?.username ? t('header.greeting', { username: userData.username }) : (user.displayName || user.email)} • {user.email}
                 </p>
             </div>
@@ -142,7 +142,7 @@ export default function AccountPage() {
                         <div className="text-3xl font-black luxury-text-gradient mb-2">
                             {userData?.eliteUnlocked ? t('account.eliteUnlocked') : t('account.eliteStandard')}
                         </div>
-                        <p className="text-xs font-bold text-muted-foreground/60 uppercase tracking-widest mb-6">
+                        <p className="text-xs font-black text-muted-foreground/60 uppercase tracking-widest mb-6">
                             {t('account.eliteStreak', { streak: userData?.streakCount || 0 })}
                         </p>
                         <Button size="sm" variant="outline" className="w-full rounded-2xl h-12 font-black uppercase tracking-widest text-[10px]" asChild>
@@ -194,7 +194,7 @@ export default function AccountPage() {
                 <Card className="rounded-[3rem] border-black/5 shadow-xl overflow-hidden">
                     <CardHeader className="p-10 pb-6 border-b border-border/50">
                         <CardTitle className="text-2xl font-black luxury-text-gradient">{t('account.orderHistoryTitle')}</CardTitle>
-                        <CardDescription className="font-medium text-[10px] uppercase tracking-widest text-muted-foreground/60">{t('account.orderHistoryDescription')}</CardDescription>
+                        <CardDescription className="font-black text-[10px] uppercase tracking-widest text-muted-foreground/60">{t('account.orderHistoryDescription')}</CardDescription>
                     </CardHeader>
                     <CardContent className="p-0">
                         <Table>
@@ -209,7 +209,7 @@ export default function AccountPage() {
                                 {clientOrders.length > 0 ? clientOrders.map(order => (
                                     <TableRow key={order.id} className="border-border/5 group">
                                         <TableCell className="pl-10 py-6">
-                                            <div className="font-bold text-sm group-hover:text-primary transition-colors">{order.product}</div>
+                                            <div className="font-black text-sm group-hover:text-primary transition-colors">{order.product}</div>
                                             <div className="text-[10px] font-black text-muted-foreground/40 mt-1">{order.formattedDate}</div>
                                         </TableCell>
                                         <TableCell>
@@ -249,7 +249,7 @@ export default function AccountPage() {
                                     {redemptionsData.map(red => (
                                         <TableRow key={red.id} className="border-border/5">
                                             <TableCell className="pl-10 py-6">
-                                                <div className="font-bold text-sm">{red.rewardType}</div>
+                                                <div className="font-black text-sm">{red.rewardType}</div>
                                             </TableCell>
                                             <TableCell>
                                                 <code className="bg-black text-white px-3 py-1.5 rounded-lg text-xs font-black tracking-widest">
