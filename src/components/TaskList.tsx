@@ -18,7 +18,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
 
-const TASK_DURATION_SECONDS = 10; // CEO AUDIT: Reduced to 10 seconds
+const TASK_DURATION_SECONDS = 10; // CEO AUDIT: 10 second fast-track
 const COOLDOWN_MS = 24 * 60 * 60 * 1000; // Strict 24-hour lockout
 
 export default function TaskList() {
@@ -52,20 +52,20 @@ export default function TaskList() {
     return new Date(new Date(userData.lastCompletedDate).getTime() + COOLDOWN_MS);
   }, [userData?.lastCompletedDate]);
 
-  // CEO LOGIC: Determine the current step index based on progress flags
+  // CEO LOGIC: Determine the current step index (0, 1, 2)
   const currentStepIndex = useMemo(() => {
-    if (isCooldownActive) return 3; // All steps locked/completed
+    if (isCooldownActive) return 3; // Cycle locked
     
     const lastComp = userData?.lastCompletedDate ? new Date(userData.lastCompletedDate).getTime() : 0;
     const lastStep = userData?.lastStepDate ? new Date(userData.lastStepDate).getTime() : 0;
     
-    // If the last step recorded was before the last full cycle completion, start fresh
-    if (lastStep <= lastComp) return 0;
+    // If a full cycle was completed after the last step was recorded, start fresh
+    if (lastComp >= lastStep && lastComp > 0) return 0;
     
     if (!userData?.step1Status) return 0;
     if (!userData?.step2Status) return 1;
     if (!userData?.step3Status) return 2;
-    return 3;
+    return 3; // All 3 steps of current cycle done, waiting for cooldown logic to kick in or final processing
   }, [userData, isCooldownActive]);
 
   const handleStageComplete = useCallback(() => {
@@ -75,7 +75,8 @@ export default function TaskList() {
     let reward = stage === 2 ? 0.34 : 0.33;
     let updates: any = {};
 
-    updates.lastStepDate = new Date().toISOString();
+    const now = new Date().toISOString();
+    updates.lastStepDate = now;
 
     if (stage === 0) updates.step1Status = true;
     if (stage === 1) updates.step2Status = true;
@@ -151,10 +152,8 @@ export default function TaskList() {
 
   const handleStartSubTask = (stepIndex: number, url: string) => {
     if (isCooldownActive || activeTimer) return;
-    if (stepIndex !== currentStepIndex) {
-        toast({ title: "Sequence Violation", description: "You must complete the tasks in the prescribed order.", variant: "destructive" });
-        return;
-    }
+    if (stepIndex > 2) return; // Prevent index out of bounds
+    
     window.open(url, '_blank', 'noopener,noreferrer');
     setActiveStep(stepIndex);
     setCountdown(TASK_DURATION_SECONDS);
@@ -183,7 +182,7 @@ export default function TaskList() {
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
   const lastComp = userData.lastCompletedDate ? new Date(userData.lastCompletedDate).getTime() : 0;
   const lastStep = userData.lastStepDate ? new Date(userData.lastStepDate).getTime() : 0;
-  const isFreshCycle = lastStep <= lastComp;
+  const isFreshCycle = lastComp >= lastStep && lastComp > 0;
 
   const channels = [
     { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Stage 1 (+$0.33)', status: !isFreshCycle && userData.step1Status },
@@ -248,7 +247,7 @@ export default function TaskList() {
             <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Authoritative Execution Sequence</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {channels.map((channel) => {
-                const isSecured = channel.status || (isCooldownActive && channel.id <= 2);
+                const isSecured = channel.status || (isCooldownActive);
                 const isLocked = channel.id > currentStepIndex && !isCooldownActive;
                 const isActivating = channel.id === currentStepIndex && activeTimer;
 
@@ -320,10 +319,10 @@ export default function TaskList() {
         <CardFooter className="bg-secondary/30 p-10 border-t border-border/50">
           <Button 
             className="w-full h-24 rounded-[2.5rem] text-sm font-black uppercase tracking-[0.4em] shadow-2xl transition-all active:scale-95 btn-luxury border-none"
-            disabled={activeTimer || isCooldownActive}
-            onClick={() => handleStartSubTask(currentStepIndex, channels[currentStepIndex].url)}
+            disabled={activeTimer || isCooldownActive || currentStepIndex > 2}
+            onClick={() => currentStepIndex <= 2 && handleStartSubTask(currentStepIndex, channels[currentStepIndex].url)}
           >
-            {activeTimer ? "Verifying Authorization..." : isCooldownActive ? "Reward Registry Secured" : `Initialize Stage ${currentStepIndex + 1}`}
+            {activeTimer ? "Verifying Authorization..." : isCooldownActive ? "Reward Registry Secured" : currentStepIndex > 2 ? "Cycle Finalized" : `Initialize Stage ${currentStepIndex + 1}`}
           </Button>
         </CardFooter>
       </Card>
