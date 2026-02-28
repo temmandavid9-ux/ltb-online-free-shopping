@@ -99,7 +99,7 @@ export default function WalletPage() {
   };
 
   if (isUserLoading || isUserDocLoading || areWithdrawalsLoading) {
-    return <div className="container text-center p-24">{t('general.loading')}</div>;
+    return <div className="container text-center p-24 font-black uppercase tracking-widest">{t('general.loading')}</div>;
   }
   
   if (!user) return null;

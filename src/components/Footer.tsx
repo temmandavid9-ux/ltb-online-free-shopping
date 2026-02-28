@@ -15,7 +15,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center space-x-4 mb-4 group">
-              <div className="w-[80px] h-[80px] bg-white rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden p-1 shadow-sm border border-border/5">
+              <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden p-1 shadow-sm border border-border/5">
                 <Image 
                   src={MASTER_LOGO} 
                   alt="Less Talk Business Logo" 
@@ -29,7 +29,7 @@ export default function Footer() {
                 <span className="font-black text-[10px] uppercase tracking-[0.3em] text-primary -mt-1">Business</span>
               </div>
             </Link>
-            <p className="text-sm text-muted-foreground">{t('footer.companyLine')}</p>
+            <p className="text-sm text-muted-foreground font-bold">{t('footer.companyLine')}</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 col-span-1 md:col-span-3 gap-8">
             <div>

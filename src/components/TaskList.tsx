@@ -18,7 +18,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
 
-const TASK_DURATION_SECONDS = 10; // PROTOTYPE: Reduced to 10 seconds for CEO verification
+const TASK_DURATION_SECONDS = 10; // CEO AUDIT: Reduced to 10 seconds
 const COOLDOWN_MS = 24 * 60 * 60 * 1000; // Strict 24-hour lockout
 
 export default function TaskList() {
@@ -52,12 +52,14 @@ export default function TaskList() {
     return new Date(new Date(userData.lastCompletedDate).getTime() + COOLDOWN_MS);
   }, [userData?.lastCompletedDate]);
 
+  // CEO LOGIC: Determine the current step index based on progress flags
   const currentStepIndex = useMemo(() => {
-    if (isCooldownActive) return 3;
+    if (isCooldownActive) return 3; // All steps locked/completed
+    
     const lastComp = userData?.lastCompletedDate ? new Date(userData.lastCompletedDate).getTime() : 0;
     const lastStep = userData?.lastStepDate ? new Date(userData.lastStepDate).getTime() : 0;
     
-    // If the steps were completed before the last total completion, we are starting fresh
+    // If the last step recorded was before the last full cycle completion, start fresh
     if (lastStep <= lastComp) return 0;
     
     if (!userData?.step1Status) return 0;
@@ -83,6 +85,7 @@ export default function TaskList() {
       const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
       let newStreak = userData.streakCount || 0;
 
+      // Streak Anchoring Protocol
       if (lastDate) {
         const diff = today.getTime() - lastDate.getTime();
         if (diff < COOLDOWN_MS * 2) {
@@ -97,24 +100,24 @@ export default function TaskList() {
       updates.lastCompletedDate = today.toISOString();
       updates.streakCount = newStreak;
 
-      // MISSION CRITICAL: Elite Mode Unlock Protocol
+      // Elite Mode Entry Protocol
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = today.toISOString();
         updates.eliteMonthlyCounter = 0;
         updates.eliteRewardsAvailable = 0;
         toast({ 
-          title: t('tasks.toast.eliteUnlockedTitle'), 
-          description: t('tasks.toast.eliteUnlockedDesc') 
+          title: "ELITE STATUS AUTHORIZED", 
+          description: "365-day milestone secured. Welcome to the elite tier." 
         });
       } else if (userData.eliteUnlocked) {
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
         if (newMonthlyCounter >= 30) {
           newMonthlyCounter = 0;
-          newRewards = (userData.eliteRewardsAvailable || 0) + 1;
+          newRewards += 1;
           toast({ 
-            title: "BONUS SECURED", 
+            title: "MONTHLY BONUS SECURED", 
             description: "$25 Gift Card added to your portfolio." 
           });
         }
@@ -131,10 +134,10 @@ export default function TaskList() {
     setCountdown(TASK_DURATION_SECONDS);
 
     toast({
-      title: "Step Secured",
+      title: "STAGE VERIFIED",
       description: `+$${reward.toFixed(2)} credited to Account Balance.`,
     });
-  }, [user, userData, userDocRef, toast, activeStep, t]);
+  }, [user, userData, userDocRef, toast, activeStep]);
 
   useEffect(() => {
     if (!activeTimer) return;
@@ -148,7 +151,10 @@ export default function TaskList() {
 
   const handleStartSubTask = (stepIndex: number, url: string) => {
     if (isCooldownActive || activeTimer) return;
-    if (stepIndex !== currentStepIndex) return;
+    if (stepIndex !== currentStepIndex) {
+        toast({ title: "Sequence Violation", description: "You must complete the tasks in the prescribed order.", variant: "destructive" });
+        return;
+    }
     window.open(url, '_blank', 'noopener,noreferrer');
     setActiveStep(stepIndex);
     setCountdown(TASK_DURATION_SECONDS);
@@ -168,21 +174,21 @@ export default function TaskList() {
       eliteMonthlyCounter: 0,
       eliteRewardsAvailable: 0
     });
-    toast({ title: "CEO BYPASS: Sequence Reset" });
+    toast({ title: "CEO BYPASS: Sequence Fully Reset" });
   };
 
-  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center">Verifying Sequence...</div>;
-  if (!user || !userData) return <p className="p-24 text-center">Authentication Required.</p>;
+  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center">Verifying Sequence Integrity...</div>;
+  if (!user || !userData) return <p className="p-24 text-center">Authentication Required for Registry Access.</p>;
 
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
   const lastComp = userData.lastCompletedDate ? new Date(userData.lastCompletedDate).getTime() : 0;
   const lastStep = userData.lastStepDate ? new Date(userData.lastStepDate).getTime() : 0;
-  const isStale = lastStep <= lastComp;
+  const isFreshCycle = lastStep <= lastComp;
 
   const channels = [
-    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Step 1 (+$0.33)', status: !isStale && userData.step1Status },
-    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: 'Step 2 (+$0.33)', status: !isStale && userData.step2Status },
-    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: 'Final Step (+$0.34)', status: !isStale && userData.step3Status }
+    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Stage 1 (+$0.33)', status: !isFreshCycle && userData.step1Status },
+    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: 'Stage 2 (+$0.33)', status: !isFreshCycle && userData.step2Status },
+    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: 'Final Stage (+$0.34)', status: !isFreshCycle && userData.step3Status }
   ];
 
   return (
@@ -193,16 +199,16 @@ export default function TaskList() {
             <div className="flex items-center gap-4 mb-4">
                 <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
                 {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-                {userData.eliteUnlocked ? "Elite Mode Active" : "Daily Task Sequence"}
+                {userData.eliteUnlocked ? "Elite Tier Active" : "Daily Task Sequence"}
                 </CardTitle>
                 {isAdmin && (
-                    <Button onClick={resetForCEO} size="sm" variant="destructive" className="rounded-full px-4 h-8 text-[8px] font-black uppercase tracking-widest gap-2">
-                        <RefreshCcw className="w-3 h-3" /> CEO Bypass: Reset
+                    <Button onClick={resetForCEO} size="sm" variant="destructive" className="rounded-full px-4 h-10 text-[9px] font-black uppercase tracking-widest gap-2 bg-black hover:bg-red-600 transition-colors">
+                        <RefreshCcw className="w-3 h-3" /> CEO BYPASS: RESET SEQUENCE
                     </Button>
                 )}
             </div>
-            <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">
-              Sequential Verification Required. Day {userData.streakCount || 0} of 365 Milestone.
+            <CardDescription className="mt-2 font-black uppercase tracking-widest text-[10px] text-muted-foreground/60">
+              Identity: CEO {userData.username} • Milestone: {userData.streakCount || 0} / 365 Cycles
             </CardDescription>
           </div>
           <div className="text-left sm:text-right">
@@ -217,7 +223,7 @@ export default function TaskList() {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <Trophy className="w-6 h-6 text-primary" />
-                  <span className="text-sm font-black uppercase tracking-widest">Streak Tracker</span>
+                  <span className="text-sm font-black uppercase tracking-widest">Streak Registry</span>
                 </div>
                 <span className="text-xs font-black text-muted-foreground">{userData.streakCount || 0} / 365 Days</span>
               </div>
@@ -229,9 +235,9 @@ export default function TaskList() {
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <Zap className="w-6 h-6 text-primary" />
-                    <span className="text-sm font-black uppercase tracking-widest">Monthly Bonus Cycle</span>
+                    <span className="text-sm font-black uppercase tracking-widest">Monthly Bonus cycle</span>
                   </div>
-                  <span className="text-xs font-black text-primary">{userData.eliteMonthlyCounter || 0} / 30 Days</span>
+                  <span className="text-xs font-black text-primary">{userData.eliteMonthlyCounter || 0} / 30 Cycles</span>
                 </div>
                 <Progress value={((userData.eliteMonthlyCounter || 0) / 30) * 100} className="h-4 bg-secondary rounded-full" />
               </div>
@@ -239,7 +245,7 @@ export default function TaskList() {
           </div>
 
           <div className="space-y-6">
-            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Execution Sequence</h3>
+            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Authoritative Execution Sequence</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {channels.map((channel) => {
                 const isSecured = channel.status || (isCooldownActive && channel.id <= 2);
@@ -247,14 +253,14 @@ export default function TaskList() {
                 const isActivating = channel.id === currentStepIndex && activeTimer;
 
                 return (
-                  <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 ${isSecured ? 'border-primary/40 bg-primary/5' : isActivating ? 'border-primary animate-pulse' : isLocked ? 'opacity-50 grayscale bg-muted/20' : 'border-black/5 bg-white'}`}>
-                    <CardContent className="p-6 text-center space-y-4">
-                      <div className={`mx-auto w-16 h-16 rounded-2xl flex items-center justify-center transition-all ${isSecured ? 'bg-primary text-white' : isLocked ? 'bg-muted text-muted-foreground' : 'bg-secondary text-foreground'}`}>
-                        {isLocked ? <Lock className="w-8 h-8" /> : isSecured ? <ShieldCheck className="w-8 h-8" /> : <channel.icon className="w-8 h-8" />}
+                  <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 ${isSecured ? 'border-primary/40 bg-primary/5 shadow-inner' : isActivating ? 'border-primary animate-pulse shadow-lg' : isLocked ? 'opacity-50 grayscale bg-muted/20 border-transparent' : 'border-black/5 bg-white shadow-md'}`}>
+                    <CardContent className="p-8 text-center space-y-4">
+                      <div className={`mx-auto w-20 h-20 rounded-[1.5rem] flex items-center justify-center transition-all ${isSecured ? 'bg-primary text-white shadow-lg' : isLocked ? 'bg-muted text-muted-foreground' : 'bg-black text-white'}`}>
+                        {isLocked ? <Lock className="w-10 h-10" /> : isSecured ? <ShieldCheck className="w-10 h-10" /> : <channel.icon className="w-10 h-10" />}
                       </div>
                       <div>
-                        <h4 className="font-black text-[10px] uppercase tracking-widest">{channel.title}</h4>
-                        <p className="text-[9px] font-bold text-muted-foreground/60 mt-1">{channel.desc}</p>
+                        <h4 className="font-black text-[11px] uppercase tracking-widest">{channel.title}</h4>
+                        <p className="text-[10px] font-bold text-muted-foreground/60 mt-1">{channel.desc}</p>
                       </div>
                       <div className="pt-2">
                         {isSecured ? (
@@ -267,10 +273,10 @@ export default function TaskList() {
                           <Button 
                             onClick={() => handleStartSubTask(channel.id, channel.url)}
                             variant="outline"
-                            className="w-full rounded-xl h-10 text-[9px] font-black uppercase tracking-widest"
+                            className="w-full rounded-xl h-12 text-[9px] font-black uppercase tracking-widest border-2 hover:bg-black hover:text-white transition-all"
                             disabled={activeTimer}
                           >
-                            {isActivating ? "Verifying..." : <><ExternalLink className="w-3 h-3 mr-2" /> Start Stage</>}
+                            {isActivating ? "Verifying..." : <><ExternalLink className="w-3 h-3 mr-2" /> Start stage</>}
                           </Button>
                         )}
                       </div>
@@ -283,27 +289,27 @@ export default function TaskList() {
 
           {activeTimer && (
             <div className="text-center py-12 space-y-8 animate-in zoom-in duration-500">
-              <div className="inline-flex items-center gap-3 px-6 py-3 bg-primary/10 text-primary rounded-full text-[10px] font-black uppercase tracking-widest">
-                <Zap className="w-4 h-4 animate-bounce" />
+              <div className="inline-flex items-center gap-3 px-8 py-4 bg-primary/10 text-primary rounded-full text-[11px] font-black uppercase tracking-widest border border-primary/20">
+                <Zap className="w-5 h-5 animate-bounce" />
                 Stage {activeStep! + 1} Verification Active
               </div>
-              <div className="text-8xl font-black font-headline tracking-tighter tabular-nums text-foreground">{countdownText}</div>
+              <div className="text-9xl font-black font-headline tracking-tighter tabular-nums text-foreground animate-pulse">{countdownText}</div>
               <p className="text-xs text-muted-foreground font-black uppercase tracking-[0.2em] max-w-sm mx-auto leading-relaxed">
-                Verification Required. Engagement secures fractional reward.
+                Stay on page. Engagement secures fractional reward credit.
               </p>
             </div>
           )}
 
           {isCooldownActive && (
-            <div className="text-center py-12 space-y-6 animate-in fade-in duration-1000">
-              <div className="mx-auto w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                <Clock className="w-14 h-14 text-primary" />
+            <div className="text-center py-16 space-y-6 animate-in fade-in duration-1000">
+              <div className="mx-auto w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mb-8 border border-primary/20">
+                <Clock className="w-16 h-16 text-primary" />
               </div>
-              <h3 className="text-3xl font-black luxury-text-gradient">Task Cooldown</h3>
-              <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest mb-4">Streak anchored. 24-hour verification window active.</p>
-              <div className="inline-flex items-center gap-2 px-6 py-2 bg-secondary rounded-full border border-border/50">
-                <Lock className="w-3 h-3 text-muted-foreground" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-foreground">
+              <h3 className="text-4xl font-black luxury-text-gradient">Task Cooldown Active</h3>
+              <p className="text-muted-foreground text-[11px] font-black uppercase tracking-widest mb-6">Streak anchored. 24-hour verification window active.</p>
+              <div className="inline-flex items-center gap-3 px-8 py-3 bg-black text-white rounded-full shadow-2xl">
+                <Lock className="w-4 h-4 text-primary" />
+                <span className="text-[11px] font-black uppercase tracking-widest">
                   Unlocks at: {nextUnlockTime?.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </span>
               </div>
@@ -313,11 +319,11 @@ export default function TaskList() {
 
         <CardFooter className="bg-secondary/30 p-10 border-t border-border/50">
           <Button 
-            className="w-full h-20 rounded-[2rem] text-xs font-black uppercase tracking-[0.3em] shadow-2xl transition-all active:scale-95 btn-luxury"
+            className="w-full h-24 rounded-[2.5rem] text-sm font-black uppercase tracking-[0.4em] shadow-2xl transition-all active:scale-95 btn-luxury border-none"
             disabled={activeTimer || isCooldownActive}
             onClick={() => handleStartSubTask(currentStepIndex, channels[currentStepIndex].url)}
           >
-            {activeTimer ? "Verification in Progress..." : isCooldownActive ? "Reward Secured" : `Initialize Task Step ${currentStepIndex + 1}`}
+            {activeTimer ? "Verifying Authorization..." : isCooldownActive ? "Reward Registry Secured" : `Initialize Stage ${currentStepIndex + 1}`}
           </Button>
         </CardFooter>
       </Card>
