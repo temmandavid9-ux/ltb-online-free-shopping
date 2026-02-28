@@ -7,7 +7,7 @@ export const en = {
   "header.signUp": "Sign Up",
   "header.account": "Account",
   "header.searchPlaceholder": "Search products...",
-  "header.greeting": "CEO, {username}",
+  "header.greeting": "CEO {username}",
 
   // Footer
   "footer.companyLine": "Your ultimate online shopping destination.",

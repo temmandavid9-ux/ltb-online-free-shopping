@@ -7,7 +7,7 @@ export const es = {
   "header.signUp": "Registrarse",
   "header.account": "Cuenta",
   "header.searchPlaceholder": "Buscar productos...",
-  "header.greeting": "CEO, {username}",
+  "header.greeting": "CEO {username}",
 
   // Footer
   "footer.companyLine": "Tu destino de compras en línea definitivo.",
@@ -159,7 +159,7 @@ export const es = {
   "wallet.balanceTitle": "Saldo Disponible",
   "wallet.withdrawalTitle": "Solicitar Retiro",
   "wallet.withdrawalDescription": "Transfiere fondos a tu cuenta.",
-  "wallet.minBalanceTitle": "Saldo Mínimo Requerido",
+  "wallet.minBalanceTitle": "Saldo Mínimo Required",
   "wallet.minBalanceDescription": "Necesitas al menos ${amount} en tu billetera para hacer un retiro.",
   "wallet.amountLabel": "Monto",
   "wallet.methodLabel": "Método de Pago",
