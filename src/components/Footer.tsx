@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -14,12 +15,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center space-x-4 mb-4 group">
-              <div className="w-14 h-14 bg-black rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden p-1 shadow-sm">
+              <div className="w-20 h-20 bg-black rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden p-1 shadow-sm">
                 <Image 
                   src={MASTER_LOGO} 
                   alt="Less Talk Business Logo" 
-                  width={60} 
-                  height={60}
+                  width={80} 
+                  height={80}
                   className="object-contain w-full h-full"
                 />
               </div>

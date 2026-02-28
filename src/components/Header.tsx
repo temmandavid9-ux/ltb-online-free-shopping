@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -33,15 +34,15 @@ export default function Header() {
   return (
     <header className="glass-header">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20 md:h-24 gap-4 md:gap-8">
+        <div className="flex items-center justify-between h-24 md:h-32 gap-4 md:gap-8">
           <div className="shrink-0">
             <Link href="/" className="flex items-center gap-3 md:gap-4 group">
-              <div className="relative w-12 h-12 md:w-14 md:h-14 overflow-hidden rounded-2xl bg-black flex items-center justify-center shadow-xl shadow-black/20 group-hover:scale-105 transition-transform p-1">
+              <div className="relative w-20 h-20 overflow-hidden rounded-2xl bg-black flex items-center justify-center shadow-xl shadow-black/20 group-hover:scale-105 transition-transform p-1">
                 <Image 
                   src={MASTER_LOGO} 
                   alt="Less Talk Business Logo" 
-                  width={100} 
-                  height={100}
+                  width={80} 
+                  height={80}
                   className="object-contain w-full h-full"
                   priority
                 />
