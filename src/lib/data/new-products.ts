@@ -1,10 +1,11 @@
 import type { Product } from '../types';
 import { getUniqueVerifiedUrls } from './find-image';
+import { manualProductNames } from './product-names';
 
 /**
  * Generates the master product catalog dynamically based on unique registry links.
  * Every unique link in all-links.json is represented exactly once as a unique product.
- * This ensures ZERO repetition in the store and matches your 900+ verified assets.
+ * CEO URIEL DAVID: Manual names from product-names.ts take priority.
  */
 const generateVerifiedCatalog = (): Product[] => {
   const uniqueUrls = getUniqueVerifiedUrls();
@@ -22,7 +23,11 @@ const generateVerifiedCatalog = (): Product[] => {
     const category = categories[i % categories.length];
     const brand = brands[i % brands.length];
     
-    // Deterministic generation to prevent hydration mismatches and ensure professional feel
+    // Check for CEO manual name override
+    const manualName = manualProductNames[index];
+    const productName = manualName || `Exclusive Masterpiece #${index}`;
+    
+    // Deterministic generation to prevent hydration mismatches
     const basePrice = 150 + ((index * 7) % 850); 
     const baseRating = Number((4.7 + ((index * 3) % 4) / 10).toFixed(1));
     const baseReviews = 100 + ((index * 13) % 400);
@@ -30,7 +35,7 @@ const generateVerifiedCatalog = (): Product[] => {
     catalog.push({
       id: `exclusive_arrival_${index}`,
       slug: `exclusive-item-${index}`,
-      name: `Exclusive Masterpiece #${index}`,
+      name: productName,
       description: `A unique, verified asset from the Less Talk Business master registry. Representing the zenith of quality and professional status. Authenticity Code: LTB-VER-${index.toString().padStart(4, '0')}. Verified by CEO URIEL DAVID.`,
       category: category,
       price: basePrice,

@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -37,7 +36,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-24 md:h-32 gap-4 md:gap-8">
           <div className="shrink-0">
             <Link href="/" className="flex items-center gap-3 md:gap-4 group">
-              <div className="relative w-[80px] h-[80px] overflow-hidden rounded-2xl bg-white flex items-center justify-center shadow-xl shadow-black/5 group-hover:scale-105 transition-transform p-1 border border-border/5">
+              <div className="relative w-20 h-20 overflow-hidden rounded-2xl bg-white flex items-center justify-center shadow-xl shadow-black/5 group-hover:scale-105 transition-transform p-1 border border-border/5">
                 <Image 
                   src={MASTER_LOGO} 
                   alt="Less Talk Business Logo" 
@@ -105,7 +104,7 @@ export default function Header() {
                     <Link href="/login" className="hidden sm:block">
                       <Button variant="ghost" className="font-black uppercase tracking-[0.2em] text-[10px] h-10 md:h-12 px-4 md:px-6">Login</Button>
                     </Link>
-                    <Link href="/signup" className>
+                    <Link href="/signup">
                       <Button className="rounded-full px-6 md:px-8 h-10 md:h-12 font-black uppercase tracking-[0.2em] text-[10px] shadow-lg shadow-primary/10 btn-luxury">Sign Up</Button>
                     </Link>
                 </div>
