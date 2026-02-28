@@ -74,7 +74,7 @@ export const en = {
   "signup.toast.emailInUse": "This corporate email is already registered.",
   
   // Account Page
-  "account.title": "Command Center",
+  "account.title": "My Account",
   "account.logout": "Terminate Session",
   "account.profileTitle": "Executive Profile",
   "account.profileDescription": "Manage your master identity and verified credentials.",
