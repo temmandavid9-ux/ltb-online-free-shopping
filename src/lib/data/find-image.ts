@@ -3,7 +3,7 @@ import masterLinks from '../image-assets/all-links.json';
 /**
  * Retrieves the absolute list of unique, verified URLs from the master registry.
  * This is the definitive deduplicated source for Less Talk Business.
- * flattens all folders and ensures NO REPETITION using a Set.
+ * Flattens all folders and ensures NO REPETITION using a Set.
  */
 export const getUniqueVerifiedUrls = () => {
   // Flatten all folders into one array

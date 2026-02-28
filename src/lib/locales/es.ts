@@ -93,10 +93,10 @@ export const es = {
   "account.eliteStandard": "Protocolo Estándar",
   "account.eliteStreak": "Racha Verificada: {streak} / 365 Ciclos",
   "account.eliteBonusProgress": "Progreso de Bono: {count} / 30 Ciclos",
-  "account.rewardsTitle": "Recompensas Ejecutivas",
-  "account.rewardsDescription": "Bonos maestros asegurados por el estatus Élite.",
-  "account.redeemReward": "Reclamar Bono de $25",
-  "account.rewardsAvailable": "{count} Recompensas de Alto Valor Aseguradas",
+  "account.rewardsTitle": "Recompensas de Tarjetas de Regalo",
+  "account.rewardsDescription": "Bonos de tarjetas de regalo asegurados por el estatus Élite.",
+  "account.redeemReward": "Reclamar Tarjeta de Regalo de $25",
+  "account.rewardsAvailable": "{count} Tarjetas de Regalo Disponibles",
   
   // Redeem Page
   "redeem.title": "Canasta de Adquisición de Activos",

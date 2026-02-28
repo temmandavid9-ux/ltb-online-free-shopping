@@ -93,10 +93,10 @@ export const en = {
   "account.eliteStandard": "Standard Protocol",
   "account.eliteStreak": "Verified Streak: {streak} / 365 Cycles",
   "account.eliteBonusProgress": "Bonus Progress: {count} / 30 Cycles",
-  "account.rewardsTitle": "Executive Rewards",
-  "account.rewardsDescription": "Master bonuses secured by Elite status.",
-  "account.redeemReward": "Claim $25 Bonus",
-  "account.rewardsAvailable": "{count} High-Value Rewards Secured",
+  "account.rewardsTitle": "Gift Card Rewards",
+  "account.rewardsDescription": "Gift card bonuses secured by Elite status.",
+  "account.redeemReward": "Claim $25 Gift Card",
+  "account.rewardsAvailable": "{count} Gift Cards Available",
   
   // Redeem Page
   "redeem.title": "Asset Acquisition Basket",
