@@ -59,7 +59,7 @@ export default function Header() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
               <Input 
                 placeholder={t('header.searchPlaceholder')} 
-                className="pl-12 h-12 md:h-14 bg-secondary/20 border-transparent focus-visible:ring-1 focus-visible:ring-primary/20 rounded-2xl text-sm transition-all shadow-inner" 
+                className="pl-12 h-12 md:h-14 bg-secondary/20 border-transparent focus-visible:ring-1 focus-visible:ring-primary/20 rounded-2xl text-sm transition-all shadow-inner font-black" 
               />
             </div>
           </div>
@@ -72,10 +72,10 @@ export default function Header() {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48 rounded-2xl p-2 shadow-2xl border-border/50">
-                    <DropdownMenuItem onClick={() => setLocale('en')} className="justify-between rounded-xl px-4 py-3">
+                    <DropdownMenuItem onClick={() => setLocale('en')} className="justify-between rounded-xl px-4 py-3 font-black uppercase text-[10px] tracking-widest">
                         English {locale === 'en' && <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(34,197,94,0.5)]" />}
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLocale('es')} className="justify-between rounded-xl px-4 py-3">
+                    <DropdownMenuItem onClick={() => setLocale('es')} className="justify-between rounded-xl px-4 py-3 font-black uppercase text-[10px] tracking-widest">
                         Español {locale === 'es' && <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(34,197,94,0.5)]" />}
                     </DropdownMenuItem>
                 </DropdownMenuContent>

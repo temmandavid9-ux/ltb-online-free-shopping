@@ -41,14 +41,14 @@ export default function TaskList() {
     return () => clearInterval(timer);
   }, []);
 
-  // Cooldown is active if last cycle was completed less than 24h ago
+  // Cooldown logic
   const isCooldownActive = useMemo(() => {
     if (!userData?.lastCompletedDate) return false;
     const lastTime = new Date(userData.lastCompletedDate).getTime();
     return (currentTime - lastTime) < COOLDOWN_MS;
   }, [userData?.lastCompletedDate, currentTime]);
 
-  // AUTO-RESET PROTOCOL: If cooldown is over but flags are still set, reset them.
+  // AUTO-RESET PROTOCOL: If cooldown is over but flags are still set, reset them immediately.
   useEffect(() => {
     if (userData && userDocRef && !isCooldownActive) {
       if (userData.step1Status || userData.step2Status || userData.step3Status) {
@@ -62,18 +62,19 @@ export default function TaskList() {
     }
   }, [userData, userDocRef, isCooldownActive]);
 
-  const nextUnlockTime = useMemo(() => {
-    if (!userData?.lastCompletedDate) return null;
-    return new Date(new Date(userData.lastCompletedDate).getTime() + COOLDOWN_MS);
-  }, [userData?.lastCompletedDate]);
-
+  // Reactive Indexing: Determines exactly which stage is next based on database flags
   const currentStepIndex = useMemo(() => {
     if (isCooldownActive) return 3; 
     if (!userData?.step1Status) return 0;
     if (!userData?.step2Status) return 1;
     if (!userData?.step3Status) return 2;
     return 3; 
-  }, [userData, isCooldownActive]);
+  }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
+
+  const nextUnlockTime = useMemo(() => {
+    if (!userData?.lastCompletedDate) return null;
+    return new Date(new Date(userData.lastCompletedDate).getTime() + COOLDOWN_MS);
+  }, [userData?.lastCompletedDate]);
 
   const handleStageComplete = useCallback(() => {
     if (!user || !userData || !userDocRef || activeStep === null) return;
@@ -108,6 +109,7 @@ export default function TaskList() {
       }
       updates.streakCount = newStreak;
 
+      // ELITE BARRIER: Milestone 365
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = now;
@@ -115,6 +117,7 @@ export default function TaskList() {
         updates.eliteRewardsAvailable = 0;
         toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured." });
       } else if (userData.eliteUnlocked) {
+        // Bonus payout tracking only if Day 366+
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
         if (newMonthlyCounter >= 30) {
@@ -269,7 +272,7 @@ export default function TaskList() {
                           <Button 
                             onClick={() => handleStartSubTask(channel.id, channel.url)}
                             variant="outline"
-                            className="w-full rounded-xl h-12 text-[9px] font-black uppercase tracking-widest border-2 hover:bg-black hover:text-white transition-all"
+                            className="w-full rounded-xl h-12 text-[9px] font-black uppercase tracking-widest border-2 hover:bg-black hover:text-white transition-all font-black"
                             disabled={activeTimer}
                           >
                             {isActivating ? "Verifying..." : <><ExternalLink className="w-3 h-3 mr-2" /> Start stage</>}
