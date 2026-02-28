@@ -94,7 +94,9 @@ export default function Header() {
                 <Link href="/account">
                   <Button variant="outline" className="rounded-full h-10 md:h-12 gap-3 px-3 md:px-6 border-foreground/5 hover:bg-secondary/50 transition-all shadow-sm">
                     <UserIcon className="h-4 w-4" />
-                    <span className="max-w-[60px] sm:max-w-[120px] truncate text-[9px] md:text-[11px] font-black uppercase tracking-[0.1em]">{userData?.username || 'Profile'}</span>
+                    <span className="max-w-[100px] sm:max-w-[150px] truncate text-[9px] md:text-[11px] font-black uppercase tracking-[0.1em]">
+                        {userData?.username ? t('header.greeting', { username: userData.username }) : 'Profile'}
+                    </span>
                   </Button>
                 </Link>
               </div>

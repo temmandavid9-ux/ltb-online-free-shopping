@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -118,7 +119,9 @@ export default function AccountPage() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12">
             <div>
                 <h1 className="text-4xl sm:text-5xl font-black luxury-text-gradient tracking-tighter mb-2">{t('account.title')}</h1>
-                <p className="text-muted-foreground font-medium uppercase tracking-[0.3em] text-[10px]">{userData?.username || user.displayName || user.email} • {user.email}</p>
+                <p className="text-muted-foreground font-medium uppercase tracking-[0.3em] text-[10px]">
+                    {userData?.username ? t('header.greeting', { username: userData.username }) : (user.displayName || user.email)} • {user.email}
+                </p>
             </div>
             <div className="flex gap-3">
                 <Button onClick={handleLogout} variant="ghost" className="rounded-full font-black uppercase tracking-widest text-[10px] h-12 px-8 border border-border/10">
