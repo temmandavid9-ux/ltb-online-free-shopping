@@ -1,3 +1,4 @@
+
 'use client';
 import {
   useUser,
@@ -12,15 +13,17 @@ import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock } from 'lucide-react';
+import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock, RefreshCcw } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
+import { useAdminStatus } from '@/hooks/useAdminStatus';
 
-const TASK_DURATION_SECONDS = 600; // 10 minutes verification
+const TASK_DURATION_SECONDS = 10; // PROTOTYPE: Reduced to 10 seconds for CEO verification
 const COOLDOWN_MS = 24 * 60 * 60 * 1000; // Strict 24-hour lockout
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
+  const { isAdmin } = useAdminStatus();
   const firestore = useFirestore();
   const { toast } = useToast();
   const { t } = useLanguage();
@@ -53,8 +56,10 @@ export default function TaskList() {
     if (isCooldownActive) return 3;
     const lastComp = userData?.lastCompletedDate ? new Date(userData.lastCompletedDate).getTime() : 0;
     const lastStep = userData?.lastStepDate ? new Date(userData.lastStepDate).getTime() : 0;
-    const isStaleCycle = lastStep < lastComp;
-    if (isStaleCycle) return 0;
+    
+    // If the steps were completed before the last total completion, we are starting fresh
+    if (lastStep <= lastComp) return 0;
+    
     if (!userData?.step1Status) return 0;
     if (!userData?.step2Status) return 1;
     if (!userData?.step3Status) return 2;
@@ -93,18 +98,16 @@ export default function TaskList() {
       updates.streakCount = newStreak;
 
       // MISSION CRITICAL: Elite Mode Unlock Protocol
-      // Must complete 365 consecutive days BEFORE Elite Mode activates
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = today.toISOString();
-        updates.eliteMonthlyCounter = 0; // Starts incrementing only from Day 366
+        updates.eliteMonthlyCounter = 0;
         updates.eliteRewardsAvailable = 0;
         toast({ 
           title: t('tasks.toast.eliteUnlockedTitle'), 
           description: t('tasks.toast.eliteUnlockedDesc') 
         });
       } else if (userData.eliteUnlocked) {
-        // Monthly Bonus Cycle progress only active AFTER 365 days are completed (Day 366+)
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
         if (newMonthlyCounter >= 30) {
@@ -152,13 +155,29 @@ export default function TaskList() {
     setActiveTimer(true);
   };
 
+  const resetForCEO = () => {
+    if (!userDocRef) return;
+    updateDocumentNonBlocking(userDocRef, {
+      lastCompletedDate: null,
+      lastStepDate: null,
+      step1Status: false,
+      step2Status: false,
+      step3Status: false,
+      streakCount: 0,
+      eliteUnlocked: false,
+      eliteMonthlyCounter: 0,
+      eliteRewardsAvailable: 0
+    });
+    toast({ title: "CEO BYPASS: Sequence Reset" });
+  };
+
   if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center">Verifying Sequence...</div>;
   if (!user || !userData) return <p className="p-24 text-center">Authentication Required.</p>;
 
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
   const lastComp = userData.lastCompletedDate ? new Date(userData.lastCompletedDate).getTime() : 0;
   const lastStep = userData.lastStepDate ? new Date(userData.lastStepDate).getTime() : 0;
-  const isStale = lastStep < lastComp;
+  const isStale = lastStep <= lastComp;
 
   const channels = [
     { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Step 1 (+$0.33)', status: !isStale && userData.step1Status },
@@ -171,10 +190,17 @@ export default function TaskList() {
       <Card className="overflow-hidden border-2 border-primary/20 bg-gradient-to-br from-background to-secondary/10 shadow-2xl rounded-[3rem]">
         <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-10 pb-7">
           <div>
-            <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
-              {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-              {userData.eliteUnlocked ? "Elite Mode Active" : "Daily Task Sequence"}
-            </CardTitle>
+            <div className="flex items-center gap-4 mb-4">
+                <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
+                {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
+                {userData.eliteUnlocked ? "Elite Mode Active" : "Daily Task Sequence"}
+                </CardTitle>
+                {isAdmin && (
+                    <Button onClick={resetForCEO} size="sm" variant="destructive" className="rounded-full px-4 h-8 text-[8px] font-black uppercase tracking-widest gap-2">
+                        <RefreshCcw className="w-3 h-3" /> CEO Bypass: Reset
+                    </Button>
+                )}
+            </div>
             <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">
               Sequential Verification Required. Day {userData.streakCount || 0} of 365 Milestone.
             </CardDescription>

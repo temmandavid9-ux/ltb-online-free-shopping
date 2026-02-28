@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -119,7 +120,7 @@ export default function AccountPage() {
             <div>
                 <h1 className="text-4xl sm:text-5xl font-black luxury-text-gradient tracking-tighter mb-2">{t('account.title')}</h1>
                 <p className="text-muted-foreground font-black uppercase tracking-[0.3em] text-[10px]">
-                    {userData?.username ? t('header.greeting', { username: userData.username }) : (user.displayName || user.email)} • {user.email}
+                    {userData?.username ? `CEO ${userData.username}` : (user.displayName || user.email)} • {user.email}
                 </p>
             </div>
             <div className="flex gap-3">
