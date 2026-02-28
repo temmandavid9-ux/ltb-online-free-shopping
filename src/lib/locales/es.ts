@@ -132,7 +132,7 @@ export const es = {
 
   // Tasks Page
   "tasks.pageTitle": "Secuencia de Registro Diario",
-  "tasks.pageDescription": "Ejecute el ciclo de verificación secuencial para asegurar recompensas diarias y construir su estatus élite.",
+  "tasks.pageDescription": "Ejecute el ciclo de verificación secuencial para asegurar recompensas diarias y construir su estatus Élite.",
   "tasks.loading": "Calibrando Registro...",
   "tasks.loginPrompt": "Autenticación requerida para acceder al registro.",
   "tasks.allCompletedTitle": "Ciclo Asegurado",
@@ -181,7 +181,7 @@ export const es = {
   "wallet.historyTitle": "Registro de Transacciones",
   "wallet.noHistory": "No se encontraron transacciones en el registro actual.",
   "wallet.toast.insufficientFundsTitle": "Desajuste de Saldo",
-  "wallet.toast.insufficientFundsDescription": "El retiro excede el saldo de la cuenta.",
+  "wallet.toast.insufficientFundsDescription": "El retiro excede el Account Balance.",
   "wallet.toast.invalidAmountTitle": "Desajuste de Umbral",
   "wallet.toast.invalidAmountDescription": "El retiro mínimo es de ${amount}.",
   "wallet.toast.successTitle": "Retiro Autorizado",

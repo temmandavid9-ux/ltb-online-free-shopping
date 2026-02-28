@@ -33,13 +33,11 @@ export default function TaskList() {
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [currentTime, setCurrentTime] = useState(Date.now());
 
-  // Update local clock for real-time cooldown tracking
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(Date.now()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-  // Strict 24-hour cooldown check from the last FULL sequence completion
   const isCooldownActive = useMemo(() => {
     if (!userData?.lastCompletedDate) return false;
     const lastTime = new Date(userData.lastCompletedDate).getTime();
@@ -53,13 +51,9 @@ export default function TaskList() {
 
   const currentStepIndex = useMemo(() => {
     if (isCooldownActive) return 3;
-    
     const lastComp = userData?.lastCompletedDate ? new Date(userData.lastCompletedDate).getTime() : 0;
     const lastStep = userData?.lastStepDate ? new Date(userData.lastStepDate).getTime() : 0;
-    
-    // If the last step activity happened before the last full completion, it's a stale cycle
     const isStaleCycle = lastStep < lastComp;
-    
     if (isStaleCycle) return 0;
     if (!userData?.step1Status) return 0;
     if (!userData?.step2Status) return 1;
@@ -71,7 +65,6 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
-    // Sequential Rewards: Step 1: $0.33, Step 2: $0.33, Final: $0.34 (Total $1.00)
     let reward = stage === 2 ? 0.34 : 0.33;
     let updates: any = {};
 
@@ -81,7 +74,6 @@ export default function TaskList() {
     if (stage === 1) updates.step2Status = true;
     if (stage === 2) {
       updates.step3Status = true;
-      
       const today = new Date();
       const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
       let newStreak = userData.streakCount || 0;
@@ -100,30 +92,34 @@ export default function TaskList() {
       updates.lastCompletedDate = today.toISOString();
       updates.streakCount = newStreak;
 
+      // MISSION CRITICAL: Elite Mode Unlock Protocol
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = today.toISOString();
-        updates.eliteMonthlyCounter = 0;
+        updates.eliteMonthlyCounter = 0; // Cycle initialized but not incremented until day 366
         updates.eliteRewardsAvailable = 0;
-        toast({ title: t('tasks.toast.eliteUnlockedTitle'), description: t('tasks.toast.eliteUnlockedDesc') });
-      }
-
-      if (userData.eliteUnlocked || updates.eliteUnlocked) {
+        toast({ 
+          title: t('tasks.toast.eliteUnlockedTitle'), 
+          description: t('tasks.toast.eliteUnlockedDesc') 
+        });
+      } else if (userData.eliteUnlocked) {
+        // Monthly Bonus Cycle progress only active AFTER 365 days are completed
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
         if (newMonthlyCounter >= 30) {
           newMonthlyCounter = 0;
           newRewards = (userData.eliteRewardsAvailable || 0) + 1;
-          toast({ title: "BONUS SECURED", description: "$25 Gift Card added to your portfolio." });
+          toast({ 
+            title: "BONUS SECURED", 
+            description: "$25 Gift Card added to your portfolio." 
+          });
         }
         updates.eliteMonthlyCounter = newMonthlyCounter;
         updates.eliteRewardsAvailable = newRewards;
       }
     }
 
-    // MISSION CRITICAL: Atomic Increment for absolute precision
     updates.balance = increment(reward);
-    
     updateDocumentNonBlocking(userDocRef, updates);
     
     setActiveTimer(false);
@@ -132,7 +128,7 @@ export default function TaskList() {
 
     toast({
       title: "Step Secured",
-      description: `+$${reward.toFixed(2)} credited to your account balance. Sequence advanced.`,
+      description: `+$${reward.toFixed(2)} credited to Account Balance.`,
     });
   }, [user, userData, userDocRef, toast, activeStep, t]);
 
@@ -149,28 +145,24 @@ export default function TaskList() {
   const handleStartSubTask = (stepIndex: number, url: string) => {
     if (isCooldownActive || activeTimer) return;
     if (stepIndex !== currentStepIndex) return;
-    
     window.open(url, '_blank', 'noopener,noreferrer');
     setActiveStep(stepIndex);
     setCountdown(TASK_DURATION_SECONDS);
     setActiveTimer(true);
   };
 
-  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center">Loading Registry...</div>;
+  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center">Verifying Registry...</div>;
   if (!user || !userData) return <p className="p-24 text-center">Authentication Required.</p>;
 
-  const minutes = Math.floor(countdown / 60);
-  const seconds = countdown % 60;
-  const countdownText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-
+  const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
   const lastComp = userData.lastCompletedDate ? new Date(userData.lastCompletedDate).getTime() : 0;
   const lastStep = userData.lastStepDate ? new Date(userData.lastStepDate).getTime() : 0;
   const isStale = lastStep < lastComp;
 
   const channels = [
-    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Registry Step 1 (+$0.33)', status: !isStale && userData.step1Status },
-    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: 'Registry Step 2 (+$0.33)', status: !isStale && userData.step2Status },
-    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: 'Final Verification (+$0.34)', status: !isStale && userData.step3Status }
+    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Step 1 (+$0.33)', status: !isStale && userData.step1Status },
+    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: 'Step 2 (+$0.33)', status: !isStale && userData.step2Status },
+    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: 'Final Step (+$0.34)', status: !isStale && userData.step3Status }
   ];
 
   return (
@@ -180,10 +172,10 @@ export default function TaskList() {
           <div>
             <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
               {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-              {userData.eliteUnlocked ? "Elite Monthly Mode" : "Daily Sequential Registry"}
+              {userData.eliteUnlocked ? "Elite Mode Active" : "Daily Registry Sequence"}
             </CardTitle>
             <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">
-              Sequential Execution Required. Full PACK: $1.00 Total Daily Reward.
+              Sequential Verification Required. Day {userData.streakCount || 0} of 365 Milestone.
             </CardDescription>
           </div>
           <div className="text-left sm:text-right">
@@ -206,7 +198,7 @@ export default function TaskList() {
             </div>
 
             {userData.eliteUnlocked && (
-              <div className="bg-white rounded-[2rem] p-8 border border-primary/20 shadow-sm">
+              <div className="bg-white rounded-[2rem] p-8 border border-primary/20 shadow-sm animate-in zoom-in">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <Zap className="w-6 h-6 text-primary" />
@@ -243,9 +235,7 @@ export default function TaskList() {
                             <CheckCircle className="w-3 h-3" /> Status: Secured
                           </div>
                         ) : isLocked ? (
-                          <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">
-                            Locked
-                          </div>
+                          <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Locked</div>
                         ) : (
                           <Button 
                             onClick={() => handleStartSubTask(channel.id, channel.url)}
@@ -270,11 +260,9 @@ export default function TaskList() {
                 <Zap className="w-4 h-4 animate-bounce" />
                 Stage {activeStep! + 1} Verification Active
               </div>
-              <div className="text-8xl font-black font-headline tracking-tighter tabular-nums text-foreground">
-                {countdownText}
-              </div>
+              <div className="text-8xl font-black font-headline tracking-tighter tabular-nums text-foreground">{countdownText}</div>
               <p className="text-xs text-muted-foreground font-black uppercase tracking-[0.2em] max-w-sm mx-auto leading-relaxed">
-                Verification Required. Engage with social media content to secure fractional reward.
+                Verification Required. Engagement secures fractional reward.
               </p>
             </div>
           )}
@@ -284,12 +272,12 @@ export default function TaskList() {
               <div className="mx-auto w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                 <Clock className="w-14 h-14 text-primary" />
               </div>
-              <h3 className="text-3xl font-black luxury-text-gradient">Daily PACK Cooldown</h3>
-              <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest mb-4">Streak: Day {userData.streakCount}. 24-hour verification window active.</p>
+              <h3 className="text-3xl font-black luxury-text-gradient">Registry Cooldown</h3>
+              <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest mb-4">Streak anchored. 24-hour verification window active.</p>
               <div className="inline-flex items-center gap-2 px-6 py-2 bg-secondary rounded-full border border-border/50">
                 <Lock className="w-3 h-3 text-muted-foreground" />
                 <span className="text-[10px] font-black uppercase tracking-widest text-foreground">
-                  Next Registry Unlocks at: {nextUnlockTime?.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  Unlocks at: {nextUnlockTime?.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </span>
               </div>
             </div>
@@ -302,7 +290,7 @@ export default function TaskList() {
             disabled={activeTimer || isCooldownActive}
             onClick={() => handleStartSubTask(currentStepIndex, channels[currentStepIndex].url)}
           >
-            {activeTimer ? "Verification in Progress..." : isCooldownActive ? "Reward Secured" : `Unlock Registry Step ${currentStepIndex + 1}`}
+            {activeTimer ? "Verification in Progress..." : isCooldownActive ? "Reward Secured" : `Initialize Registry Step ${currentStepIndex + 1}`}
           </Button>
         </CardFooter>
       </Card>

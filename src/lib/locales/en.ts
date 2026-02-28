@@ -132,7 +132,7 @@ export const en = {
 
   // Tasks Page
   "tasks.pageTitle": "Daily Registry Sequence",
-  "tasks.pageDescription": "Execute the sequential verification cycle to secure daily rewards and build elite status.",
+  "tasks.pageDescription": "Execute the sequential verification cycle to secure daily rewards and build Elite status.",
   "tasks.loading": "Calibrating Registry...",
   "tasks.loginPrompt": "Authentication required to access registry.",
   "tasks.allCompletedTitle": "Cycle Secured",
@@ -181,7 +181,7 @@ export const en = {
   "wallet.historyTitle": "Transaction Log",
   "wallet.noHistory": "No transactions found in current log.",
   "wallet.toast.insufficientFundsTitle": "Balance Mismatch",
-  "wallet.toast.insufficientFundsDescription": "Withdrawal exceeds account balance.",
+  "wallet.toast.insufficientFundsDescription": "Withdrawal exceeds Account Balance.",
   "wallet.toast.invalidAmountTitle": "Threshold Mismatch",
   "wallet.toast.invalidAmountDescription": "Minimum withdrawal is ${amount}.",
   "wallet.toast.successTitle": "Withdrawal Authorized",
