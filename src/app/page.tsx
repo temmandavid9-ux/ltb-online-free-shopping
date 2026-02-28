@@ -57,7 +57,7 @@ export default function Home() {
                         alt={asset.title} 
                         fill
                         priority={asset.id === '1'}
-                        className="object-cover transition-all duration-[3s] ease-out group-hover:scale-110"
+                        className="object-cover transition-all duration-[3000ms] ease-out group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     </div>

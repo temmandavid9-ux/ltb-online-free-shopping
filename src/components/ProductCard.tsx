@@ -65,7 +65,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 width={600}
                 height={750}
                 priority={product.id.includes('exclusive_1')}
-                className="object-cover w-full h-full transition-all duration-[1.5s] ease-out group-hover:scale-110"
+                className="object-cover w-full h-full transition-all duration-[1500ms] ease-out group-hover:scale-110"
                 onError={() => setImgError(true)}
               />
             ) : (
