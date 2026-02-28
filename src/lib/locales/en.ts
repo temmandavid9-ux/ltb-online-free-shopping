@@ -118,7 +118,7 @@ export const en = {
   "checkout.cityLabel": "City",
   "checkout.zipLabel": "Postal Code",
   "checkout.orderSummaryTitle": "Order Summary",
-  "checkout.walletBalance": "Current Account Balance",
+  "checkout.walletBalance": "Account Balance",
   "checkout.remainingBalance": "Post-Order Balance",
   "checkout.insufficientFundsTitle": "Balance Mismatch",
   "checkout.insufficientFundsDescription": "Insufficient account balance to secure these assets.",
