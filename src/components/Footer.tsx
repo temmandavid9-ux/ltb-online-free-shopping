@@ -15,7 +15,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center space-x-4 mb-4 group">
-              <div className="w-20 h-20 bg-black rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden p-1 shadow-sm">
+              <div className="w-[80px] h-[80px] bg-black rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden p-1 shadow-sm">
                 <Image 
                   src={MASTER_LOGO} 
                   alt="Less Talk Business Logo" 

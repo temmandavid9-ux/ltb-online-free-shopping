@@ -37,7 +37,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-24 md:h-32 gap-4 md:gap-8">
           <div className="shrink-0">
             <Link href="/" className="flex items-center gap-3 md:gap-4 group">
-              <div className="relative w-20 h-20 overflow-hidden rounded-2xl bg-black flex items-center justify-center shadow-xl shadow-black/20 group-hover:scale-105 transition-transform p-1">
+              <div className="relative w-[80px] h-[80px] overflow-hidden rounded-2xl bg-black flex items-center justify-center shadow-xl shadow-black/20 group-hover:scale-105 transition-transform p-1">
                 <Image 
                   src={MASTER_LOGO} 
                   alt="Less Talk Business Logo" 

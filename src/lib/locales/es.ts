@@ -1,3 +1,4 @@
+
 export const es = {
   // Header
   "header.home": "Inicio",
