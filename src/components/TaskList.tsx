@@ -1,4 +1,3 @@
-
 'use client';
 import {
   useUser,
@@ -106,7 +105,7 @@ export default function TaskList() {
         updates.eliteStartDate = today.toISOString();
         updates.eliteMonthlyCounter = 0;
         updates.eliteRewardsAvailable = 0;
-        toast({ title: "ELITE MODE ACTIVATED", description: "365-day milestone achieved. Permanent Elite status secured." });
+        toast({ title: t('tasks.toast.eliteUnlockedTitle'), description: t('tasks.toast.eliteUnlockedDesc') });
       }
 
       if (userData.eliteUnlocked || updates.eliteUnlocked) {
@@ -115,7 +114,7 @@ export default function TaskList() {
         if (newMonthlyCounter >= 30) {
           newMonthlyCounter = 0;
           newRewards = (userData.eliteRewardsAvailable || 0) + 1;
-          toast({ title: "MONTHLY BONUS EARNED", description: "$25 Gift Card credited to your account." });
+          toast({ title: "BONUS SECURED", description: "$25 Gift Card added to your portfolio." });
         }
         updates.eliteMonthlyCounter = newMonthlyCounter;
         updates.eliteRewardsAvailable = newRewards;
@@ -133,9 +132,9 @@ export default function TaskList() {
 
     toast({
       title: "Step Secured",
-      description: `+$${reward.toFixed(2)} credited to your status balance. Sequence advanced.`,
+      description: `+$${reward.toFixed(2)} credited to your account balance. Sequence advanced.`,
     });
-  }, [user, userData, userDocRef, toast, activeStep]);
+  }, [user, userData, userDocRef, toast, activeStep, t]);
 
   useEffect(() => {
     if (!activeTimer) return;
@@ -181,14 +180,14 @@ export default function TaskList() {
           <div>
             <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
               {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-              {userData.eliteUnlocked ? "Elite Monthly Registry" : "Daily Sequential Registry"}
+              {userData.eliteUnlocked ? "Elite Monthly Mode" : "Daily Sequential Registry"}
             </CardTitle>
             <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">
               Sequential Execution Required. Full PACK: $1.00 Total Daily Reward.
             </CardDescription>
           </div>
           <div className="text-left sm:text-right">
-            <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Status Balance</div>
+            <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Account Balance</div>
             <div className="text-4xl font-black text-primary">${(userData.balance || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
           </div>
         </CardHeader>
