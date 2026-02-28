@@ -54,8 +54,6 @@ export default function TaskList() {
 
   const currentStepIndex = useMemo(() => {
     if (isCooldownActive) return 3; 
-    
-    // Check flags for current cycle
     if (!userData?.step1Status) return 0;
     if (!userData?.step2Status) return 1;
     if (!userData?.step3Status) return 2;
@@ -78,7 +76,6 @@ export default function TaskList() {
       updates.step3Status = true;
       updates.lastCompletedDate = now;
       
-      // Streak Calculation
       const today = new Date();
       const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
       let newStreak = userData.streakCount || 0;
@@ -95,7 +92,6 @@ export default function TaskList() {
       }
       updates.streakCount = newStreak;
 
-      // Elite Check
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = now;
@@ -164,8 +160,8 @@ export default function TaskList() {
     toast({ title: "CEO BYPASS: Sequence Fully Reset" });
   };
 
-  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center">Verifying Sequence Integrity...</div>;
-  if (!user || !userData) return <p className="p-24 text-center">Authentication Required.</p>;
+  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center font-black uppercase tracking-widest">Verifying Integrity...</div>;
+  if (!user || !userData) return <p className="p-24 text-center font-black uppercase tracking-widest text-muted-foreground">Authentication Required.</p>;
 
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
 
