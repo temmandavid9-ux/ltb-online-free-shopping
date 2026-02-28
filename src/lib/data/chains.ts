@@ -135,7 +135,7 @@ export const chainProducts: Product[] = [
   {
     id: 'prod_137',
     slug: 'product-137',
-    name: 'Product 137',
+    name: 'Womens Sparkling Short Dress Suitable for Weddings, Parties & Proms',
     description: 'Helios Titan Chain',
     category: 'Chains',
     price: 1500,
@@ -148,7 +148,7 @@ export const chainProducts: Product[] = [
   {
     id: 'prod_138',
     slug: 'product-138',
-    name: 'Product 138',
+    name: 'Womens Sparkling Short Dress Suitable for Weddings, Parties & Proms',
     description: 'Zenco Box-Link Chain',
     category: 'Chains',
     price: 250,
@@ -161,7 +161,7 @@ export const chainProducts: Product[] = [
   {
     id: 'prod_139',
     slug: 'product-139',
-    name: 'Product 139',
+    name: 'Womens Sparkling Short Dress Suitable for Weddings, Parties & Proms',
     description: 'Aperture Diamond-Cut Chain',
     category: 'Chains',
     price: 1800,
@@ -174,7 +174,7 @@ export const chainProducts: Product[] = [
   {
     id: 'prod_140',
     slug: 'product-140',
-    name: 'Product 140',
+    name: 'Womens Sparkling Short Dress Suitable for Weddings, Parties & Proms',
     description: 'Aperture Golden Link Chain',
     category: 'Chains',
     price: 1250,
@@ -187,7 +187,7 @@ export const chainProducts: Product[] = [
   {
     id: 'prod_141',
     slug: 'product-141',
-    name: 'Product 141',
+    name: 'Womens Sparkling Short Dress Suitable for Weddings, Parties & Proms',
     description: 'Stellar Silver Necklace',
     category: 'Chains',
     price: 450,
@@ -200,7 +200,7 @@ export const chainProducts: Product[] = [
   {
     id: 'prod_142',
     slug: 'product-142',
-    name: 'Product 142',
+    name: 'Womens Sparkling Short Dress Suitable for Weddings, Parties & Proms',
     description: 'Helios Sovereign Gold Chain',
     category: 'Chains',
     price: 2500,
@@ -213,7 +213,7 @@ export const chainProducts: Product[] = [
   {
     id: 'prod_143',
     slug: 'product-143',
-    name: 'Product 143',
+    name: 'Womens Sparkling Short Dress Suitable for Weddings, Parties & Proms',
     description: 'Orion Starlight Necklace',
     category: 'Chains',
     price: 1900,

@@ -5999,11 +5999,11 @@ export const clothesProducts: Product[] = [
   {
     id: 'prod_218',
     slug: 'product-218',
-    name: 'Eco Urban Shell Jacket',
+    name: ' Quality Designer Women Jeans Available in Different Sizes',
     description: 'Minimalist shell jacket for urban weather protection.',
     category: 'Clothes',
     price: 190,
-    brand: 'Eco',
+    brand: 'LTB',
     images: [findImage('prod_img_218')],
     stock: 50,
     rating: 4.7,
