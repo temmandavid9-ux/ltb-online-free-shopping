@@ -36,7 +36,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-20 md:h-24 gap-4 md:gap-8">
           <div className="shrink-0">
             <Link href="/" className="flex items-center gap-3 md:gap-4 group">
-              <div className="relative w-12 h-12 md:w-14 md:h-14 overflow-hidden rounded-2xl bg-white flex items-center justify-center shadow-xl shadow-black/5 group-hover:scale-105 transition-transform p-1">
+              <div className="relative w-12 h-12 md:w-14 md:h-14 overflow-hidden rounded-2xl bg-black flex items-center justify-center shadow-xl shadow-black/20 group-hover:scale-105 transition-transform p-1">
                 <Image 
                   src={MASTER_LOGO} 
                   alt="Less Talk Business Logo" 
@@ -104,7 +104,7 @@ export default function Header() {
                     <Link href="/login" className="hidden sm:block">
                       <Button variant="ghost" className="font-black uppercase tracking-[0.2em] text-[10px] h-10 md:h-12 px-4 md:px-6">Login</Button>
                     </Link>
-                    <Link href="/signup">
+                    <Link href="/signup" className>
                       <Button className="rounded-full px-6 md:px-8 h-10 md:h-12 font-black uppercase tracking-[0.2em] text-[10px] shadow-lg shadow-primary/10 btn-luxury">Sign Up</Button>
                     </Link>
                 </div>

@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -15,7 +14,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center space-x-4 mb-4 group">
-              <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden p-1 shadow-sm">
+              <div className="w-14 h-14 bg-black rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform overflow-hidden p-1 shadow-sm">
                 <Image 
                   src={MASTER_LOGO} 
                   alt="Less Talk Business Logo" 
@@ -33,36 +32,36 @@ export default function Footer() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 col-span-1 md:col-span-3 gap-8">
             <div>
-              <h4 className="font-semibold mb-3">{t('footer.shop')}</h4>
+              <h4 className="font-black uppercase tracking-widest text-[10px] mb-4">{t('footer.shop')}</h4>
               <ul className="space-y-2">
-                <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary">{t('footer.newArrivals')}</Link></li>
-                <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary">{t('footer.bestSellers')}</Link></li>
-                <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary">{t('footer.categories')}</Link></li>
-                <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary">{t('footer.onSale')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.newArrivals')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.bestSellers')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.categories')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.onSale')}</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-3">{t('footer.support')}</h4>
+              <h4 className="font-black uppercase tracking-widest text-[10px] mb-4">{t('footer.support')}</h4>
               <ul className="space-y-2">
-                <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary">{t('footer.contactUs')}</Link></li>
-                <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary">{t('footer.faq')}</Link></li>
-                <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary">{t('footer.shippingReturns')}</Link></li>
-                <li><Link href="/account" className="text-sm text-muted-foreground hover:text-primary">{t('footer.orderTracking')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.contactUs')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.faq')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.shippingReturns')}</Link></li>
+                <li><Link href="/account" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.orderTracking')}</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-3">{t('footer.company')}</h4>
+              <h4 className="font-black uppercase tracking-widest text-[10px] mb-4">{t('footer.company')}</h4>
               <ul className="space-y-2">
-                <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary">{t('footer.aboutUs')}</Link></li>
-                <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary">{t('footer.careers')}</Link></li>
-                <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary">{t('footer.privacyPolicy')}</Link></li>
-                <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary">{t('footer.termsOfService')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.aboutUs')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.careers')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.privacyPolicy')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.termsOfService')}</Link></li>
               </ul>
             </div>
           </div>
         </div>
         <div className="mt-12 pt-8 border-t flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-sm text-muted-foreground">{t('footer.copyright', { year: new Date().getFullYear() })}</p>
+          <p className="text-xs font-black uppercase tracking-widest text-muted-foreground/60">{t('footer.copyright', { year: new Date().getFullYear() })}</p>
         </div>
       </div>
     </footer>
