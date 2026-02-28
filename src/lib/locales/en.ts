@@ -165,7 +165,7 @@ export const en = {
 
   // Wallet Page
   "wallet.title": "Wallet",
-  "wallet.description": "Manage your secured funds and audit transaction history.",
+  "wallet.description": "Manage your secured funds and audit withdrawal history.",
   "wallet.balanceTitle": "Account Balance",
   "wallet.withdrawalTitle": "Withdrawal",
   "wallet.withdrawalDescription": "Transfer secured funds to your primary accounts.",
@@ -178,7 +178,7 @@ export const en = {
   "wallet.detailsPlaceholder": "Account number or verification ID",
   "wallet.button": "Withdrawal",
   "wallet.buttonLoading": "Processing...",
-  "wallet.historyTitle": "Transaction Log",
+  "wallet.historyTitle": "Withdrawal History",
   "wallet.noHistory": "No transactions found in current log.",
   "wallet.toast.insufficientFundsTitle": "Balance Mismatch",
   "wallet.toast.insufficientFundsDescription": "Withdrawal exceeds Account Balance.",

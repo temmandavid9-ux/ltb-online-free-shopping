@@ -154,7 +154,7 @@ export const es = {
   "tasks.toast.streakMaintained": "Racha anclada. Día {streak} alcanzado.",
   "tasks.toast.eliteUnlockedTitle": "MODO ÉLITE ACTIVADO",
   "tasks.toast.eliteUnlockedDesc": "Hito de 365 días asegurado. Estatus Élite permanente autorizado.",
-  "tasks.toast.giftCardEarned": "BONO ASEGURADO. Tarjeta de regalo de $25 añadida a su cartera.",
+  "tasks.toast.giftCardEarned": "BONUS ASEGURADO. Tarjeta de regalo de $25 añadida a su cartera.",
   "tasks.initialFollow.title": "Primero, siga nuestras redes",
   "tasks.initialFollow.description": "Para desbloquear las tareas diarias, primero debe seguir todos nuestros canales de redes sociales.",
   "tasks.initialFollow.followButton": "Seguir",
@@ -165,7 +165,7 @@ export const es = {
   
   // Wallet Page
   "wallet.title": "Billetera",
-  "wallet.description": "Administre sus fondos asegurados y audite el historial de transacciones.",
+  "wallet.description": "Administre sus fondos asegurados y audite el historial de retiros.",
   "wallet.balanceTitle": "Account Balance",
   "wallet.withdrawalTitle": "Withdrawal",
   "wallet.withdrawalDescription": "Transfiera fondos asegurados a sus cuentas principales.",
@@ -178,7 +178,7 @@ export const es = {
   "wallet.detailsPlaceholder": "Número de cuenta o ID de verificación",
   "wallet.button": "Withdrawal",
   "wallet.buttonLoading": "Procesando...",
-  "wallet.historyTitle": "Registro de Transacciones",
+  "wallet.historyTitle": "Historial de Retiros",
   "wallet.noHistory": "No se encontraron transacciones en el registro actual.",
   "wallet.toast.insufficientFundsTitle": "Desajuste de Saldo",
   "wallet.toast.insufficientFundsDescription": "El retiro excede el Account Balance.",
