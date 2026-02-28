@@ -31,7 +31,7 @@ const generateVerifiedCatalog = (): Product[] => {
       id: `exclusive_arrival_${index}`,
       slug: `exclusive-item-${index}`,
       name: `Exclusive Masterpiece #${index}`,
-      description: `A unique, verified asset from the Less Talk Business master registry. Representing the zenith of quality and professional status. Authenticity Code: LTB-VER-${index.toString().padStart(4, '0')}. Verified by CEO.`,
+      description: `A unique, verified asset from the Less Talk Business master registry. Representing the zenith of quality and professional status. Authenticity Code: LTB-VER-${index.toString().padStart(4, '0')}. Verified by CEO URIEL DAVID.`,
       category: category,
       price: basePrice,
       brand: brand,
