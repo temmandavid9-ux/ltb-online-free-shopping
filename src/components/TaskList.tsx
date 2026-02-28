@@ -93,17 +93,18 @@ export default function TaskList() {
       updates.streakCount = newStreak;
 
       // MISSION CRITICAL: Elite Mode Unlock Protocol
+      // Must complete 365 consecutive days BEFORE Elite Mode activates
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = today.toISOString();
-        updates.eliteMonthlyCounter = 0; // Cycle initialized but not incremented until day 366
+        updates.eliteMonthlyCounter = 0; // Starts incrementing only from Day 366
         updates.eliteRewardsAvailable = 0;
         toast({ 
           title: t('tasks.toast.eliteUnlockedTitle'), 
           description: t('tasks.toast.eliteUnlockedDesc') 
         });
       } else if (userData.eliteUnlocked) {
-        // Monthly Bonus Cycle progress only active AFTER 365 days are completed
+        // Monthly Bonus Cycle progress only active AFTER 365 days are completed (Day 366+)
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
         if (newMonthlyCounter >= 30) {
@@ -151,7 +152,7 @@ export default function TaskList() {
     setActiveTimer(true);
   };
 
-  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center">Verifying Registry...</div>;
+  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center">Verifying Sequence...</div>;
   if (!user || !userData) return <p className="p-24 text-center">Authentication Required.</p>;
 
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
@@ -172,7 +173,7 @@ export default function TaskList() {
           <div>
             <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
               {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-              {userData.eliteUnlocked ? "Elite Mode Active" : "Daily Registry Sequence"}
+              {userData.eliteUnlocked ? "Elite Mode Active" : "Daily Task Sequence"}
             </CardTitle>
             <CardDescription className="mt-2 font-medium uppercase tracking-widest text-[10px] text-muted-foreground">
               Sequential Verification Required. Day {userData.streakCount || 0} of 365 Milestone.
@@ -272,7 +273,7 @@ export default function TaskList() {
               <div className="mx-auto w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-6">
                 <Clock className="w-14 h-14 text-primary" />
               </div>
-              <h3 className="text-3xl font-black luxury-text-gradient">Registry Cooldown</h3>
+              <h3 className="text-3xl font-black luxury-text-gradient">Task Cooldown</h3>
               <p className="text-muted-foreground text-[10px] font-black uppercase tracking-widest mb-4">Streak anchored. 24-hour verification window active.</p>
               <div className="inline-flex items-center gap-2 px-6 py-2 bg-secondary rounded-full border border-border/50">
                 <Lock className="w-3 h-3 text-muted-foreground" />
@@ -290,7 +291,7 @@ export default function TaskList() {
             disabled={activeTimer || isCooldownActive}
             onClick={() => handleStartSubTask(currentStepIndex, channels[currentStepIndex].url)}
           >
-            {activeTimer ? "Verification in Progress..." : isCooldownActive ? "Reward Secured" : `Initialize Registry Step ${currentStepIndex + 1}`}
+            {activeTimer ? "Verification in Progress..." : isCooldownActive ? "Reward Secured" : `Initialize Task Step ${currentStepIndex + 1}`}
           </Button>
         </CardFooter>
       </Card>
