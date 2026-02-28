@@ -41,11 +41,26 @@ export default function TaskList() {
     return () => clearInterval(timer);
   }, []);
 
+  // Cooldown is active if last cycle was completed less than 24h ago
   const isCooldownActive = useMemo(() => {
     if (!userData?.lastCompletedDate) return false;
     const lastTime = new Date(userData.lastCompletedDate).getTime();
     return (currentTime - lastTime) < COOLDOWN_MS;
   }, [userData?.lastCompletedDate, currentTime]);
+
+  // AUTO-RESET PROTOCOL: If cooldown is over but flags are still set, reset them.
+  useEffect(() => {
+    if (userData && userDocRef && !isCooldownActive) {
+      if (userData.step1Status || userData.step2Status || userData.step3Status) {
+        updateDocumentNonBlocking(userDocRef, {
+          step1Status: false,
+          step2Status: false,
+          step3Status: false,
+          lastStepDate: null
+        });
+      }
+    }
+  }, [userData, userDocRef, isCooldownActive]);
 
   const nextUnlockTime = useMemo(() => {
     if (!userData?.lastCompletedDate) return null;
@@ -82,6 +97,7 @@ export default function TaskList() {
 
       if (lastDate) {
         const diff = today.getTime() - lastDate.getTime();
+        // Streak continues if finished within 48 hours of last completion
         if (diff < COOLDOWN_MS * 2) {
           newStreak += 1;
         } else {
@@ -215,7 +231,7 @@ export default function TaskList() {
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <Zap className="w-6 h-6 text-primary" />
-                    <span className="text-sm font-black uppercase tracking-widest">Monthly Bonus cycle</span>
+                    <span className="text-sm font-black uppercase tracking-widest">Monthly Bonus Cycle</span>
                   </div>
                   <span className="text-xs font-black text-primary">{userData.eliteMonthlyCounter || 0} / 30 Cycles</span>
                 </div>
