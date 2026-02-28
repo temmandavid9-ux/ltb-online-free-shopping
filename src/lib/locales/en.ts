@@ -167,7 +167,7 @@ export const en = {
   "wallet.title": "Wallet",
   "wallet.description": "Manage your secured funds and audit transaction history.",
   "wallet.balanceTitle": "Account Balance",
-  "wallet.withdrawalTitle": "Initiate Withdrawal",
+  "wallet.withdrawalTitle": "Withdrawal",
   "wallet.withdrawalDescription": "Transfer secured funds to your primary accounts.",
   "wallet.minBalanceTitle": "Minimum Threshold",
   "wallet.minBalanceDescription": "Withdrawal requires a minimum threshold of ${amount}.",
