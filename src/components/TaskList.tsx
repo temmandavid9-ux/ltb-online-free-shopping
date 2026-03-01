@@ -41,14 +41,14 @@ export default function TaskList() {
     return () => clearInterval(timer);
   }, []);
 
-  // Cooldown logic: Only locks if Stage 3 was finalized within the last 24h
+  // Cooldown logic: Only locks if the WHOLE cycle (Stage 3) was finalized within last 24h
   const isCooldownActive = useMemo(() => {
     if (!userData?.lastCompletedDate) return false;
     const lastTime = new Date(userData.lastCompletedDate).getTime();
     return (currentTime - lastTime) < COOLDOWN_MS;
   }, [userData?.lastCompletedDate, currentTime]);
 
-  // Reactive Indexing: Force immediate calculation of the next required step
+  // Reactive Indexing: Determines which stage is currently required
   const currentStepIndex = useMemo(() => {
     if (isCooldownActive) return 3; 
     if (!userData?.step1Status) return 0;
@@ -57,10 +57,11 @@ export default function TaskList() {
     return 3; 
   }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
 
-  // AUTO-RESET: If cooldown is over but flags are still true, clear them for the new day
+  // CEO DAILY RESET: If it's a new day (cooldown over), clear the previous day's flags
   useEffect(() => {
     if (userData && userDocRef && !isCooldownActive && !activeTimer) {
-      if (userData.step1Status || userData.step2Status || userData.step3Status) {
+      // Only reset if Stage 3 was the last thing we did and now the day is new
+      if (userData.step3Status) {
         updateDocumentNonBlocking(userDocRef, {
           step1Status: false,
           step2Status: false,
@@ -93,6 +94,7 @@ export default function TaskList() {
 
       if (lastDate) {
         const diff = today.getTime() - lastDate.getTime();
+        // If within 48h, maintain streak, else reset
         if (diff < COOLDOWN_MS * 2) {
           newStreak += 1;
         } else {

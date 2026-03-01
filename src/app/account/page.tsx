@@ -15,7 +15,7 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-  } from "@/table-font-fix"
+  } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -29,13 +29,6 @@ import type { Order, UserProfile, RewardRedemption } from "@/lib/types";
 import { ArrowRight, DollarSign, Crown, Gift, Trophy } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
-
-// Authoritative Table Components with Font-Black (900) weight
-const AuthoritativeTable = ({ children }: { children: React.ReactNode }) => (
-    <Table className="font-black">
-        {children}
-    </Table>
-);
 
 export default function AccountPage() {
     const { user, isUserLoading } = useUser();
@@ -205,7 +198,7 @@ export default function AccountPage() {
                         <CardDescription className="font-black text-[10px] uppercase tracking-widest text-muted-foreground/60">{t('account.orderHistoryDescription')}</CardDescription>
                     </CardHeader>
                     <CardContent className="p-0">
-                        <Table className="font-black">
+                        <Table>
                             <TableHeader>
                                 <TableRow className="border-none bg-secondary/30">
                                     <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest">{t('general.product')}</TableHead>
@@ -245,7 +238,7 @@ export default function AccountPage() {
                             <CardTitle className="text-2xl font-black luxury-text-gradient">Reward History</CardTitle>
                         </CardHeader>
                         <CardContent className="p-0">
-                            <Table className="font-black">
+                            <Table>
                                 <TableHeader>
                                     <TableRow className="border-none bg-secondary/30">
                                         <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest">Reward</TableHead>
