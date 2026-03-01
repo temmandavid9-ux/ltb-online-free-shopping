@@ -18,7 +18,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
 
-const TASK_DURATION_SECONDS = 10; 
+const TASK_DURATION_SECONDS = 600; // Restored to 10 Minutes per command
 const COOLDOWN_MS = 24 * 60 * 60 * 1000; 
 
 export default function TaskList() {
