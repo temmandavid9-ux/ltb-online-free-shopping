@@ -41,16 +41,25 @@ export default function TaskList() {
     return () => clearInterval(timer);
   }, []);
 
-  // Cooldown logic
+  // Cooldown logic: Only locks if Stage 3 was finalized within the last 24h
   const isCooldownActive = useMemo(() => {
     if (!userData?.lastCompletedDate) return false;
     const lastTime = new Date(userData.lastCompletedDate).getTime();
     return (currentTime - lastTime) < COOLDOWN_MS;
   }, [userData?.lastCompletedDate, currentTime]);
 
-  // AUTO-RESET PROTOCOL: If cooldown is over but flags are still set, reset them immediately.
+  // Reactive Indexing: Force immediate calculation of the next required step
+  const currentStepIndex = useMemo(() => {
+    if (isCooldownActive) return 3; 
+    if (!userData?.step1Status) return 0;
+    if (!userData?.step2Status) return 1;
+    if (!userData?.step3Status) return 2;
+    return 3; 
+  }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
+
+  // AUTO-RESET: If cooldown is over but flags are still true, clear them for the new day
   useEffect(() => {
-    if (userData && userDocRef && !isCooldownActive) {
+    if (userData && userDocRef && !isCooldownActive && !activeTimer) {
       if (userData.step1Status || userData.step2Status || userData.step3Status) {
         updateDocumentNonBlocking(userDocRef, {
           step1Status: false,
@@ -60,21 +69,7 @@ export default function TaskList() {
         });
       }
     }
-  }, [userData, userDocRef, isCooldownActive]);
-
-  // Reactive Indexing: Determines exactly which stage is next based on database flags
-  const currentStepIndex = useMemo(() => {
-    if (isCooldownActive) return 3; 
-    if (!userData?.step1Status) return 0;
-    if (!userData?.step2Status) return 1;
-    if (!userData?.step3Status) return 2;
-    return 3; 
-  }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
-
-  const nextUnlockTime = useMemo(() => {
-    if (!userData?.lastCompletedDate) return null;
-    return new Date(new Date(userData.lastCompletedDate).getTime() + COOLDOWN_MS);
-  }, [userData?.lastCompletedDate]);
+  }, [userData, userDocRef, isCooldownActive, activeTimer]);
 
   const handleStageComplete = useCallback(() => {
     if (!user || !userData || !userDocRef || activeStep === null) return;
@@ -98,7 +93,6 @@ export default function TaskList() {
 
       if (lastDate) {
         const diff = today.getTime() - lastDate.getTime();
-        // Streak continues if finished within 48 hours of last completion
         if (diff < COOLDOWN_MS * 2) {
           newStreak += 1;
         } else {
@@ -117,7 +111,6 @@ export default function TaskList() {
         updates.eliteRewardsAvailable = 0;
         toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured." });
       } else if (userData.eliteUnlocked) {
-        // Bonus payout tracking only if Day 366+
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
         if (newMonthlyCounter >= 30) {
@@ -176,7 +169,10 @@ export default function TaskList() {
       eliteMonthlyCounter: 0,
       eliteRewardsAvailable: 0
     });
-    toast({ title: "CEO BYPASS: Sequence Fully Reset" });
+    setActiveTimer(false);
+    setActiveStep(null);
+    setCountdown(TASK_DURATION_SECONDS);
+    toast({ title: "CEO BYPASS: SEQUENCE FULLY RESET" });
   };
 
   if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center font-black uppercase tracking-widest">Verifying Integrity...</div>;
@@ -194,21 +190,21 @@ export default function TaskList() {
     <div className="space-y-10">
       <Card className="overflow-hidden border-2 border-primary/20 bg-gradient-to-br from-background to-secondary/10 shadow-2xl rounded-[3rem]">
         <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-10 pb-7">
-          <div>
-            <div className="flex items-center gap-4 mb-4">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-4">
                 <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
                 {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
                 {userData.eliteUnlocked ? "Elite Tier Active" : "Daily Task Sequence"}
                 </CardTitle>
-                {isAdmin && (
-                    <Button onClick={resetForCEO} size="sm" variant="destructive" className="rounded-full px-4 h-10 text-[9px] font-black uppercase tracking-widest gap-2 bg-black hover:bg-red-600 transition-colors">
-                        <RefreshCcw className="w-3 h-3" /> CEO BYPASS: RESET SEQUENCE
-                    </Button>
-                )}
             </div>
-            <CardDescription className="mt-2 font-black uppercase tracking-widest text-[10px] text-muted-foreground/60">
+            <CardDescription className="font-black uppercase tracking-widest text-[10px] text-muted-foreground/60">
               Identity: CEO {userData.username} • Milestone: {userData.streakCount || 0} / 365 Cycles
             </CardDescription>
+            {isAdmin && (
+                <Button onClick={resetForCEO} size="sm" variant="destructive" className="mt-2 rounded-full px-6 h-10 text-[9px] font-black uppercase tracking-widest gap-2 bg-black hover:bg-red-600 transition-colors w-fit">
+                    <RefreshCcw className="w-3 h-3" /> CEO BYPASS: RESET SEQUENCE
+                </Button>
+            )}
           </div>
           <div className="text-left sm:text-right">
             <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Account Balance</div>
@@ -248,14 +244,14 @@ export default function TaskList() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {channels.map((channel) => {
                 const isSecured = channel.status;
-                const isLocked = channel.id > currentStepIndex && !isCooldownActive;
+                const isLocked = channel.id > currentStepIndex;
                 const isActivating = channel.id === currentStepIndex && activeTimer;
 
                 return (
-                  <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 ${isSecured ? 'border-primary/40 bg-primary/5 shadow-inner' : isActivating ? 'border-primary animate-pulse shadow-lg' : isLocked ? 'opacity-50 grayscale bg-muted/20 border-transparent' : 'border-black/5 bg-white shadow-md'}`}>
+                  <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 ${isSecured ? 'border-primary/40 bg-primary/5 shadow-inner' : isActivating ? 'border-primary animate-pulse shadow-lg' : isLocked || isCooldownActive ? 'opacity-50 grayscale bg-muted/20 border-transparent' : 'border-black/5 bg-white shadow-md'}`}>
                     <CardContent className="p-8 text-center space-y-4">
-                      <div className={`mx-auto w-20 h-20 rounded-[1.5rem] flex items-center justify-center transition-all ${isSecured ? 'bg-primary text-white shadow-lg' : isLocked ? 'bg-muted text-muted-foreground' : 'bg-black text-white'}`}>
-                        {isLocked ? <Lock className="w-10 h-10" /> : isSecured ? <ShieldCheck className="w-10 h-10" /> : <channel.icon className="w-10 h-10" />}
+                      <div className={`mx-auto w-20 h-20 rounded-[1.5rem] flex items-center justify-center transition-all ${isSecured ? 'bg-primary text-white shadow-lg' : isLocked || isCooldownActive ? 'bg-muted text-muted-foreground' : 'bg-black text-white'}`}>
+                        {isLocked || isCooldownActive ? <Lock className="w-10 h-10" /> : isSecured ? <ShieldCheck className="w-10 h-10" /> : <channel.icon className="w-10 h-10" />}
                       </div>
                       <div>
                         <h4 className="font-black text-[11px] uppercase tracking-widest">{channel.title}</h4>
@@ -309,7 +305,7 @@ export default function TaskList() {
               <div className="inline-flex items-center gap-3 px-8 py-3 bg-black text-white rounded-full shadow-2xl">
                 <Lock className="w-4 h-4 text-primary" />
                 <span className="text-[11px] font-black uppercase tracking-widest">
-                  Unlocks at: {nextUnlockTime?.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  Cycle finalized. Check back in 24 hours.
                 </span>
               </div>
             </div>
