@@ -16,7 +16,8 @@ const generateVerifiedCatalog = (): Product[] => {
   const productUrls = uniqueUrls.filter(url => url !== masterLogoUrl);
 
   const categories = ['Clothes', 'Wigs', 'Laptops', 'Shoes', 'Watches', 'Underwear', 'Chains', 'Phones', 'Beauty'];
-  const brands = ['Nexa', 'Stellar', 'Aperture', 'Helios', 'Zenco'];
+  // Consolidated listed brands into LTB
+  const brands = ['LTB'];
 
   productUrls.forEach((url, i) => {
     const index = i + 1;

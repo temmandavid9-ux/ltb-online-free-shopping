@@ -3,14 +3,13 @@ import { findImage } from './find-image';
 
 /**
  * Standard Beauty Catalog.
- * For any products in the 12-410 range missing unique links,
- * we utilize high-quality anchors from the verified registry.
+ * Consolidated brands to LTB.
  */
 export const beautyProducts: Product[] = [
   {
     id: 'prod_1',
     slug: 'product-1',
-    name: 'Nexa Radiant Foundation',
+    name: 'LTB Radiant Foundation',
     description: 'The definitive standard of flawless coverage.',
     category: 'Beauty',
     price: 45,
@@ -23,7 +22,7 @@ export const beautyProducts: Product[] = [
   {
     id: 'prod_2',
     slug: 'product-2',
-    name: 'Stellar Glow Serum',
+    name: 'LTB Glow Serum',
     description: 'Zenith of skin refinement.',
     category: 'Beauty',
     price: 75,
@@ -36,7 +35,7 @@ export const beautyProducts: Product[] = [
   {
     id: 'prod_3',
     slug: 'product-3',
-    name: 'Zenco Lip Lacquer Set',
+    name: 'LTB Lip Lacquer Set',
     description: 'Signature aesthetics for the global elite.',
     category: 'Beauty',
     price: 50,
@@ -49,7 +48,7 @@ export const beautyProducts: Product[] = [
   {
     id: 'prod_4',
     slug: 'product-4',
-    name: 'Aperture Flawless Finish',
+    name: 'LTB Flawless Finish',
     description: 'Ultimate quality verified by Less Talk Business.',
     category: 'Beauty',
     price: 48,
