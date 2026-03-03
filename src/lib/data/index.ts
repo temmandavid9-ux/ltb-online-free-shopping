@@ -1,3 +1,4 @@
+
 import type { Product, Category } from '../types';
 import { Shirt, Laptop, Watch, Dna, Footprints, Layers, Smartphone, Link as LinkIcon, Palette } from 'lucide-react';
 import { newProducts } from './new-products';
@@ -24,5 +25,5 @@ export const products: Product[] = [
     ...newProducts
 ];
 
-// Simplified brands list strictly reflecting the consolidated identity
-export const brands: string[] = ['LTB'];
+// As per authoritative command: Consolidated brand is "LTB Brand"
+export const brands: string[] = ['LTB Brand'];

@@ -1,3 +1,4 @@
+
 import type { Product } from '../types';
 import { getUniqueVerifiedUrls } from './find-image';
 import { manualProductNames } from './product-names';
@@ -16,17 +17,17 @@ const generateVerifiedCatalog = (): Product[] => {
   const productUrls = uniqueUrls.filter(url => url !== masterLogoUrl);
 
   const categories = ['Clothes', 'Wigs', 'Laptops', 'Shoes', 'Watches', 'Underwear', 'Chains', 'Phones', 'Beauty'];
-  // Consolidated listed brands into LTB
-  const brands = ['LTB'];
+  
+  // As per authoritative command: Brand is strictly "LTB Brand"
+  const brandName = 'LTB Brand';
 
   productUrls.forEach((url, i) => {
     const index = i + 1;
     const category = categories[i % categories.length];
-    const brand = brands[i % brands.length];
     
-    // Check for CEO manual name override
+    // Check for CEO manual name override (prioritize manual string if it exists and is not empty)
     const manualName = manualProductNames[index];
-    const productName = manualName || `Exclusive Masterpiece #${index}`;
+    const productName = (manualName && manualName.trim() !== "") ? manualName : `Exclusive Masterpiece #${index}`;
     
     // Deterministic generation to prevent hydration mismatches
     const basePrice = 150 + ((index * 7) % 850); 
@@ -40,7 +41,7 @@ const generateVerifiedCatalog = (): Product[] => {
       description: `A unique, verified asset from the Less Talk Business master registry. Representing the zenith of quality and professional status. Authenticity Code: LTB-VER-${index.toString().padStart(4, '0')}. Verified by CEO URIEL DAVID.`,
       category: category,
       price: basePrice,
-      brand: brand,
+      brand: brandName,
       images: [{ url, hint: "verified" }],
       stock: 5 + (index % 15),
       rating: baseRating,
