@@ -1,3 +1,4 @@
+
 import type { Product } from '../types';
 import { findImage } from './find-image';
 
@@ -31,11 +32,11 @@ export const wigProducts: Product[] = [
   {
     id: 'prod_334',
     slug: 'product-334',
-    name: 'Vivid Fire Opal Wig',
+    name: 'LTB Vivid Fire Opal Wig',
     description: 'Make a bold statement with the Vivid Fire Opal Wig. Its vibrant colors and high-quality synthetic fibers create a look that is both stunning and unique.',
     category: 'Wigs',
     price: 150,
-    brand: 'Vivid',
+    brand: 'LTB',
     images: [findImage('prod_img_334')],
     stock: 22,
     rating: 4.8,

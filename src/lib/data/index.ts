@@ -1,4 +1,3 @@
-
 import type { Product, Category } from '../types';
 import { Shirt, Laptop, Watch, Dna, Footprints, Layers, Smartphone, Link as LinkIcon, Palette } from 'lucide-react';
 import { newProducts } from './new-products';
@@ -20,11 +19,10 @@ export const categories: Category[] = [
 
 /**
  * Master Product Catalog
- * composited exclusively from the verified unique links in all-links.json.
- * This ensures NO REPETITION and full utilization of the 900+ assets.
  */
 export const products: Product[] = [
     ...newProducts
 ];
 
-export const brands: string[] = Array.from(new Set(products.map(p => p.brand)));
+// Simplified brands list strictly reflecting the consolidated identity
+export const brands: string[] = ['LTB'];

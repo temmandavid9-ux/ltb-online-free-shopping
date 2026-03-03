@@ -1,4 +1,3 @@
-
 'use client';
 import {
   useUser,
@@ -18,7 +17,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
 
-const TASK_DURATION_SECONDS = 600; // Restored to 10 Minutes per command
+const TASK_DURATION_SECONDS = 600; // 10 Minutes per stage
 const COOLDOWN_MS = 24 * 60 * 60 * 1000; 
 
 export default function TaskList() {
@@ -41,14 +40,13 @@ export default function TaskList() {
     return () => clearInterval(timer);
   }, []);
 
-  // Cooldown logic: Only locks if the WHOLE cycle (Stage 3) was finalized within last 24h
   const isCooldownActive = useMemo(() => {
     if (!userData?.lastCompletedDate) return false;
     const lastTime = new Date(userData.lastCompletedDate).getTime();
     return (currentTime - lastTime) < COOLDOWN_MS;
   }, [userData?.lastCompletedDate, currentTime]);
 
-  // Reactive Indexing: Determines which stage is currently required
+  // Reactive Step Indexer
   const currentStepIndex = useMemo(() => {
     if (isCooldownActive) return 3; 
     if (!userData?.step1Status) return 0;
@@ -57,10 +55,9 @@ export default function TaskList() {
     return 3; 
   }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
 
-  // CEO DAILY RESET: If it's a new day (cooldown over), clear the previous day's flags
+  // Daily Reset Protocol: Automatically clear old flags when cooldown expires
   useEffect(() => {
     if (userData && userDocRef && !isCooldownActive && !activeTimer) {
-      // Only reset if Stage 3 was the last thing we did and now the day is new
       if (userData.step3Status) {
         updateDocumentNonBlocking(userDocRef, {
           step1Status: false,
@@ -94,7 +91,6 @@ export default function TaskList() {
 
       if (lastDate) {
         const diff = today.getTime() - lastDate.getTime();
-        // If within 48h, maintain streak, else reset
         if (diff < COOLDOWN_MS * 2) {
           newStreak += 1;
         } else {
@@ -105,7 +101,6 @@ export default function TaskList() {
       }
       updates.streakCount = newStreak;
 
-      // ELITE BARRIER: Milestone 365
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = now;
