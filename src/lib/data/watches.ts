@@ -1,4 +1,3 @@
-
 import type { Product } from '../types';
 import { findImage } from './find-image';
 
@@ -10,7 +9,7 @@ export const watchProducts: Product[] = [
     description: 'A masterpiece of precision horology and refined aesthetics. Designed for the executive who values both time and timeless style.',
     category: 'Watches',
     price: 85,
-    brand: 'LTB',
+    brand: 'LTB Brand',
     images: [findImage('prod_img_160')],
     stock: 120,
     rating: 4.7,
@@ -23,7 +22,7 @@ export const watchProducts: Product[] = [
     description: 'Sleek black finish with minimalist details. This watch represents the pinnacle of modern luxury and reliable functionality.',
     category: 'Watches',
     price: 150,
-    brand: 'LTB',
+    brand: 'LTB Brand',
     images: [findImage('prod_img_167')],
     stock: 90,
     rating: 4.8,
@@ -36,7 +35,7 @@ export const watchProducts: Product[] = [
     description: 'The ultimate business accessory. Hand-assembled with premium components for a life of success and precision.',
     category: 'Watches',
     price: 800,
-    brand: 'LTB',
+    brand: 'LTB Brand',
     images: [findImage('prod_img_170')],
     stock: 20,
     rating: 5,
@@ -49,7 +48,7 @@ export const watchProducts: Product[] = [
     description: 'Command the moment. The Sovereign is a masterpiece of 18k gold and precision engineering, built for those who lead.',
     category: 'Watches',
     price: 3199,
-    brand: 'LTB',
+    brand: 'LTB Brand',
     images: [findImage('prod_img_171')],
     stock: 10,
     rating: 4.9,
@@ -62,7 +61,7 @@ export const watchProducts: Product[] = [
     description: 'Master time itself. Fusing aerospace-grade titanium with classic functionality, the Apex is the essential tool for the modern pioneer.',
     category: 'Watches',
     price: 2250,
-    brand: 'LTB',
+    brand: 'LTB Brand',
     images: [findImage('prod_img_173')],
     stock: 18,
     rating: 4.8,

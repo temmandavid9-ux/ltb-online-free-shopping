@@ -55,19 +55,45 @@ export default function TaskList() {
     return 3; 
   }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
 
-  // Daily Reset Protocol: Automatically clear old flags when cooldown expires
+  // Proactive Streak and Reset Protocol
   useEffect(() => {
-    if (userData && userDocRef && !isCooldownActive && !activeTimer) {
-      if (userData.step3Status) {
-        updateDocumentNonBlocking(userDocRef, {
-          step1Status: false,
-          step2Status: false,
-          step3Status: false,
-          lastStepDate: null
-        });
+    if (userData && userDocRef && !activeTimer) {
+      const updates: any = {};
+      let needsUpdate = false;
+
+      // 1. Daily Task Flag Reset: If cooldown expired but flags are still set
+      if (!isCooldownActive && userData.step3Status) {
+        updates.step1Status = false;
+        updates.step2Status = false;
+        updates.step3Status = false;
+        updates.lastStepDate = null;
+        needsUpdate = true;
+      }
+
+      // 2. STREAK INTEGRITY CHECK: If missed a day (48h since last completion)
+      if (userData.lastCompletedDate) {
+        const lastTime = new Date(userData.lastCompletedDate).getTime();
+        const diff = currentTime - lastTime;
+        // If more than 48 hours passed, user missed their window
+        if (diff > COOLDOWN_MS * 2 && userData.streakCount > 0) {
+          updates.streakCount = 0;
+          needsUpdate = true;
+          // Note: Balance is explicitly preserved as per instructions
+        }
+      }
+
+      if (needsUpdate) {
+        updateDocumentNonBlocking(userDocRef, updates);
+        if (updates.streakCount === 0) {
+          toast({
+            variant: "destructive",
+            title: "STREAK REGISTRY RESET",
+            description: "48-hour activity window exceeded. Registry initialized to Day 0.",
+          });
+        }
       }
     }
-  }, [userData, userDocRef, isCooldownActive, activeTimer]);
+  }, [userData, userDocRef, isCooldownActive, activeTimer, currentTime, toast]);
 
   const handleStageComplete = useCallback(() => {
     if (!user || !userData || !userDocRef || activeStep === null) return;
@@ -89,8 +115,10 @@ export default function TaskList() {
       const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
       let newStreak = userData.streakCount || 0;
 
+      // Update streak count logic
       if (lastDate) {
         const diff = today.getTime() - lastDate.getTime();
+        // Allow within 48 hours to maintain streak (24h cooldown + 24h grace)
         if (diff < COOLDOWN_MS * 2) {
           newStreak += 1;
         } else {
@@ -101,6 +129,7 @@ export default function TaskList() {
       }
       updates.streakCount = newStreak;
 
+      // Handle Elite Unlocks
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = now;

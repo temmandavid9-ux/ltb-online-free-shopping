@@ -3,7 +3,7 @@ import { findImage } from './find-image';
 
 /**
  * Standard Beauty Catalog.
- * Consolidated brands to LTB.
+ * Consolidated brands to LTB Brand.
  */
 export const beautyProducts: Product[] = [
   {
@@ -13,7 +13,7 @@ export const beautyProducts: Product[] = [
     description: 'The definitive standard of flawless coverage.',
     category: 'Beauty',
     price: 45,
-    brand: 'LTB',
+    brand: 'LTB Brand',
     images: [findImage('prod_img_1')],
     stock: 100,
     rating: 4.8,
@@ -26,7 +26,7 @@ export const beautyProducts: Product[] = [
     description: 'Zenith of skin refinement.',
     category: 'Beauty',
     price: 75,
-    brand: 'LTB',
+    brand: 'LTB Brand',
     images: [findImage('prod_img_2')],
     stock: 80,
     rating: 4.9,
@@ -39,7 +39,7 @@ export const beautyProducts: Product[] = [
     description: 'Signature aesthetics for the global elite.',
     category: 'Beauty',
     price: 50,
-    brand: 'LTB',
+    brand: 'LTB Brand',
     images: [findImage('prod_img_3')],
     stock: 120,
     rating: 4.7,
@@ -52,7 +52,7 @@ export const beautyProducts: Product[] = [
     description: 'Ultimate quality verified by Less Talk Business.',
     category: 'Beauty',
     price: 48,
-    brand: 'LTB',
+    brand: 'LTB Brand',
     images: [findImage('prod_img_4')],
     stock: 90,
     rating: 4.8,

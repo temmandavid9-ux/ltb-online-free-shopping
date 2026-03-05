@@ -67,9 +67,6 @@ export default function AdminPage() {
   const recentOrders = ordersData?.slice(0, 5) || [];
   const recentWithdrawals = withdrawalsData?.slice(0, 5) || [];
 
-  // Total users count is restricted due to security rules (cannot list /users)
-  const totalUsers = 'Verified Restricted';
-
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="flex justify-between items-end mb-12">
@@ -133,8 +130,8 @@ export default function AdminPage() {
                         {recentOrders.length > 0 ? recentOrders.map(order => (
                             <TableRow key={order.id} className="border-border/5">
                                 <TableCell className="pl-8 py-5">
-                                    <div className="font-bold text-sm">{order.product}</div>
-                                    <div className="text-[9px] font-medium text-muted-foreground uppercase">{order.userId.substring(0,8)}...</div>
+                                    <div className="font-black text-sm">{order.product}</div>
+                                    <div className="text-[9px] font-black text-muted-foreground uppercase">{order.userId.substring(0,8)}...</div>
                                 </TableCell>
                                 <TableCell>
                                     <Badge variant={order.status === 'Pending' ? 'secondary' : 'default'} className="rounded-full text-[9px] uppercase font-black tracking-widest">
@@ -169,8 +166,8 @@ export default function AdminPage() {
                             {recentWithdrawals.length > 0 ? recentWithdrawals.map(w => (
                                 <TableRow key={w.id} className="border-border/5">
                                     <TableCell className="pl-8 py-5">
-                                        <div className="font-bold text-sm">{w.paymentMethod}</div>
-                                        <div className="text-[9px] font-medium text-muted-foreground uppercase">{w.userId.substring(0, 8)}...</div>
+                                        <div className="font-black text-sm">{w.paymentMethod}</div>
+                                        <div className="text-[9px] font-black text-muted-foreground uppercase">{w.userId.substring(0, 8)}...</div>
                                     </TableCell>
                                     <TableCell>
                                         <Badge variant={w.status === 'Pending' ? 'secondary' : 'default'} className="rounded-full text-[9px] uppercase font-black tracking-widest">
