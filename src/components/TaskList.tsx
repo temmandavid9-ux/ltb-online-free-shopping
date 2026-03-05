@@ -18,7 +18,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
 
 const TASK_DURATION_SECONDS = 600; // Strictly 10 Minutes per your command
-const COOLDOWN_MS = 24 * 60 * 60 * 1000; // 24 Hour Cycle
+const COOLDOWN_MS = 24 * 60 * 60 * 1000; // Strict 24 Hour Cycle
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
@@ -46,6 +46,20 @@ export default function TaskList() {
     return (currentTime - lastTime) < COOLDOWN_MS;
   }, [userData?.lastCompletedDate, currentTime]);
 
+  const cooldownRemainingText = useMemo(() => {
+    if (!isCooldownActive || !userData?.lastCompletedDate) return null;
+    const lastTime = new Date(userData.lastCompletedDate).getTime();
+    const remainingMs = COOLDOWN_MS - (currentTime - lastTime);
+    
+    if (remainingMs <= 0) return null;
+
+    const h = Math.floor(remainingMs / (1000 * 60 * 60));
+    const m = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((remainingMs % (1000 * 60)) / 1000);
+
+    return `${h}h ${m}m ${s}s`;
+  }, [isCooldownActive, userData?.lastCompletedDate, currentTime]);
+
   const currentStepIndex = useMemo(() => {
     if (isCooldownActive) return 3; 
     if (!userData?.step1Status) return 0;
@@ -72,7 +86,7 @@ export default function TaskList() {
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
-        // CEO COMMAND: Threshold is now strictly 24 hours
+        // CEO COMMAND: Threshold is strictly 24 hours
         if (diff > COOLDOWN_MS && userData.streakCount > 0) {
           updates.streakCount = 0;
           needsUpdate = true;
@@ -111,7 +125,6 @@ export default function TaskList() {
       const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
       let newStreak = (userData.streakCount || 0) + 1;
 
-      // CEO COMMAND: Streak resets if window breached (24h)
       if (lastDate) {
         const diff = currentTime - lastDate.getTime();
         if (diff > COOLDOWN_MS) {
@@ -317,11 +330,16 @@ export default function TaskList() {
                 <Clock className="w-16 h-16 text-primary" />
               </div>
               <h3 className="text-4xl font-black luxury-text-gradient">Daily Cooldown Active</h3>
-              <p className="text-muted-foreground text-[11px] font-black uppercase tracking-widest mb-6">Streak anchored. Sequence locked for 24 hours.</p>
+              <p className="text-muted-foreground text-[11px] font-black uppercase tracking-widest mb-2">Streak anchored. Sequence locked for 24 hours.</p>
+              
+              <div className="text-5xl font-black tabular-nums tracking-tighter mb-6 text-foreground">
+                {cooldownRemainingText}
+              </div>
+
               <div className="inline-flex items-center gap-3 px-8 py-3 bg-black text-white rounded-full shadow-2xl">
                 <Lock className="w-4 h-4 text-primary" />
                 <span className="text-[11px] font-black uppercase tracking-widest">
-                  Cycle finalized. Registry secured.
+                  Registry secured until next authorized window.
                 </span>
               </div>
             </div>
@@ -334,7 +352,7 @@ export default function TaskList() {
             disabled={activeTimer || isCooldownActive || currentStepIndex > 2}
             onClick={() => currentStepIndex <= 2 && handleStartSubTask(currentStepIndex, channels[currentStepIndex].url)}
           >
-            {activeTimer ? "Verifying Authorization..." : isCooldownActive ? "Reward Registry Secured" : currentStepIndex > 2 ? "Cycle Finalized" : `Initialize Stage ${currentStepIndex + 1}`}
+            {activeTimer ? "Verifying Authorization..." : isCooldownActive ? `Authorized in ${cooldownRemainingText}` : currentStepIndex > 2 ? "Cycle Finalized" : `Initialize Stage ${currentStepIndex + 1}`}
           </Button>
         </CardFooter>
       </Card>
