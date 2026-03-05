@@ -4,7 +4,7 @@ import { manualProductNames } from './product-names';
 
 /**
  * Dynamic Generation Engine
- * Globally enforcing "LTB Brand" identity.
+ * Globally enforcing "LTB Brand" identity per CEO command.
  */
 const generateVerifiedCatalog = (): Product[] => {
   const uniqueUrls = getUniqueVerifiedUrls();
@@ -14,7 +14,6 @@ const generateVerifiedCatalog = (): Product[] => {
   const brandName = 'LTB Brand';
 
   uniqueUrls.forEach((url, i) => {
-    // ASSET #N starts at 1
     const assetNumber = i + 1;
     const category = categories[i % categories.length];
     

@@ -17,8 +17,8 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
 
-const TASK_DURATION_SECONDS = 600; // Strictly 10 Minutes
-const COOLDOWN_MS = 24 * 60 * 60 * 1000; 
+const TASK_DURATION_SECONDS = 600; // Strictly 10 Minutes per your command
+const COOLDOWN_MS = 24 * 60 * 60 * 1000; // 24 Hour Cycle
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
@@ -35,7 +35,6 @@ export default function TaskList() {
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [currentTime, setCurrentTime] = useState(Date.now());
 
-  // Heartbeat for reactive time checks
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(Date.now()), 1000);
     return () => clearInterval(timer);
@@ -47,7 +46,6 @@ export default function TaskList() {
     return (currentTime - lastTime) < COOLDOWN_MS;
   }, [userData?.lastCompletedDate, currentTime]);
 
-  // Reactive Step Indexer
   const currentStepIndex = useMemo(() => {
     if (isCooldownActive) return 3; 
     if (!userData?.step1Status) return 0;
@@ -56,7 +54,6 @@ export default function TaskList() {
     return 3; 
   }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
 
-  // PROACTIVE STREAK & RESET INTEGRITY PROTOCOL
   useEffect(() => {
     if (userData && userDocRef && !activeTimer) {
       const updates: any = {};
@@ -71,12 +68,12 @@ export default function TaskList() {
         needsUpdate = true;
       }
 
-      // 2. STREAK FAILURE CHECK: If user breached the 48-hour activity window
+      // 2. STRICT 24H STREAK FAILURE CHECK: Reset to Day 0 if the 24-hour activity window is breached
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
-        // Breach threshold: 48 hours (24h cooldown + 24h cycle window)
-        if (diff > COOLDOWN_MS * 2 && userData.streakCount > 0) {
+        // CEO COMMAND: Threshold is now strictly 24 hours
+        if (diff > COOLDOWN_MS && userData.streakCount > 0) {
           updates.streakCount = 0;
           needsUpdate = true;
         }
@@ -88,7 +85,7 @@ export default function TaskList() {
           toast({
             variant: "destructive",
             title: "STREAK REGISTRY RESET",
-            description: "48-hour activity window breached. Streak initialized to Day 0. Balance preserved.",
+            description: "24-hour activity window breached. Streak initialized to Day 0. Balance preserved.",
           });
         }
       }
@@ -114,16 +111,15 @@ export default function TaskList() {
       const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
       let newStreak = (userData.streakCount || 0) + 1;
 
-      // Reset streak if too much time passed (safety redundancy)
+      // CEO COMMAND: Streak resets if window breached (24h)
       if (lastDate) {
         const diff = currentTime - lastDate.getTime();
-        if (diff > COOLDOWN_MS * 2) {
+        if (diff > COOLDOWN_MS) {
           newStreak = 1;
         }
       }
       updates.streakCount = newStreak;
 
-      // ELITE STATUS AUTH
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = now;

@@ -210,7 +210,7 @@ export default function AccountPage() {
                                     <TableRow key={order.id} className="border-border/5 group">
                                         <TableCell className="pl-10 py-6">
                                             <div className="font-black text-sm group-hover:text-primary transition-colors">{order.product}</div>
-                                            <div className="text-[10px] font-black text-muted-foreground/40 mt-1">{order.formattedDate}</div>
+                                            <div className="text-[10px] font-black text-foreground mt-1">{order.formattedDate}</div>
                                         </TableCell>
                                         <TableCell>
                                             <Badge variant="outline" className="rounded-full px-4 py-1 border-none bg-primary/10 text-primary text-[9px] font-black uppercase tracking-widest">
@@ -257,7 +257,7 @@ export default function AccountPage() {
                                                 </code>
                                             </TableCell>
                                             <TableCell className="text-right pr-10">
-                                                <div className="text-[10px] font-black text-muted-foreground/40">{new Date(red.redemptionDate).toLocaleDateString()}</div>
+                                                <div className="text-[10px] font-black text-foreground">{new Date(red.redemptionDate).toLocaleDateString()}</div>
                                             </TableCell>
                                         </TableRow>
                                     ))}

@@ -33,7 +33,6 @@ export default function AdminPage() {
     setAssetCount(getUniqueAssetCount());
   }, []);
 
-  // ONLY execute collection queries if user is confirmed as admin to avoid permission errors
   const ordersQuery = useMemoFirebase(() => isAdmin ? query(collection(firestore, 'orders'), orderBy('date', 'desc')) : null, [firestore, isAdmin]);
   const { data: ordersData, isLoading: areOrdersLoading } = useCollection<Order>(ordersQuery);
 
@@ -131,7 +130,7 @@ export default function AdminPage() {
                             <TableRow key={order.id} className="border-border/5">
                                 <TableCell className="pl-8 py-5">
                                     <div className="font-black text-sm">{order.product}</div>
-                                    <div className="text-[9px] font-black text-muted-foreground uppercase">{order.userId.substring(0,8)}...</div>
+                                    <div className="text-[9px] font-black text-foreground uppercase">{order.userId.substring(0,8)}...</div>
                                 </TableCell>
                                 <TableCell>
                                     <Badge variant={order.status === 'Pending' ? 'secondary' : 'default'} className="rounded-full text-[9px] uppercase font-black tracking-widest">
@@ -167,7 +166,7 @@ export default function AdminPage() {
                                 <TableRow key={w.id} className="border-border/5">
                                     <TableCell className="pl-8 py-5">
                                         <div className="font-black text-sm">{w.paymentMethod}</div>
-                                        <div className="text-[9px] font-black text-muted-foreground uppercase">{w.userId.substring(0, 8)}...</div>
+                                        <div className="text-[9px] font-black text-foreground uppercase">{w.userId.substring(0, 8)}...</div>
                                     </TableCell>
                                     <TableCell>
                                         <Badge variant={w.status === 'Pending' ? 'secondary' : 'default'} className="rounded-full text-[9px] uppercase font-black tracking-widest">

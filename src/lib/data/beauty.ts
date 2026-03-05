@@ -3,7 +3,7 @@ import { findImage } from './find-image';
 
 /**
  * Standard Beauty Catalog.
- * Consolidated brands to LTB Brand.
+ * Globally consolidated to LTB Brand.
  */
 export const beautyProducts: Product[] = [
   {

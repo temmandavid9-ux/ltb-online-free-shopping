@@ -187,7 +187,7 @@ export default function WalletPage() {
                     <TableRow key={w.id} className="border-border/5">
                       <TableCell className="pl-10 py-6 text-sm font-black">{w.formattedDate}</TableCell>
                       <TableCell className="font-black text-sm">${w.amount.toLocaleString()}</TableCell>
-                      <TableCell className="text-sm font-black text-muted-foreground">{w.paymentMethod}</TableCell>
+                      <TableCell className="text-sm font-black text-foreground">{w.paymentMethod}</TableCell>
                       <TableCell className="text-right pr-10">
                          <Badge variant="outline" className={`rounded-full px-4 py-1 border-none text-[9px] font-black uppercase tracking-widest ${
                             w.status === 'Approved' ? 'bg-primary/10 text-primary' : 
