@@ -3,8 +3,8 @@ import { getUniqueVerifiedUrls } from './find-image';
 import { manualProductNames } from './product-names';
 
 /**
- * Generates the master product catalog dynamically based on unique registry links.
- * 1:1 Alignment: Exclusive Arrival #N = Asset #N in Registry.
+ * Dynamic Generation Engine
+ * Globally enforcing "LTB Brand" identity.
  */
 const generateVerifiedCatalog = (): Product[] => {
   const uniqueUrls = getUniqueVerifiedUrls();
@@ -17,11 +17,9 @@ const generateVerifiedCatalog = (): Product[] => {
     const index = i + 1;
     const category = categories[i % categories.length];
     
-    // Prioritize CEO Manual Names
     const manualName = manualProductNames[index];
     const productName = (manualName && manualName.trim() !== "") ? manualName : `Exclusive Masterpiece #${index}`;
     
-    // Deterministic Price/Rating
     const basePrice = 150 + ((index * 7) % 850); 
     const baseRating = Number((4.7 + ((index * 3) % 4) / 10).toFixed(1));
     const baseReviews = 100 + ((index * 13) % 400);

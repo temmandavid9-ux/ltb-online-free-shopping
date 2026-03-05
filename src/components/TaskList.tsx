@@ -35,6 +35,7 @@ export default function TaskList() {
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [currentTime, setCurrentTime] = useState(Date.now());
 
+  // Heartbeat for reactive time checks
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(Date.now()), 1000);
     return () => clearInterval(timer);
@@ -55,14 +56,14 @@ export default function TaskList() {
     return 3; 
   }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
 
-  // Proactive Streak and Reset Protocol
+  // PROACTIVE STREAK INTEGRITY PROTOCOL
   useEffect(() => {
     if (userData && userDocRef && !activeTimer) {
       const updates: any = {};
       let needsUpdate = false;
 
-      // 1. Daily Task Flag Reset: If cooldown expired but flags are still set
-      if (!isCooldownActive && userData.step3Status) {
+      // 1. AUTO-RESET PREVIOUS DAY'S PROGRESS: If cooldown expired but flags are still true
+      if (!isCooldownActive && (userData.step1Status || userData.step2Status || userData.step3Status)) {
         updates.step1Status = false;
         updates.step2Status = false;
         updates.step3Status = false;
@@ -70,15 +71,15 @@ export default function TaskList() {
         needsUpdate = true;
       }
 
-      // 2. STREAK INTEGRITY CHECK: If missed a day (48h since last completion)
+      // 2. STREAK FAILURE CHECK: If user breached the 48-hour activity window
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
-        // If more than 48 hours passed, user missed their window
+        // Breach threshold: 48 hours (24h cooldown + 24h cycle window)
         if (diff > COOLDOWN_MS * 2 && userData.streakCount > 0) {
           updates.streakCount = 0;
           needsUpdate = true;
-          // Note: Balance is explicitly preserved as per instructions
+          // Balance is explicitly preserved
         }
       }
 
@@ -88,7 +89,7 @@ export default function TaskList() {
           toast({
             variant: "destructive",
             title: "STREAK REGISTRY RESET",
-            description: "48-hour activity window exceeded. Registry initialized to Day 0.",
+            description: "48-hour activity window breached. Streak initialized to Day 0. Balance preserved.",
           });
         }
       }
@@ -113,23 +114,18 @@ export default function TaskList() {
       
       const today = new Date();
       const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
-      let newStreak = userData.streakCount || 0;
+      let newStreak = (userData.streakCount || 0) + 1;
 
-      // Update streak count logic
+      // Reset streak if too much time passed (safety check)
       if (lastDate) {
         const diff = today.getTime() - lastDate.getTime();
-        // Allow within 48 hours to maintain streak (24h cooldown + 24h grace)
-        if (diff < COOLDOWN_MS * 2) {
-          newStreak += 1;
-        } else {
+        if (diff > COOLDOWN_MS * 2) {
           newStreak = 1;
         }
-      } else {
-        newStreak = 1;
       }
       updates.streakCount = newStreak;
 
-      // Handle Elite Unlocks
+      // ELITE STATUS AUTH
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = now;
@@ -201,7 +197,7 @@ export default function TaskList() {
     toast({ title: "CEO BYPASS: SEQUENCE FULLY RESET" });
   };
 
-  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center font-black uppercase tracking-widest">Verifying Integrity...</div>;
+  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center font-black uppercase tracking-widest">Verifying System Integrity...</div>;
   if (!user || !userData) return <p className="p-24 text-center font-black uppercase tracking-widest text-muted-foreground">Authentication Required.</p>;
 
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
@@ -224,7 +220,7 @@ export default function TaskList() {
                 </CardTitle>
             </div>
             <CardDescription className="font-black uppercase tracking-widest text-[10px] text-muted-foreground/60">
-              Identity: CEO {userData.username} • Milestone: {userData.streakCount || 0} / 365 Cycles
+              Identity: CEO {userData.username} • Registry: Day {userData.streakCount || 0} / 365
             </CardDescription>
             {isAdmin && (
                 <Button onClick={resetForCEO} size="sm" variant="destructive" className="mt-2 rounded-full px-6 h-10 text-[9px] font-black uppercase tracking-widest gap-2 bg-black hover:bg-red-600 transition-colors w-fit">
@@ -316,7 +312,7 @@ export default function TaskList() {
               </div>
               <div className="text-9xl font-black font-headline tracking-tighter tabular-nums text-foreground animate-pulse">{countdownText}</div>
               <p className="text-xs text-muted-foreground font-black uppercase tracking-[0.2em] max-w-sm mx-auto leading-relaxed">
-                Engagement secures fractional reward credit.
+                Verification process initiated. Engage with channel content to secure reward credit.
               </p>
             </div>
           )}
@@ -331,7 +327,7 @@ export default function TaskList() {
               <div className="inline-flex items-center gap-3 px-8 py-3 bg-black text-white rounded-full shadow-2xl">
                 <Lock className="w-4 h-4 text-primary" />
                 <span className="text-[11px] font-black uppercase tracking-widest">
-                  Cycle finalized. Check back in 24 hours.
+                  Cycle finalized. Registry secured.
                 </span>
               </div>
             </div>

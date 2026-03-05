@@ -9,7 +9,7 @@ export const beautyProducts: Product[] = [
   {
     id: 'prod_1',
     slug: 'product-1',
-    name: 'LTB Radiant Foundation',
+    name: 'LTB Brand Radiant Foundation',
     description: 'The definitive standard of flawless coverage.',
     category: 'Beauty',
     price: 45,
@@ -22,7 +22,7 @@ export const beautyProducts: Product[] = [
   {
     id: 'prod_2',
     slug: 'product-2',
-    name: 'LTB Glow Serum',
+    name: 'LTB Brand Glow Serum',
     description: 'Zenith of skin refinement.',
     category: 'Beauty',
     price: 75,
@@ -35,7 +35,7 @@ export const beautyProducts: Product[] = [
   {
     id: 'prod_3',
     slug: 'product-3',
-    name: 'LTB Lip Lacquer Set',
+    name: 'LTB Brand Lip Lacquer Set',
     description: 'Signature aesthetics for the global elite.',
     category: 'Beauty',
     price: 50,
@@ -48,7 +48,7 @@ export const beautyProducts: Product[] = [
   {
     id: 'prod_4',
     slug: 'product-4',
-    name: 'LTB Flawless Finish',
+    name: 'LTB Brand Flawless Finish',
     description: 'Ultimate quality verified by Less Talk Business.',
     category: 'Beauty',
     price: 48,
