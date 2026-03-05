@@ -109,14 +109,14 @@ export default function WalletPage() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-12">
-        <h1 className="text-5xl font-black luxury-text-gradient tracking-tighter">{t('wallet.title')}</h1>
-        <p className="text-muted-foreground font-black uppercase tracking-[0.3em] text-[10px] mt-2">{t('wallet.description')}</p>
+        <h1 className="text-5xl font-black luxury-text-gradient tracking-tighter">Wallet</h1>
+        <p className="text-muted-foreground font-black uppercase tracking-[0.3em] text-[10px] mt-2">Manage your secured funds and audit withdrawal history.</p>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         <div className="lg:col-span-1 space-y-10">
           <Card className="rounded-[3rem] shadow-xl border-primary/10">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-black uppercase tracking-widest">{t('wallet.balanceTitle')}</CardTitle>
+                <CardTitle className="text-sm font-black uppercase tracking-widest">Account Balance</CardTitle>
                 <DollarSign className="w-5 h-5 text-primary" />
             </CardHeader>
             <CardContent>
@@ -125,42 +125,42 @@ export default function WalletPage() {
           </Card>
           <Card className="rounded-[3rem] shadow-xl overflow-hidden border-black/5">
             <CardHeader className="bg-secondary/30">
-              <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2"><Landmark className="w-4 h-4 text-primary" /> {t('wallet.withdrawalTitle')}</CardTitle>
-              <CardDescription className="text-[10px] font-black text-muted-foreground/60">{t('wallet.withdrawalDescription')}</CardDescription>
+              <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2"><Landmark className="w-4 h-4 text-primary" /> Withdrawal</CardTitle>
+              <CardDescription className="text-[10px] font-black text-muted-foreground/60">Transfer secured funds to your primary accounts.</CardDescription>
             </CardHeader>
             <CardContent className="pt-8">
               {!canWithdraw && (
                 <Alert className="rounded-2xl border-none bg-primary/5 text-primary mb-6">
                   <WalletCards className="h-4 w-4"/>
-                  <AlertTitle className="text-[10px] font-black uppercase tracking-widest">{t('wallet.minBalanceTitle')}</AlertTitle>
-                  <AlertDescription className="text-[10px] font-black">{t('wallet.minBalanceDescription', { amount: MIN_WITHDRAWAL_AMOUNT.toLocaleString() })}</AlertDescription>
+                  <AlertTitle className="text-[10px] font-black uppercase tracking-widest">Minimum Threshold</AlertTitle>
+                  <AlertDescription className="text-[10px] font-black">Withdrawal requires a minimum threshold of ${MIN_WITHDRAWAL_AMOUNT.toLocaleString()}.</AlertDescription>
                 </Alert>
               )}
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className={`space-y-6 ${!canWithdraw ? 'opacity-50' : ''}`}>
                     <FormField name="amount" control={form.control} render={({ field }) => (
                         <FormItem>
-                        <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{t('wallet.amountLabel')}</FormLabel>
+                        <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Withdrawal Amount</FormLabel>
                         <FormControl><Input type="number" {...field} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black" /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )} />
                     <FormField name="paymentMethod" control={form.control} render={({ field }) => (
                         <FormItem>
-                        <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{t('wallet.methodLabel')}</FormLabel>
-                        <FormControl><Input {...field} placeholder={t('wallet.methodPlaceholder')} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black" /></FormControl>
+                        <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Payment Channel</FormLabel>
+                        <FormControl><Input {...field} placeholder="e.g. Bank Transfer, PayPal" disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black" /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )} />
                     <FormField name="accountDetails" control={form.control} render={({ field }) => (
                         <FormItem>
-                        <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{t('wallet.detailsLabel')}</FormLabel>
-                        <FormControl><Input {...field} placeholder={t('wallet.detailsPlaceholder')} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black" /></FormControl>
+                        <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Account Logistics</FormLabel>
+                        <FormControl><Input {...field} placeholder="Account number or verification ID" disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black" /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )} />
                     <Button type="submit" className="w-full rounded-2xl h-16 font-black uppercase tracking-widest text-[10px] btn-luxury" disabled={!canWithdraw || form.formState.isSubmitting}>
-                        {form.formState.isSubmitting ? t('wallet.buttonLoading') : t('wallet.button')}
+                        {form.formState.isSubmitting ? 'Processing...' : 'Withdrawal'}
                     </Button>
                 </form>
               </Form>
@@ -170,16 +170,16 @@ export default function WalletPage() {
         <div className="lg:col-span-2">
           <Card className="rounded-[3rem] shadow-xl overflow-hidden border-black/5">
             <CardHeader className="p-10 border-b border-border/50">
-              <CardTitle className="text-2xl font-black luxury-text-gradient">{t('wallet.historyTitle')}</CardTitle>
+              <CardTitle className="text-2xl font-black luxury-text-gradient">Withdrawal History</CardTitle>
             </CardHeader>
             <CardContent className="p-0">
               <Table>
                 <TableHeader>
                   <TableRow className="border-none bg-secondary/30">
-                    <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest">{t('general.date')}</TableHead>
-                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">{t('general.amount')}</TableHead>
-                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">{t('wallet.methodLabel')}</TableHead>
-                    <TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest">{t('general.status')}</TableHead>
+                    <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest">Date</TableHead>
+                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">Amount</TableHead>
+                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">Method</TableHead>
+                    <TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest">Status</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -200,7 +200,7 @@ export default function WalletPage() {
                     </TableRow>
                   )) : (
                     <TableRow>
-                      <TableCell colSpan={4} className="text-center py-24 text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">{t('wallet.noHistory')}</TableCell>
+                      <TableCell colSpan={4} className="text-center py-24 text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">No transactions found in current log.</TableCell>
                     </TableRow>
                   )}
                 </TableBody>

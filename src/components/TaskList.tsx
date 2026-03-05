@@ -17,7 +17,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
 
-const TASK_DURATION_SECONDS = 600; // 10 Minutes per stage
+const TASK_DURATION_SECONDS = 600; // Strictly 10 Minutes
 const COOLDOWN_MS = 24 * 60 * 60 * 1000; 
 
 export default function TaskList() {
@@ -56,7 +56,7 @@ export default function TaskList() {
     return 3; 
   }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
 
-  // PROACTIVE STREAK INTEGRITY PROTOCOL
+  // PROACTIVE STREAK & RESET INTEGRITY PROTOCOL
   useEffect(() => {
     if (userData && userDocRef && !activeTimer) {
       const updates: any = {};
@@ -79,7 +79,6 @@ export default function TaskList() {
         if (diff > COOLDOWN_MS * 2 && userData.streakCount > 0) {
           updates.streakCount = 0;
           needsUpdate = true;
-          // Balance is explicitly preserved
         }
       }
 
@@ -112,13 +111,12 @@ export default function TaskList() {
       updates.step3Status = true;
       updates.lastCompletedDate = now;
       
-      const today = new Date();
       const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
       let newStreak = (userData.streakCount || 0) + 1;
 
-      // Reset streak if too much time passed (safety check)
+      // Reset streak if too much time passed (safety redundancy)
       if (lastDate) {
-        const diff = today.getTime() - lastDate.getTime();
+        const diff = currentTime - lastDate.getTime();
         if (diff > COOLDOWN_MS * 2) {
           newStreak = 1;
         }
@@ -156,7 +154,7 @@ export default function TaskList() {
       title: "STAGE VERIFIED",
       description: `+$${reward.toFixed(2)} credited to Account Balance.`,
     });
-  }, [user, userData, userDocRef, toast, activeStep]);
+  }, [user, userData, userDocRef, toast, activeStep, currentTime]);
 
   useEffect(() => {
     if (!activeTimer) return;
@@ -290,7 +288,7 @@ export default function TaskList() {
                           <Button 
                             onClick={() => handleStartSubTask(channel.id, channel.url)}
                             variant="outline"
-                            className="w-full rounded-xl h-12 text-[9px] font-black uppercase tracking-widest border-2 hover:bg-black hover:text-white transition-all font-black"
+                            className="w-full rounded-xl h-12 text-[9px] font-black uppercase tracking-widest border-2 hover:bg-black hover:text-white transition-all"
                             disabled={activeTimer}
                           >
                             {isActivating ? "Verifying..." : <><ExternalLink className="w-3 h-3 mr-2" /> Start stage</>}

@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -95,7 +94,7 @@ export default function Header() {
                   <Button variant="outline" className="rounded-full h-10 md:h-12 gap-3 px-3 md:px-6 border-foreground/5 hover:bg-secondary/50 transition-all shadow-sm">
                     <UserIcon className="h-4 w-4" />
                     <span className="max-w-[100px] sm:max-w-[150px] truncate text-[9px] md:text-[11px] font-black uppercase tracking-[0.1em]">
-                        {userData?.username ? t('header.greeting', { username: userData.username }) : 'Profile'}
+                        {userData?.username ? `CEO ${userData.username}` : 'Profile'}
                     </span>
                   </Button>
                 </Link>
@@ -117,11 +116,11 @@ export default function Header() {
          <div className="container mx-auto px-4">
             <div className="flex justify-center items-center gap-8 md:gap-12 h-14 md:h-16">
               <Link href="/" className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] hover:text-primary transition-all relative group py-2">
-                {t('header.home')}
+                Home
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
               </Link>
               <Link href="/tasks" className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] hover:text-primary transition-all flex items-center gap-2.5 group py-2">
-                <ListChecks className="h-4 w-4 text-primary transition-transform group-hover:scale-110"/> {t('header.dailyTasks')}
+                <ListChecks className="h-4 w-4 text-primary transition-transform group-hover:scale-110"/> Daily Tasks
               </Link>
               <Link href="/redeem" className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] hover:text-primary transition-all flex items-center gap-2.5 group py-2">
                 <div className="relative">
@@ -132,7 +131,7 @@ export default function Header() {
                       </span>
                   )}
                 </div>
-                {t('header.redeemBasket')}
+                Redeem Basket
               </Link>
             </div>
          </div>

@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -29,40 +28,40 @@ export default function Footer() {
                 <span className="font-black text-[10px] uppercase tracking-[0.3em] text-primary -mt-1">Business</span>
               </div>
             </Link>
-            <p className="text-sm text-muted-foreground font-bold">{t('footer.companyLine')}</p>
+            <p className="text-sm text-muted-foreground font-bold">The definitive registry for verified global assets.</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 col-span-1 md:col-span-3 gap-8">
             <div>
-              <h4 className="font-black uppercase tracking-widest text-[10px] mb-4">{t('footer.shop')}</h4>
+              <h4 className="font-black uppercase tracking-widest text-[10px] mb-4">Shop</h4>
               <ul className="space-y-2">
-                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.newArrivals')}</Link></li>
-                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.bestSellers')}</Link></li>
-                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.categories')}</Link></li>
-                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.onSale')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">New Arrivals</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">Best Sellers</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">Categories</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">On Sale</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-black uppercase tracking-widest text-[10px] mb-4">{t('footer.support')}</h4>
+              <h4 className="font-black uppercase tracking-widest text-[10px] mb-4">Support</h4>
               <ul className="space-y-2">
-                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.contactUs')}</Link></li>
-                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.faq')}</Link></li>
-                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.shippingReturns')}</Link></li>
-                <li><Link href="/account" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.orderTracking')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">Contact Us</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">FAQ</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">Shipping & Returns</Link></li>
+                <li><Link href="/account" className="text-sm font-bold text-muted-foreground hover:text-primary">Order Tracking</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-black uppercase tracking-widest text-[10px] mb-4">{t('footer.company')}</h4>
+              <h4 className="font-black uppercase tracking-widest text-[10px] mb-4">Company</h4>
               <ul className="space-y-2">
-                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.aboutUs')}</Link></li>
-                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.careers')}</Link></li>
-                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.privacyPolicy')}</Link></li>
-                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">{t('footer.termsOfService')}</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">About Us</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">Careers</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">Privacy Policy</Link></li>
+                <li><Link href="#" className="text-sm font-bold text-muted-foreground hover:text-primary">Terms of Service</Link></li>
               </ul>
             </div>
           </div>
         </div>
         <div className="mt-12 pt-8 border-t flex flex-col sm:flex-row justify-between items-center">
-          <p className="text-xs font-black uppercase tracking-widest text-muted-foreground/60">{t('footer.copyright', { year: new Date().getFullYear() })}</p>
+          <p className="text-xs font-black uppercase tracking-widest text-muted-foreground/60">© {new Date().getFullYear()} Less Talk Business. All rights reserved.</p>
         </div>
       </div>
     </footer>

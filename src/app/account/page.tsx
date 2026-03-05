@@ -153,7 +153,7 @@ export default function AccountPage() {
 
                 <Card className="rounded-[3rem] border-black/5 shadow-xl">
                     <CardHeader className="flex flex-row items-center justify-between pb-4">
-                        <CardTitle className="text-sm font-black uppercase tracking-widest">{t('account.walletTitle')}</CardTitle>
+                        <CardTitle className="text-sm font-black uppercase tracking-widest">Account Balance</CardTitle>
                         <div className="p-3 bg-primary/10 rounded-2xl">
                             <DollarSign className="w-5 h-5 text-primary" />
                         </div>
@@ -161,7 +161,7 @@ export default function AccountPage() {
                     <CardContent>
                         <div className="text-4xl font-black mb-6">${currentBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
                          <Button className="w-full rounded-2xl h-14 font-black uppercase tracking-widest text-[10px] btn-luxury" asChild>
-                            <Link href="/wallet">{t('account.manageWallet')} <ArrowRight className="ml-2 h-4 w-4"/></Link>
+                            <Link href="/wallet">Manage Wallet <ArrowRight className="ml-2 h-4 w-4"/></Link>
                         </Button>
                     </CardContent>
                 </Card>
@@ -193,7 +193,7 @@ export default function AccountPage() {
             <div className="lg:col-span-2 space-y-10">
                 <Card className="rounded-[3rem] border-black/5 shadow-xl overflow-hidden">
                     <CardHeader className="p-10 pb-6 border-b border-border/50">
-                        <CardTitle className="text-2xl font-black luxury-text-gradient">{t('account.orderHistoryTitle')}</CardTitle>
+                        <CardTitle className="text-2xl font-black luxury-text-gradient">Order History</CardTitle>
                         <CardDescription className="font-black text-[10px] uppercase tracking-widest text-muted-foreground/60">{t('account.orderHistoryDescription')}</CardDescription>
                     </CardHeader>
                     <CardContent className="p-0">

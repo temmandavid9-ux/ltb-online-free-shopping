@@ -33,8 +33,10 @@ export const findImage = (id: string) => {
   const numericMatch = id.match(/\d+$/);
   
   if (numericMatch) {
+    // ASSET #N maps to Index N-1
     const index = parseInt(numericMatch[0]) - 1;
-    // Strictly map to the registry index
+    
+    // Strict Verification Loop
     if (uniqueUrls[index]) {
       return {
         url: uniqueUrls[index],
