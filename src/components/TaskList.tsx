@@ -1,3 +1,4 @@
+
 'use client';
 import {
   useUser,
@@ -18,8 +19,8 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
 
 const TASK_DURATION_SECONDS = 600; // Strictly 10 Minutes per CEO command
-const COOLDOWN_MS = 24 * 60 * 60 * 1000; // Strict 24 Hour Security Cooldown
-const STREAK_GRACE_PERIOD = 24 * 60 * 60 * 1000; // Strict 24 Hour Completion Window
+const COOLDOWN_MS = 20 * 60 * 60 * 1000; // 20 Hour Security Cooldown
+const STREAK_GRACE_PERIOD = 4 * 60 * 60 * 1000; // 4 Hour Completion Window (Total 24h Cycle)
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
@@ -77,9 +78,8 @@ export default function TaskList() {
       let needsUpdate = false;
 
       // 1. AUTHORITATIVE NEW-DAY RESET:
-      // Only reset flags if the cooldown is over AND the previous cycle was fully finalized (step3Status).
-      // This prevents resetting mid-cycle progress (Stage 1 -> Stage 2).
-      if (!isCooldownActive && userData.step3Status) {
+      // Only reset flags if the cooldown is over AND we are not currently mid-cycle (prevents race condition).
+      if (!isCooldownActive && userData.step3Status && !userData.step1Status) {
         updates.step1Status = false;
         updates.step2Status = false;
         updates.step3Status = false;
@@ -88,11 +88,10 @@ export default function TaskList() {
       }
 
       // 2. STRICT 24H STREAK INTEGRITY CHECK:
-      // If 24 hours have passed since the task became available (Total 48h since last completion), reset.
+      // Missing the strict window results in immediate reset to Day 0.
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
-        // CEO Command: Strict 24h Window after Cooldown. (Total 48h breach threshold).
         if (diff > (COOLDOWN_MS + STREAK_GRACE_PERIOD) && userData.streakCount > 0) {
           updates.streakCount = 0;
           needsUpdate = true;
@@ -105,7 +104,7 @@ export default function TaskList() {
           toast({
             variant: "destructive",
             title: "STREAK REGISTRY RESET",
-            description: "Strict activity window breached. Registry initialized to Day 0. Balance preserved.",
+            description: "Strict 24h activity window breached. Registry initialized to Day 0. Balance preserved.",
           });
         }
       }
@@ -131,7 +130,6 @@ export default function TaskList() {
       let newStreak = (userData.streakCount || 0) + 1;
       updates.streakCount = newStreak;
 
-      // Elite Mode Authorization
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = now;
