@@ -100,7 +100,7 @@ export default function TaskList() {
 
       if (needsUpdate) {
         updateDocumentNonBlocking(userDocRef, updates);
-        if (updates.streakCount === 0) {
+        if (updates.streakCount === 0 && !updates.step1Status) {
           toast({
             variant: "destructive",
             title: "STREAK REGISTRY RESET",
