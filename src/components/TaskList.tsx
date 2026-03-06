@@ -1,4 +1,3 @@
-
 'use client';
 import {
   useUser,
@@ -18,9 +17,9 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
 
-const TASK_DURATION_SECONDS = 600; // Strictly 10 Minutes per CEO command
+const TASK_DURATION_SECONDS = 600; // STRICT 10 MINUTES PER CEO COMMAND
 const COOLDOWN_MS = 20 * 60 * 60 * 1000; // 20 Hour Security Cooldown
-const STREAK_GRACE_PERIOD = 4 * 60 * 60 * 1000; // 4 Hour Completion Window (Total 24h Cycle)
+const TOTAL_CYCLE_MS = 24 * 60 * 60 * 1000; // Strict 24h Registry Window
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
@@ -37,7 +36,7 @@ export default function TaskList() {
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [currentTime, setCurrentTime] = useState(Date.now());
 
-  // Real-time clock for cooldown and resets
+  // REAL-TIME SYSTEM CLOCK
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(Date.now()), 1000);
     return () => clearInterval(timer);
@@ -63,23 +62,25 @@ export default function TaskList() {
     return `${h}h ${m}m ${s}s`;
   }, [isCooldownActive, userData?.lastCompletedDate, currentTime]);
 
-  // SOURCE OF TRUTH: Advance logic depends strictly on verified Firestore flags
+  // SEQUENTIAL ADVANCEMENT LOGIC
   const currentStepIndex = useMemo(() => {
-    if (isCooldownActive) return 3; // Blocked by cooldown
+    if (isCooldownActive) return 3; // Blocked by Cooldown
     if (!userData?.step1Status) return 0;
     if (!userData?.step2Status) return 1;
     if (!userData?.step3Status) return 2;
-    return 3; // All finished, waiting for next cycle
+    return 3; // Cycle Secured
   }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
 
+  // STREAK AND RESET PROTOCOL
   useEffect(() => {
     if (userData && userDocRef && !activeTimer) {
       const updates: any = {};
       let needsUpdate = false;
 
-      // 1. AUTHORITATIVE NEW-DAY RESET:
-      // Only reset flags if the cooldown is over AND we are not currently mid-cycle (prevents race condition).
-      if (!isCooldownActive && userData.step3Status && !userData.step1Status) {
+      // 1. AUTHORITATIVE NEW DAY RESET
+      // If cooldown is over and we finished yesterday (step3Status is true),
+      // we must reset the flags to allow the NEW cycle to begin.
+      if (!isCooldownActive && userData.step3Status) {
         updates.step1Status = false;
         updates.step2Status = false;
         updates.step3Status = false;
@@ -87,12 +88,11 @@ export default function TaskList() {
         needsUpdate = true;
       }
 
-      // 2. STRICT 24H STREAK INTEGRITY CHECK:
-      // Missing the strict window results in immediate reset to Day 0.
+      // 2. STRICT 24H STREAK INTEGRITY
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
-        if (diff > (COOLDOWN_MS + STREAK_GRACE_PERIOD) && userData.streakCount > 0) {
+        if (diff > TOTAL_CYCLE_MS && userData.streakCount > 0) {
           updates.streakCount = 0;
           needsUpdate = true;
         }
@@ -104,7 +104,7 @@ export default function TaskList() {
           toast({
             variant: "destructive",
             title: "STREAK REGISTRY RESET",
-            description: "Strict 24h activity window breached. Registry initialized to Day 0. Balance preserved.",
+            description: "Strict 24h activity window breached. Registry initialized to Day 0. Balance secured.",
           });
         }
       }
@@ -327,10 +327,10 @@ export default function TaskList() {
                 <Clock className="w-16 h-16 text-primary" />
               </div>
               <h3 className="text-4xl font-black luxury-text-gradient">Daily Cooldown Active</h3>
-              <p className="text-muted-foreground text-[11px] font-black uppercase tracking-widest mb-2">Streak anchored. Sequence locked for 24 hours.</p>
+              <p className="text-muted-foreground text-[11px] font-black uppercase tracking-widest mb-2">Streak anchored. Sequence locked for security cycle.</p>
               
               <div className="text-5xl font-black tabular-nums tracking-tighter mb-6 text-foreground">
-                {cooldownRemainingText}
+                Next Task: {cooldownRemainingText}
               </div>
 
               <div className="inline-flex items-center gap-3 px-8 py-3 bg-black text-white rounded-full shadow-2xl">

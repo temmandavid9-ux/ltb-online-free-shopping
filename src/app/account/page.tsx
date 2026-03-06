@@ -1,4 +1,3 @@
-
 'use client';
 
 import {
@@ -87,7 +86,7 @@ export default function AccountPage() {
             userId: user.uid,
             giftCardCodeId: codeId,
             redemptionDate: new Date().toISOString(),
-            rewardType: '$25 Elite Monthly Gift Card',
+            rewardType: '$25 LTB Brand Elite Gift Card',
             value: 25,
         };
 
@@ -209,16 +208,16 @@ export default function AccountPage() {
                             <TableBody>
                                 {clientOrders.length > 0 ? clientOrders.map(order => (
                                     <TableRow key={order.id} className="border-border/5 group">
-                                        <TableCell className="pl-10 py-6">
+                                        <TableCell className="pl-10 py-6 font-black">
                                             <div className="font-black text-sm group-hover:text-primary transition-colors">{order.product}</div>
                                             <div className="text-[10px] font-black text-foreground mt-1">{order.formattedDate}</div>
                                         </TableCell>
-                                        <TableCell>
+                                        <TableCell className="font-black">
                                             <Badge variant="outline" className="rounded-full px-4 py-1 border-none bg-primary/10 text-primary text-[9px] font-black uppercase tracking-widest">
                                                 {order.status}
                                             </Badge>
                                         </TableCell>
-                                        <TableCell className="text-right pr-10">
+                                        <TableCell className="text-right pr-10 font-black">
                                             <div className="font-black text-sm">${order.price.toLocaleString()}</div>
                                         </TableCell>
                                     </TableRow>
@@ -249,15 +248,15 @@ export default function AccountPage() {
                                 <TableBody>
                                     {redemptionsData.map(red => (
                                         <TableRow key={red.id} className="border-border/5">
-                                            <TableCell className="pl-10 py-6">
+                                            <TableCell className="pl-10 py-6 font-black">
                                                 <div className="font-black text-sm">{red.rewardType}</div>
                                             </TableCell>
-                                            <TableCell>
+                                            <TableCell className="font-black">
                                                 <code className="bg-black text-white px-3 py-1.5 rounded-lg text-xs font-black tracking-widest">
                                                     {red.giftCardCodeId}
                                                 </code>
                                             </TableCell>
-                                            <TableCell className="text-right pr-10">
+                                            <TableCell className="text-right pr-10 font-black">
                                                 <div className="text-sm font-black text-foreground">{new Date(red.redemptionDate).toLocaleDateString()}</div>
                                             </TableCell>
                                         </TableRow>

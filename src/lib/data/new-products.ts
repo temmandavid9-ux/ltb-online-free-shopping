@@ -18,7 +18,7 @@ const generateVerifiedCatalog = (): Product[] => {
     const category = categories[i % categories.length];
     
     const manualName = manualProductNames[assetNumber];
-    const productName = (manualName && manualName.trim() !== "") ? manualName : `Exclusive Masterpiece #${assetNumber}`;
+    const productName = (manualName && manualName.trim() !== "") ? manualName : `LTB Brand Exclusive Masterpiece #${assetNumber}`;
     
     const basePrice = 150 + ((assetNumber * 7) % 850); 
     const baseRating = Number((4.7 + ((assetNumber * 3) % 4) / 10).toFixed(1));

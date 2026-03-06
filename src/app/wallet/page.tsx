@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useUser, useFirestore, useDoc, useMemoFirebase, updateDocumentNonBlocking, setDocumentNonBlocking, useCollection } from "@/firebase";
@@ -189,7 +188,7 @@ export default function WalletPage() {
                       <TableCell className="pl-10 py-6 text-sm font-black">{w.formattedDate}</TableCell>
                       <TableCell className="font-black text-sm">${w.amount.toLocaleString()}</TableCell>
                       <TableCell className="text-sm font-black text-foreground">{w.paymentMethod}</TableCell>
-                      <TableCell className="text-right pr-10">
+                      <TableCell className="text-right pr-10 font-black">
                          <Badge variant="outline" className={`rounded-full px-4 py-1 border-none text-[9px] font-black uppercase tracking-widest ${
                             w.status === 'Approved' ? 'bg-primary/10 text-primary' : 
                             w.status === 'Rejected' ? 'bg-destructive/10 text-destructive' :
