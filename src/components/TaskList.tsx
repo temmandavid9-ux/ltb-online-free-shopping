@@ -17,7 +17,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
 
-const TASK_DURATION_SECONDS = 600; // Strictly 10 Minutes per your command
+const TASK_DURATION_SECONDS = 600; // Strictly 10 Minutes per CEO command
 const COOLDOWN_MS = 24 * 60 * 60 * 1000; // Strict 24 Hour Cycle
 
 export default function TaskList() {
@@ -35,6 +35,7 @@ export default function TaskList() {
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [currentTime, setCurrentTime] = useState(Date.now());
 
+  // Real-time clock for cooldown and resets
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(Date.now()), 1000);
     return () => clearInterval(timer);
@@ -73,8 +74,10 @@ export default function TaskList() {
       const updates: any = {};
       let needsUpdate = false;
 
-      // 1. AUTO-RESET PREVIOUS DAY'S PROGRESS: If cooldown expired but flags are still true
-      if (!isCooldownActive && (userData.step1Status || userData.step2Status || userData.step3Status)) {
+      // 1. AUTHORITATIVE AUTO-RESET: 
+      // Only reset flags if the cooldown is over AND the previous cycle was fully finished (step3Status).
+      // This prevents resetting progress while the user is mid-cycle.
+      if (!isCooldownActive && userData.step3Status) {
         updates.step1Status = false;
         updates.step2Status = false;
         updates.step3Status = false;
@@ -82,12 +85,13 @@ export default function TaskList() {
         needsUpdate = true;
       }
 
-      // 2. STRICT 24H STREAK FAILURE CHECK: Reset to Day 0 if the 24-hour activity window is breached
+      // 2. STRICT 24H STREAK FAILURE CHECK: 
+      // Reset to Day 0 if the 24-hour activity window since last completion is breached.
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
-        // CEO COMMAND: Threshold is strictly 24 hours
-        if (diff > COOLDOWN_MS && userData.streakCount > 0) {
+        // CEO Command: 24h strict window (Total 48h from previous completion start: 24h cooldown + 24h grace)
+        if (diff > (COOLDOWN_MS * 2) && userData.streakCount > 0) {
           updates.streakCount = 0;
           needsUpdate = true;
         }
@@ -99,7 +103,7 @@ export default function TaskList() {
           toast({
             variant: "destructive",
             title: "STREAK REGISTRY RESET",
-            description: "24-hour activity window breached. Streak initialized to Day 0. Balance preserved.",
+            description: "Strict activity window breached. Streak initialized to Day 0. Balance preserved.",
           });
         }
       }
@@ -125,14 +129,16 @@ export default function TaskList() {
       const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
       let newStreak = (userData.streakCount || 0) + 1;
 
+      // Reset streak if too much time passed since last cycle
       if (lastDate) {
         const diff = currentTime - lastDate.getTime();
-        if (diff > COOLDOWN_MS) {
+        if (diff > (COOLDOWN_MS * 2)) {
           newStreak = 1;
         }
       }
       updates.streakCount = newStreak;
 
+      // Elite Mode Calculation
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = now;

@@ -63,8 +63,8 @@ export default function AdminPage() {
   const pendingWithdrawals = withdrawalsData?.filter(w => w.status === 'Pending').length || 0;
   const totalRevenue = ordersData?.filter(o => o.status === 'Completed' || o.status === 'Approved').reduce((sum, o) => sum + o.price, 0) || 0;
     
-  const recentOrders = ordersData?.slice(0, 5) || [];
-  const recentWithdrawals = withdrawalsData?.slice(0, 5) || [];
+  const recentOrders = ordersData?.slice(0, 10) || [];
+  const recentWithdrawals = withdrawalsData?.slice(0, 10) || [];
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -130,7 +130,7 @@ export default function AdminPage() {
                             <TableRow key={order.id} className="border-border/5">
                                 <TableCell className="pl-8 py-5">
                                     <div className="font-black text-sm">{order.product}</div>
-                                    <div className="text-[9px] font-black text-foreground uppercase">{order.userId.substring(0,8)}...</div>
+                                    <div className="text-[10px] font-black text-foreground uppercase">{order.userId.substring(0,8)}...</div>
                                 </TableCell>
                                 <TableCell>
                                     <Badge variant={order.status === 'Pending' ? 'secondary' : 'default'} className="rounded-full text-[9px] uppercase font-black tracking-widest">
@@ -159,8 +159,7 @@ export default function AdminPage() {
                                 <TableHead className="pl-8 h-14 text-[10px] font-black uppercase tracking-widest">Method</TableHead>
                                 <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">Status</TableHead>
                                 <TableHead className="h-14 text-right pr-8 text-[10px] font-black uppercase tracking-widest">Amount</TableHead>
-                            </TableRow>
-                        </TableHeader>
+                            </TableHeader>
                         <TableBody>
                             {recentWithdrawals.length > 0 ? recentWithdrawals.map(w => (
                                 <TableRow key={w.id} className="border-border/5">

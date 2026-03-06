@@ -257,7 +257,7 @@ export default function AccountPage() {
                                                 </code>
                                             </TableCell>
                                             <TableCell className="text-right pr-10">
-                                                <div className="text-[10px] font-black text-foreground">{new Date(red.redemptionDate).toLocaleDateString()}</div>
+                                                <div className="text-sm font-black text-foreground">{new Date(red.redemptionDate).toLocaleDateString()}</div>
                                             </TableCell>
                                         </TableRow>
                                     ))}
