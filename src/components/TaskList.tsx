@@ -18,7 +18,8 @@ import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
 
 const TASK_DURATION_SECONDS = 600; // Strictly 10 Minutes per CEO command
-const COOLDOWN_MS = 24 * 60 * 60 * 1000; // Strict 24 Hour Cycle
+const COOLDOWN_MS = 24 * 60 * 60 * 1000; // Strict 24 Hour Security Cooldown
+const STREAK_GRACE_PERIOD = 24 * 60 * 60 * 1000; // Strict 24 Hour Completion Window
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
@@ -61,12 +62,13 @@ export default function TaskList() {
     return `${h}h ${m}m ${s}s`;
   }, [isCooldownActive, userData?.lastCompletedDate, currentTime]);
 
+  // SOURCE OF TRUTH: Advance logic depends strictly on verified Firestore flags
   const currentStepIndex = useMemo(() => {
-    if (isCooldownActive) return 3; 
+    if (isCooldownActive) return 3; // Blocked by cooldown
     if (!userData?.step1Status) return 0;
     if (!userData?.step2Status) return 1;
     if (!userData?.step3Status) return 2;
-    return 3; 
+    return 3; // All finished, waiting for next cycle
   }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
 
   useEffect(() => {
@@ -74,9 +76,9 @@ export default function TaskList() {
       const updates: any = {};
       let needsUpdate = false;
 
-      // 1. AUTHORITATIVE AUTO-RESET: 
-      // Only reset flags if the cooldown is over AND the previous cycle was fully finished (step3Status).
-      // This prevents resetting progress while the user is mid-cycle.
+      // 1. AUTHORITATIVE NEW-DAY RESET:
+      // Only reset flags if the cooldown is over AND the previous cycle was fully finalized (step3Status).
+      // This prevents resetting mid-cycle progress (Stage 1 -> Stage 2).
       if (!isCooldownActive && userData.step3Status) {
         updates.step1Status = false;
         updates.step2Status = false;
@@ -85,13 +87,13 @@ export default function TaskList() {
         needsUpdate = true;
       }
 
-      // 2. STRICT 24H STREAK FAILURE CHECK: 
-      // Reset to Day 0 if the 24-hour activity window since last completion is breached.
+      // 2. STRICT 24H STREAK INTEGRITY CHECK:
+      // If 24 hours have passed since the task became available (Total 48h since last completion), reset.
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
-        // CEO Command: 24h strict window (Total 48h from previous completion start: 24h cooldown + 24h grace)
-        if (diff > (COOLDOWN_MS * 2) && userData.streakCount > 0) {
+        // CEO Command: Strict 24h Window after Cooldown. (Total 48h breach threshold).
+        if (diff > (COOLDOWN_MS + STREAK_GRACE_PERIOD) && userData.streakCount > 0) {
           updates.streakCount = 0;
           needsUpdate = true;
         }
@@ -103,7 +105,7 @@ export default function TaskList() {
           toast({
             variant: "destructive",
             title: "STREAK REGISTRY RESET",
-            description: "Strict activity window breached. Streak initialized to Day 0. Balance preserved.",
+            description: "Strict activity window breached. Registry initialized to Day 0. Balance preserved.",
           });
         }
       }
@@ -126,19 +128,10 @@ export default function TaskList() {
       updates.step3Status = true;
       updates.lastCompletedDate = now;
       
-      const lastDate = userData.lastCompletedDate ? new Date(userData.lastCompletedDate) : null;
       let newStreak = (userData.streakCount || 0) + 1;
-
-      // Reset streak if too much time passed since last cycle
-      if (lastDate) {
-        const diff = currentTime - lastDate.getTime();
-        if (diff > (COOLDOWN_MS * 2)) {
-          newStreak = 1;
-        }
-      }
       updates.streakCount = newStreak;
 
-      // Elite Mode Calculation
+      // Elite Mode Authorization
       if (!userData.eliteUnlocked && newStreak >= 365) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = now;
@@ -167,9 +160,9 @@ export default function TaskList() {
 
     toast({
       title: "STAGE VERIFIED",
-      description: `+$${reward.toFixed(2)} credited to Account Balance.`,
+      description: `+$${reward.toFixed(2)} credited to Account Balance. ADVANCING SEQUENCE.`,
     });
-  }, [user, userData, userDocRef, toast, activeStep, currentTime]);
+  }, [user, userData, userDocRef, toast, activeStep]);
 
   useEffect(() => {
     if (!activeTimer) return;

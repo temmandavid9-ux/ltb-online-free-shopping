@@ -52,7 +52,7 @@ export default function AdminPage() {
   }, [isAdmin, isAdminLoading, isUserLoading, router]);
 
   if (isUserLoading || isAdminLoading || areOrdersLoading || areWithdrawalsLoading) {
-    return <div className="container text-center p-24">{t('general.loading')}</div>;
+    return <div className="container text-center p-24 font-black uppercase tracking-widest">{t('general.loading')}</div>;
   }
 
   if (!isAdmin) {
@@ -159,7 +159,7 @@ export default function AdminPage() {
                                 <TableHead className="pl-8 h-14 text-[10px] font-black uppercase tracking-widest">Method</TableHead>
                                 <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">Status</TableHead>
                                 <TableHead className="h-14 text-right pr-8 text-[10px] font-black uppercase tracking-widest">Amount</TableHead>
-                            </TableHeader>
+                            </TableRow>
                         <TableBody>
                             {recentWithdrawals.length > 0 ? recentWithdrawals.map(w => (
                                 <TableRow key={w.id} className="border-border/5">
