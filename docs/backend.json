@@ -47,7 +47,7 @@
         },
         "eliteRewardsAvailable": {
           "type": "number",
-          "description": "The number of $25 gift cards an Elite user has earned but not yet redeemed."
+          "description": "The number of $100 gift cards an Elite user has earned but not yet redeemed."
         },
         "redeemedRewardIds": {
           "type": "array",
@@ -80,7 +80,7 @@
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "GiftCardCode",
       "type": "object",
-      "description": "Represents a unique $25 gift card code managed by the system.",
+      "description": "Represents a unique $100 gift card code managed by the system.",
       "properties": {
         "id": {
           "type": "string"

@@ -87,8 +87,8 @@ export default function AccountPage() {
             userId: user.uid,
             giftCardCodeId: codeId,
             redemptionDate: new Date().toISOString(),
-            rewardType: '$25 LTB Brand Elite Gift Card',
-            value: 25,
+            rewardType: '$100 LTB Brand Elite Gift Card',
+            value: 100,
         };
 
         setDocumentNonBlocking(redemptionRef, newRedemption, { merge: false });

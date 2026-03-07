@@ -96,7 +96,7 @@ export const es = {
   "account.eliteBonusProgress": "Progreso de Bono: {count} / 30 Ciclos",
   "account.rewardsTitle": "Gift Card Rewards",
   "account.rewardsDescription": "Bonos de tarjetas de regalo asegurados por el estatus Élite.",
-  "account.redeemReward": "Reclamar Tarjeta de Regalo de $25 LTB Brand Elite",
+  "account.redeemReward": "Reclamar Tarjeta de Regalo de $100 LTB Brand Elite",
   "account.rewardsAvailable": "{count} Tarjetas de Regalo Disponibles",
   
   // Redeem Page
@@ -155,7 +155,7 @@ export const es = {
   "tasks.toast.streakMaintained": "Racha anclada. Día {streak} alcanzado.",
   "tasks.toast.eliteUnlockedTitle": "MODO ÉLITE ACTIVADO",
   "tasks.toast.eliteUnlockedDesc": "Hito de 365 días asegurado. Estatus Élite permanente autorizado.",
-  "tasks.toast.giftCardEarned": "BONUS ASEGURADO. Tarjeta de regalo de $25 añadida a su cartera.",
+  "tasks.toast.giftCardEarned": "BONUS ASEGURADO. Tarjeta de regalo de $100 añadida a su cartera.",
   "tasks.initialFollow.title": "Primero, siga nuestras redes",
   "tasks.initialFollow.description": "Para desbloquear las tareas diarias, primero debe seguir todos nuestros canales de redes sociales.",
   "tasks.initialFollow.followButton": "Seguir",
@@ -163,8 +163,8 @@ export const es = {
   "tasks.initialFollow.confirmButton": "He seguido todas las cuentas",
   "tasks.initialFollow.toast.successTitle": "Acceso Concedido",
   "tasks.initialFollow.toast.successDescription": "Las tareas diarias y el seguimiento de racha están activos.",
-  "tasks.eliteRegistry.title": "Protocolo de Registro Élite",
-  "tasks.eliteRegistry.description": "Complete la secuencia de tareas diarias durante 365 días consecutivos para desbloquear permanentemente el Modo Élite. Los miembros Élite ganan una Tarjeta de Regalo Élite de LTB Brand de $25 por cada 30 días de actividad constante. IMPORTANTE: Se aplica una estricta ventana de actividad de 24 horas. Si se pierde un solo día, el registro se inicializa al Día 0. Su saldo se mantiene estrictamente preservado.",
+  "tasks.eliteRegistry.title": "LTB GIFT CARD CHALLENGE",
+  "tasks.eliteRegistry.description": "Complete la secuencia de tareas diarias durante 365 días consecutivos para desbloquear permanentemente el Modo Élite. Los miembros Élite ganan una Tarjeta de Regalo Élite de LTB Brand de $100 por cada 30 días de actividad constante. IMPORTANTE: Se aplica una estricta ventana de actividad de 24 horas. Si se pierde un solo día, el registro se inicializa al Día 0. Su saldo se mantiene estrictamente preservado.",
 
   // Wallet Page
   "wallet.title": "Billetera",

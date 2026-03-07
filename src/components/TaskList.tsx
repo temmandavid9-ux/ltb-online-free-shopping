@@ -79,8 +79,6 @@ export default function TaskList() {
       let needsUpdate = false;
 
       // 1. AUTHORITATIVE NEW DAY RESET
-      // If cooldown is over and we finished yesterday (step3Status is true),
-      // we must reset the flags to allow the NEW cycle to begin.
       if (!isCooldownActive && userData.step3Status) {
         updates.step1Status = false;
         updates.step2Status = false;
@@ -90,7 +88,6 @@ export default function TaskList() {
       }
 
       // 2. STRICT 24H STREAK INTEGRITY
-      // Missing the 24h cycle window results in Day 0 initialization.
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
@@ -144,7 +141,7 @@ export default function TaskList() {
         if (newMonthlyCounter >= 30) {
           newMonthlyCounter = 0;
           newRewards += 1;
-          toast({ title: "BONUS SECURED", description: "$25 LTB Brand Elite Gift Card earned." });
+          toast({ title: "BONUS SECURED", description: "$100 LTB Brand Elite Gift Card earned." });
         }
         updates.eliteMonthlyCounter = newMonthlyCounter;
         updates.eliteRewardsAvailable = newRewards;
@@ -225,7 +222,7 @@ export default function TaskList() {
           <CardTitle className="text-sm font-black uppercase tracking-widest">{t('tasks.eliteRegistry.title')}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-[11px] font-bold text-muted-foreground leading-relaxed">
+          <p className="text-[11px] font-black text-muted-foreground leading-relaxed">
             {t('tasks.eliteRegistry.description')}
           </p>
         </CardContent>
