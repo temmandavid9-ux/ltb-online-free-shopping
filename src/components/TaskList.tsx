@@ -91,6 +91,7 @@ export default function TaskList() {
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
+        // RESET STREAK IF 24H CYCLE BREACHED
         if (diff > TOTAL_CYCLE_MS && userData.streakCount > 0) {
           updates.streakCount = 0;
           needsUpdate = true;
@@ -213,7 +214,7 @@ export default function TaskList() {
 
   return (
     <div className="space-y-10">
-      {/* Informative Elite Registry Card */}
+      {/* Informative Elite Registry Card - RE-CALIBRATED TO BE VERY BOLD */}
       <Card className="rounded-[2.5rem] border-accent/20 bg-accent/5 overflow-hidden shadow-xl">
         <CardHeader className="flex flex-row items-center gap-4">
           <div className="p-3 bg-accent/10 rounded-2xl">
@@ -222,7 +223,7 @@ export default function TaskList() {
           <CardTitle className="text-sm font-black uppercase tracking-widest">{t('tasks.eliteRegistry.title')}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-[11px] font-black text-muted-foreground leading-relaxed">
+          <p className="text-[11px] font-black text-foreground leading-relaxed uppercase">
             {t('tasks.eliteRegistry.description')}
           </p>
         </CardContent>

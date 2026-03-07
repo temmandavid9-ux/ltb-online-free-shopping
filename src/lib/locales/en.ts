@@ -159,6 +159,7 @@ export const en = {
   "tasks.initialFollow.title": "First, Follow Our Socials",
   "tasks.initialFollow.description": "To unlock daily tasks, you must first follow all of our social media channels.",
   "tasks.initialFollow.followButton": "Follow",
+  "tasks.initialFollow.description": "To unlock daily tasks, you must first follow all of our social media channels.",
   "tasks.initialFollow.confirmationPrompt": "After following all accounts, click confirm.",
   "tasks.initialFollow.confirmButton": "I Have Followed All Accounts",
   "tasks.initialFollow.toast.successTitle": "Access Granted",
