@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useUser, useFirestore, useDoc, useMemoFirebase, updateDocumentNonBlocking, setDocumentNonBlocking, useCollection } from "@/firebase";
@@ -98,7 +99,7 @@ export default function WalletPage() {
   };
 
   if (isUserLoading || isUserDocLoading || areWithdrawalsLoading) {
-    return <div className="container text-center p-24 font-black uppercase tracking-widest">{t('general.loading')}</div>;
+    return <div className="container text-center p-24 font-black uppercase tracking-widest text-foreground">{t('general.loading')}</div>;
   }
   
   if (!user) return null;
@@ -120,12 +121,12 @@ export default function WalletPage() {
                 <DollarSign className="w-5 h-5 text-primary" />
             </CardHeader>
             <CardContent>
-                <div className="text-5xl font-black">${currentBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
+                <div className="text-5xl font-black text-foreground">${currentBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
             </CardContent>
           </Card>
           <Card className="rounded-[3rem] shadow-xl overflow-hidden border-black/5">
             <CardHeader className="bg-secondary/30">
-              <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2"><Landmark className="w-4 h-4 text-primary" /> Withdrawal</CardTitle>
+              <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2 text-foreground"><Landmark className="w-4 h-4 text-primary" /> Withdrawal</CardTitle>
               <CardDescription className="text-[10px] font-black text-muted-foreground/60">Transfer secured funds to your primary accounts.</CardDescription>
             </CardHeader>
             <CardContent className="pt-8">
@@ -141,25 +142,25 @@ export default function WalletPage() {
                     <FormField name="amount" control={form.control} render={({ field }) => (
                         <FormItem>
                         <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Withdrawal Amount</FormLabel>
-                        <FormControl><Input type="number" {...field} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black" /></FormControl>
+                        <FormControl><Input type="number" {...field} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black text-foreground" /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )} />
                     <FormField name="paymentMethod" control={form.control} render={({ field }) => (
                         <FormItem>
                         <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Payment Channel</FormLabel>
-                        <FormControl><Input {...field} placeholder="e.g. Bank Transfer, PayPal" disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black" /></FormControl>
+                        <FormControl><Input {...field} placeholder="e.g. Bank Transfer, PayPal" disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black text-foreground" /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )} />
                     <FormField name="accountDetails" control={form.control} render={({ field }) => (
                         <FormItem>
                         <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Account Logistics</FormLabel>
-                        <FormControl><Input {...field} placeholder="Account number or verification ID" disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black" /></FormControl>
+                        <FormControl><Input {...field} placeholder="Account number or verification ID" disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black text-foreground" /></FormControl>
                         <FormMessage />
                         </FormItem>
                     )} />
-                    <Button type="submit" className="w-full rounded-2xl h-16 font-black uppercase tracking-widest text-[10px] btn-luxury" disabled={!canWithdraw || form.formState.isSubmitting}>
+                    <Button type="submit" className="w-full rounded-2xl h-16 font-black uppercase tracking-widest text-[10px] btn-luxury border-none" disabled={!canWithdraw || form.formState.isSubmitting}>
                         {form.formState.isSubmitting ? 'Processing...' : 'Withdrawal'}
                     </Button>
                 </form>
@@ -176,19 +177,19 @@ export default function WalletPage() {
               <Table>
                 <TableHeader>
                   <TableRow className="border-none bg-secondary/30">
-                    <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest">Date</TableHead>
-                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">Amount</TableHead>
-                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">Method</TableHead>
-                    <TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest">Status</TableHead>
+                    <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Date</TableHead>
+                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Amount</TableHead>
+                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Method</TableHead>
+                    <TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest text-foreground">Status</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {clientWithdrawals.length > 0 ? clientWithdrawals.map(w => (
                     <TableRow key={w.id} className="border-border/5">
-                      <TableCell className="pl-10 py-6 text-sm font-black">{w.formattedDate}</TableCell>
-                      <TableCell className="font-black text-sm">${w.amount.toLocaleString()}</TableCell>
+                      <TableCell className="pl-10 py-6 text-sm font-black text-foreground">{w.formattedDate}</TableCell>
+                      <TableCell className="font-black text-sm text-foreground">${w.amount.toLocaleString()}</TableCell>
                       <TableCell className="text-sm font-black text-foreground">{w.paymentMethod}</TableCell>
-                      <TableCell className="text-right pr-10 font-black">
+                      <TableCell className="text-right pr-10 font-black text-foreground">
                          <Badge variant="outline" className={`rounded-full px-4 py-1 border-none text-[9px] font-black uppercase tracking-widest ${
                             w.status === 'Approved' ? 'bg-primary/10 text-primary' : 
                             w.status === 'Rejected' ? 'bg-destructive/10 text-destructive' :

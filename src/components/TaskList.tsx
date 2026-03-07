@@ -1,3 +1,4 @@
+
 'use client';
 import {
   useUser,
@@ -12,14 +13,14 @@ import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock, RefreshCcw } from 'lucide-react';
+import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock, RefreshCcw, Info } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
 
 const TASK_DURATION_SECONDS = 600; // STRICT 10 MINUTES PER CEO COMMAND
 const COOLDOWN_MS = 20 * 60 * 60 * 1000; // 20 Hour Security Cooldown
-const TOTAL_CYCLE_MS = 24 * 60 * 60 * 1000; // Strict 24h Registry Window
+const TOTAL_CYCLE_MS = 24 * 60 * 60 * 1000; // STRICT 24H REGISTRY WINDOW
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
@@ -62,7 +63,7 @@ export default function TaskList() {
     return `${h}h ${m}m ${s}s`;
   }, [isCooldownActive, userData?.lastCompletedDate, currentTime]);
 
-  // SEQUENTIAL ADVANCEMENT LOGIC
+  // SEQUENTIAL ADVANCEMENT LOGIC WITH PERSISTENCE LOCK
   const currentStepIndex = useMemo(() => {
     if (isCooldownActive) return 3; // Blocked by Cooldown
     if (!userData?.step1Status) return 0;
@@ -71,7 +72,7 @@ export default function TaskList() {
     return 3; // Cycle Secured
   }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
 
-  // STREAK AND RESET PROTOCOL
+  // STREAK AND RESET PROTOCOL - STRICT 24H ENFORCEMENT
   useEffect(() => {
     if (userData && userDocRef && !activeTimer) {
       const updates: any = {};
@@ -89,6 +90,7 @@ export default function TaskList() {
       }
 
       // 2. STRICT 24H STREAK INTEGRITY
+      // Missing the 24h cycle window results in Day 0 initialization.
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
@@ -100,7 +102,7 @@ export default function TaskList() {
 
       if (needsUpdate) {
         updateDocumentNonBlocking(userDocRef, updates);
-        if (updates.streakCount === 0 && !updates.step1Status) {
+        if (updates.streakCount === 0 && !updates.step1Status && userData.streakCount > 0) {
           toast({
             variant: "destructive",
             title: "STREAK REGISTRY RESET",
@@ -142,7 +144,7 @@ export default function TaskList() {
         if (newMonthlyCounter >= 30) {
           newMonthlyCounter = 0;
           newRewards += 1;
-          toast({ title: "BONUS SECURED", description: "$25 Gift Card earned." });
+          toast({ title: "BONUS SECURED", description: "$25 LTB Brand Elite Gift Card earned." });
         }
         updates.eliteMonthlyCounter = newMonthlyCounter;
         updates.eliteRewardsAvailable = newRewards;
@@ -201,7 +203,7 @@ export default function TaskList() {
     toast({ title: "CEO BYPASS: SEQUENCE FULLY RESET" });
   };
 
-  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center font-black uppercase tracking-widest">Verifying System Integrity...</div>;
+  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center font-black uppercase tracking-widest text-foreground">Verifying System Integrity...</div>;
   if (!user || !userData) return <p className="p-24 text-center font-black uppercase tracking-widest text-muted-foreground">Authentication Required.</p>;
 
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
@@ -214,6 +216,21 @@ export default function TaskList() {
 
   return (
     <div className="space-y-10">
+      {/* Informative Elite Registry Card */}
+      <Card className="rounded-[2.5rem] border-accent/20 bg-accent/5 overflow-hidden shadow-xl">
+        <CardHeader className="flex flex-row items-center gap-4">
+          <div className="p-3 bg-accent/10 rounded-2xl">
+            <Info className="w-6 h-6 text-accent" />
+          </div>
+          <CardTitle className="text-sm font-black uppercase tracking-widest">{t('tasks.eliteRegistry.title')}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-[11px] font-bold text-muted-foreground leading-relaxed">
+            {t('tasks.eliteRegistry.description')}
+          </p>
+        </CardContent>
+      </Card>
+
       <Card className="overflow-hidden border-2 border-primary/20 bg-gradient-to-br from-background to-secondary/10 shadow-2xl rounded-[3rem]">
         <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-10 pb-7">
           <div className="flex flex-col gap-2">

@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -52,7 +53,7 @@ export default function AdminPage() {
   }, [isAdmin, isAdminLoading, isUserLoading, router]);
 
   if (isUserLoading || isAdminLoading || areOrdersLoading || areWithdrawalsLoading) {
-    return <div className="container text-center p-24 font-black uppercase tracking-widest">{t('general.loading')}</div>;
+    return <div className="container text-center p-24 font-black uppercase tracking-widest text-foreground">{t('general.loading')}</div>;
   }
 
   if (!isAdmin) {
@@ -85,7 +86,7 @@ export default function AdminPage() {
             <Database className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
-            <div className="text-4xl font-black">{assetCount} Unique Items</div>
+            <div className="text-4xl font-black text-foreground">{assetCount} Unique Items</div>
             <p className="text-[9px] font-bold text-muted-foreground mt-1 uppercase">Deduplication Engine Active</p>
           </CardContent>
         </Card>
@@ -96,7 +97,7 @@ export default function AdminPage() {
             <DollarSign className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-4xl font-black">${totalRevenue.toLocaleString()}</div>
+            <div className="text-4xl font-black text-foreground">${totalRevenue.toLocaleString()}</div>
           </CardContent>
         </Card>
 
@@ -106,7 +107,7 @@ export default function AdminPage() {
             <AlertCircle className="h-4 w-4 text-destructive" />
           </CardHeader>
           <CardContent>
-            <div className="text-4xl font-black">{pendingOrders + pendingWithdrawals} Actions</div>
+            <div className="text-4xl font-black text-foreground">{pendingOrders + pendingWithdrawals} Actions</div>
           </CardContent>
         </Card>
       </div>
@@ -114,22 +115,22 @@ export default function AdminPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <Card className="rounded-[3rem] overflow-hidden shadow-xl border-black/5">
                 <CardHeader className="bg-secondary/30 p-8">
-                    <CardTitle className="text-xl font-black tracking-tight">Recent Orders</CardTitle>
+                    <CardTitle className="text-xl font-black tracking-tight text-foreground">Recent Orders</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
                 <Table>
                     <TableHeader>
                         <TableRow className="border-none">
-                            <TableHead className="pl-8 h-14 text-[10px] font-black uppercase tracking-widest">Product</TableHead>
-                            <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">Status</TableHead>
-                            <TableHead className="h-14 text-right pr-8 text-[10px] font-black uppercase tracking-widest">Amount</TableHead>
+                            <TableHead className="pl-8 h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Product</TableHead>
+                            <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Status</TableHead>
+                            <TableHead className="h-14 text-right pr-8 text-[10px] font-black uppercase tracking-widest text-foreground">Amount</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {recentOrders.length > 0 ? recentOrders.map(order => (
                             <TableRow key={order.id} className="border-border/5">
                                 <TableCell className="pl-8 py-5">
-                                    <div className="font-black text-sm">{order.product}</div>
+                                    <div className="font-black text-sm text-foreground">{order.product}</div>
                                     <div className="text-[10px] font-black text-foreground uppercase">{order.userId.substring(0,8)}...</div>
                                 </TableCell>
                                 <TableCell>
@@ -137,7 +138,7 @@ export default function AdminPage() {
                                         {order.status}
                                     </Badge>
                                 </TableCell>
-                                <TableCell className="text-right pr-8 font-black text-sm">${order.price.toLocaleString()}</TableCell>
+                                <TableCell className="text-right pr-8 font-black text-sm text-foreground">${order.price.toLocaleString()}</TableCell>
                             </TableRow>
                         )) : (
                             <TableRow>
@@ -150,21 +151,22 @@ export default function AdminPage() {
             </Card>
             <Card className="rounded-[3rem] overflow-hidden shadow-xl border-black/5">
                 <CardHeader className="bg-secondary/30 p-8">
-                    <CardTitle className="text-xl font-black tracking-tight">Recent Withdrawals</CardTitle>
+                    <CardTitle className="text-xl font-black tracking-tight text-foreground">Recent Withdrawals</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
                     <Table>
                         <TableHeader>
                             <TableRow className="border-none">
-                                <TableHead className="pl-8 h-14 text-[10px] font-black uppercase tracking-widest">Method</TableHead>
-                                <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">Status</TableHead>
-                                <TableHead className="h-14 text-right pr-8 text-[10px] font-black uppercase tracking-widest">Amount</TableHead>
+                                <TableHead className="pl-8 h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Method</TableHead>
+                                <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Status</TableHead>
+                                <TableHead className="h-14 text-right pr-8 text-[10px] font-black uppercase tracking-widest text-foreground">Amount</TableHead>
                             </TableRow>
+                        </TableHeader>
                         <TableBody>
                             {recentWithdrawals.length > 0 ? recentWithdrawals.map(w => (
                                 <TableRow key={w.id} className="border-border/5">
                                     <TableCell className="pl-8 py-5">
-                                        <div className="font-black text-sm">{w.paymentMethod}</div>
+                                        <div className="font-black text-sm text-foreground">{w.paymentMethod}</div>
                                         <div className="text-[9px] font-black text-foreground uppercase">{w.userId.substring(0, 8)}...</div>
                                     </TableCell>
                                     <TableCell>
@@ -172,7 +174,7 @@ export default function AdminPage() {
                                             {w.status}
                                         </Badge>
                                     </TableCell>
-                                    <TableCell className="text-right pr-8 font-black text-sm">${w.amount.toLocaleString()}</TableCell>
+                                    <TableCell className="text-right pr-8 font-black text-sm text-foreground">${w.amount.toLocaleString()}</TableCell>
                                 </TableRow>
                             )) : (
                                 <TableRow>

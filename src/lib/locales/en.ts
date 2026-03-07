@@ -96,7 +96,7 @@ export const en = {
   "account.eliteBonusProgress": "Bonus Progress: {count} / 30 Cycles",
   "account.rewardsTitle": "Gift Card Rewards",
   "account.rewardsDescription": "Gift card bonuses secured by Elite status.",
-  "account.redeemReward": "Claim $25 Gift Card",
+  "account.redeemReward": "Claim $25 LTB Brand Elite Gift Card",
   "account.rewardsAvailable": "{count} Gift Cards Available",
   
   // Redeem Page
@@ -163,6 +163,8 @@ export const en = {
   "tasks.initialFollow.confirmButton": "I Have Followed All Accounts",
   "tasks.initialFollow.toast.successTitle": "Access Granted",
   "tasks.initialFollow.toast.successDescription": "Daily tasks and streak tracking are now active.",
+  "tasks.eliteRegistry.title": "Elite Registry Protocol",
+  "tasks.eliteRegistry.description": "Complete the daily task sequence for 365 consecutive days to permanently unlock Elite Mode. Elite members earn a $25 LTB Brand Elite Gift Card for every 30 days of consistent activity. IMPORTANT: A strict 24-hour activity window is enforced. If a single day is missed, the registry initializes to Day 0. Your balance remains strictly preserved.",
 
   // Wallet Page
   "wallet.title": "Wallet",

@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -104,7 +105,7 @@ export default function AccountPage() {
     };
 
     if (isUserLoading || isUserDocLoading || areOrdersLoading) {
-        return <div className="container text-center p-24 font-black uppercase tracking-widest">{t('general.loading')}</div>;
+        return <div className="container text-center p-24 font-black uppercase tracking-widest text-foreground">{t('general.loading')}</div>;
     }
 
     if (!user) {
@@ -200,24 +201,24 @@ export default function AccountPage() {
                         <Table>
                             <TableHeader>
                                 <TableRow className="border-none bg-secondary/30">
-                                    <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest">{t('general.product')}</TableHead>
-                                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">{t('general.status')}</TableHead>
-                                    <TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest">{t('general.total')}</TableHead>
+                                    <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest text-foreground">{t('general.product')}</TableHead>
+                                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">{t('general.status')}</TableHead>
+                                    <TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest text-foreground">{t('general.total')}</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {clientOrders.length > 0 ? clientOrders.map(order => (
                                     <TableRow key={order.id} className="border-border/5 group">
-                                        <TableCell className="pl-10 py-6 font-black">
+                                        <TableCell className="pl-10 py-6 font-black text-foreground">
                                             <div className="font-black text-sm group-hover:text-primary transition-colors">{order.product}</div>
                                             <div className="text-[10px] font-black text-foreground mt-1">{order.formattedDate}</div>
                                         </TableCell>
-                                        <TableCell className="font-black">
+                                        <TableCell className="font-black text-foreground">
                                             <Badge variant="outline" className="rounded-full px-4 py-1 border-none bg-primary/10 text-primary text-[9px] font-black uppercase tracking-widest">
                                                 {order.status}
                                             </Badge>
                                         </TableCell>
-                                        <TableCell className="text-right pr-10 font-black">
+                                        <TableCell className="text-right pr-10 font-black text-foreground">
                                             <div className="font-black text-sm">${order.price.toLocaleString()}</div>
                                         </TableCell>
                                     </TableRow>
@@ -240,23 +241,23 @@ export default function AccountPage() {
                             <Table>
                                 <TableHeader>
                                     <TableRow className="border-none bg-secondary/30">
-                                        <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest">Reward</TableHead>
-                                        <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">Code</TableHead>
-                                        <TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest">Date</TableHead>
+                                        <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Reward</TableHead>
+                                        <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Code</TableHead>
+                                        <TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest text-foreground">Date</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
                                     {redemptionsData.map(red => (
                                         <TableRow key={red.id} className="border-border/5">
-                                            <TableCell className="pl-10 py-6 font-black">
+                                            <TableCell className="pl-10 py-6 font-black text-foreground">
                                                 <div className="font-black text-sm">{red.rewardType}</div>
                                             </TableCell>
-                                            <TableCell className="font-black">
+                                            <TableCell className="font-black text-foreground">
                                                 <code className="bg-black text-white px-3 py-1.5 rounded-lg text-xs font-black tracking-widest">
                                                     {red.giftCardCodeId}
                                                 </code>
                                             </TableCell>
-                                            <TableCell className="text-right pr-10 font-black">
+                                            <TableCell className="text-right pr-10 font-black text-foreground">
                                                 <div className="text-sm font-black text-foreground">{new Date(red.redemptionDate).toLocaleDateString()}</div>
                                             </TableCell>
                                         </TableRow>
