@@ -142,7 +142,7 @@ export default function TaskList() {
         if (newMonthlyCounter >= 30) {
           newMonthlyCounter = 0;
           newRewards += 1;
-          toast({ title: "BONUS SECURED", description: "$100 LTB Brand Elite Gift Card earned." });
+          toast({ title: "BONUS SECURED", description: "$25 LTB Brand Elite Gift Card earned." });
         }
         updates.eliteMonthlyCounter = newMonthlyCounter;
         updates.eliteRewardsAvailable = newRewards;

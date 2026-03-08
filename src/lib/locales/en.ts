@@ -96,7 +96,7 @@ export const en = {
   "account.eliteBonusProgress": "Bonus Progress: {count} / 30 Cycles",
   "account.rewardsTitle": "Gift Card Rewards",
   "account.rewardsDescription": "Gift card bonuses secured by Elite status.",
-  "account.redeemReward": "Claim $100 LTB Brand Elite Gift Card",
+  "account.redeemReward": "Claim $25 LTB Brand Elite Gift Card",
   "account.rewardsAvailable": "{count} Gift Cards Available",
   
   // Redeem Page
@@ -155,7 +155,7 @@ export const en = {
   "tasks.toast.streakMaintained": "Streak anchored. Day {streak} achieved.",
   "tasks.toast.eliteUnlockedTitle": "ELITE MODE ACTIVATED",
   "tasks.toast.eliteUnlockedDesc": "365-day milestone secured. Permanent Elite status authorized.",
-  "tasks.toast.giftCardEarned": "BONUS SECURED. $100 Gift Card added to your portfolio.",
+  "tasks.toast.giftCardEarned": "BONUS SECURED. $25 Gift Card added to your portfolio.",
   "tasks.initialFollow.title": "First, Follow Our Socials",
   "tasks.initialFollow.description": "To unlock daily tasks, you must first follow all of our social media channels.",
   "tasks.initialFollow.followButton": "Follow",
@@ -165,7 +165,7 @@ export const en = {
   "tasks.initialFollow.toast.successTitle": "Access Granted",
   "tasks.initialFollow.toast.successDescription": "Daily tasks and streak tracking are now active.",
   "tasks.eliteRegistry.title": "LTB GIFT CARD CHALLENGE",
-  "tasks.eliteRegistry.description": "Complete the daily task sequence for 365 consecutive days to permanently unlock Elite Mode. Elite members earn a $100 LTB Brand Elite Gift Card for every 30 days of consistent activity. IMPORTANT: A strict 24-hour activity window is enforced. If a single day is missed, the registry initializes to Day 0. Your balance remains strictly preserved.",
+  "tasks.eliteRegistry.description": "Complete the daily task sequence for 365 consecutive days to permanently unlock Elite Mode. Elite members earn a $25 LTB Brand Elite Gift Card for every 30 days of consistent activity. IMPORTANT: A strict 24-hour activity window is enforced. If a single day is missed, the registry initializes to Day 0. Your balance remains strictly preserved.",
 
   // Wallet Page
   "wallet.title": "Wallet",
