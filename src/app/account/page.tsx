@@ -79,7 +79,7 @@ export default function AccountPage() {
         if (userData.eliteRewardsAvailable <= 0) return;
 
         const redemptionId = `gc_${Date.now()}`;
-        const codeId = `EDEN-GC-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
+        const codeId = `LTB-GC-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
         
         const redemptionRef = doc(firestore, 'users', user.uid, 'rewardRedemptions', redemptionId);
         const newRedemption: RewardRedemption = {
@@ -87,8 +87,8 @@ export default function AccountPage() {
             userId: user.uid,
             giftCardCodeId: codeId,
             redemptionDate: new Date().toISOString(),
-            rewardType: '$25 LTB Brand Elite Gift Card',
-            value: 25,
+            rewardType: '$100 LTB Brand Elite Gift Card',
+            value: 100,
         };
 
         setDocumentNonBlocking(redemptionRef, newRedemption, { merge: false });

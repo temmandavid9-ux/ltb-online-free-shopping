@@ -5,7 +5,7 @@
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "UserProfile",
       "type": "object",
-      "description": "A user's profile containing reward system data for the ShopSphere application, enabling daily task tracking and Elite Mode gift card bonuses.",
+      "description": "A user's profile containing reward system data for the ShopSphere application, enabling daily task tracking and Elite Mode $100 gift card bonuses.",
       "properties": {
         "id": {
           "type": "string",
@@ -25,7 +25,7 @@
         },
         "streakCount": {
           "type": "number",
-          "description": "The number of consecutive days the user has completed daily tasks. Resets to 0 if a day is missed."
+          "description": "The number of consecutive days the user has completed daily tasks. Resets to 0 if a 24h cycle is missed."
         },
         "lastCompletedDate": {
           "type": "string",
@@ -47,7 +47,7 @@
         },
         "eliteRewardsAvailable": {
           "type": "number",
-          "description": "The number of $25 gift cards an Elite user has earned but not yet redeemed."
+          "description": "The number of $100 gift cards an Elite user has earned but not yet redeemed."
         },
         "redeemedRewardIds": {
           "type": "array",
@@ -80,7 +80,7 @@
       "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "GiftCardCode",
       "type": "object",
-      "description": "Represents a unique $25 gift card code managed by the system.",
+      "description": "Represents a unique $100 gift card code managed by the system.",
       "properties": {
         "id": {
           "type": "string"
@@ -198,6 +198,6 @@
         }
       }
     ],
-    "reasoning": "Standardized to a 2-segment path for UserProfile (/users/{userId}) to ensure valid Firestore DocumentReferences. Maintained subcollection structure for redemptions."
+    "reasoning": "Standardized to a 2-segment path for UserProfile (/users/{userId}) to ensure valid Firestore DocumentReferences. Maintained subcollection structure for redemptions. Updated Elite rewards to $100."
   }
 }

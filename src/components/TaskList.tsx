@@ -78,7 +78,7 @@ export default function TaskList() {
       const updates: any = {};
       let needsUpdate = false;
 
-      // 1. AUTHORITATIVE NEW DAY RESET
+      // 1. AUTHORITATIVE NEW DAY RESET (IF COOLDOWN OVER AND CYCLE DONE)
       if (!isCooldownActive && userData.step3Status) {
         updates.step1Status = false;
         updates.step2Status = false;
@@ -142,7 +142,7 @@ export default function TaskList() {
         if (newMonthlyCounter >= 30) {
           newMonthlyCounter = 0;
           newRewards += 1;
-          toast({ title: "BONUS SECURED", description: "$25 LTB Brand Elite Gift Card earned." });
+          toast({ title: "BONUS SECURED", description: "$100 LTB Brand Elite Gift Card earned." });
         }
         updates.eliteMonthlyCounter = newMonthlyCounter;
         updates.eliteRewardsAvailable = newRewards;
@@ -214,7 +214,6 @@ export default function TaskList() {
 
   return (
     <div className="space-y-10">
-      {/* Informative Elite Registry Card - RE-CALIBRATED TO BE VERY BOLD */}
       <Card className="rounded-[2.5rem] border-accent/20 bg-accent/5 overflow-hidden shadow-xl">
         <CardHeader className="flex flex-row items-center gap-4">
           <div className="p-3 bg-accent/10 rounded-2xl">
