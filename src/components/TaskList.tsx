@@ -350,7 +350,7 @@ export default function TaskList() {
               <div className="inline-flex items-center gap-3 px-8 py-3 bg-black text-white rounded-full shadow-2xl">
                 <Lock className="w-4 h-4 text-primary" />
                 <span className="text-[11px] font-black uppercase tracking-widest">
-                  Registry secured until next authorized window.
+                  Registry secured until next authorized Task.
                 </span>
               </div>
             </div>
