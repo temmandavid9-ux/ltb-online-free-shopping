@@ -76,8 +76,13 @@ export default function TaskList() {
       const updates: any = {};
       let needsUpdate = false;
 
-      // New Day Cycle Reset Logic - Only reset if cooldown finished and we haven't started today's sequence
-      if (!isCooldownActive && userData.step3Status && !userData.step1Status) {
+      // CALENDAR-AWARE RESET LOGIC
+      // If we are past the security cooldown AND it's a new day compared to the last activity,
+      // OR if we completed all stages and the cooldown is officially over.
+      const lastStepDay = userData.lastStepDate ? new Date(userData.lastStepDate).toDateString() : null;
+      const today = new Date().toDateString();
+      
+      if (!isCooldownActive && (userData.step3Status || (lastStepDay && lastStepDay !== today))) {
         updates.step1Status = false;
         updates.step2Status = false;
         updates.step3Status = false;
@@ -97,7 +102,7 @@ export default function TaskList() {
 
       if (needsUpdate) {
         updateDocumentNonBlocking(userDocRef, updates);
-        if (updates.streakCount === 0 && !updates.step1Status && userData.streakCount > 0) {
+        if (updates.streakCount === 0 && userData.streakCount > 0) {
           toast({
             variant: "destructive",
             title: "STREAK REGISTRY RESET",
