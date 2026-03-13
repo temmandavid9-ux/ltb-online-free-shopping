@@ -119,7 +119,7 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
-    // REWARD CALIBRATION: Elite Active Tier 1 = $25.00 per task | Standard Tier 1 = $1.00 Daily ($0.33, $0.33, $0.34)
+    // REWARD CALIBRATION: Elite Active Tier 1 = $25.00 per task | Tier 1 = $1.00 Daily ($0.33, $0.33, $0.34)
     const isEliteActive = userData.eliteUnlocked;
     let reward = isEliteActive ? 25.00 : (stage === 2 ? 0.34 : 0.33);
     
