@@ -153,7 +153,7 @@ export const en = {
   "tasks.eliteActive": "Mode: ELITE",
   "tasks.toast.alreadyCompleted": "Tasks already secured for current window.",
   "tasks.toast.streakMaintained": "Streak anchored. Day {streak} achieved.",
-  "tasks.toast.eliteUnlockedTitle": "ELITE MODE ACTIVATED Tier 2",
+  "tasks.toast.eliteUnlockedTitle": "ELITE MODE ACTIVATED Tier 1",
   "tasks.toast.eliteUnlockedDesc": "365-day milestone secured. Permanent Elite status authorized.",
   "tasks.toast.giftCardEarned": "BONUS SECURED. $100 Gift Card added to your portfolio.",
   "tasks.initialFollow.title": "First, Follow Our Socials",
