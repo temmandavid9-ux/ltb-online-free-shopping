@@ -76,9 +76,6 @@ export default function TaskList() {
       const updates: any = {};
       let needsUpdate = false;
 
-      // CALENDAR-AWARE RESET LOGIC
-      // If we are past the security cooldown AND it's a new day compared to the last activity,
-      // OR if we completed all stages and the cooldown is officially over.
       const lastStepDay = userData.lastStepDate ? new Date(userData.lastStepDate).toDateString() : null;
       const today = new Date().toDateString();
       
@@ -90,7 +87,6 @@ export default function TaskList() {
         needsUpdate = true;
       }
 
-      // Streak Failure Monitor - Strict 24h window
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
@@ -209,10 +205,12 @@ export default function TaskList() {
 
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
 
+  const isElite = !!userData.eliteUnlocked;
+
   const channels = [
-    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: `Stage 1 (+${userData.eliteUnlocked ? '25.00' : '0.33'})`, status: userData.step1Status },
-    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: `Stage 2 (+${userData.eliteUnlocked ? '25.00' : '0.33'})`, status: userData.step2Status },
-    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: `Final Stage (+${userData.eliteUnlocked ? '25.00' : '0.34'})`, status: userData.step3Status }
+    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: `Stage 1 (+${isElite ? '25.00' : '0.33'})`, status: userData.step1Status },
+    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: `Stage 2 (+${isElite ? '25.00' : '0.33'})`, status: userData.step2Status },
+    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: `Final Stage (+${isElite ? '25.00' : '0.34'})`, status: userData.step3Status }
   ];
 
   return (
@@ -222,7 +220,9 @@ export default function TaskList() {
           <div className="p-3 bg-accent/10 rounded-2xl">
             <Info className="w-6 h-6 text-accent" />
           </div>
-          <CardTitle className="text-sm font-black uppercase tracking-widest">{t('tasks.eliteRegistry.title')}</CardTitle>
+          <CardTitle className="text-sm font-black uppercase tracking-widest">
+            {t('tasks.eliteRegistry.title')}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-[11px] font-black text-foreground leading-relaxed uppercase whitespace-pre-line">
@@ -236,8 +236,8 @@ export default function TaskList() {
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-4">
                 <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
-                {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-                {userData.eliteUnlocked ? "Elite Active Tier 2" : "Daily Task Sequence"}
+                {isElite ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
+                {isElite ? "Elite Active Tier 2" : "Daily Task Sequence"}
                 </CardTitle>
             </div>
             <CardDescription className="font-black uppercase tracking-widest text-[10px] text-muted-foreground/60">
@@ -268,7 +268,7 @@ export default function TaskList() {
               <Progress value={((userData.streakCount || 0) / 365) * 100} className="h-4 bg-secondary rounded-full" />
             </div>
 
-            {userData.eliteUnlocked && (
+            {isElite && (
               <div className="bg-white rounded-[2rem] p-8 border border-primary/20 shadow-sm animate-in zoom-in">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
