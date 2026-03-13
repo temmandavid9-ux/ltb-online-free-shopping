@@ -137,7 +137,7 @@ export const es = {
   "tasks.loading": "Calibrando Tareas...",
   "tasks.loginPrompt": "Autenticación requerida para acceder a las tareas.",
   "tasks.allCompletedTitle": "Ciclo Asegurado",
-  "tasks.allCompletedDescription": "Daily PACK finalizado. Recompensa de $1.00 asegurada. Tareas bloqueadas por 24 horas.",
+  "tasks.allCompletedDescription": "Daily PACK finalizado. Tareas bloqueadas por 24 horas.",
   "tasks.unlockTime": "Próximo ciclo autorizado a las: {date}",
   "tasks.inProgress": "Verificación activa...",
   "tasks.stayOnPage": "Interacción requerida. Las micro-recompensas se aseguran automáticamente.",
@@ -164,7 +164,7 @@ export const es = {
   "tasks.initialFollow.toast.successTitle": "Acceso Concedido",
   "tasks.initialFollow.toast.successDescription": "Las tareas diarias y el seguimiento de racha están activos.",
   "tasks.eliteRegistry.title": "UNLOCK ELITE MODE, LTB GIFT CARD TIER 2",
-  "tasks.eliteRegistry.description": "Complete la secuencia de tareas diarias durante 365 días consecutivos para desbloquear permanentemente el Modo Élite. Los miembros Élite ganan una Tarjeta de Regalo Élite de LTB Brand de $100 por cada 30 días de actividad constante. En el Modo Élite, los usuarios reciben $25.00 por tarea completada. IMPORTANTE: Se aplica una estricta ventana de actividad de 24 horas. Si se pierde un solo día, el registro se inicializa al Día 0.",
+  "tasks.eliteRegistry.description": "COMPLETE LA SECUENCIA DE TAREAS DIARIAS DURANTE 365 DÍAS CONSECUTIVOS PARA DESBLOQUEAR PERMANENTEMENTE EL MODO ÉLITE. LOS MIEMBROS ESTÁNDAR DE NIVEL 1 GANAN EXACTAMENTE $1.00 POR CICLO DIARIO ($0.33, $0.33, $0.34). LOS MIEMBROS ÉLITE DE NIVEL 2 GANAN UNA TARJETA DE REGALO ÉLITE DE LTB BRAND DE $100 POR CADA 30 DÍAS DE ACTIVIDAD CONSTANTE. EN EL MODO ÉLITE, LOS USUARIOS RECIBEN $25.00 POR TAREA COMPLETADA. IMPORTANTE: SE APLICA UNA ESTRICTA VENTANA DE ACTIVIDAD DE 24 HORAS. SI SE PIERDE UN SOLO DÍA, EL REGISTRO SE INICIALIZA AL DÍA 0.",
 
   // Wallet Page
   "wallet.title": "Billetera",

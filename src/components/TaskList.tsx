@@ -1,3 +1,4 @@
+
 'use client';
 import {
   useUser,
@@ -17,7 +18,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
 
-const TASK_DURATION_SECONDS = 600; // STRICT 10 MINUTES PER CEO COMMAND
+const TASK_DURATION_SECONDS = 600; // STRICT 10 MINUTES
 const COOLDOWN_MS = 20 * 60 * 60 * 1000; // 20 Hour Security Cooldown
 const TOTAL_CYCLE_MS = 24 * 60 * 60 * 1000; // STRICT 24H REGISTRY WINDOW
 
@@ -63,11 +64,11 @@ export default function TaskList() {
   }, [isCooldownActive, userData?.lastCompletedDate, currentTime]);
 
   const currentStepIndex = useMemo(() => {
-    if (isCooldownActive) return 3; // Blocked by Cooldown
+    if (isCooldownActive) return 3;
     if (!userData?.step1Status) return 0;
     if (!userData?.step2Status) return 1;
     if (!userData?.step3Status) return 2;
-    return 3; // Cycle Secured
+    return 3; 
   }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
 
   useEffect(() => {
@@ -75,8 +76,8 @@ export default function TaskList() {
       const updates: any = {};
       let needsUpdate = false;
 
-      // New Day Cycle Reset Logic
-      if (!isCooldownActive && userData.step3Status) {
+      // New Day Cycle Reset Logic - Only reset if cooldown finished and we haven't started today's sequence
+      if (!isCooldownActive && userData.step3Status && !userData.step1Status) {
         updates.step1Status = false;
         updates.step2Status = false;
         updates.step3Status = false;
@@ -84,7 +85,7 @@ export default function TaskList() {
         needsUpdate = true;
       }
 
-      // Streak Failure Monitor
+      // Streak Failure Monitor - Strict 24h window
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
@@ -100,7 +101,7 @@ export default function TaskList() {
           toast({
             variant: "destructive",
             title: "STREAK REGISTRY RESET",
-            description: "Strict 24h activity window breached. Registry initialized to Day 0. Balance secured.",
+            description: "Strict 24h activity window breached. Registry initialized to Day 0.",
           });
         }
       }
@@ -111,7 +112,7 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
-    // REWARD CALIBRATION: Elite = $25.00 | Tier 1 = $1.00 Daily ($0.33, $0.33, $0.34)
+    // REWARD CALIBRATION: Elite Tier 2 = $25.00 | Standard Tier 1 = $1.00 Daily ($0.33, $0.33, $0.34)
     let reward = userData.eliteUnlocked ? 25.00 : (stage === 2 ? 0.34 : 0.33);
     let updates: any = {};
 
@@ -204,9 +205,9 @@ export default function TaskList() {
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
 
   const channels = [
-    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: `Stage 1 (+${userData.eliteUnlocked ? '$25.00' : '$0.33'})`, status: userData.step1Status },
-    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: `Stage 2 (+${userData.eliteUnlocked ? '$25.00' : '$0.33'})`, status: userData.step2Status },
-    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: `Final Stage (+${userData.eliteUnlocked ? '$25.00' : '$0.34'})`, status: userData.step3Status }
+    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: `Stage 1 (+${userData.eliteUnlocked ? '25.00' : '0.33'})`, status: userData.step1Status },
+    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: `Stage 2 (+${userData.eliteUnlocked ? '25.00' : '0.33'})`, status: userData.step2Status },
+    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: `Final Stage (+${userData.eliteUnlocked ? '25.00' : '0.34'})`, status: userData.step3Status }
   ];
 
   return (
@@ -219,7 +220,7 @@ export default function TaskList() {
           <CardTitle className="text-sm font-black uppercase tracking-widest">{t('tasks.eliteRegistry.title')}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-[11px] font-black text-foreground leading-relaxed uppercase">
+          <p className="text-[11px] font-black text-foreground leading-relaxed uppercase whitespace-pre-line">
             {t('tasks.eliteRegistry.description')}
           </p>
         </CardContent>
@@ -292,7 +293,7 @@ export default function TaskList() {
                       </div>
                       <div>
                         <h4 className="font-black text-[11px] uppercase tracking-widest">{channel.title}</h4>
-                        <p className="text-[10px] font-bold text-muted-foreground/60 mt-1">{channel.desc}</p>
+                        <p className="text-[10px] font-bold text-muted-foreground/60 mt-1 uppercase tracking-tighter">{channel.desc}</p>
                       </div>
                       <div className="pt-2">
                         {isSecured ? (

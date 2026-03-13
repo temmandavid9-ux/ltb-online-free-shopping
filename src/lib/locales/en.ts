@@ -137,7 +137,7 @@ export const en = {
   "tasks.loading": "Calibrating Tasks...",
   "tasks.loginPrompt": "Authentication required to access tasks.",
   "tasks.allCompletedTitle": "Cycle Secured",
-  "tasks.allCompletedDescription": "Daily PACK finalized. $1.00 reward secured. Tasks locked for 24 hours.",
+  "tasks.allCompletedDescription": "Daily PACK finalized. Tasks locked for 24 hours.",
   "tasks.unlockTime": "Next cycle authorized at: {date}",
   "tasks.inProgress": "Verification active...",
   "tasks.stayOnPage": "Engagement required. Micro-rewards secure automatically.",
@@ -164,7 +164,7 @@ export const en = {
   "tasks.initialFollow.toast.successTitle": "Access Granted",
   "tasks.initialFollow.toast.successDescription": "Daily tasks and streak tracking are now active.",
   "tasks.eliteRegistry.title": "UNLOCK ELITE MODE, LTB GIFT CARD TIER 2",
-  "tasks.eliteRegistry.description": "Complete the daily task sequence for 365 consecutive days to permanently unlock Elite Mode. Elite members earn a $100 LTB Brand Elite Gift Card for every 30 days of consistent activity. In Elite Mode, users receive $25.00 per individual task completed. IMPORTANT: A strict 24-hour activity window is enforced. If a single day is missed, the registry initializes to Day 0.",
+  "tasks.eliteRegistry.description": "COMPLETE THE DAILY TASK SEQUENCE FOR 365 CONSECUTIVE DAYS TO PERMANENTLY UNLOCK ELITE MODE. STANDARD TIER 1 MEMBERS EARN EXACTLY $1.00 PER DAILY CYCLE ($0.33, $0.33, $0.34). ELITE TIER 2 MEMBERS EARN A $100 LTB BRAND ELITE GIFT CARD FOR EVERY 30 DAYS OF CONSISTENT ACTIVITY. IN ELITE MODE, USERS RECEIVE $25.00 PER INDIVIDUAL TASK COMPLETED. IMPORTANT: A STRICT 24-HOUR ACTIVITY WINDOW IS ENFORCED. IF A SINGLE DAY IS MISSED, THE REGISTRY INITIALIZES TO DAY 0.",
 
   // Wallet Page
   "wallet.title": "Wallet",
