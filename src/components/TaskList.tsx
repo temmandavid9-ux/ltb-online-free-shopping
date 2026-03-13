@@ -234,7 +234,7 @@ export default function TaskList() {
             <div className="flex items-center gap-4">
                 <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
                 {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-                {userData.eliteUnlocked ? "Elite Tier Active" : "Daily Task Sequence"}
+                {userData.eliteUnlocked ? "Elite Active  Tier 1" : "Daily Task Sequence"}
                 </CardTitle>
             </div>
             <CardDescription className="font-black uppercase tracking-widest text-[10px] text-muted-foreground/60">

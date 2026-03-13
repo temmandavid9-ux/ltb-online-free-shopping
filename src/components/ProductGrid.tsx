@@ -1,20 +1,27 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import type { Product } from '@/lib/types';
 import { categories } from '@/lib/data';
 import ProductCard from '@/components/ProductCard';
 import CategoryFilter from '@/components/CategoryFilter';
+import { useSearchParams } from 'next/navigation';
 
 type ProductGridProps = {
   products: Product[];
 };
 
 export default function ProductGrid({ products }: ProductGridProps) {
+  const searchParams = useSearchParams();
   const [filters, setFilters] = useState({
     category: 'All',
-    search: '',
+    search: searchParams.get('q') || '',
   });
+
+  useEffect(() => {
+    const q = searchParams.get('q') || '';
+    setFilters(prev => ({ ...prev, search: q }));
+  }, [searchParams]);
 
   const filteredProducts = useMemo(() => {
     return products.filter((product: Product) => {

@@ -9,6 +9,8 @@ import { useUser, useFirestore, useDoc, useMemoFirebase } from '@/firebase';
 import { Input } from '@/components/ui/input';
 import { doc } from 'firebase/firestore';
 import { useLanguage } from '@/context/LanguageContext';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,11 +26,40 @@ export default function Header() {
   const { user, isUserLoading } = useUser();
   const firestore = useFirestore();
   const { t, setLocale, locale } = useLanguage();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const userDocRef = useMemoFirebase(() => user ? doc(firestore, 'users', user.uid) : null, [firestore, user]);
   const { data: userData } = useDoc<UserProfile>(userDocRef);
 
+  const [searchValue, setSearchValue] = useState(searchParams.get('q') || '');
+
   const balance = userData?.balance ?? 0;
+
+  useEffect(() => {
+    setSearchValue(searchParams.get('q') || '');
+  }, [searchParams]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchValue(value);
+    
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) {
+      params.set('q', value);
+    } else {
+      params.delete('q');
+    }
+    
+    const newUrl = params.toString() ? `/?${params.toString()}` : '/';
+    
+    if (pathname !== '/') {
+        router.push(newUrl);
+    } else {
+        router.replace(newUrl, { scroll: false });
+    }
+  };
 
   return (
     <header className="glass-header">
@@ -58,6 +89,8 @@ export default function Header() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
               <Input 
                 placeholder={t('header.searchPlaceholder')} 
+                value={searchValue}
+                onChange={handleSearchChange}
                 className="pl-12 h-12 md:h-14 bg-secondary/20 border-transparent focus-visible:ring-1 focus-visible:ring-primary/20 rounded-2xl text-sm transition-all shadow-inner font-black" 
               />
             </div>
