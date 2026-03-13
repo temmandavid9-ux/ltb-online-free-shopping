@@ -82,6 +82,7 @@ export default function TaskList() {
       const today = new Date().toDateString();
       
       // AUTO-RESET LOGIC: NEW DAY AUTHORIZATION
+      // Tasks reset if it's a new calendar day AND no cooldown is active, or if all 3 were completed.
       if (!isCooldownActive && (userData.step3Status || (lastStepDay && lastStepDay !== today))) {
         updates.step1Status = false;
         updates.step2Status = false;
@@ -117,7 +118,7 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
-    // REWARD CALIBRATION: Elite Tier 2 = $25.00 | Standard Tier 1 = $1.00 Daily ($0.33, $0.33, $0.34)
+    // REWARD CALIBRATION: TIER 2 (Elite) = $25.00 | TIER 1 (Standard) = $1.00 Daily ($0.33, $0.33, $0.34)
     let reward = userData.eliteUnlocked ? 25.00 : (stage === 2 ? 0.34 : 0.33);
     let updates: any = {};
 
