@@ -243,6 +243,19 @@ export default function TaskList() {
             <div className="text-4xl font-black text-primary">${(userData.balance || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
           </div>
         </CardHeader>
+
+        {!isElite && (
+          <div className="px-10 pb-6">
+            <Card className="bg-primary/5 border-primary/10 rounded-[2rem] border-2 overflow-hidden shadow-inner">
+              <CardContent className="p-8">
+                <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4">{t('tasks.tier2.title')}</h3>
+                <p className="text-[11px] font-black uppercase leading-relaxed text-foreground text-justify">
+                  {t('tasks.tier2.description')}
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        )}
         
         <CardContent className="space-y-10 px-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -151,6 +151,8 @@ export const en = {
   "tasks.streakStatus": "Cycle: {streak} / 365",
   "tasks.eliteMonthlyStatus": "Bonus: {count} / 30 Cycles",
   "tasks.eliteActive": "Elite Active Tier 1",
+  "tasks.tier2.title": "TIER 2 REGISTRY PROTOCOL",
+  "tasks.tier2.description": "COMPLETE THE DAILY TASK SEQUENCE FOR 365 CONSECUTIVE DAYS TO PERMANENTLY UNLOCK TIER 2 REWARDS. ONCE TIER 2 IS ACTIVE, EXECUTIVES EARN $25.00 PER INDIVIDUAL TASK COMPLETED ($75.00 PER DAILY CYCLE) AND SECURE THE $100.00 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONTINUOUS ACTIVITY. A STRICT 24-HOUR WINDOW IS ENFORCED; MISSING A SINGLE DAY INITIALIZES THE REGISTRY TO DAY 0.",
   "tasks.toast.alreadyCompleted": "Tasks already secured for current window.",
   "tasks.toast.streakMaintained": "Streak anchored. Day {streak} achieved.",
   "tasks.toast.eliteUnlockedTitle": "ELITE ACTIVE TIER 1",
@@ -163,8 +165,6 @@ export const en = {
   "tasks.initialFollow.confirmButton": "I Have Followed All Accounts",
   "tasks.initialFollow.toast.successTitle": "Access Granted",
   "tasks.initialFollow.toast.successDescription": "Daily tasks and streak tracking are now active.",
-  "tasks.eliteRegistry.title": "ELITE REGISTRY PROTOCOL",
-  "tasks.eliteRegistry.description": "",
 
   // Wallet Page
   "wallet.title": "Wallet",

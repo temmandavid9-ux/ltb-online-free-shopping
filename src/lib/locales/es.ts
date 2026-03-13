@@ -151,6 +151,8 @@ export const es = {
   "tasks.streakStatus": "Ciclo: {streak} / 365",
   "tasks.eliteMonthlyStatus": "Bono: {count} / 30 Ciclos",
   "tasks.eliteActive": "Elite Active Tier 1",
+  "tasks.tier2.title": "PROTOCOLO DE REGISTRO TIER 2",
+  "tasks.tier2.description": "COMPLETE LA SECUENCIA DE TAREAS DIARIAS DURANTE 365 DÍAS CONSECUTIVOS PARA DESBLOQUEAR PERMANENTEMENTE LAS RECOMPENSAS TIER 2. EN TIER 2, LOS EJECUTIVOS GANAN $25.00 POR CADA TAREA INDIVIDUAL COMPLETADA ($75.00 POR CICLO DIARIO) Y ASEGURAN EL BONO DE TARJETA DE REGALO DE $100.00 LTB BRAND ELITE POR CADA 30 DÍAS DE ACTIVIDAD CONTINUA. SE APLICA UNA VENTANA ESTRICTA DE 24 HORAS; PERDER UN SOLO DÍA INICIALIZA EL REGISTRO AL DÍA 0.",
   "tasks.toast.alreadyCompleted": "Tareas ya aseguradas para la ventana actual.",
   "tasks.toast.streakMaintained": "Racha anclada. Día {streak} alcanzado.",
   "tasks.toast.eliteUnlockedTitle": "MODO ÉLITE ACTIVADO",
@@ -163,8 +165,6 @@ export const es = {
   "tasks.initialFollow.confirmButton": "He seguido todas las cuentas",
   "tasks.initialFollow.toast.successTitle": "Acceso Concedido",
   "tasks.initialFollow.toast.successDescription": "Las tareas diarias y el seguimiento de racha están activos.",
-  "tasks.eliteRegistry.title": "PROTOCOLO DE REGISTRO ÉLITE",
-  "tasks.eliteRegistry.description": "",
 
   // Wallet Page
   "wallet.title": "Billetera",
