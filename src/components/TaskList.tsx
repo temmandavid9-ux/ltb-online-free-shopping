@@ -244,14 +244,14 @@ export default function TaskList() {
           </div>
         </CardHeader>
 
-        {/* Tier 2 Roadmap Note */}
+        {/* Tier 2 Roadmap Note: Hard-coded for Maximum Visual Authority */}
         {!isElite && (
           <div className="px-10 pb-6">
             <Card className="bg-primary/5 border-primary/10 rounded-[2rem] border-2 overflow-hidden shadow-inner">
               <CardContent className="p-8">
-                <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4">{t('tasks.tier2.title')}</h3>
+                <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4">TIER 2 REGISTRY PROTOCOL</h3>
                 <p className="text-[11px] font-black uppercase leading-relaxed text-foreground text-justify">
-                  {t('tasks.tier2.description')}
+                  ACHIEVE A 365-DAY CONSECUTIVE STREAK TO UNLOCK TIER 2 STATUS (ELITE ACTIVE TIER 1). UPON ACTIVATION, INDIVIDUAL TASK REWARDS APPRECIATE TO $25.00 PER COMPLETION ($75.00 TOTAL PER DAILY CYCLE). ADEMÁS, TIER 2 EXECUTIVES SECURE A $100.00 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONTINUOUS REGISTRY ACTIVITY. A STRICT 24-HOUR COMPLETION WINDOW IS MANDATORY; BREACHING THIS WINDOW INITIALIZES THE STREAK REGISTRY TO DAY 0.
                 </p>
               </CardContent>
             </Card>
@@ -369,7 +369,7 @@ export default function TaskList() {
             disabled={activeTimer || isCooldownActive || currentStepIndex > 2}
             onClick={() => currentStepIndex <= 2 && handleStartSubTask(currentStepIndex, channels[currentStepIndex].url)}
           >
-            {activeTimer ? "Verifying Authorization..." : isCooldownActive ? `Authorized in ${cooldownRemainingText}` : currentStepIndex > 2 ? "Cycle Finalized" : t('tasks.startButton')}
+            {activeTimer ? "Verifying Authorization..." : isCooldownActive ? `Authorized in ${cooldownRemainingText}` : currentStepIndex > 2 ? "Cycle Finalized" : "Initialize Tasks"}
           </Button>
         </CardFooter>
       </Card>
