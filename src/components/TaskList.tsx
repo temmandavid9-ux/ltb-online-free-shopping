@@ -1,4 +1,3 @@
-
 'use client';
 import {
   useUser,
@@ -76,6 +75,7 @@ export default function TaskList() {
       const updates: any = {};
       let needsUpdate = false;
 
+      // New Day Cycle Reset Logic
       if (!isCooldownActive && userData.step3Status) {
         updates.step1Status = false;
         updates.step2Status = false;
@@ -84,6 +84,7 @@ export default function TaskList() {
         needsUpdate = true;
       }
 
+      // Streak Failure Monitor
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
@@ -110,7 +111,7 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
-    // ELITE REWARD PROTOCOL: $25 PER TASK ONLY IF UNLOCKED
+    // REWARD CALIBRATION: Elite = $25.00 | Tier 1 = $1.00 Daily ($0.33, $0.33, $0.34)
     let reward = userData.eliteUnlocked ? 25.00 : (stage === 2 ? 0.34 : 0.33);
     let updates: any = {};
 
