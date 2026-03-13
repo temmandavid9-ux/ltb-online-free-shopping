@@ -164,7 +164,7 @@ export const en = {
   "tasks.initialFollow.toast.successTitle": "Access Granted",
   "tasks.initialFollow.toast.successDescription": "Daily tasks and streak tracking are now active.",
   "tasks.eliteRegistry.title": "ELITE REGISTRY PROTOCOL",
-  "tasks.eliteRegistry.description": "COMPLETE THE DAILY TASK SEQUENCE FOR 365 CONSECUTIVE DAYS TO PERMANENTLY UNLOCK ELITE ACTIVE TIER 1. IN THE INITIAL PHASE, USERS EARN EXACTLY $1.00 PER DAILY CYCLE ($0.33, $0.33, $0.34). ONCE ELITE ACTIVE TIER 1 IS ACTIVATED, USERS EARN $25.00 PER INDIVIDUAL TASK COMPLETED ($75.00 PER DAY) AND BECOME ELIGIBLE FOR THE $100 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONSISTENT ACTIVITY. A STRICT 24-HOUR ACTIVITY WINDOW IS ENFORCED. IF A SINGLE DAY IS MISSED, THE REGISTRY INITIALIZES TO DAY 0.",
+  "tasks.eliteRegistry.description": "",
 
   // Wallet Page
   "wallet.title": "Wallet",

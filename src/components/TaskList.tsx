@@ -13,7 +13,7 @@ import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock, RefreshCcw, Info } from 'lucide-react';
+import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock, RefreshCcw } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
@@ -220,22 +220,6 @@ export default function TaskList() {
 
   return (
     <div className="space-y-10">
-      <Card className="rounded-[2.5rem] border-accent/20 bg-accent/5 overflow-hidden shadow-xl">
-        <CardHeader className="flex flex-row items-center gap-4">
-          <div className="p-3 bg-accent/10 rounded-2xl">
-            <Info className="w-6 h-6 text-accent" />
-          </div>
-          <CardTitle className="text-sm font-black uppercase tracking-widest">
-            {t('tasks.eliteRegistry.title')}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-[11px] font-black text-foreground leading-relaxed uppercase whitespace-pre-line">
-            {t('tasks.eliteRegistry.description')}
-          </p>
-        </CardContent>
-      </Card>
-
       <Card className="overflow-hidden border-2 border-primary/20 bg-gradient-to-br from-background to-secondary/10 shadow-2xl rounded-[3rem]">
         <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-10 pb-7">
           <div className="flex flex-col gap-2">

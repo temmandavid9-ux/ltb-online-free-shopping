@@ -164,7 +164,7 @@ export const es = {
   "tasks.initialFollow.toast.successTitle": "Acceso Concedido",
   "tasks.initialFollow.toast.successDescription": "Las tareas diarias y el seguimiento de racha están activos.",
   "tasks.eliteRegistry.title": "PROTOCOLO DE REGISTRO ÉLITE",
-  "tasks.eliteRegistry.description": "COMPLETE LA SECUENCIA DE TAREAS DIARIAS DURANTE 365 DÍAS CONSECUTIVOS PARA DESBLOQUEAR PERMANENTEMENTE EL MODO ELITE ACTIVE TIER 1. LOS MIEMBROS ESTÁNDAR GANAN EXACTAMENTE $1.00 POR CICLO DIARIO ($0.33, $0.33, $0.34). UNA VEZ QUE SE ACTIVA EL MODO ELITE ACTIVE TIER 1, LOS USUARIOS GANAN $25.00 POR TAREA COMPLETADA ($75.00 POR DÍA) Y SE VUELVEN ELEGIBLES PARA EL BONO DE TARJETA DE REGALO ÉLITE DE LTB BRAND DE $100 POR CADA 30 DÍAS DE ACTIVIDAD CONSTANTE. IMPORTANTE: SE APLICA UNA ESTRICTA VENTANA DE ACTIVIDAD DE 24 HORAS. SI SE PIERDE UN SOLO DÍA, EL REGISTRO SE INICIALIZA AL DÍA 0.",
+  "tasks.eliteRegistry.description": "",
 
   // Wallet Page
   "wallet.title": "Billetera",
