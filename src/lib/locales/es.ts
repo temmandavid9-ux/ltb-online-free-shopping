@@ -144,7 +144,7 @@ export const es = {
   "tasks.taskCompleted": "Etapa Asegurada. Recompensa: ${reward}",
   "tasks.startPrompt": "Inicie las tareas para asegurar recompensas de estatus.",
   "tasks.unlockPrompt": "Bloqueo secuencial activo.",
-  "tasks.startButton": "Inicializar Tareas ($1 Reward)",
+  "tasks.startButton": "Inicializar Tareas",
   "tasks.timerActive": "Verificando Interacción...",
   "tasks.completed": "ASEGURADO",
   "tasks.locked": "BLOQUEADO",
@@ -164,7 +164,7 @@ export const es = {
   "tasks.initialFollow.toast.successTitle": "Acceso Concedido",
   "tasks.initialFollow.toast.successDescription": "Las tareas diarias y el seguimiento de racha están activos.",
   "tasks.eliteRegistry.title": "LTB GIFT CARD CHALLENGE",
-  "tasks.eliteRegistry.description": "Complete la secuencia de tareas diarias durante 365 días consecutivos para desbloquear permanentemente el Modo Élite. Los miembros Élite ganan una Tarjeta de Regalo Élite de LTB Brand de $100 por cada 30 días de actividad constante. IMPORTANTE: Se aplica una estricta ventana de actividad de 24 horas. Si se pierde un solo día, el registro se inicializa al Día 0. Su saldo se mantiene estrictamente preservado.",
+  "tasks.eliteRegistry.description": "Complete la secuencia de tareas diarias durante 365 días consecutivos para desbloquear permanentemente el Modo Élite. Los miembros Élite ganan una Tarjeta de Regalo Élite de LTB Brand de $100 por cada 30 días de actividad constante. En el Modo Élite, los usuarios reciben $25.00 por tarea completada. IMPORTANTE: Se aplica una estricta ventana de actividad de 24 horas. Si se pierde un solo día, el registro se inicializa al Día 0. Su saldo se mantiene estrictamente preservado.",
 
   // Wallet Page
   "wallet.title": "Billetera",

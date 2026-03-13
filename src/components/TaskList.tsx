@@ -115,7 +115,8 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
-    let reward = stage === 2 ? 0.34 : 0.33;
+    // ELITE REWARD PROTOCOL: $25 PER TASK
+    let reward = userData.eliteUnlocked ? 25.00 : (stage === 2 ? 0.34 : 0.33);
     let updates: any = {};
 
     const now = new Date().toISOString();
@@ -207,9 +208,9 @@ export default function TaskList() {
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
 
   const channels = [
-    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: 'Stage 1 (+$0.33)', status: userData.step1Status },
-    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: 'Stage 2 (+$0.33)', status: userData.step2Status },
-    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: 'Final Stage (+$0.34)', status: userData.step3Status }
+    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: `Stage 1 (+${userData.eliteUnlocked ? '$25.00' : '$0.33'})`, status: userData.step1Status },
+    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: `Stage 2 (+${userData.eliteUnlocked ? '$25.00' : '$0.33'})`, status: userData.step2Status },
+    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: `Final Stage (+${userData.eliteUnlocked ? '$25.00' : '$0.34'})`, status: userData.step3Status }
   ];
 
   return (
@@ -234,7 +235,7 @@ export default function TaskList() {
             <div className="flex items-center gap-4">
                 <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
                 {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-                {userData.eliteUnlocked ? "Elite Active  Tier 1" : "Daily Task Sequence"}
+                {userData.eliteUnlocked ? "Elite Active Tier 1" : "Daily Task Sequence"}
                 </CardTitle>
             </div>
             <CardDescription className="font-black uppercase tracking-widest text-[10px] text-muted-foreground/60">
@@ -363,7 +364,7 @@ export default function TaskList() {
             disabled={activeTimer || isCooldownActive || currentStepIndex > 2}
             onClick={() => currentStepIndex <= 2 && handleStartSubTask(currentStepIndex, channels[currentStepIndex].url)}
           >
-            {activeTimer ? "Verifying Authorization..." : isCooldownActive ? `Authorized in ${cooldownRemainingText}` : currentStepIndex > 2 ? "Cycle Finalized" : `Initialize Stage ${currentStepIndex + 1}`}
+            {activeTimer ? "Verifying Authorization..." : isCooldownActive ? `Authorized in ${cooldownRemainingText}` : currentStepIndex > 2 ? "Cycle Finalized" : t('tasks.startButton')}
           </Button>
         </CardFooter>
       </Card>
