@@ -153,8 +153,8 @@ export const en = {
   "tasks.eliteActive": "Mode: ELITE",
   "tasks.toast.alreadyCompleted": "Tasks already secured for current window.",
   "tasks.toast.streakMaintained": "Streak anchored. Day {streak} achieved.",
-  "tasks.toast.eliteUnlockedTitle": "ELITE MODE ACTIVATED Tier 1",
-  "tasks.toast.eliteUnlockedDesc": "365-day milestone secured. Permanent Elite status authorized.",
+  "tasks.toast.eliteUnlockedTitle": "ELITE ACTIVE TIER 1",
+  "tasks.toast.eliteUnlockedDesc": "365-day milestone secured. Elite Active Tier 1 status authorized.",
   "tasks.toast.giftCardEarned": "BONUS SECURED. $100 Gift Card added to your portfolio.",
   "tasks.initialFollow.title": "First, Follow Our Socials",
   "tasks.initialFollow.description": "To unlock daily tasks, you must first follow all of our social media channels.",
@@ -163,8 +163,8 @@ export const en = {
   "tasks.initialFollow.confirmButton": "I Have Followed All Accounts",
   "tasks.initialFollow.toast.successTitle": "Access Granted",
   "tasks.initialFollow.toast.successDescription": "Daily tasks and streak tracking are now active.",
-  "tasks.eliteRegistry.title": "UNLOCK ELITE MODE, LTB GIFT CARD TIER 2",
-  "tasks.eliteRegistry.description": "EVERY USER MUST INITIALIZE IN TIER 1. COMPLETE THE DAILY TASK SEQUENCE FOR 365 CONSECUTIVE DAYS TO PERMANENTLY UNLOCK ELITE MODE (TIER 2). IN TIER 1, USERS EARN EXACTLY $1.00 PER DAILY CYCLE ($0.33, $0.33, $0.34). ONCE TIER 2 IS ACTIVATED, USERS EARN $25.00 PER INDIVIDUAL TASK COMPLETED ($75.00 PER DAY) AND BECOME ELIGIBLE FOR THE $100 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONSISTENT ACTIVITY. A STRICT 24-HOUR ACTIVITY WINDOW IS ENFORCED. IF A SINGLE DAY IS MISSED, THE REGISTRY INITIALIZES TO DAY 0.",
+  "tasks.eliteRegistry.title": "UNLOCK ELITE MODE, LTB GIFT CARD TIER 1",
+  "tasks.eliteRegistry.description": "EVERY USER MUST INITIALIZE IN TIER 1. COMPLETE THE DAILY TASK SEQUENCE FOR 365 CONSECUTIVE DAYS TO PERMANENTLY UNLOCK ELITE ACTIVE TIER 1. IN THE INITIAL PHASE, USERS EARN EXACTLY $1.00 PER DAILY CYCLE ($0.33, $0.33, $0.34). ONCE ELITE ACTIVE TIER 1 IS ACTIVATED, USERS EARN $25.00 PER INDIVIDUAL TASK COMPLETED ($75.00 PER DAY) AND BECOME ELIGIBLE FOR THE $100 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONSISTENT ACTIVITY. A STRICT 24-HOUR ACTIVITY WINDOW IS ENFORCED. IF A SINGLE DAY IS MISSED, THE REGISTRY INITIALIZES TO DAY 0.",
 
   // Wallet Page
   "wallet.title": "Wallet",

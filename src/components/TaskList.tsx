@@ -82,7 +82,6 @@ export default function TaskList() {
       const today = new Date().toDateString();
       
       // CALENDAR-AWARE RESET ENGINE
-      // Authorize fresh cycle if cooldown is inactive AND (completed all OR it's a new day since last progress)
       const hasCompletedAll = userData.step3Status;
       const isNewDaySinceLastStep = lastStepDay && lastStepDay !== today;
 
@@ -90,7 +89,6 @@ export default function TaskList() {
         updates.step1Status = false;
         updates.step2Status = false;
         updates.step3Status = false;
-        // lastStepDate is NOT reset here, it stays as the anchor for the "isNewDay" check
         needsUpdate = true;
       }
 
@@ -121,7 +119,7 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
-    // REWARD CALIBRATION: TIER 2 (Elite) = $25.00 per task | TIER 1 (Standard) = $1.00 Daily ($0.33, $0.33, $0.34)
+    // REWARD CALIBRATION: Elite Active Tier 1 = $25.00 per task | Standard Tier 1 = $1.00 Daily ($0.33, $0.33, $0.34)
     const isEliteActive = userData.eliteUnlocked;
     let reward = isEliteActive ? 25.00 : (stage === 2 ? 0.34 : 0.33);
     
@@ -143,7 +141,7 @@ export default function TaskList() {
         updates.eliteStartDate = now;
         updates.eliteMonthlyCounter = 0;
         updates.eliteRewardsAvailable = 0;
-        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured. Elite Tier 2 Active." });
+        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured. Elite Active Tier 1." });
       } else if (userData.eliteUnlocked) {
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
@@ -214,7 +212,6 @@ export default function TaskList() {
 
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
 
-  // REWARD DISPLAY LOGIC: TIER 1 vs TIER 2
   const channels = [
     { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: `Stage 1 (+${isElite ? '25.00' : '0.33'})`, status: userData.step1Status },
     { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: `Stage 2 (+${isElite ? '25.00' : '0.33'})`, status: userData.step2Status },
@@ -245,7 +242,7 @@ export default function TaskList() {
             <div className="flex items-center gap-4">
                 <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
                 {isElite ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-                {isElite ? "Elite Active Tier 2" : "Daily Task Sequence"}
+                {isElite ? "Elite Active Tier 1" : "Daily Task Sequence"}
                 </CardTitle>
             </div>
             <CardDescription className="font-black uppercase tracking-widest text-[10px] text-muted-foreground/60">
