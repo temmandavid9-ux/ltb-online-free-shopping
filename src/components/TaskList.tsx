@@ -63,7 +63,6 @@ export default function TaskList() {
     return `${h}h ${m}m ${s}s`;
   }, [isCooldownActive, userData?.lastCompletedDate, currentTime]);
 
-  // SEQUENTIAL ADVANCEMENT LOGIC WITH PERSISTENCE LOCK
   const currentStepIndex = useMemo(() => {
     if (isCooldownActive) return 3; // Blocked by Cooldown
     if (!userData?.step1Status) return 0;
@@ -72,13 +71,11 @@ export default function TaskList() {
     return 3; // Cycle Secured
   }, [userData?.step1Status, userData?.step2Status, userData?.step3Status, isCooldownActive]);
 
-  // STREAK AND RESET PROTOCOL - STRICT 24H ENFORCEMENT
   useEffect(() => {
     if (userData && userDocRef && !activeTimer) {
       const updates: any = {};
       let needsUpdate = false;
 
-      // 1. AUTHORITATIVE NEW DAY RESET (IF COOLDOWN OVER AND CYCLE DONE)
       if (!isCooldownActive && userData.step3Status) {
         updates.step1Status = false;
         updates.step2Status = false;
@@ -87,11 +84,9 @@ export default function TaskList() {
         needsUpdate = true;
       }
 
-      // 2. STRICT 24H STREAK INTEGRITY
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
-        // RESET STREAK IF 24H CYCLE BREACHED
         if (diff > TOTAL_CYCLE_MS && userData.streakCount > 0) {
           updates.streakCount = 0;
           needsUpdate = true;
@@ -115,7 +110,7 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
-    // ELITE REWARD PROTOCOL: $25 PER TASK
+    // ELITE REWARD PROTOCOL: $25 PER TASK ONLY IF UNLOCKED
     let reward = userData.eliteUnlocked ? 25.00 : (stage === 2 ? 0.34 : 0.33);
     let updates: any = {};
 
@@ -136,7 +131,7 @@ export default function TaskList() {
         updates.eliteStartDate = now;
         updates.eliteMonthlyCounter = 0;
         updates.eliteRewardsAvailable = 0;
-        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured." });
+        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured. Elite Tier 2 Active." });
       } else if (userData.eliteUnlocked) {
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
@@ -235,7 +230,7 @@ export default function TaskList() {
             <div className="flex items-center gap-4">
                 <CardTitle className="text-3xl font-black luxury-text-gradient flex items-center gap-3">
                 {userData.eliteUnlocked ? <Crown className="w-10 h-10 text-primary animate-pulse" /> : <Zap className="w-10 h-10 text-primary" />}
-                {userData.eliteUnlocked ? "Elite Active Tier 1" : "Daily Task Sequence"}
+                {userData.eliteUnlocked ? "Elite Active Tier 2" : "Daily Task Sequence"}
                 </CardTitle>
             </div>
             <CardDescription className="font-black uppercase tracking-widest text-[10px] text-muted-foreground/60">
