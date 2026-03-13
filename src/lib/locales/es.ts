@@ -46,7 +46,7 @@ export const es = {
   "login.passwordLabel": "Clave de Acceso",
   "login.forgotPassword": "¿Olvidaste tu contraseña?",
   "login.button": "Autenticar",
-  "login.buttonLoading": "Autorizando...",
+  "login.buttonLoading": "Authorizing...",
   "login.googleButton": "Iniciar Sesión con Google",
   "login.noAccount": "¿Nuevo Ejecutivo?",
   "login.signUpLink": "Registrar Cuenta",

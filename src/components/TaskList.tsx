@@ -43,6 +43,8 @@ export default function TaskList() {
     return () => clearInterval(timer);
   }, []);
 
+  const isElite = !!userData?.eliteUnlocked;
+
   const isCooldownActive = useMemo(() => {
     if (!userData?.lastCompletedDate) return false;
     const lastTime = new Date(userData.lastCompletedDate).getTime();
@@ -79,6 +81,7 @@ export default function TaskList() {
       const lastStepDay = userData.lastStepDate ? new Date(userData.lastStepDate).toDateString() : null;
       const today = new Date().toDateString();
       
+      // AUTO-RESET LOGIC: NEW DAY AUTHORIZATION
       if (!isCooldownActive && (userData.step3Status || (lastStepDay && lastStepDay !== today))) {
         updates.step1Status = false;
         updates.step2Status = false;
@@ -87,6 +90,7 @@ export default function TaskList() {
         needsUpdate = true;
       }
 
+      // STREAK REGISTRY MONITOR: 24H WINDOW
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
@@ -204,8 +208,6 @@ export default function TaskList() {
   if (!user || !userData) return <p className="p-24 text-center font-black uppercase tracking-widest text-muted-foreground">Authentication Required.</p>;
 
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
-
-  const isElite = !!userData.eliteUnlocked;
 
   const channels = [
     { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: `Stage 1 (+${isElite ? '25.00' : '0.33'})`, status: userData.step1Status },
