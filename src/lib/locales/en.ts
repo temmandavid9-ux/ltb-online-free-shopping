@@ -163,7 +163,7 @@ export const en = {
   "tasks.initialFollow.confirmButton": "I Have Followed All Accounts",
   "tasks.initialFollow.toast.successTitle": "Access Granted",
   "tasks.initialFollow.toast.successDescription": "Daily tasks and streak tracking are now active.",
-  "tasks.eliteRegistry.title": "LTB GIFT CARD CHALLENGE",
+  "tasks.eliteRegistry.title": "UNLOCK ELITE MODE, LTB GIFT CARD TIER 2",
   "tasks.eliteRegistry.description": "Complete the daily task sequence for 365 consecutive days to permanently unlock Elite Mode. Elite members earn a $100 LTB Brand Elite Gift Card for every 30 days of consistent activity. In Elite Mode, users receive $25.00 per individual task completed. IMPORTANT: A strict 24-hour activity window is enforced. If a single day is missed, the registry initializes to Day 0. Your balance remains strictly preserved.",
 
   // Wallet Page
