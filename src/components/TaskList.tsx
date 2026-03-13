@@ -244,6 +244,7 @@ export default function TaskList() {
           </div>
         </CardHeader>
 
+        {/* Tier 2 Roadmap Note */}
         {!isElite && (
           <div className="px-10 pb-6">
             <Card className="bg-primary/5 border-primary/10 rounded-[2rem] border-2 overflow-hidden shadow-inner">
