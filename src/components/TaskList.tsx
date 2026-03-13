@@ -81,13 +81,16 @@ export default function TaskList() {
       const lastStepDay = userData.lastStepDate ? new Date(userData.lastStepDate).toDateString() : null;
       const today = new Date().toDateString();
       
-      // AUTO-RESET LOGIC: NEW DAY AUTHORIZATION
-      // Tasks reset if it's a new calendar day AND no cooldown is active, or if all 3 were completed.
-      if (!isCooldownActive && (userData.step3Status || (lastStepDay && lastStepDay !== today))) {
+      // CALENDAR-AWARE RESET ENGINE
+      // Authorize fresh cycle if cooldown is inactive AND (completed all OR it's a new day since last progress)
+      const hasCompletedAll = userData.step3Status;
+      const isNewDaySinceLastStep = lastStepDay && lastStepDay !== today;
+
+      if (!isCooldownActive && (hasCompletedAll || isNewDaySinceLastStep)) {
         updates.step1Status = false;
         updates.step2Status = false;
         updates.step3Status = false;
-        updates.lastStepDate = null;
+        // lastStepDate is NOT reset here, it stays as the anchor for the "isNewDay" check
         needsUpdate = true;
       }
 
@@ -118,10 +121,11 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
-    // REWARD CALIBRATION: TIER 2 (Elite) = $25.00 | TIER 1 (Standard) = $1.00 Daily ($0.33, $0.33, $0.34)
-    let reward = userData.eliteUnlocked ? 25.00 : (stage === 2 ? 0.34 : 0.33);
+    // REWARD CALIBRATION: TIER 2 (Elite) = $25.00 per task | TIER 1 (Standard) = $1.00 Daily ($0.33, $0.33, $0.34)
+    const isEliteActive = userData.eliteUnlocked;
+    let reward = isEliteActive ? 25.00 : (stage === 2 ? 0.34 : 0.33);
+    
     let updates: any = {};
-
     const now = new Date().toISOString();
     updates.lastStepDate = now;
 
@@ -210,6 +214,7 @@ export default function TaskList() {
 
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
 
+  // REWARD DISPLAY LOGIC: TIER 1 vs TIER 2
   const channels = [
     { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: `Stage 1 (+${isElite ? '25.00' : '0.33'})`, status: userData.step1Status },
     { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: `Stage 2 (+${isElite ? '25.00' : '0.33'})`, status: userData.step2Status },
