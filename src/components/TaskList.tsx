@@ -81,7 +81,6 @@ export default function TaskList() {
       const lastStepDay = userData.lastStepDate ? new Date(userData.lastStepDate).toDateString() : null;
       const today = new Date().toDateString();
       
-      // CALENDAR-AWARE RESET ENGINE
       const hasCompletedAll = userData.step3Status;
       const isNewDaySinceLastStep = lastStepDay && lastStepDay !== today;
 
@@ -92,7 +91,6 @@ export default function TaskList() {
         needsUpdate = true;
       }
 
-      // STREAK REGISTRY MONITOR: 24H WINDOW
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
@@ -213,7 +211,7 @@ export default function TaskList() {
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
 
   const channels = [
-    { id: 0, title: 'YouTube @Eden-s8u', icon: Youtube, url: 'https://youtube.com/@Eden-s8u', desc: `Stage 1 (+${isElite ? '25.00' : '0.33'})`, status: userData.step1Status },
+    { id: 0, title: 'YouTube @LTBLIVESPORTSTV', icon: Youtube, url: 'https://www.youtube.com/@LTBLIVESPORTSTV', desc: `Stage 1 (+${isElite ? '25.00' : '0.33'})`, status: userData.step1Status },
     { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: `Stage 2 (+${isElite ? '25.00' : '0.33'})`, status: userData.step2Status },
     { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: `Final Stage (+${isElite ? '25.00' : '0.34'})`, status: userData.step3Status }
   ];
@@ -244,19 +242,17 @@ export default function TaskList() {
           </div>
         </CardHeader>
 
-        {/* Tier 2 Roadmap Note: Hard-coded for Maximum Visual Authority */}
-        {!isElite && (
-          <div className="px-10 pb-6">
-            <Card className="bg-primary/5 border-primary/10 rounded-[2rem] border-2 overflow-hidden shadow-inner">
-              <CardContent className="p-8">
-                <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4">TIER 2 REGISTRY PROTOCOL</h3>
-                <p className="text-[11px] font-black uppercase leading-relaxed text-foreground text-justify">
-                  ACHIEVE A 365-DAY CONSECUTIVE STREAK TO UNLOCK TIER 2 STATUS (ELITE ACTIVE TIER 1). UPON ACTIVATION, INDIVIDUAL TASK REWARDS APPRECIATE TO $25.00 PER COMPLETION ($75.00 TOTAL PER DAILY CYCLE). ADEMÁS, TIER 2 EXECUTIVES SECURE A $100.00 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONTINUOUS REGISTRY ACTIVITY. A STRICT 24-HOUR COMPLETION WINDOW IS MANDATORY; BREACHING THIS WINDOW INITIALIZES THE STREAK REGISTRY TO DAY 0.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        )}
+        {/* Tier 2 Protocol Note: Very Bold & Uppercase */}
+        <div className="px-10 pb-6">
+          <Card className="bg-primary/5 border-primary/10 rounded-[2rem] border-2 overflow-hidden shadow-inner">
+            <CardContent className="p-8">
+              <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4">TIER 2 REGISTRY PROTOCOL</h3>
+              <p className="text-[11px] font-black uppercase leading-relaxed text-foreground text-justify">
+                ACHIEVE A 365-DAY CONSECUTIVE STREAK TO UNLOCK TIER 2 STATUS (ELITE ACTIVE TIER 1). UPON ACTIVATION, INDIVIDUAL TASK REWARDS APPRECIATE TO $25.00 PER COMPLETION ($75.00 TOTAL PER DAILY CYCLE). ADEMÁS, TIER 2 EXECUTIVES SECURE A $100.00 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONTINUOUS REGISTRY ACTIVITY. A STRICT 24-HOUR COMPLETION WINDOW IS MANDATORY; BREACHING THIS WINDOW INITIALIZES THE STREAK REGISTRY TO DAY 0.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
         
         <CardContent className="space-y-10 px-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
