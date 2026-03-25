@@ -13,7 +13,7 @@ import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Youtube, Instagram, Twitch, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock, RefreshCcw } from 'lucide-react';
+import { Youtube, Instagram, Facebook, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock, RefreshCcw } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 import { useAdminStatus } from '@/hooks/useAdminStatus';
@@ -84,6 +84,7 @@ export default function TaskList() {
       const hasCompletedAll = userData.step3Status;
       const isNewDaySinceLastStep = lastStepDay && lastStepDay !== today;
 
+      // SECURITY RESET: If it's a new day and cooldown is over, authorize fresh cycle
       if (!isCooldownActive && (hasCompletedAll || isNewDaySinceLastStep)) {
         updates.step1Status = false;
         updates.step2Status = false;
@@ -91,6 +92,7 @@ export default function TaskList() {
         needsUpdate = true;
       }
 
+      // STREAK AUDIT: If 24h cycle breached, reset to Day 0
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
@@ -117,7 +119,7 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
-    // TIER 1 ($1.00 daily: 0.33, 0.33, 0.34) | TIER 2 ($25.00 per task)
+    // TIER 1 ($1.00 daily: 0.33, 0.33, 0.34) | ELITE ACTIVE TIER 1 ($25.00 per task)
     const isEliteActive = userData.eliteUnlocked;
     let reward = isEliteActive ? 25.00 : (stage === 2 ? 0.34 : 0.33);
     
@@ -139,7 +141,7 @@ export default function TaskList() {
         updates.eliteStartDate = now;
         updates.eliteMonthlyCounter = 0;
         updates.eliteRewardsAvailable = 0;
-        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured. Tier 2 Activated." });
+        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured. Elite Active Tier 1 Activated." });
       } else if (userData.eliteUnlocked) {
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
@@ -213,7 +215,7 @@ export default function TaskList() {
   const channels = [
     { id: 0, title: 'YouTube @LTBLIVESPORTSTV', icon: Youtube, url: 'https://www.youtube.com/@LTBLIVESPORTSTV', desc: `Stage 1 (+${isElite ? '25.00' : '0.33'})`, status: userData.step1Status },
     { id: 1, title: 'Instagram @ltblivesports', icon: Instagram, url: 'https://www.instagram.com/ltblivesports/', desc: `Stage 2 (+${isElite ? '25.00' : '0.33'})`, status: userData.step2Status },
-    { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: `Final Stage (+${isElite ? '25.00' : '0.34'})`, status: userData.step3Status }
+    { id: 2, title: 'Facebook Reels: ltbliveurielsport', icon: Facebook, url: 'https://www.facebook.com/ltbliveurielsport/reels/', desc: `Final Stage (+${isElite ? '25.00' : '0.34'})`, status: userData.step3Status }
   ];
 
   return (
@@ -242,13 +244,13 @@ export default function TaskList() {
           </div>
         </CardHeader>
 
-        {/* Tier 2 Protocol Note: Very Bold & Uppercase */}
+        {/* Elite Active Tier 1 Protocol Note: Very Bold & Uppercase */}
         <div className="px-10 pb-6">
           <Card className="bg-primary/5 border-primary/10 rounded-[2rem] border-2 overflow-hidden shadow-inner">
             <CardContent className="p-8">
-              <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4">TIER 2 REGISTRY PROTOCOL</h3>
+              <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4">ELITE ACTIVE TIER 1 PROTOCOL</h3>
               <p className="text-[11px] font-black uppercase leading-relaxed text-foreground text-justify">
-                ACHIEVE A 365-DAY CONSECUTIVE STREAK TO UNLOCK TIER 2 STATUS (ELITE ACTIVE TIER 1). UPON ACTIVATION, INDIVIDUAL TASK REWARDS APPRECIATE TO $25.00 PER COMPLETION ($75.00 TOTAL PER DAILY CYCLE). ADEMÁS, TIER 2 EXECUTIVES SECURE A $100.00 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONTINUOUS REGISTRY ACTIVITY. A STRICT 24-HOUR COMPLETION WINDOW IS MANDATORY; BREACHING THIS WINDOW INITIALIZES THE STREAK REGISTRY TO DAY 0.
+                UPON SECURING A 365-DAY CONSECUTIVE STREAK, THE EXECUTIVE IS AUTHORIZED FOR ELITE ACTIVE TIER 1 STATUS. INDIVIDUAL TASK REWARDS APPRECIATE FROM MICRO-CREDITS TO $25.00 PER STAGE ($75.00 TOTAL DAILY). ADEMÁS, ELITE EXECUTIVES ARE GRANTED ACCESS TO THE $100.00 LTB BRAND ELITE GIFT CARD BONUS CYCLE FOR EVERY 30 DAYS OF CONTINUOUS ACTIVITY. A STRICT 24-HOUR REGISTRY WINDOW IS MANDATORY; BREACHING THIS PROTOCOL INITIALIZES THE STREAK REGISTRY TO DAY 0.
               </p>
             </CardContent>
           </Card>
