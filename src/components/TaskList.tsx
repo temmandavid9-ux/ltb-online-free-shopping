@@ -117,7 +117,7 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
-    // REWARD CALIBRATION: Elite Active Tier 1 = $25.00 per task | Tier 1 = $1.00 Daily ($0.33, $0.33, $0.34)
+    // TIER 1 ($1.00 daily: 0.33, 0.33, 0.34) | TIER 2 ($25.00 per task)
     const isEliteActive = userData.eliteUnlocked;
     let reward = isEliteActive ? 25.00 : (stage === 2 ? 0.34 : 0.33);
     
@@ -139,7 +139,7 @@ export default function TaskList() {
         updates.eliteStartDate = now;
         updates.eliteMonthlyCounter = 0;
         updates.eliteRewardsAvailable = 0;
-        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured. Elite Active Tier 1." });
+        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured. Tier 2 Activated." });
       } else if (userData.eliteUnlocked) {
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
@@ -162,7 +162,7 @@ export default function TaskList() {
 
     toast({
       title: "STAGE VERIFIED",
-      description: `+$${reward.toFixed(2)} credited to Account Balance. ADVANCING SEQUENCE.`,
+      description: `+$${reward.toFixed(2)} credited to Account Balance. SEQUENCE ADVANCED.`,
     });
   }, [user, userData, userDocRef, toast, activeStep]);
 
@@ -212,7 +212,7 @@ export default function TaskList() {
 
   const channels = [
     { id: 0, title: 'YouTube @LTBLIVESPORTSTV', icon: Youtube, url: 'https://www.youtube.com/@LTBLIVESPORTSTV', desc: `Stage 1 (+${isElite ? '25.00' : '0.33'})`, status: userData.step1Status },
-    { id: 1, title: 'Instagram: eden022026', icon: Instagram, url: 'https://www.instagram.com/eden022026/', desc: `Stage 2 (+${isElite ? '25.00' : '0.33'})`, status: userData.step2Status },
+    { id: 1, title: 'Instagram @ltblivesports', icon: Instagram, url: 'https://www.instagram.com/ltblivesports/', desc: `Stage 2 (+${isElite ? '25.00' : '0.33'})`, status: userData.step2Status },
     { id: 2, title: 'Twitch: edenonlineshoppingstore', icon: Twitch, url: 'https://www.twitch.tv/edenonlineshoppingstore', desc: `Final Stage (+${isElite ? '25.00' : '0.34'})`, status: userData.step3Status }
   ];
 
