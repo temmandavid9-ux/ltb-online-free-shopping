@@ -1,4 +1,3 @@
-
 'use client';
 import {
   useUser,
@@ -84,7 +83,6 @@ export default function TaskList() {
       const hasCompletedAll = userData.step3Status;
       const isNewDaySinceLastStep = lastStepDay && lastStepDay !== today;
 
-      // SECURITY RESET: If it's a new day and cooldown is over, authorize fresh cycle
       if (!isCooldownActive && (hasCompletedAll || isNewDaySinceLastStep)) {
         updates.step1Status = false;
         updates.step2Status = false;
@@ -92,7 +90,6 @@ export default function TaskList() {
         needsUpdate = true;
       }
 
-      // STREAK AUDIT: If 24h cycle breached, reset to Day 0
       if (userData.lastCompletedDate) {
         const lastTime = new Date(userData.lastCompletedDate).getTime();
         const diff = currentTime - lastTime;
@@ -119,8 +116,8 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
-    // TIER 1 ($1.00 daily: 0.33, 0.33, 0.34) | ELITE ACTIVE TIER 1 ($25.00 per task)
     const isEliteActive = userData.eliteUnlocked;
+    // TIER 1 ($1.00 daily total) | ELITE ACTIVE TIER 1 ($25.00 per individual task)
     let reward = isEliteActive ? 25.00 : (stage === 2 ? 0.34 : 0.33);
     
     let updates: any = {};
@@ -244,7 +241,7 @@ export default function TaskList() {
           </div>
         </CardHeader>
 
-        {/* Elite Active Tier 1 Protocol Note: Very Bold & Uppercase */}
+        {/* ELITE ACTIVE TIER 1 PROTOCOL: HIGH AUTHORITY NOTE */}
         <div className="px-10 pb-6">
           <Card className="bg-primary/5 border-primary/10 rounded-[2rem] border-2 overflow-hidden shadow-inner">
             <CardContent className="p-8">
