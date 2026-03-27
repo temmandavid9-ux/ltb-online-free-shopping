@@ -117,6 +117,7 @@ export default function TaskList() {
 
     const stage = activeStep;
     const isEliteActive = userData.eliteUnlocked;
+    
     // TIER 1 ($1.00 daily total) | ELITE ACTIVE TIER 1 ($25.00 per individual task)
     let reward = isEliteActive ? 25.00 : (stage === 2 ? 0.34 : 0.33);
     
