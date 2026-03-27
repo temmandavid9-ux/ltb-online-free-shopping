@@ -246,7 +246,7 @@ export default function TaskList() {
         <div className="px-10 pb-6">
           <Card className="bg-primary/5 border-primary/10 rounded-[2rem] border-2 overflow-hidden shadow-inner">
             <CardContent className="p-8">
-              <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4">TIER 2 REGISTRY PROTOCOL</h3>
+              <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4">ELITE ACTIVE TIER 1 PROTOCOL</h3>
               <p className="text-[11px] font-black uppercase leading-relaxed text-foreground text-justify">
                 ACHIEVE A 365-DAY CONSECUTIVE STREAK TO UNLOCK ELITE ACTIVE TIER 1 STATUS. UPON ACTIVATION, INDIVIDUAL TASK REWARDS APPRECIATE FROM MICRO-CREDITS TO $25.00 PER COMPLETION ($75.00 TOTAL PER DAILY CYCLE). ADDITIONALLY, ELITE EXECUTIVES SECURE A $100.00 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONTINUOUS REGISTRY ACTIVITY. A STRICT 24-HOUR COMPLETION WINDOW IS MANDATORY; BREACHING THIS WINDOW INITIALIZES THE STREAK REGISTRY TO DAY 0.
               </p>
