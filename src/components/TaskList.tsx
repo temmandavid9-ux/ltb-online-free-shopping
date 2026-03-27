@@ -242,7 +242,7 @@ export default function TaskList() {
           </div>
         </CardHeader>
 
-        {/* TIER 2 REGISTRY PROTOCOL: HIGH AUTHORITY NOTE */}
+        {/* ELITE ACTIVE TIER 1 PROTOCOL CARD */}
         <div className="px-10 pb-6">
           <Card className="bg-primary/5 border-primary/10 rounded-[2rem] border-2 overflow-hidden shadow-inner">
             <CardContent className="p-8">
