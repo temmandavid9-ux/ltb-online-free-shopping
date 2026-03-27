@@ -46,7 +46,6 @@ export default function Home() {
                         <Button size="lg" className="bg-white text-black hover:bg-primary hover:text-white font-black rounded-full px-12 h-16 uppercase tracking-[0.2em] text-[10px] shadow-2xl transition-all active:scale-95" asChild>
                           <Link href="/redeem">Explore Collection</Link>
                         </Button>
-                        {/* CALIBRATED: BLACK TEXT COLOR AUTHORIZED */}
                         <Button size="lg" className="bg-white text-black hover:bg-white/80 border-none font-black rounded-full px-12 h-16 uppercase tracking-[0.2em] text-[10px] transition-all">
                           View Lookbook
                         </Button>
