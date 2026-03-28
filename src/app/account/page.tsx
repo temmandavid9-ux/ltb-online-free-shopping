@@ -1,4 +1,3 @@
-
 'use client';
 
 import {
@@ -22,11 +21,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useUser, useFirestore, useDoc, useMemoFirebase, useAuth, useCollection, updateDocumentNonBlocking, setDocumentNonBlocking } from "@/firebase";
-import { doc, collection, query, where } from 'firebase/firestore';
+import { doc, collection, query, where, increment } from 'firebase/firestore';
 import { signOut } from "firebase/auth";
 import { useAdminStatus } from "@/hooks/useAdminStatus";
 import type { Order, UserProfile, RewardRedemption } from "@/lib/types";
-import { ArrowRight, DollarSign, Crown, Gift, Trophy } from "lucide-react";
+import { ArrowRight, DollarSign, Crown, Gift, Trophy, Lock } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useToast } from "@/hooks/use-toast";
 
@@ -77,6 +76,10 @@ export default function AccountPage() {
     const handleRedeemGiftCard = () => {
         if (!user || !userData || !userDocRef) return;
         if (userData.eliteRewardsAvailable <= 0) return;
+        if (userData.streakCount < 365) {
+            toast({ variant: 'destructive', title: "CLAIM REJECTED", description: "365-day consecutive streak required to claim Elite Bonus." });
+            return;
+        }
 
         const redemptionId = `gc_${Date.now()}`;
         const codeId = `LTB-GC-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
@@ -91,16 +94,19 @@ export default function AccountPage() {
             value: 100,
         };
 
+        // Create log
         setDocumentNonBlocking(redemptionRef, newRedemption, { merge: false });
         
+        // Update balance and availability
         updateDocumentNonBlocking(userDocRef, {
-            eliteRewardsAvailable: userData.eliteRewardsAvailable - 1,
+            balance: increment(100), // ADD FUNDS TO WALLET
+            eliteRewardsAvailable: increment(-1),
             redeemedRewardIds: [...(userData.redeemedRewardIds || []), redemptionId]
         });
 
         toast({
-            title: "Gift Card Redeemed!",
-            description: `Your unique code is: ${codeId}. Check your reward history below.`,
+            title: "Bonus Claimed!",
+            description: `$100.00 added to Account Balance. Your unique code is: ${codeId}.`,
         });
     };
 
@@ -113,6 +119,7 @@ export default function AccountPage() {
     }
 
     const currentBalance = userData?.balance ?? 0;
+    const isEliteStreakAchieved = (userData?.streakCount || 0) >= 365;
 
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -136,12 +143,12 @@ export default function AccountPage() {
                     <CardHeader className="pb-2">
                         <div className="flex items-center justify-between mb-4">
                             <CardTitle className="text-sm font-black uppercase tracking-widest">{t('account.eliteStatus')}</CardTitle>
-                            {userData?.eliteUnlocked ? <Crown className="w-6 h-6 text-primary" /> : <Trophy className="w-6 h-6 text-muted-foreground/30" />}
+                            {isEliteStreakAchieved ? <Crown className="w-6 h-6 text-primary" /> : <Trophy className="w-6 h-6 text-muted-foreground/30" />}
                         </div>
                     </CardHeader>
                     <CardContent>
                         <div className="text-3xl font-black luxury-text-gradient mb-2">
-                            {userData?.eliteUnlocked ? t('account.eliteUnlocked') : t('account.eliteStandard')}
+                            {isEliteStreakAchieved ? t('account.eliteUnlocked') : t('account.eliteStandard')}
                         </div>
                         <p className="text-xs font-black text-muted-foreground/60 uppercase tracking-widest mb-6">
                             {t('account.eliteStreak', { streak: userData?.streakCount || 0 })}
@@ -167,28 +174,34 @@ export default function AccountPage() {
                     </CardContent>
                 </Card>
 
-                {userData?.eliteUnlocked && (
-                    <Card className="rounded-[3rem] border-accent/20 bg-accent/5 overflow-hidden shadow-xl">
-                        <CardHeader>
-                            <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
-                                <Gift className="w-5 h-5 text-accent" /> {t('account.rewardsTitle')}
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-6">
-                            <div className="text-center p-6 bg-white rounded-[2rem] border border-accent/10">
-                                <div className="text-3xl font-black text-accent mb-1">{userData.eliteRewardsAvailable || 0}</div>
-                                <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{t('account.rewardsAvailable', { count: userData.eliteRewardsAvailable })}</div>
-                            </div>
+                <Card className="rounded-[3rem] border-accent/20 bg-accent/5 overflow-hidden shadow-xl">
+                    <CardHeader>
+                        <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2">
+                            <Gift className="w-5 h-5 text-accent" /> {t('account.rewardsTitle')}
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                        <div className="text-center p-6 bg-white rounded-[2rem] border border-accent/10">
+                            <div className="text-3xl font-black text-accent mb-1">{userData?.eliteRewardsAvailable || 0}</div>
+                            <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{t('account.rewardsAvailable', { count: userData?.eliteRewardsAvailable || 0 })}</div>
+                        </div>
+                        
+                        <div className="space-y-2">
                             <Button 
                                 onClick={handleRedeemGiftCard} 
-                                disabled={userData.eliteRewardsAvailable <= 0}
-                                className="w-full rounded-2xl h-14 font-black uppercase tracking-widest text-[10px] bg-accent hover:bg-accent/90"
+                                disabled={!isEliteStreakAchieved || (userData?.eliteRewardsAvailable || 0) <= 0}
+                                className="w-full rounded-2xl h-14 font-black uppercase tracking-widest text-[10px] bg-accent hover:bg-accent/90 disabled:opacity-50 disabled:grayscale transition-all"
                             >
-                                {t('account.redeemReward')}
+                                {isEliteStreakAchieved ? t('account.redeemReward') : <><Lock className="w-3 h-3 mr-2" /> Locked: 365 Days Req.</>}
                             </Button>
-                        </CardContent>
-                    </Card>
-                )}
+                            {!isEliteStreakAchieved && (
+                                <p className="text-[8px] font-black uppercase text-center text-muted-foreground/60 tracking-tighter">
+                                    Bonus is generated but claim-locked until 365-Day milestone.
+                                </p>
+                            )}
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
 
             <div className="lg:col-span-2 space-y-10">

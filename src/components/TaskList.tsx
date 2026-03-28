@@ -42,7 +42,7 @@ export default function TaskList() {
     return () => clearInterval(timer);
   }, []);
 
-  const isElite = !!userData?.eliteUnlocked;
+  const isElite = !!(userData && userData.streakCount >= 365);
 
   const isCooldownActive = useMemo(() => {
     if (!userData?.lastCompletedDate) return false;
@@ -95,6 +95,7 @@ export default function TaskList() {
         const diff = currentTime - lastTime;
         if (diff > TOTAL_CYCLE_MS && userData.streakCount > 0) {
           updates.streakCount = 0;
+          updates.eliteUnlocked = false; // Reset elite status on streak break
           needsUpdate = true;
         }
       }
@@ -133,22 +134,21 @@ export default function TaskList() {
       let newStreak = (userData.streakCount || 0) + 1;
       updates.streakCount = newStreak;
 
-      if (!userData.eliteUnlocked && newStreak >= 365) {
+      // Update Elite Unlocked Flag at 365
+      if (newStreak >= 365 && !userData.eliteUnlocked) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = now;
+        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured. Bonus claims enabled." });
+      }
+
+      // Universal Monthly Bonus Tracking (Generates rewards but claiming is locked behind streak)
+      let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
+      if (newMonthlyCounter >= 30) {
         updates.eliteMonthlyCounter = 0;
-        updates.eliteRewardsAvailable = 0;
-        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured. Elite Bonus Registry Activated." });
-      } else if (userData.eliteUnlocked) {
-        let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
-        let newRewards = userData.eliteRewardsAvailable || 0;
-        if (newMonthlyCounter >= 30) {
-          newMonthlyCounter = 0;
-          newRewards += 1;
-          toast({ title: "BONUS SECURED", description: "$100 LTB Brand Elite Gift Card earned." });
-        }
+        updates.eliteRewardsAvailable = increment(1);
+        toast({ title: "BONUS GENERATED", description: "$100 LTB Brand Elite Gift Card added to registry. Reach 365-day streak to claim." });
+      } else {
         updates.eliteMonthlyCounter = newMonthlyCounter;
-        updates.eliteRewardsAvailable = newRewards;
       }
     }
 
@@ -241,13 +241,12 @@ export default function TaskList() {
           </div>
         </CardHeader>
 
-        {/* TIER 2 REGISTRY PROTOCOL NOTE - UPDATED TO $1.00 DAILY MANDATE */}
         <div className="px-10 pb-6">
           <Card className="bg-primary/5 border-primary/10 rounded-[2rem] border-2 overflow-hidden shadow-inner">
             <CardContent className="p-8">
               <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4">ELITE ACTIVE TIER 1 PROTOCOL</h3>
               <p className="text-[11px] font-black uppercase leading-relaxed text-foreground text-justify">
-                ACHIEVE A 365-DAY CONSECUTIVE STREAK TO AUTHORIZE PERMANENT ACCESS TO THE ELITE REGISTRY. ALL EXECUTIVES EARN A CONSOLIDATED $1.00 PER DAILY TASK CYCLE. ADDITIONALLY, ELITE MEMBERS SECURE A $100.00 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONTINUOUS ACTIVITY. A STRICT 24-HOUR COMPLETION WINDOW IS MANDATORY; BREACHING THIS WINDOW INITIALIZES THE STREAK REGISTRY TO DAY 0.
+                ACHIEVE A 365-DAY CONSECUTIVE STREAK TO AUTHORIZE PERMANENT ACCESS TO THE ELITE REGISTRY. ALL EXECUTIVES EARN A CONSOLIDATED $1.00 PER DAILY TASK CYCLE. ADDITIONALLY, ALL MEMBERS GENERATE A $100.00 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONTINUOUS ACTIVITY; HOWEVER, CLAIMING IS EXCLUSIVELY LOCKED UNTIL THE 365-DAY MILESTONE IS SECURED. UPON CLAIMING, $100.00 IS CREDITED DIRECTLY TO YOUR WALLET. A STRICT 24-HOUR COMPLETION WINDOW IS MANDATORY; BREACHING THIS WINDOW INITIALIZES THE STREAK REGISTRY TO DAY 0.
               </p>
             </CardContent>
           </Card>
@@ -266,18 +265,16 @@ export default function TaskList() {
               <Progress value={((userData.streakCount || 0) / 365) * 100} className="h-4 bg-secondary rounded-full" />
             </div>
 
-            {isElite && (
-              <div className="bg-white rounded-[2rem] p-8 border border-primary/20 shadow-sm animate-in zoom-in">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <Zap className="w-6 h-6 text-primary" />
-                    <span className="text-sm font-black uppercase tracking-widest">Monthly Bonus Cycle</span>
-                  </div>
-                  <span className="text-xs font-black text-primary">{userData.eliteMonthlyCounter || 0} / 30 Cycles</span>
+            <div className="bg-white rounded-[2rem] p-8 border border-primary/20 shadow-sm">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <Zap className="w-6 h-6 text-primary" />
+                  <span className="text-sm font-black uppercase tracking-widest">Monthly Bonus Cycle</span>
                 </div>
-                <Progress value={((userData.eliteMonthlyCounter || 0) / 30) * 100} className="h-4 bg-secondary rounded-full" />
+                <span className="text-xs font-black text-primary">{userData.eliteMonthlyCounter || 0} / 30 Cycles</span>
               </div>
-            )}
+              <Progress value={((userData.eliteMonthlyCounter || 0) / 30) * 100} className="h-4 bg-secondary rounded-full" />
+            </div>
           </div>
 
           <div className="space-y-6">
