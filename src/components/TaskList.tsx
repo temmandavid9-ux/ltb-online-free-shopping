@@ -116,10 +116,9 @@ export default function TaskList() {
     if (!user || !userData || !userDocRef || activeStep === null) return;
 
     const stage = activeStep;
-    const isEliteActive = userData.eliteUnlocked;
     
-    // TIER 1 ($1.00 daily total) | ELITE ACTIVE TIER 1 ($25.00 per individual task)
-    let reward = isEliteActive ? 25.00 : (stage === 2 ? 0.34 : 0.33);
+    // MANDATORY $1.00 DAILY TOTAL ($0.33, $0.33, $0.34) FOR ALL USERS PER CEO URIEL DAVID
+    let reward = (stage === 2 ? 0.34 : 0.33);
     
     let updates: any = {};
     const now = new Date().toISOString();
@@ -139,7 +138,7 @@ export default function TaskList() {
         updates.eliteStartDate = now;
         updates.eliteMonthlyCounter = 0;
         updates.eliteRewardsAvailable = 0;
-        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured. Elite Active Tier 1 Activated." });
+        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured. Elite Bonus Registry Activated." });
       } else if (userData.eliteUnlocked) {
         let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
         let newRewards = userData.eliteRewardsAvailable || 0;
@@ -211,9 +210,9 @@ export default function TaskList() {
   const countdownText = `${Math.floor(countdown / 60)}:${(countdown % 60).toString().padStart(2, '0')}`;
 
   const channels = [
-    { id: 0, title: 'YouTube @LTBLIVESPORTSTV', icon: Youtube, url: 'https://www.youtube.com/@LTBLIVESPORTSTV', desc: `Stage 1 (+${isElite ? '25.00' : '0.33'})`, status: userData.step1Status },
-    { id: 1, title: 'Instagram @ltblivesports', icon: Instagram, url: 'https://www.instagram.com/ltblivesports/', desc: `Stage 2 (+${isElite ? '25.00' : '0.33'})`, status: userData.step2Status },
-    { id: 2, title: 'Facebook Reels: ltbliveurielsport', icon: Facebook, url: 'https://www.facebook.com/ltbliveurielsport/reels/', desc: `Final Stage (+${isElite ? '25.00' : '0.34'})`, status: userData.step3Status }
+    { id: 0, title: 'YouTube @LTBLIVESPORTSTV', icon: Youtube, url: 'https://www.youtube.com/@LTBLIVESPORTSTV', desc: `Stage 1 (+0.33)`, status: userData.step1Status },
+    { id: 1, title: 'Instagram @ltblivesports', icon: Instagram, url: 'https://www.instagram.com/ltblivesports/', desc: `Stage 2 (+0.33)`, status: userData.step2Status },
+    { id: 2, title: 'Facebook Reels: ltbliveurielsport', icon: Facebook, url: 'https://www.facebook.com/ltbliveurielsport/reels/', desc: `Final Stage (+0.34)`, status: userData.step3Status }
   ];
 
   return (
@@ -242,13 +241,13 @@ export default function TaskList() {
           </div>
         </CardHeader>
 
-        {/* TIER 2 REGISTRY PROTOCOL NOTE */}
+        {/* TIER 2 REGISTRY PROTOCOL NOTE - UPDATED TO $1.00 DAILY MANDATE */}
         <div className="px-10 pb-6">
           <Card className="bg-primary/5 border-primary/10 rounded-[2rem] border-2 overflow-hidden shadow-inner">
             <CardContent className="p-8">
               <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4">ELITE ACTIVE TIER 1 PROTOCOL</h3>
               <p className="text-[11px] font-black uppercase leading-relaxed text-foreground text-justify">
-                ACHIEVE A 365-DAY CONSECUTIVE STREAK TO AUTHORIZE PERMANENT ACCESS TO THE ELITE REGISTRY. UPON ACTIVATION, INDIVIDUAL TASK REWARDS APPRECIATE FROM INITIAL MICRO-CREDITS TO $25.00 PER INDIVIDUAL COMPLETION ($75.00 TOTAL PER DAILY CYCLE). ADDITIONALLY, ELITE EXECUTIVES SECURE A $100.00 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONTINUOUS ACTIVITY. A STRICT 24-HOUR COMPLETION WINDOW IS MANDATORY; BREACHING THIS WINDOW INITIALIZES THE STREAK REGISTRY TO DAY 0.
+                ACHIEVE A 365-DAY CONSECUTIVE STREAK TO AUTHORIZE PERMANENT ACCESS TO THE ELITE REGISTRY. ALL EXECUTIVES EARN A CONSOLIDATED $1.00 PER DAILY TASK CYCLE. ADDITIONALLY, ELITE MEMBERS SECURE A $100.00 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONTINUOUS ACTIVITY. A STRICT 24-HOUR COMPLETION WINDOW IS MANDATORY; BREACHING THIS WINDOW INITIALIZES THE STREAK REGISTRY TO DAY 0.
               </p>
             </CardContent>
           </Card>

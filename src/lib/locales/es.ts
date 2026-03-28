@@ -1,4 +1,3 @@
-
 export const es = {
   // Header
   "header.home": "Inicio",
@@ -152,14 +151,13 @@ export const es = {
   "tasks.eliteMonthlyStatus": "Bono: {count} / 30 Ciclos",
   "tasks.eliteActive": "Elite Active Tier 1",
   "tasks.tier2.title": "PROTOCOLO ELITE ACTIVE TIER 1",
-  "tasks.tier2.description": "ALCANCE UNA RACHA CONSECUTIVA DE 365 DÍAS PARA DESBLOQUEAR EL ESTATUS ELITE ACTIVE TIER 1. TRAS LA ACTIVACIÓN, LAS RECOMPENSAS POR TAREAS INDIVIDUALES SE APRECIAN DESDE MICRO-CRÉDITOS A $25.00 POR CADA UNA ($75.00 EN TOTAL POR CICLO DIARIO). ADEMÁS, LOS EJECUTIVOS DE ELITE ASEGURAN UN BONO DE TARJETA DE REGALO ELITE DE LTB BRAND DE $100.00 POR CADA 30 DÍAS DE ACTIVIDAD CONTINUA EN EL REGISTRO. SE REQUIERE UNA VENTANA DE ACTIVIDAD DE 24 HORAS; SI SE INCUMPLE, EL REGISTRO DE LA RACHA SE INICIALIZA AL DÍA 0.",
+  "tasks.tier2.description": "ALCANCE UNA RACHA CONSECUTIVA DE 365 DÍAS PARA DESBLOQUEAR EL ESTATUS ELITE ACTIVE TIER 1. TODOS LOS EJECUTIVOS GANAN UN TOTAL DE $1.00 POR CICLO DIARIO. ADEMÁS, LOS MIEMBROS ÉLITE ASEGURAN UN BONO DE TARJETA DE REGALO DE $100.00 CADA 30 DÍAS DE ACTIVIDAD. SE REQUIERE UNA VENTANA DE 24 HORAS; SI SE INCUMPLE, LA RACHA SE REINICIA AL DÍA 0.",
   "tasks.toast.alreadyCompleted": "Tareas ya aseguradas para la ventana actual.",
   "tasks.toast.streakMaintained": "Racha anclada. Día {streak} alcanzado.",
   "tasks.toast.eliteUnlockedTitle": "ELITE ACTIVE TIER 1 ACTIVADO",
   "tasks.toast.eliteUnlockedDesc": "Hito de 365 días asegurado. Estatus Elite Active Tier 1 autorizado.",
   "tasks.toast.giftCardEarned": "BONUS ASEGURADO. Tarjeta de regalo de $100 añadida a su cartera.",
   "tasks.initialFollow.title": "Primero, siga nuestras redes",
-  "tasks.initialFollow.description": "Para desbloquear las tareas diarias, primero debe seguir todos nuestros canales de redes sociales.",
   "tasks.initialFollow.followButton": "Seguir",
   "tasks.initialFollow.confirmationPrompt": "Después de seguir todas las cuentas, haga clic en confirmar.",
   "tasks.initialFollow.confirmButton": "He seguido todas las cuentas",
