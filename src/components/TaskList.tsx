@@ -96,7 +96,7 @@ export default function TaskList() {
         const diff = currentTime - lastTime;
         if (diff > TOTAL_CYCLE_MS && userData.streakCount > 0) {
           updates.streakCount = 0;
-          updates.eliteUnlocked = false; // Reset elite status on streak break
+          updates.eliteUnlocked = false; 
           needsUpdate = true;
         }
       }
@@ -119,7 +119,7 @@ export default function TaskList() {
 
     const stage = activeStep;
     
-    // MANDATORY $1.00 DAILY TOTAL ($0.33, $0.33, $0.34) FOR ALL USERS PER CEO URIEL DAVID
+    // MANDATORY $1.00 DAILY TOTAL ($0.33, $0.33, $0.34) FOR ALL USERS
     let reward = (stage === 2 ? 0.34 : 0.33);
     
     let updates: any = {};
@@ -135,14 +135,13 @@ export default function TaskList() {
       let newStreak = (userData.streakCount || 0) + 1;
       updates.streakCount = newStreak;
 
-      // Update Elite Unlocked Flag at 365
       if (newStreak >= 365 && !userData.eliteUnlocked) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = now;
         toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured. Bonus claims enabled." });
       }
 
-      // Universal Monthly Bonus Tracking (Generates rewards but claiming is locked behind streak)
+      // Monthly Bonus Generation (Every 30 cycles = $100.00 LTB Brand Elite Gift Card)
       let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
       if (newMonthlyCounter >= 30) {
         updates.eliteMonthlyCounter = 0;
