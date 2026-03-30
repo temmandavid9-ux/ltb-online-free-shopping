@@ -1,3 +1,4 @@
+
 export const en = {
   // Header
   "header.home": "Home",
@@ -172,7 +173,7 @@ export const en = {
   "wallet.withdrawalTitle": "Withdrawal",
   "wallet.withdrawalDescription": "Transfer secured funds to your primary accounts.",
   "wallet.minBalanceTitle": "Minimum Threshold",
-  "wallet.minBalanceDescription": "Withdrawal requires a minimum threshold of ${amount}.",
+  "wallet.minBalanceDescription": "Withdrawal requires a minimum threshold of {amount}.",
   "wallet.amountLabel": "Withdrawal Amount",
   "wallet.methodLabel": "Payment Channel",
   "wallet.methodPlaceholder": "e.g. Bank Transfer, PayPal",
@@ -185,7 +186,7 @@ export const en = {
   "wallet.toast.insufficientFundsTitle": "Balance Mismatch",
   "wallet.toast.insufficientFundsDescription": "Withdrawal exceeds Account Balance.",
   "wallet.toast.invalidAmountTitle": "Threshold Mismatch",
-  "wallet.toast.invalidAmountDescription": "Minimum withdrawal is ${amount}.",
+  "wallet.toast.invalidAmountDescription": "Minimum withdrawal is {amount}.",
   "wallet.toast.successTitle": "Withdrawal Requested",
   "wallet.toast.successDescription": "Your request is pending final audit."
 };

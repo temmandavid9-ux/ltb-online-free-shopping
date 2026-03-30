@@ -1,3 +1,4 @@
+
 export const es = {
   // Header
   "header.home": "Inicio",
@@ -171,7 +172,7 @@ export const es = {
   "wallet.withdrawalTitle": "Withdrawal",
   "wallet.withdrawalDescription": "Transfiera fondos asegurados a sus cuentas principales.",
   "wallet.minBalanceTitle": "Umbral Mínimo",
-  "wallet.minBalanceDescription": "El retiro requiere un umbral mínimo de ${amount}.",
+  "wallet.minBalanceDescription": "El retiro requiere un umbral mínimo de {amount}.",
   "wallet.amountLabel": "Monto de Retiro",
   "wallet.methodLabel": "Canal de Pago",
   "wallet.methodPlaceholder": "ej. Transferencia Bancaria, PayPal",
@@ -184,7 +185,7 @@ export const es = {
   "wallet.toast.insufficientFundsTitle": "Desajuste de Saldo",
   "wallet.toast.insufficientFundsDescription": "El retiro excede el Account Balance.",
   "wallet.toast.invalidAmountTitle": "Desajuste de Umbral",
-  "wallet.toast.invalidAmountDescription": "El retiro mínimo es de ${amount}.",
+  "wallet.toast.invalidAmountDescription": "El retiro mínimo es de {amount}.",
   "wallet.toast.successTitle": "Solicitud de Retiro",
   "wallet.toast.successDescription": "Su solicitud está pendiente de auditoría final."
 };
