@@ -20,6 +20,7 @@ import { DollarSign, WalletCards, Landmark } from "lucide-react";
 import type { Withdrawal, UserProfile } from "@/lib/types";
 import { useLanguage } from "@/context/LanguageContext";
 
+// AUTHORITATIVE WITHDRAWAL THRESHOLD: $80.00
 const MIN_WITHDRAWAL_AMOUNT = 80;
 
 const withdrawalSchema = z.object({
@@ -72,7 +73,7 @@ export default function WalletPage() {
         return;
     }
     if (values.amount < MIN_WITHDRAWAL_AMOUNT) {
-        toast({ variant: 'destructive', title: t('wallet.toast.invalidAmountTitle'), description: t('wallet.toast.invalidAmountDescription', { amount: MIN_WITHDRAWAL_AMOUNT.toLocaleString() }) });
+        toast({ variant: 'destructive', title: "Threshold Mismatch", description: `Minimum withdrawal is $${MIN_WITHDRAWAL_AMOUNT.toLocaleString()}.` });
         return;
     }
 
@@ -94,7 +95,7 @@ export default function WalletPage() {
         updateDocumentNonBlocking(userDocRef, { balance: newBalance });
     }
 
-    toast({ title: t('wallet.toast.successTitle'), description: t('wallet.toast.successDescription') });
+    toast({ title: "Withdrawal Requested", description: "Your request is pending final executive audit." });
     form.reset();
   };
 

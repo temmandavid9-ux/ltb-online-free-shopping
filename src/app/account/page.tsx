@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -76,6 +77,8 @@ export default function AccountPage() {
     const handleRedeemGiftCard = () => {
         if (!user || !userData || !userDocRef) return;
         if (userData.eliteRewardsAvailable <= 0) return;
+        
+        // STRICT MILESTONE SECURITY: 365 DAYS REQUIRED
         if (userData.streakCount < 365) {
             toast({ variant: 'destructive', title: "CLAIM REJECTED", description: "365-day consecutive streak required to claim Elite Bonus." });
             return;
@@ -97,9 +100,9 @@ export default function AccountPage() {
         // Create log
         setDocumentNonBlocking(redemptionRef, newRedemption, { merge: false });
         
-        // Update balance and availability
+        // Update balance and availability - FUNDS GO DIRECTLY TO WALLET
         updateDocumentNonBlocking(userDocRef, {
-            balance: increment(100), // ADD FUNDS TO WALLET
+            balance: increment(100), 
             eliteRewardsAvailable: increment(-1),
             redeemedRewardIds: [...(userData.redeemedRewardIds || []), redemptionId]
         });
