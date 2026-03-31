@@ -145,7 +145,7 @@ export default function TaskList() {
       let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
       if (newMonthlyCounter >= 30) {
         updates.eliteMonthlyCounter = 0;
-        updates.eliteRewardsAvailable = increment(1);
+        updates.eliteRewardsAvailable = (userData.eliteRewardsAvailable || 0) + 1;
         toast({ title: "BONUS GENERATED", description: "$100 LTB Brand Elite Gift Card added to registry. Reach 365-day streak to claim." });
       } else {
         updates.eliteMonthlyCounter = newMonthlyCounter;
