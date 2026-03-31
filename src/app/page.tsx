@@ -1,4 +1,3 @@
-
 import { products } from '@/lib/data';
 import {
   Carousel,
@@ -53,14 +52,7 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="hidden md:block relative h-[600px] rounded-[3rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border border-white/5 group">
-                      <Image 
-                        src={asset.url} 
-                        alt={asset.title} 
-                        fill
-                        priority={asset.id === '1'}
-                        className="object-cover transition-all duration-[3000ms] ease-out group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <Image src={asset.url} alt={asset.title} fill priority={asset.id === '1'} className="object-cover transition-all duration-[3000ms] ease-out group-hover:scale-110" />
                     </div>
                   </div>
                 </div>
@@ -74,63 +66,6 @@ export default function Home() {
         </Carousel>
       </section>
 
-      <div className="container mx-auto px-4 mb-24">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 py-16 border-y border-border/10 bg-white/30 backdrop-blur-sm rounded-[3rem] px-8">
-          <div className="flex flex-col items-center text-center gap-4">
-            <ShieldCheck className="w-12 h-12 text-primary" />
-            <div>
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-1">Verified Origins</h4>
-              <p className="text-[11px] text-muted-foreground/60">100% Authentic Assets</p>
-            </div>
-          </div>
-          <div className="flex flex-col items-center text-center gap-4">
-            <Zap className="w-12 h-12 text-primary" />
-            <div>
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-1">Instant Rewards</h4>
-              <p className="text-[11px] text-muted-foreground/60">Claim Balance Today</p>
-            </div>
-          </div>
-          <div className="flex flex-col items-center text-center gap-4">
-            <Sparkles className="w-12 h-12 text-primary" />
-            <div>
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-1">Premium Selection</h4>
-              <p className="text-[11px] text-muted-foreground/60">Curated for Excellence</p>
-            </div>
-          </div>
-          <div className="flex flex-col items-center text-center gap-4">
-            <Trophy className="w-12 h-12 text-primary" />
-            <div>
-              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] mb-1">Elite Membership</h4>
-              <p className="text-[11px] text-muted-foreground/60">Exclusive Store Access</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {heritageProducts.length > 0 && (
-        <section className="container mx-auto px-4 mb-32">
-          <div className="flex items-end justify-between mb-12">
-            <div className="flex items-center gap-5">
-              <div className="p-5 bg-white shadow-xl rounded-[2rem]">
-                <Crown className="w-10 h-10 text-primary" />
-              </div>
-              <div>
-                <h2 className="text-4xl font-black font-headline tracking-tighter luxury-text-gradient">Heritage Elite Series</h2>
-                <p className="text-muted-foreground/60 text-[10px] font-black uppercase tracking-[0.4em] mt-1">Latest Verified Masterpieces</p>
-              </div>
-            </div>
-            <Button variant="ghost" className="font-black uppercase tracking-[0.3em] text-[9px] h-12 px-8 rounded-full border border-border/10" asChild>
-              <Link href="/redeem">View All Assets</Link>
-            </Button>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
-            {heritageProducts.map(product => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </section>
-      )}
-      
       <div className="container mx-auto px-4">
         <ProductGrid products={products} />
         <AiRecommendations />

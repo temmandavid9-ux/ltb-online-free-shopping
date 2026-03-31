@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useUser, useFirestore, useDoc, useMemoFirebase, updateDocumentNonBlocking, setDocumentNonBlocking, useCollection } from "@/firebase";
@@ -46,12 +45,7 @@ export default function WalletPage() {
 
   useEffect(() => {
     if (withdrawalsData) {
-        setClientWithdrawals(
-            withdrawalsData.map(w => ({
-                ...w,
-                formattedDate: new Date(w.date).toLocaleDateString()
-            }))
-        );
+        setClientWithdrawals(withdrawalsData.map(w => ({ ...w, formattedDate: new Date(w.date).toLocaleDateString() })));
     }
   }, [withdrawalsData]);
 
@@ -73,40 +67,23 @@ export default function WalletPage() {
         return;
     }
     if (values.amount < MIN_WITHDRAWAL_AMOUNT) {
-        toast({ 
-            variant: 'destructive', 
-            title: t('wallet.toast.invalidAmountTitle'), 
-            description: t('wallet.toast.invalidAmountDescription', { amount: `$${MIN_WITHDRAWAL_AMOUNT.toLocaleString()}` }) 
-        });
+        toast({ variant: 'destructive', title: t('wallet.toast.invalidAmountTitle'), description: t('wallet.toast.invalidAmountDescription', { amount: `$${MIN_WITHDRAWAL_AMOUNT.toLocaleString()}` }) });
         return;
     }
 
     const newBalance = userData.balance - values.amount;
     const withdrawalId = `wd_${new Date().getTime()}`;
     const withdrawalRef = doc(firestore, 'withdrawals', withdrawalId);
-    const newWithdrawal = {
-        id: withdrawalId,
-        userId: user.uid,
-        amount: values.amount,
-        paymentMethod: values.paymentMethod,
-        accountDetails: values.accountDetails,
-        status: 'Pending',
-        date: new Date().toISOString(),
-    };
+    const newWithdrawal = { id: withdrawalId, userId: user.uid, amount: values.amount, paymentMethod: values.paymentMethod, accountDetails: values.accountDetails, status: 'Pending', date: new Date().toISOString() };
+    
     setDocumentNonBlocking(withdrawalRef, newWithdrawal, { merge: false });
-
-    if(userDocRef) {
-        updateDocumentNonBlocking(userDocRef, { balance: newBalance });
-    }
+    if(userDocRef) updateDocumentNonBlocking(userDocRef, { balance: newBalance });
 
     toast({ title: t('wallet.toast.successTitle'), description: t('wallet.toast.successDescription') });
     form.reset();
   };
 
-  if (isUserLoading || isUserDocLoading || areWithdrawalsLoading) {
-    return <div className="container text-center p-24 font-black uppercase tracking-widest text-foreground">{t('general.loading')}</div>;
-  }
-  
+  if (isUserLoading || isUserDocLoading || areWithdrawalsLoading) return <div className="container text-center p-24 font-black uppercase tracking-widest">{t('general.loading')}</div>;
   if (!user) return null;
 
   const currentBalance = userData?.balance || 0;
@@ -125,45 +102,29 @@ export default function WalletPage() {
                 <CardTitle className="text-sm font-black uppercase tracking-widest">{t('wallet.balanceTitle')}</CardTitle>
                 <DollarSign className="w-5 h-5 text-primary" />
             </CardHeader>
-            <CardContent>
-                <div className="text-5xl font-black text-foreground">${currentBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
-            </CardContent>
+            <CardContent><div className="text-5xl font-black">${currentBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div></CardContent>
           </Card>
           <Card className="rounded-[3rem] shadow-xl overflow-hidden border-black/5">
             <CardHeader className="bg-secondary/30">
-              <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2 text-foreground"><Landmark className="w-4 h-4 text-primary" /> {t('wallet.withdrawalTitle')}</CardTitle>
-              <CardDescription className="text-[10px] font-black text-muted-foreground/60">{t('wallet.withdrawalDescription')}</CardDescription>
+              <CardTitle className="text-sm font-black uppercase tracking-widest flex items-center gap-2"><Landmark className="w-4 h-4 text-primary" /> {t('wallet.withdrawalTitle')}</CardTitle>
             </CardHeader>
             <CardContent className="pt-8">
               {!canWithdraw && (
                 <Alert className="rounded-2xl border-none bg-primary/5 text-primary mb-6">
-                  <WalletCards className="h-4 w-4"/>
-                  <AlertTitle className="text-[10px] font-black uppercase tracking-widest">{t('wallet.minBalanceTitle')}</AlertTitle>
+                  <WalletCards className="h-4 w-4"/><AlertTitle className="text-[10px] font-black uppercase tracking-widest">{t('wallet.minBalanceTitle')}</AlertTitle>
                   <AlertDescription className="text-[10px] font-black">{t('wallet.minBalanceDescription', { amount: `$${MIN_WITHDRAWAL_AMOUNT.toLocaleString()}` })}</AlertDescription>
                 </Alert>
               )}
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className={`space-y-6 ${!canWithdraw ? 'opacity-50' : ''}`}>
                     <FormField name="amount" control={form.control} render={({ field }) => (
-                        <FormItem>
-                        <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{t('wallet.amountLabel')}</FormLabel>
-                        <FormControl><Input type="number" {...field} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black text-foreground" /></FormControl>
-                        <FormMessage />
-                        </FormItem>
+                        <FormItem><FormLabel className="text-[10px] font-black uppercase tracking-widest">{t('wallet.amountLabel')}</FormLabel><FormControl><Input type="number" {...field} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black" /></FormControl><FormMessage /></FormItem>
                     )} />
                     <FormField name="paymentMethod" control={form.control} render={({ field }) => (
-                        <FormItem>
-                        <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{t('wallet.methodLabel')}</FormLabel>
-                        <FormControl><Input {...field} placeholder={t('wallet.methodPlaceholder')} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black text-foreground" /></FormControl>
-                        <FormMessage />
-                        </FormItem>
+                        <FormItem><FormLabel className="text-[10px] font-black uppercase tracking-widest">{t('wallet.methodLabel')}</FormLabel><FormControl><Input {...field} placeholder={t('wallet.methodPlaceholder')} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black" /></FormControl><FormMessage /></FormItem>
                     )} />
                     <FormField name="accountDetails" control={form.control} render={({ field }) => (
-                        <FormItem>
-                        <FormLabel className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{t('wallet.detailsLabel')}</FormLabel>
-                        <FormControl><Input {...field} placeholder={t('wallet.detailsPlaceholder')} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black text-foreground" /></FormControl>
-                        <FormMessage />
-                        </FormItem>
+                        <FormItem><FormLabel className="text-[10px] font-black uppercase tracking-widest">{t('wallet.detailsLabel')}</FormLabel><FormControl><Input {...field} placeholder={t('wallet.detailsPlaceholder')} disabled={!canWithdraw} className="rounded-2xl h-12 bg-secondary/20 border-none font-black" /></FormControl><FormMessage /></FormItem>
                     )} />
                     <Button type="submit" className="w-full rounded-2xl h-16 font-black uppercase tracking-widest text-[10px] btn-luxury border-none" disabled={!canWithdraw || form.formState.isSubmitting}>
                         {form.formState.isSubmitting ? t('wallet.buttonLoading') : t('wallet.button')}
@@ -175,39 +136,20 @@ export default function WalletPage() {
         </div>
         <div className="lg:col-span-2">
           <Card className="rounded-[3rem] shadow-xl overflow-hidden border-black/5">
-            <CardHeader className="p-10 border-b border-border/50">
-              <CardTitle className="text-2xl font-black luxury-text-gradient">{t('wallet.historyTitle')}</CardTitle>
-            </CardHeader>
+            <CardHeader className="p-10 border-b border-border/50"><CardTitle className="text-2xl font-black luxury-text-gradient">{t('wallet.historyTitle')}</CardTitle></CardHeader>
             <CardContent className="p-0">
               <Table>
-                <TableHeader>
-                  <TableRow className="border-none bg-secondary/30">
-                    <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest text-foreground">{t('general.date')}</TableHead>
-                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">{t('general.amount')}</TableHead>
-                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Method</TableHead>
-                    <TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest text-foreground">{t('general.status')}</TableHead>
-                  </TableRow>
-                </TableHeader>
+                <TableHeader><TableRow className="border-none bg-secondary/30"><TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest">{t('general.date')}</TableHead><TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">{t('general.amount')}</TableHead><TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">Method</TableHead><TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest">{t('general.status')}</TableHead></TableRow></TableHeader>
                 <TableBody>
                   {clientWithdrawals.length > 0 ? clientWithdrawals.map(w => (
                     <TableRow key={w.id} className="border-border/5">
-                      <TableCell className="pl-10 py-6 text-sm font-black text-foreground">{w.formattedDate}</TableCell>
-                      <TableCell className="font-black text-sm text-foreground">${w.amount.toLocaleString()}</TableCell>
-                      <TableCell className="text-sm font-black text-foreground">{w.paymentMethod}</TableCell>
-                      <TableCell className="text-right pr-10 font-black text-foreground">
-                         <Badge variant="outline" className={`rounded-full px-4 py-1 border-none text-[9px] font-black uppercase tracking-widest ${
-                            w.status === 'Approved' ? 'bg-primary/10 text-primary' : 
-                            w.status === 'Rejected' ? 'bg-destructive/10 text-destructive' :
-                            'bg-accent/10 text-accent'
-                        }`}>
-                            {w.status}
-                        </Badge>
-                      </TableCell>
+                      <TableCell className="pl-10 py-6 text-sm font-black">{w.formattedDate}</TableCell>
+                      <TableCell className="font-black text-sm">${w.amount.toLocaleString()}</TableCell>
+                      <TableCell className="text-sm font-black">{w.paymentMethod}</TableCell>
+                      <TableCell className="text-right pr-10 font-black"><Badge variant="outline" className={`rounded-full px-4 py-1 border-none text-[9px] font-black uppercase tracking-widest ${w.status === 'Approved' ? 'bg-primary/10 text-primary' : 'bg-accent/10 text-accent'}`}>{w.status}</Badge></TableCell>
                     </TableRow>
                   )) : (
-                    <TableRow>
-                      <TableCell colSpan={4} className="text-center py-24 text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">{t('wallet.noHistory')}</TableCell>
-                    </TableRow>
+                    <TableRow><TableCell colSpan={4} className="text-center py-24 text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">{t('wallet.noHistory')}</TableCell></TableRow>
                   )}
                 </TableBody>
               </Table>

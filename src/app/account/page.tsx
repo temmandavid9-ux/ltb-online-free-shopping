@@ -1,4 +1,3 @@
-
 'use client';
 
 import {
@@ -32,7 +31,6 @@ import { useToast } from "@/hooks/use-toast";
 
 export default function AccountPage() {
     const { user, isUserLoading } = useUser();
-    const { isAdmin } = useAdminStatus();
     const router = useRouter();
     const firestore = useFirestore();
     const auth = useAuth();
@@ -61,7 +59,6 @@ export default function AccountPage() {
         }
     }, [ordersData]);
 
-
     useEffect(() => {
         if (!isUserLoading && !user) {
             router.push('/login');
@@ -86,8 +83,8 @@ export default function AccountPage() {
 
         const redemptionId = `gc_${Date.now()}`;
         const codeId = `LTB-GC-${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
-        
         const redemptionRef = doc(firestore, 'users', user.uid, 'rewardRedemptions', redemptionId);
+        
         const newRedemption: RewardRedemption = {
             id: redemptionId,
             userId: user.uid,
@@ -97,29 +94,21 @@ export default function AccountPage() {
             value: 100,
         };
 
-        // Create log
         setDocumentNonBlocking(redemptionRef, newRedemption, { merge: false });
-        
-        // Update balance and availability - FUNDS GO DIRECTLY TO WALLET
         updateDocumentNonBlocking(userDocRef, {
             balance: increment(100), 
             eliteRewardsAvailable: increment(-1),
             redeemedRewardIds: [...(userData.redeemedRewardIds || []), redemptionId]
         });
 
-        toast({
-            title: "Bonus Claimed!",
-            description: `$100.00 added to Account Balance. Your unique code is: ${codeId}.`,
-        });
+        toast({ title: "Bonus Claimed!", description: `$100.00 added to Account Balance. Code: ${codeId}.` });
     };
 
     if (isUserLoading || isUserDocLoading || areOrdersLoading) {
         return <div className="container text-center p-24 font-black uppercase tracking-widest text-foreground">{t('general.loading')}</div>;
     }
 
-    if (!user) {
-        return null;
-    }
+    if (!user) return null;
 
     const currentBalance = userData?.balance ?? 0;
     const isEliteStreakAchieved = (userData?.streakCount || 0) >= 365;
@@ -133,11 +122,9 @@ export default function AccountPage() {
                     CEO {userData?.username || user.displayName || user.email} • {user.email}
                 </p>
             </div>
-            <div className="flex gap-3">
-                <Button onClick={handleLogout} variant="ghost" className="rounded-full font-black uppercase tracking-widest text-[10px] h-12 px-8 border border-border/10">
-                    {t('account.logout')}
-                </Button>
-            </div>
+            <Button onClick={handleLogout} variant="ghost" className="rounded-full font-black uppercase tracking-widest text-[10px] h-12 px-8 border border-border/10">
+                {t('account.logout')}
+            </Button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -165,9 +152,7 @@ export default function AccountPage() {
                 <Card className="rounded-[3rem] border-black/5 shadow-xl">
                     <CardHeader className="flex flex-row items-center justify-between pb-4">
                         <CardTitle className="text-sm font-black uppercase tracking-widest">Account Balance</CardTitle>
-                        <div className="p-3 bg-primary/10 rounded-2xl">
-                            <DollarSign className="w-5 h-5 text-primary" />
-                        </div>
+                        <div className="p-3 bg-primary/10 rounded-2xl"><DollarSign className="w-5 h-5 text-primary" /></div>
                     </CardHeader>
                     <CardContent>
                         <div className="text-4xl font-black mb-6">${currentBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
@@ -188,19 +173,12 @@ export default function AccountPage() {
                             <div className="text-3xl font-black text-accent mb-1">{userData?.eliteRewardsAvailable || 0}</div>
                             <div className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">{t('account.rewardsAvailable', { count: userData?.eliteRewardsAvailable || 0 })}</div>
                         </div>
-                        
                         <div className="space-y-2">
-                            <Button 
-                                onClick={handleRedeemGiftCard} 
-                                disabled={!isEliteStreakAchieved || (userData?.eliteRewardsAvailable || 0) <= 0}
-                                className="w-full rounded-2xl h-14 font-black uppercase tracking-widest text-[10px] bg-accent hover:bg-accent/90 disabled:opacity-50 disabled:grayscale transition-all"
-                            >
+                            <Button onClick={handleRedeemGiftCard} disabled={!isEliteStreakAchieved || (userData?.eliteRewardsAvailable || 0) <= 0} className="w-full rounded-2xl h-14 font-black uppercase tracking-widest text-[10px] bg-accent hover:bg-accent/90 disabled:opacity-50 transition-all">
                                 {isEliteStreakAchieved ? t('account.redeemReward') : <><Lock className="w-3 h-3 mr-2" /> Locked: 365 Days Req.</>}
                             </Button>
                             {!isEliteStreakAchieved && (
-                                <p className="text-[8px] font-black uppercase text-center text-muted-foreground/60 tracking-tighter">
-                                    Bonus is generated but claim-locked until 365-Day milestone.
-                                </p>
+                                <p className="text-[8px] font-black uppercase text-center text-muted-foreground/60 tracking-tighter">Bonus generated but claim-locked until 365-Day milestone.</p>
                             )}
                         </div>
                     </CardContent>
@@ -211,78 +189,33 @@ export default function AccountPage() {
                 <Card className="rounded-[3rem] border-black/5 shadow-xl overflow-hidden">
                     <CardHeader className="p-10 pb-6 border-b border-border/50">
                         <CardTitle className="text-2xl font-black luxury-text-gradient">Order History</CardTitle>
-                        <CardDescription className="font-black text-[10px] uppercase tracking-widest text-muted-foreground/60">{t('account.orderHistoryDescription')}</CardDescription>
                     </CardHeader>
                     <CardContent className="p-0">
                         <Table>
                             <TableHeader>
                                 <TableRow className="border-none bg-secondary/30">
-                                    <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest text-foreground">{t('general.product')}</TableHead>
-                                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">{t('general.status')}</TableHead>
-                                    <TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest text-foreground">{t('general.total')}</TableHead>
+                                    <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest">Product</TableHead>
+                                    <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest">Status</TableHead>
+                                    <TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest">Total</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {clientOrders.length > 0 ? clientOrders.map(order => (
                                     <TableRow key={order.id} className="border-border/5 group">
-                                        <TableCell className="pl-10 py-6 font-black text-foreground">
-                                            <div className="font-black text-sm group-hover:text-primary transition-colors">{order.product}</div>
-                                            <div className="text-[10px] font-black text-foreground mt-1">{order.formattedDate}</div>
+                                        <TableCell className="pl-10 py-6 font-black">
+                                            <div className="font-black text-sm">{order.product}</div>
+                                            <div className="text-[10px] font-black mt-1">{order.formattedDate}</div>
                                         </TableCell>
-                                        <TableCell className="font-black text-foreground">
-                                            <Badge variant="outline" className="rounded-full px-4 py-1 border-none bg-primary/10 text-primary text-[9px] font-black uppercase tracking-widest">
-                                                {order.status}
-                                            </Badge>
-                                        </TableCell>
-                                        <TableCell className="text-right pr-10 font-black text-foreground">
-                                            <div className="font-black text-sm">${order.price.toLocaleString()}</div>
-                                        </TableCell>
+                                        <TableCell><Badge variant="outline" className="rounded-full px-4 py-1 border-none bg-primary/10 text-primary text-[9px] font-black uppercase tracking-widest">{order.status}</Badge></TableCell>
+                                        <TableCell className="text-right pr-10 font-black text-sm">${order.price.toLocaleString()}</TableCell>
                                     </TableRow>
                                 )) : (
-                                    <TableRow>
-                                        <TableCell colSpan={3} className="text-center py-20 text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">{t('account.noOrders')}</TableCell>
-                                    </TableRow>
+                                    <TableRow><TableCell colSpan={3} className="text-center py-20 text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">{t('account.noOrders')}</TableCell></TableRow>
                                 )}
                             </TableBody>
                         </Table>
                     </CardContent>
                 </Card>
-
-                {redemptionsData && redemptionsData.length > 0 && (
-                    <Card className="rounded-[3rem] border-black/5 shadow-xl overflow-hidden">
-                        <CardHeader className="p-10 pb-6 border-b border-border/50">
-                            <CardTitle className="text-2xl font-black luxury-text-gradient">Reward History</CardTitle>
-                        </CardHeader>
-                        <CardContent className="p-0">
-                            <Table>
-                                <TableHeader>
-                                    <TableRow className="border-none bg-secondary/30">
-                                        <TableHead className="pl-10 h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Reward</TableHead>
-                                        <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Code</TableHead>
-                                        <TableHead className="h-14 text-right pr-10 text-[10px] font-black uppercase tracking-widest text-foreground">Date</TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    {redemptionsData.map(red => (
-                                        <TableRow key={red.id} className="border-border/5">
-                                            <TableCell className="pl-10 py-6 font-black text-foreground">
-                                                <div className="font-black text-sm">{red.rewardType}</div>
-                                            </TableCell>
-                                            <TableCell className="font-black text-foreground">
-                                                <code className="bg-black text-white px-3 py-1.5 rounded-lg text-xs font-black tracking-widest">
-                                                    {red.giftCardCodeId}
-                                                </code>
-                                            </TableCell>
-                                            <TableCell className="text-right pr-10 font-black text-foreground">
-                                                <div className="text-sm font-black text-foreground">{new Date(red.redemptionDate).toLocaleDateString()}</div>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </CardContent>
-                    </Card>
-                )}
             </div>
         </div>
       </div>
