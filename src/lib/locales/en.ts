@@ -1,4 +1,3 @@
-
 export const en = {
   // Header
   "header.home": "Home",

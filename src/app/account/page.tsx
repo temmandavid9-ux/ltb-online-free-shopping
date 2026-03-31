@@ -23,7 +23,6 @@ import { useEffect, useState } from "react";
 import { useUser, useFirestore, useDoc, useMemoFirebase, useAuth, useCollection, updateDocumentNonBlocking, setDocumentNonBlocking } from "@/firebase";
 import { doc, collection, query, where, increment } from 'firebase/firestore';
 import { signOut } from "firebase/auth";
-import { useAdminStatus } from "@/hooks/useAdminStatus";
 import type { Order, UserProfile, RewardRedemption } from "@/lib/types";
 import { ArrowRight, DollarSign, Crown, Gift, Trophy, Lock } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -42,9 +41,6 @@ export default function AccountPage() {
 
     const ordersQuery = useMemoFirebase(() => user ? query(collection(firestore, 'orders'), where('userId', '==', user.uid)) : null, [firestore, user]);
     const { data: ordersData, isLoading: areOrdersLoading } = useCollection<Order>(ordersQuery);
-
-    const redemptionsQuery = useMemoFirebase(() => user ? query(collection(firestore, 'users', user.uid, 'rewardRedemptions')) : null, [firestore, user]);
-    const { data: redemptionsData } = useCollection<RewardRedemption>(redemptionsQuery);
 
     const [clientOrders, setClientOrders] = useState<(Order & { formattedDate: string })[]>([]);
 

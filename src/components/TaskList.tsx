@@ -12,10 +12,9 @@ import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Youtube, Instagram, Facebook, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock, RefreshCcw } from 'lucide-react';
+import { Youtube, Instagram, Facebook, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
-import { useAdminStatus } from '@/hooks/useAdminStatus';
 
 const TASK_DURATION_SECONDS = 600; // STRICT 10 MINUTES
 const COOLDOWN_MS = 20 * 60 * 60 * 1000; // 20 Hour Security Cooldown
@@ -23,7 +22,6 @@ const TOTAL_CYCLE_MS = 24 * 60 * 60 * 1000; // STRICT 24H REGISTRY WINDOW
 
 export default function TaskList() {
   const { user, isUserLoading } = useUser();
-  const { isAdmin } = useAdminStatus();
   const firestore = useFirestore();
   const { toast } = useToast();
   const { t } = useLanguage();
@@ -110,7 +108,7 @@ export default function TaskList() {
   const handleStageComplete = useCallback(() => {
     if (!user || !userData || !userDocRef || activeStep === null) return;
     const stage = activeStep;
-    let reward = (stage === 2 ? 0.34 : 0.33);
+    let reward = (stage === 2 ? 0.34 : 0.33); // $1.00 TOTAL DAILY
     let updates: any = {};
     const now = new Date().toISOString();
     updates.lastStepDate = now;

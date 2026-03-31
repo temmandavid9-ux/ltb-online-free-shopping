@@ -6,14 +6,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import { Card } from '@/components/ui/card';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import ProductGrid from '@/components/ProductGrid';
 import { AiRecommendations } from '@/components/AiRecommendations';
-import { Sparkles, Trophy, ShieldCheck, Zap, Crown } from 'lucide-react';
-import ProductCard from '@/components/ProductCard';
+import { Trophy } from 'lucide-react';
 
 const MASTER_ASSETS = [
   { id: '1', title: 'Prestige Collection', desc: 'The definitive standard of luxury verified by Less Talk Business.', url: "https://image2url.com/r2/default/files/1771940966609-b927061a-b8ae-4d96-b236-35a78c784bae.avif", color: 'bg-emerald-950' },
@@ -22,8 +20,6 @@ const MASTER_ASSETS = [
 ];
 
 export default function Home() {
-  const heritageProducts = products.filter(p => p.id.includes('exclusive') && parseInt(p.id.split('_').pop() || '0') >= 554).slice(0, 4);
-
   return (
     <div className="pb-24 hero-gradient">
       <section className="relative overflow-hidden mb-16">
