@@ -1,16 +1,11 @@
 import Link from "next/link";
 
-/**
- * For Static Export (output: 'export'), this tells Next.js 
- * to skip pre-generating specific Order IDs during build.
- */
+// This MUST be a Server Component (no "use client") for this to work
 export function generateStaticParams() {
-  return [];
+  return []; 
 }
 
-/** @type {import('next').NextPage} */
 export default async function OrderConfirmationPage(props: any) {
-  // Manual resolution to bypass Next.js 15 strictness
   const params = await props.params;
   const orderId = params?.orderId || "Order Received";
 
@@ -18,7 +13,7 @@ export default async function OrderConfirmationPage(props: any) {
     <div style={{ padding: "100px 20px", textAlign: "center", fontFamily: "sans-serif" }}>
       <h1 style={{ color: "#16a34a", fontSize: "2.5rem" }}>Success!</h1>
       <p style={{ fontSize: "1.2rem", color: "#666" }}>Your order is being processed.</p>
-      <div style={{ margin: "30px 0", padding: "15px", background: "#f9fafb", borderRadius: "8px", display: "inline-block", border: "1px solid #e5e7eb" }}>
+      <div style={{ margin: "30px 0", padding: "15px", background: "#f9fafb", borderRadius: "#8px", display: "inline-block", border: "1px solid #e5e7eb" }}>
         <span style={{ fontWeight: "bold" }}>Order ID:</span> {orderId}
       </div>
       <div style={{ marginTop: "30px" }}>
