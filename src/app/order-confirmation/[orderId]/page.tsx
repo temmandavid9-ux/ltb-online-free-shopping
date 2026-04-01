@@ -3,9 +3,12 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CheckCircle, Package, Truck, Home } from "lucide-react";
+import React from "react";
 
-export default function OrderConfirmationPage({ params }: { params: { orderId: string } }) {
-  const { orderId } = params;
+// Update: Added 'async' and changed params to a Promise type
+export default async function OrderConfirmationPage({ params }: { params: Promise<{ orderId: string }> }) {
+  // Update: We must 'await' the params now
+  const { orderId } = await params;
 
   const trackingSteps = [
     { name: "Order Placed", icon: CheckCircle, status: "completed" },
@@ -36,8 +39,8 @@ export default function OrderConfirmationPage({ params }: { params: { orderId: s
             <h3 className="font-semibold text-lg mb-4">Order Tracking</h3>
             <div className="flex justify-between items-center">
               {trackingSteps.map((step, index) => (
-                <>
-                  <div key={step.name} className="flex flex-col items-center text-center w-24">
+                <React.Fragment key={step.name}>
+                  <div className="flex flex-col items-center text-center w-24">
                     <div className={`
                       h-12 w-12 rounded-full flex items-center justify-center
                       ${step.status === 'completed' ? 'bg-primary text-primary-foreground' : ''}
@@ -53,7 +56,7 @@ export default function OrderConfirmationPage({ params }: { params: { orderId: s
                   {index < trackingSteps.length - 1 && (
                     <div className={`flex-1 h-1 ${index < 2 ? 'bg-primary' : 'bg-border'}`}></div>
                   )}
-                </>
+                </React.Fragment>
               ))}
             </div>
           </div>
