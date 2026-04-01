@@ -34,7 +34,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [locale]);
 
   const t = useCallback((key: keyof typeof en, values?: Record<string, any>) => {
-    const translation = translations[locale][key] || translations['en'][key];
+    const translation = (translations[locale] as any)[key] || (translations['en'] as any)[key];
     if (values) {
         return interpolate(translation, values);
     }
