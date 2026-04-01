@@ -1,8 +1,3 @@
-// 1. ADD THIS AT THE VERY TOP: This satisfies the 'output: export' requirement
-export async function generateStaticParams() {
-  return []; 
-}
-
 "use client";
 
 import React, { useState } from 'react';
@@ -23,16 +18,13 @@ const getProductBySlug = (slug: string): Product | undefined => {
   return products.find(p => p.slug === slug);
 };
 
-// Next.js 15 requires params to be a Promise
 export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
-  // This is the magic line for Next.js 15 Client Components
   const resolvedParams = React.use(params);
   const slug = resolvedParams.slug;
 
   const product = getProductBySlug(slug);
   const { addToBasket } = useRedeem();
   const [quantity, setQuantity] = useState(1);
-  
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   if (!product) {
@@ -65,7 +57,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        {/* Image Gallery */}
         <div>
           <Card className="overflow-hidden">
             <CardContent className="p-4">
@@ -109,7 +100,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
           </div>
         </div>
 
-        {/* Product Info */}
         <div className="space-y-6">
           <Badge variant="outline">{product.brand}</Badge>
           <h1 className="text-4xl font-bold font-headline">{product.name}</h1>
@@ -127,9 +117,6 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
               Redeem Item
             </Button>
           </div>
-          {product.stock < 20 && (
-            <p className="text-sm text-destructive font-medium">Only {product.stock} left in stock!</p>
-          )}
 
           <Card className="bg-muted/50">
             <CardContent className="p-4 space-y-3 text-sm">
