@@ -111,20 +111,24 @@ export const chainProducts: Product[] = [
     slug: 'product-135',
     name: 'LTB Brand Cuban Link',
     category: 'Chains',
-    price: 950,
-    brand: 'LTB Brand',
-    images: [findImage('prod_img_135')],
-    stock: 30,
+    price: 150, // Or whatever the price was
+    brand: 'LTB',
+    description: 'High-quality LTB Brand Cuban Link chain for elite style.', // ADD THIS LINE
+    images: [
+      { url: '/images/cuban-link.jpg', hint: 'LTB Cuban Link' }
+    ],
+    stock: 50,
     rating: 5,
-    reviewCount: 150,
+    reviewCount: 200,
   },
-  {
+{
     id: 'prod_136',
     slug: 'product-136',
     name: 'LTB Brand Link Chain',
     category: 'Chains',
     price: 350,
     brand: 'LTB Brand',
+    description: 'The signature LTB Brand Link Chain, crafted for a premium feel and lasting durability.', // ADDED THIS
     images: [findImage('prod_img_136')],
     stock: 80,
     rating: 4.7,
