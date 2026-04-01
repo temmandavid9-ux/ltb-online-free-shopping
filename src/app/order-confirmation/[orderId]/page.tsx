@@ -1,16 +1,15 @@
 import Link from "next/link";
 
-// 1. THIS IS THE KEY: It tells Next.js NOT to look for other dynamic IDs 
-// because we are in a static (output: export) environment.
+// ADD THIS LINE - It tells the static builder not to look for other IDs
 export const dynamicParams = false; 
 
-// 2. The "Hall Pass" - stays as an empty array for static GitHub Pages.
+// This function must be exported exactly like this
 export function generateStaticParams() {
   return []; 
 }
 
 export default async function OrderConfirmationPage(props: any) {
-  // In Next.js 15, we must await the params
+  // Ensure we await params for Next.js 15 compatibility
   const params = await props.params;
   const orderId = params?.orderId || "Order Received";
 
