@@ -1,6 +1,11 @@
+// 1. ADD THIS AT THE VERY TOP: This satisfies the 'output: export' requirement
+export async function generateStaticParams() {
+  return []; 
+}
+
 "use client";
 
-import React, { useState } from 'react'; // Added React for use()
+import React, { useState } from 'react';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { products } from '@/lib/data';
@@ -12,7 +17,7 @@ import { Badge } from '@/components/ui/badge';
 import {
   Card,
   CardContent,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 
 const getProductBySlug = (slug: string): Product | undefined => {
   return products.find(p => p.slug === slug);
@@ -28,14 +33,12 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
   const { addToBasket } = useRedeem();
   const [quantity, setQuantity] = useState(1);
   
-  // We handle the initial state carefully
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   if (!product) {
     notFound();
   }
 
-  // Set the first image if none selected
   const mainImage = selectedImage || product.images[0]?.url;
 
   const handleQuantityChange = (change: number) => {
