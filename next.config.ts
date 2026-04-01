@@ -1,8 +1,12 @@
-
-import type {NextConfig} from 'next';
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // 1. Tells Next.js to generate static files for GitHub Pages
+  output: 'export',
+
+  // 2. Matches your EXACT repository name so links and images work
+  basePath: '/ltb-online-free-shopping',
+
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -10,6 +14,9 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    // 3. Required for static export (removes the need for a Next.js server)
+    unoptimized: true,
+
     remotePatterns: [
       {
         protocol: 'https',
