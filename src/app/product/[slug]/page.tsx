@@ -9,10 +9,7 @@ import { Button } from '@/components/ui/button';
 import { useRedeem } from '@/context/CartContext';
 import { Star, ShieldCheck, Truck } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 const getProductBySlug = (slug: string): Product | undefined => {
   return products.find(p => p.slug === slug);
@@ -43,20 +40,21 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
     const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
 
     return (
-        <div className="flex items-center space-x-2">
-            <div className="flex text-yellow-400">
-                {[...Array(fullStars)].map((_, i) => <Star key={`full-${i}`} className="h-5 w-5 fill-current" />)}
-                {halfStar && <Star key="half" className="h-5 w-5 fill-current" />}
-                {[...Array(emptyStars)].map((_, i) => <Star key={`empty-${i}`} className="h-5 w-5 text-muted" />)}
-            </div>
-            <span className="text-sm text-muted-foreground">({reviewCount} reviews)</span>
+      <div className="flex items-center space-x-2">
+        <div className="flex text-yellow-400">
+          {[...Array(fullStars)].map((_, i) => <Star key={`full-${i}`} className="h-5 w-5 fill-current" />)}
+          {halfStar && <Star key="half" className="h-5 w-5 fill-current" />}
+          {[...Array(emptyStars)].map((_, i) => <Star key={`empty-${i}`} className="h-5 w-5 text-muted" />)}
         </div>
+        <span className="text-sm text-muted-foreground">({reviewCount} reviews)</span>
+      </div>
     );
   };
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        {/* Image Gallery */}
         <div>
           <Card className="overflow-hidden">
             <CardContent className="p-4">
@@ -100,6 +98,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
           </div>
         </div>
 
+        {/* Product Info */}
         <div className="space-y-6">
           <Badge variant="outline">{product.brand}</Badge>
           <h1 className="text-4xl font-bold font-headline">{product.name}</h1>
