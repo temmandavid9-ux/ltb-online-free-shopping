@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   output: 'export',
   basePath: '/ltb-online-free-shopping',
   // THIS IS THE FIX - IT TELLS GITHUB TO IGNORE THE TYPE ERROR
-  typescript: {
+ typescript: {
     ignoreBuildErrors: true,
   },
   eslint: {
