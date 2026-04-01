@@ -1,5 +1,13 @@
 import Link from "next/link";
 
+/**
+ * For Static Export (output: 'export'), this tells Next.js 
+ * to skip pre-generating specific Order IDs during build.
+ */
+export function generateStaticParams() {
+  return [];
+}
+
 /** @type {import('next').NextPage} */
 export default async function OrderConfirmationPage(props: any) {
   // Manual resolution to bypass Next.js 15 strictness
