@@ -1,21 +1,23 @@
 import Link from "next/link";
 
+/** @type {import('next').NextPage} */
 export default async function OrderConfirmationPage(props: any) {
-  // Next.js 15 requires awaiting params
+  // Manual resolution to bypass Next.js 15 strictness
   const params = await props.params;
-  const orderId = params.orderId;
+  const orderId = params?.orderId || "Order Received";
 
   return (
-    <div style={{ padding: "50px", textAlign: "center", fontFamily: "sans-serif" }}>
-      <h1 style={{ fontSize: "2rem", color: "#16a34a" }}>Order Confirmed!</h1>
-      <p>Thank you for shopping with LTB Brand.</p>
-      <div style={{ margin: "20px 0", padding: "10px", background: "#f3f4f6", display: "inline-block" }}>
-        <strong>Order ID:</strong> {orderId}
+    <div style={{ padding: "100px 20px", textAlign: "center", fontFamily: "sans-serif" }}>
+      <h1 style={{ color: "#16a34a", fontSize: "2.5rem" }}>Success!</h1>
+      <p style={{ fontSize: "1.2rem", color: "#666" }}>Your order is being processed.</p>
+      <div style={{ margin: "30px 0", padding: "15px", background: "#f9fafb", borderRadius: "8px", display: "inline-block", border: "1px solid #e5e7eb" }}>
+        <span style={{ fontWeight: "bold" }}>Order ID:</span> {orderId}
       </div>
-      <br /><br />
-      <Link href="/" style={{ color: "#2563eb", textDecoration: "underline" }}>
-        Return to Home
-      </Link>
+      <div style={{ marginTop: "30px" }}>
+        <Link href="/" style={{ padding: "12px 24px", background: "#000", color: "#fff", borderRadius: "5px", textDecoration: "none" }}>
+          Back to LTB Home
+        </Link>
+      </div>
     </div>
   );
 }
