@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import React, { useState } from 'react'; // Added React for use()
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { products } from '@/lib/data';
@@ -18,15 +18,25 @@ const getProductBySlug = (slug: string): Product | undefined => {
   return products.find(p => p.slug === slug);
 };
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
-  const product = getProductBySlug(params.slug);
+// Next.js 15 requires params to be a Promise
+export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  // This is the magic line for Next.js 15 Client Components
+  const resolvedParams = React.use(params);
+  const slug = resolvedParams.slug;
+
+  const product = getProductBySlug(slug);
   const { addToBasket } = useRedeem();
   const [quantity, setQuantity] = useState(1);
-  const [mainImage, setMainImage] = useState(product?.images[0]);
+  
+  // We handle the initial state carefully
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  if (!product || !mainImage) {
+  if (!product) {
     notFound();
   }
+
+  // Set the first image if none selected
+  const mainImage = selectedImage || product.images[0]?.url;
 
   const handleQuantityChange = (change: number) => {
     setQuantity(prev => Math.max(1, Math.min(product.stock, prev + change)));
@@ -57,9 +67,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           <Card className="overflow-hidden">
             <CardContent className="p-4">
               <div className="aspect-square w-full overflow-hidden rounded-lg">
-                {mainImage.url ? (
+                {mainImage ? (
                   <Image
-                    src={mainImage.url}
+                    src={mainImage}
                     alt={product.name}
                     width={800}
                     height={800}
@@ -77,8 +87,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             {product.images.map((image, index) => (
               <button
                 key={index}
-                onClick={() => setMainImage(image)}
-                className={`aspect-square rounded-md overflow-hidden border-2 ${mainImage.url === image.url ? 'border-primary' : 'border-transparent'} transition-all`}
+                onClick={() => setSelectedImage(image.url)}
+                className={`aspect-square rounded-md overflow-hidden border-2 ${mainImage === image.url ? 'border-primary' : 'border-transparent'} transition-all`}
               >
                 {image.url ? (
                   <Image
