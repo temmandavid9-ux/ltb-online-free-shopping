@@ -1,7 +1,10 @@
 import Link from "next/link";
 
-// 1. This is the "Hall Pass". It tells the builder: 
-// "Don't worry about pre-printing specific IDs, I'll handle them at runtime."
+// 1. THIS IS THE KEY: It tells Next.js NOT to look for other dynamic IDs 
+// because we are in a static (output: export) environment.
+export const dynamicParams = false; 
+
+// 2. The "Hall Pass" - stays as an empty array for static GitHub Pages.
 export function generateStaticParams() {
   return []; 
 }
