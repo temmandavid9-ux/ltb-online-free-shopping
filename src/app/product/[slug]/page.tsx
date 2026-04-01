@@ -1,8 +1,9 @@
 import Link from "next/link";
 
 /**
- * For Static Export (output: 'export'), this tells Next.js 
- * to skip pre-generating specific Order IDs during build.
+ * This satisfies the 'output: export' requirement.
+ * By returning an empty array, we tell Next.js not to pre-build 
+ * any specific order IDs during the GitHub Actions build.
  */
 export function generateStaticParams() {
   return [];
