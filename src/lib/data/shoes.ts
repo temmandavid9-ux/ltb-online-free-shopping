@@ -119,17 +119,20 @@ export const shoeProducts: Product[] = [
     rating: 4.6,
     reviewCount: 140,
   },
-  {
+ {
     id: 'prod_273',
     slug: 'product-273',
     name: 'LTB Orion Hiking Boots',
     category: 'Shoes',
-    price: 350,
+    price: 180, 
     brand: 'LTB Brand',
-    images: [findImage('prod_img_273')],
-    stock: 35,
+    description: 'Rugged LTB Orion Hiking Boots built for all-terrain endurance.', // ADD THIS
+    images: [
+      { url: '/images/boots.jpg', hint: 'Hiking Boots' }
+    ],
+    stock: 25,
     rating: 4.8,
-    reviewCount: 190,
+    reviewCount: 140,
   },
   {
     id: 'prod_274',
