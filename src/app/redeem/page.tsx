@@ -80,7 +80,7 @@ export default function RedeemPage() {
               </div>
               <Separator />
               <div className="flex justify-between font-bold text-lg">
-                <span>{t('redeem.total')}</span>
+              <span>{(t as any)('redeem.total') || 'Total'}</span>
                 <span>${basketTotal.toLocaleString()}</span>
               </div>
             </CardContent>
