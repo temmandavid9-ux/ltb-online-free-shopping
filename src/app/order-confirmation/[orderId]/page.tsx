@@ -1,11 +1,12 @@
 import Link from "next/link";
 
-// This tells Next.js to allow this dynamic route during static export
+// This function MUST be here for static export to work
 export function generateStaticParams() {
   return []; 
 }
 
 export default async function OrderConfirmationPage(props: any) {
+  // In Next.js 15, we must await params
   const params = await props.params;
   const orderId = params?.orderId || "Order Received";
 
@@ -13,8 +14,6 @@ export default async function OrderConfirmationPage(props: any) {
     <div style={{ padding: "100px 20px", textAlign: "center", fontFamily: "sans-serif" }}>
       <h1 style={{ color: "#16a34a", fontSize: "2.5rem" }}>Success!</h1>
       <p style={{ fontSize: "1.2rem", color: "#666" }}>Your order is being processed.</p>
-      
-      {/* Fixed the #8px typo below */}
       <div style={{ 
         margin: "30px 0", 
         padding: "15px", 
@@ -25,7 +24,6 @@ export default async function OrderConfirmationPage(props: any) {
       }}>
         <span style={{ fontWeight: "bold" }}>Order ID:</span> {orderId}
       </div>
-
       <div style={{ marginTop: "30px" }}>
         <Link href="/" style={{ padding: "12px 24px", background: "#000", color: "#fff", borderRadius: "5px", textDecoration: "none" }}>
           Back to LTB Home
