@@ -53,13 +53,12 @@ function Calendar({
         day_hidden: "invisible",
         ...classNames,
       }}
+      // THIS IS THE FIX: Using 'Icon' instead of 'IconLeft'/'IconRight'
       components={{
-        IconLeft: ({ className, ...props }) => (
-          <ChevronLeft className={cn("h-4 w-4", className)} {...props} />
-        ),
-        IconRight: ({ className, ...props }) => (
-          <ChevronRight className={cn("h-4 w-4", className)} {...props} />
-        ),
+        Icon: ({ ...props }) => {
+          if (props.name === "chevron-left") return <ChevronLeft className="h-4 w-4" />;
+          return <ChevronRight className="h-4 w-4" />;
+        },
       }}
       {...props}
     />
