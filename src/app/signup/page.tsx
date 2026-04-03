@@ -17,8 +17,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { useAuth, useFirestore, useUser, setDocumentNonBlocking } from "@/firebase";
-import { doc } from "firebase/firestore";
+import { useAuth, useFirestore, useUser } from "@/firebase"; // Removed setDocumentNonBlocking
+import { doc, setDoc } from "firebase/firestore"; // Added setDoc
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useLanguage } from "@/context/LanguageContext";
 import type { UserProfile } from "@/lib/types";
@@ -49,6 +49,7 @@ export default function SignupPage() {
   async function onSubmit(values: z.infer<typeof signupSchema>) {
     if (!auth || !firestore) return;
     try {
+      // 1. Create the user in Firebase Authentication
       const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
       const newUser = userCredential.user;
 
@@ -74,19 +75,27 @@ export default function SignupPage() {
           redeemedRewardIds: [],
         };
         
-        setDocumentNonBlocking(userRef, newUserDoc, { merge: false });
+        // 🚀 THE FIX: We 'await' the database write so it finishes before we leave the page
+        await setDoc(userRef, newUserDoc);
 
         toast({
           title: t('signup.toast.successTitle'),
           description: t('signup.toast.successDescription'),
         });
+        
+        // Only redirect AFTER the database save is confirmed
         router.push("/account");
       }
     } catch (error: any) {
-      let description = t('login.toast.errorDescription')
+      console.error("Signup Error:", error);
+      let description = t('login.toast.errorDescription');
+      
       if (error.code === 'auth/email-already-in-use') {
         description = t('signup.toast.emailInUse');
+      } else if (error.code === 'permission-denied') {
+        description = "Database access denied. Check your Firestore Rules.";
       }
+
       toast({
         variant: "destructive",
         title: t('signup.toast.errorTitle'),

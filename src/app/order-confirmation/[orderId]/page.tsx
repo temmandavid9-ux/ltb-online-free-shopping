@@ -5,7 +5,7 @@ export const dynamicParams = false;
 
 // This function must be exported exactly like this
 export function generateStaticParams() {
-  return []; 
+  return [{ orderId: 'ORD-001' }]; 
 }
 
 export default async function OrderConfirmationPage(props: any) {
