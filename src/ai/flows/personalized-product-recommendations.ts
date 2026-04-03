@@ -1,4 +1,3 @@
-'use server';
 
 /**
  * @fileOverview Provides personalized product recommendations based on user browsing history and purchase behavior.
