@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { Suspense } from 'react'; // 1. Import Suspense
 import { Toaster } from '@/components/ui/toaster';
 import { RedeemProvider } from '@/context/CartContext';
 import Header from '@/components/Header';
@@ -28,8 +29,11 @@ export default function RootLayout({
         <FirebaseClientProvider>
           <LanguageProvider>
             <RedeemProvider>
-              <Header />
-              <main className="flex-grow">{children}</main>
+              {/* 2. Wrap the dynamic parts in Suspense */}
+              <Suspense fallback={<div className="h-20 bg-black" />}>
+                <Header />
+                <main className="flex-grow">{children}</main>
+              </Suspense>
               <Footer />
             </RedeemProvider>
           </LanguageProvider>
