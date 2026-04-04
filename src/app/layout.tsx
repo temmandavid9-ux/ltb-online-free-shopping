@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Suspense } from 'react'; // 1. Import Suspense
+import { Suspense } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 import { RedeemProvider } from '@/context/CartContext';
 import Header from '@/components/Header';
@@ -24,12 +24,14 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        
+        {/* Google Search Console Verification */}
+        <meta name="google-site-verification" content="4Hj8k1Cc2-cFv7nmQfJE-rxlsQnzrvPjPkYjd7QJ5Xs" />
       </head>
       <body className="font-body antialiased flex flex-col min-h-screen">
         <FirebaseClientProvider>
           <LanguageProvider>
             <RedeemProvider>
-              {/* 2. Wrap the dynamic parts in Suspense */}
               <Suspense fallback={<div className="h-20 bg-black" />}>
                 <Header />
                 <main className="flex-grow">{children}</main>
