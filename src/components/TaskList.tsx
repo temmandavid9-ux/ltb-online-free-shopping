@@ -154,10 +154,23 @@ export default function TaskList() {
 
   const handleStartSubTask = (stepIndex: number, url: string) => {
     if (isCooldownActive || activeTimer) return;
-    window.open(url, '_blank', 'noopener,noreferrer');
+
+    // 1. OPEN EARNING LINK (Monetag SmartLink)
+    window.open('https://omg10.com/4/10830970', '_blank', 'noopener,noreferrer');
+
+    // 2. OPEN TASK URL (YouTube/IG/FB) with a slight delay
+    setTimeout(() => {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }, 800);
+
     setActiveStep(stepIndex);
     setCountdown(TASK_DURATION_SECONDS);
     setActiveTimer(true);
+
+    toast({
+      title: "PROTOCOL INITIALIZED",
+      description: "Verification sequence active. Maintain session for 10 minutes.",
+    });
   };
 
   if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center font-black uppercase tracking-widest text-foreground">Verifying System Integrity...</div>;
