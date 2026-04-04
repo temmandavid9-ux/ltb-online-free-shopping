@@ -12,7 +12,7 @@ import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Youtube, Instagram, Facebook, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock } from 'lucide-react';
+import { Youtube, Instagram, Facebook, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock, PlayCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -33,6 +33,9 @@ export default function TaskList() {
   const [countdown, setCountdown] = useState(TASK_DURATION_SECONDS);
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [currentTime, setCurrentTime] = useState(Date.now());
+  
+  // NEW: Tracking the Two-Step logic
+  const [hasWatchedAd, setHasWatchedAd] = useState<boolean>(false);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(Date.now()), 1000);
@@ -108,7 +111,7 @@ export default function TaskList() {
   const handleStageComplete = useCallback(() => {
     if (!user || !userData || !userDocRef || activeStep === null) return;
     const stage = activeStep;
-    let reward = (stage === 2 ? 0.34 : 0.33); // $1.00 TOTAL DAILY
+    let reward = (stage === 2 ? 0.34 : 0.33); 
     let updates: any = {};
     const now = new Date().toISOString();
     updates.lastStepDate = now;
@@ -123,23 +126,23 @@ export default function TaskList() {
       if (newStreak >= 365 && !userData.eliteUnlocked) {
         updates.eliteUnlocked = true;
         updates.eliteStartDate = now;
-        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured. Bonus claims enabled." });
+        toast({ title: "ELITE STATUS AUTHORIZED", description: "365-day milestone secured." });
       }
       let newMonthlyCounter = (userData.eliteMonthlyCounter || 0) + 1;
+      updates.eliteMonthlyCounter = newMonthlyCounter >= 30 ? 0 : newMonthlyCounter;
       if (newMonthlyCounter >= 30) {
-        updates.eliteMonthlyCounter = 0;
         updates.eliteRewardsAvailable = (userData.eliteRewardsAvailable || 0) + 1;
-        toast({ title: "BONUS GENERATED", description: "$100 LTB Brand Elite Gift Card added to registry. Reach 365-day streak to claim." });
-      } else {
-        updates.eliteMonthlyCounter = newMonthlyCounter;
       }
     }
     updates.balance = increment(reward);
     updateDocumentNonBlocking(userDocRef, updates);
+    
+    // Reset local state
     setActiveTimer(false);
     setActiveStep(null);
+    setHasWatchedAd(false);
     setCountdown(TASK_DURATION_SECONDS);
-    toast({ title: "STAGE VERIFIED", description: `+$${reward.toFixed(2)} credited to Account Balance.` });
+    toast({ title: "STAGE VERIFIED", description: `+$${reward.toFixed(2)} credited.` });
   }, [user, userData, userDocRef, toast, activeStep]);
 
   useEffect(() => {
@@ -152,29 +155,33 @@ export default function TaskList() {
     return () => clearInterval(timer);
   }, [activeTimer, countdown, handleStageComplete]);
 
+  // UPDATED: Two-Step Verification Logic
   const handleStartSubTask = (stepIndex: number, url: string) => {
-    if (isCooldownActive || activeTimer) return;
+    if (isCooldownActive || (activeTimer && hasWatchedAd)) return;
 
-    // 1. OPEN EARNING LINK (Monetag SmartLink)
-    window.open('https://omg10.com/4/10830970', '_blank', 'noopener,noreferrer');
-
-    // 2. OPEN TASK URL (YouTube/IG/FB) with a slight delay
-    setTimeout(() => {
+    if (!hasWatchedAd) {
+      // STEP 1: OPEN MONETAG AD
+      window.open('https://omg10.com/4/10830970', '_blank', 'noopener,noreferrer');
+      setHasWatchedAd(true);
+      setActiveStep(stepIndex);
+      toast({
+        title: "AD VERIFICATION TRIGGERED",
+        description: "Click again to access task content.",
+      });
+    } else {
+      // STEP 2: OPEN TASK & START 10-MIN TIMER
       window.open(url, '_blank', 'noopener,noreferrer');
-    }, 800);
-
-    setActiveStep(stepIndex);
-    setCountdown(TASK_DURATION_SECONDS);
-    setActiveTimer(true);
-
-    toast({
-      title: "PROTOCOL INITIALIZED",
-      description: "Verification sequence active. Maintain session for 10 minutes.",
-    });
+      setCountdown(TASK_DURATION_SECONDS);
+      setActiveTimer(true);
+      toast({
+        title: "PROTOCOL INITIALIZED",
+        description: "Task active. Maintain session for 10 minutes.",
+      });
+    }
   };
 
-  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center font-black uppercase tracking-widest text-foreground">Verifying System Integrity...</div>;
-  if (!user || !userData) return <p className="p-24 text-center font-black uppercase tracking-widest text-muted-foreground">Authentication Required.</p>;
+  if (isUserLoading || isUserDataLoading) return <div className="p-24 text-center font-black uppercase tracking-widest">Verifying System Integrity...</div>;
+  if (!user || !userData) return <p className="p-24 text-center font-black uppercase tracking-widest">Authentication Required.</p>;
 
   const channels = [
     { id: 0, title: 'YouTube @LTBLIVESPORTSTV', icon: Youtube, url: 'https://www.youtube.com/@LTBLIVESPORTSTV', desc: `Stage 1 (+0.33)`, status: userData.step1Status },
@@ -203,60 +210,53 @@ export default function TaskList() {
 
         <div className="px-10 pb-6">
           <Card className="bg-primary/5 border-primary/10 rounded-[2rem] border-2 overflow-hidden shadow-inner">
-            <CardContent className="p-8">
-              <h3 className="text-xs font-black uppercase tracking-[0.3em] text-primary mb-4">ELITE ACTIVE TIER 1 PROTOCOL</h3>
-              <p className="text-[11px] font-black uppercase leading-relaxed text-foreground text-justify">
-                ACHIEVE A 365-DAY CONSECUTIVE STREAK TO AUTHORIZE PERMANENT ACCESS TO THE ELITE REGISTRY. ALL EXECUTIVES EARN A CONSOLIDATED $1.00 PER DAILY TASK CYCLE. ADDITIONALLY, ALL MEMBERS GENERATE A $100.00 LTB BRAND ELITE GIFT CARD BONUS FOR EVERY 30 DAYS OF CONTINUOUS ACTIVITY; HOWEVER, CLAIMING IS EXCLUSIVELY LOCKED UNTIL THE 365-DAY MILESTONE IS SECURED. UPON CLAIMING, $100.00 IS CREDITED DIRECTLY TO YOUR WALLET. A STRICT 24-HOUR COMPLETION WINDOW IS MANDATORY; BREACHING THIS WINDOW INITIALIZES THE STREAK REGISTRY TO DAY 0.
-              </p>
+            <CardContent className="p-8 text-[11px] font-black uppercase leading-relaxed text-foreground text-justify">
+              ACHIEVE A 365-DAY CONSECUTIVE STREAK TO AUTHORIZE PERMANENT ACCESS TO THE ELITE REGISTRY. A STRICT 24-HOUR COMPLETION WINDOW IS MANDATORY.
             </CardContent>
           </Card>
         </div>
         
         <CardContent className="space-y-10 px-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-[2rem] p-8 border border-black/5 shadow-sm">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <Trophy className="w-6 h-6 text-primary" />
-                  <span className="text-sm font-black uppercase tracking-widest">Streak Registry</span>
+             <div className="bg-white rounded-[2rem] p-8 border border-black/5 shadow-sm">
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-sm font-black uppercase tracking-widest flex items-center gap-2"><Trophy className="w-5 h-5 text-primary"/> Streak</span>
+                  <span className="text-xs font-black">{userData.streakCount || 0} / 365</span>
                 </div>
-                <span className="text-xs font-black text-muted-foreground">{userData.streakCount || 0} / 365 Days</span>
-              </div>
-              <Progress value={((userData.streakCount || 0) / 365) * 100} className="h-4 bg-secondary rounded-full" />
-            </div>
-            <div className="bg-white rounded-[2rem] p-8 border border-primary/20 shadow-sm">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <Zap className="w-6 h-6 text-primary" />
-                  <span className="text-sm font-black uppercase tracking-widest">Monthly Bonus Cycle</span>
+                <Progress value={((userData.streakCount || 0) / 365) * 100} className="h-4 bg-secondary" />
+             </div>
+             <div className="bg-white rounded-[2rem] p-8 border border-primary/20 shadow-sm">
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-sm font-black uppercase tracking-widest flex items-center gap-2"><Zap className="w-5 h-5 text-primary"/> Monthly</span>
+                  <span className="text-xs font-black">{userData.eliteMonthlyCounter || 0} / 30</span>
                 </div>
-                <span className="text-xs font-black text-primary">{userData.eliteMonthlyCounter || 0} / 30 Cycles</span>
-              </div>
-              <Progress value={((userData.eliteMonthlyCounter || 0) / 30) * 100} className="h-4 bg-secondary rounded-full" />
-            </div>
+                <Progress value={((userData.eliteMonthlyCounter || 0) / 30) * 100} className="h-4 bg-secondary" />
+             </div>
           </div>
 
           <div className="space-y-6">
-            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Authoritative Execution Sequence</h3>
+            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-center mb-8">Execution Sequence</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {channels.map((channel) => (
-                <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 ${channel.status ? 'border-primary/40 bg-primary/5 shadow-inner' : (channel.id === currentStepIndex && activeTimer) ? 'border-primary animate-pulse shadow-lg' : (channel.id > currentStepIndex || isCooldownActive) ? 'opacity-50 grayscale bg-muted/20 border-transparent' : 'border-black/5 bg-white shadow-md'}`}>
+                <Card key={channel.id} className={`rounded-[2rem] border-2 transition-all duration-500 ${channel.status ? 'border-primary/40 bg-primary/5' : (channel.id === currentStepIndex) ? 'border-primary shadow-lg' : 'opacity-50 grayscale bg-muted/20'}`}>
                   <CardContent className="p-8 text-center space-y-4">
-                    <div className={`mx-auto w-20 h-20 rounded-[1.5rem] flex items-center justify-center transition-all ${channel.status ? 'bg-primary text-white shadow-lg' : (channel.id > currentStepIndex || isCooldownActive) ? 'bg-muted text-muted-foreground' : 'bg-black text-white'}`}>
-                      {channel.id > currentStepIndex || isCooldownActive ? <Lock className="w-10 h-10" /> : channel.status ? <ShieldCheck className="w-10 h-10" /> : <channel.icon className="w-10 h-10" />}
+                    <div className={`mx-auto w-20 h-20 rounded-[1.5rem] flex items-center justify-center ${channel.status ? 'bg-primary text-white' : 'bg-black text-white'}`}>
+                      {channel.status ? <ShieldCheck className="w-10 h-10" /> : <channel.icon className="w-10 h-10" />}
                     </div>
-                    <div>
-                      <h4 className="font-black text-[11px] uppercase tracking-widest">{channel.title}</h4>
-                      <p className="text-[10px] font-bold text-muted-foreground/60 mt-1 uppercase tracking-tighter">{channel.desc}</p>
-                    </div>
+                    <h4 className="font-black text-[11px] uppercase tracking-widest">{channel.title}</h4>
                     <div className="pt-2">
                       {channel.status ? (
-                        <div className="text-[10px] font-black text-primary uppercase tracking-widest flex items-center justify-center gap-1"><CheckCircle className="w-3 h-3" /> Status: Secured</div>
-                      ) : (channel.id > currentStepIndex || isCooldownActive) ? (
+                        <div className="text-[10px] font-black text-primary uppercase tracking-widest flex items-center justify-center gap-1"><CheckCircle className="w-3 h-3" /> Secured</div>
+                      ) : (channel.id !== currentStepIndex || isCooldownActive) ? (
                         <div className="text-[10px] font-black text-muted-foreground uppercase tracking-widest">Locked</div>
                       ) : (
-                        <Button onClick={() => handleStartSubTask(channel.id, channel.url)} variant="outline" className="w-full rounded-xl h-12 text-[9px] font-black uppercase tracking-widest border-2 hover:bg-black hover:text-white transition-all" disabled={activeTimer}>
-                          { (channel.id === currentStepIndex && activeTimer) ? "Verifying..." : <><ExternalLink className="w-3 h-3 mr-2" /> Start stage</>}
+                        <Button 
+                          onClick={() => handleStartSubTask(channel.id, channel.url)} 
+                          variant={hasWatchedAd ? "default" : "outline"}
+                          className={`w-full rounded-xl h-12 text-[9px] font-black uppercase transition-all ${hasWatchedAd ? 'bg-green-600 hover:bg-green-700 animate-bounce' : 'border-2'}`} 
+                          disabled={activeTimer}
+                        >
+                          {hasWatchedAd ? <><PlayCircle className="w-3 h-3 mr-2" /> Go to Task</> : <><ExternalLink className="w-3 h-3 mr-2" /> Start stage</>}
                         </Button>
                       )}
                     </div>
@@ -267,26 +267,30 @@ export default function TaskList() {
           </div>
 
           {activeTimer && (
-            <div className="text-center py-12 space-y-8 animate-in zoom-in duration-500">
+            <div className="text-center py-12 space-y-8">
               <div className="inline-flex items-center gap-3 px-8 py-4 bg-primary/10 text-primary rounded-full text-[11px] font-black uppercase tracking-widest border border-primary/20">
                 <Zap className="w-5 h-5 animate-bounce" /> Stage {activeStep! + 1} Verification Active
               </div>
-              <div className="text-9xl font-black font-headline tracking-tighter tabular-nums text-foreground animate-pulse">{Math.floor(countdown / 60)}:{(countdown % 60).toString().padStart(2, '0')}</div>
+              <div className="text-9xl font-black tabular-nums text-foreground animate-pulse">{Math.floor(countdown / 60)}:{(countdown % 60).toString().padStart(2, '0')}</div>
             </div>
           )}
 
           {isCooldownActive && (
-            <div className="text-center py-16 space-y-6 animate-in fade-in duration-1000">
+            <div className="text-center py-16 space-y-6">
               <div className="mx-auto w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mb-8 border border-primary/20"><Clock className="w-16 h-16 text-primary" /></div>
               <h3 className="text-4xl font-black luxury-text-gradient">Daily Cooldown Active</h3>
-              <div className="text-5xl font-black tabular-nums tracking-tighter mb-6 text-foreground">Next Task: {cooldownRemainingText}</div>
+              <div className="text-5xl font-black tabular-nums tracking-tighter text-foreground">Next Task: {cooldownRemainingText}</div>
             </div>
           )}
         </CardContent>
 
         <CardFooter className="bg-secondary/30 p-10 border-t border-border/50">
-          <Button className="w-full h-24 rounded-[2.5rem] text-sm font-black uppercase tracking-[0.4em] shadow-2xl transition-all active:scale-95 btn-luxury border-none" disabled={activeTimer || isCooldownActive || currentStepIndex > 2} onClick={() => currentStepIndex <= 2 && handleStartSubTask(currentStepIndex, channels[currentStepIndex].url)}>
-            {activeTimer ? "Verifying Authorization..." : isCooldownActive ? `Authorized in ${cooldownRemainingText}` : currentStepIndex > 2 ? "Cycle Finalized" : "Initialize Tasks"}
+          <Button 
+            className="w-full h-24 rounded-[2.5rem] text-sm font-black uppercase tracking-[0.4em] shadow-2xl transition-all active:scale-95 btn-luxury border-none" 
+            disabled={activeTimer || isCooldownActive || currentStepIndex > 2} 
+            onClick={() => currentStepIndex <= 2 && handleStartSubTask(currentStepIndex, channels[currentStepIndex].url)}
+          >
+            {activeTimer ? "Verifying..." : isCooldownActive ? `Authorized in ${cooldownRemainingText}` : hasWatchedAd ? "Click Green Button Above" : "Initialize Tasks"}
           </Button>
         </CardFooter>
       </Card>
