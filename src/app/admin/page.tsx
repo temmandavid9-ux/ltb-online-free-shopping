@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -34,11 +33,22 @@ export default function AdminPage() {
     setAssetCount(getUniqueAssetCount());
   }, []);
 
+  // 1. DATA FETCHING (Orders, Withdrawals, and now USERS for names)
   const ordersQuery = useMemoFirebase(() => isAdmin ? query(collection(firestore, 'orders'), orderBy('date', 'desc')) : null, [firestore, isAdmin]);
   const { data: ordersData, isLoading: areOrdersLoading } = useCollection<Order>(ordersQuery);
 
   const withdrawalsQuery = useMemoFirebase(() => isAdmin ? query(collection(firestore, 'withdrawals'), orderBy('date', 'desc')) : null, [firestore, isAdmin]);
   const { data: withdrawalsData, isLoading: areWithdrawalsLoading } = useCollection<Withdrawal>(withdrawalsQuery);
+
+  // FETCH USERS TO GET NAMES
+  const usersQuery = useMemoFirebase(() => isAdmin ? query(collection(firestore, 'users')) : null, [firestore, isAdmin]);
+  const { data: usersData, isLoading: areUsersLoading } = useCollection<any>(usersQuery);
+
+  // HELPER: Matches a ID to a Name
+  const getUserName = (userId: string) => {
+    const foundUser = usersData?.find(u => u.id === userId);
+    return foundUser?.username || foundUser?.displayName || userId.substring(0, 5);
+  };
 
   useEffect(() => {
     if (!isUserLoading && !user) {
@@ -52,7 +62,7 @@ export default function AdminPage() {
       }
   }, [isAdmin, isAdminLoading, isUserLoading, router]);
 
-  if (isUserLoading || isAdminLoading || areOrdersLoading || areWithdrawalsLoading) {
+  if (isUserLoading || isAdminLoading || areOrdersLoading || areWithdrawalsLoading || areUsersLoading) {
     return <div className="container text-center p-24 font-black uppercase tracking-widest text-foreground">{t('general.loading')}</div>;
   }
 
@@ -131,7 +141,8 @@ export default function AdminPage() {
                             <TableRow key={order.id} className="border-border/5">
                                 <TableCell className="pl-8 py-5">
                                     <div className="font-black text-sm text-foreground">{order.product}</div>
-                                    <div className="text-[10px] font-black text-foreground uppercase">{order.userId.substring(0,8)}...</div>
+                                    {/* UPDATED: Showing Name instead of ID */}
+                                    <div className="text-[10px] font-black text-primary uppercase tracking-widest">USER: {getUserName(order.userId)}</div>
                                 </TableCell>
                                 <TableCell>
                                     <Badge variant={order.status === 'Pending' ? 'secondary' : 'default'} className="rounded-full text-[9px] uppercase font-black tracking-widest">
@@ -149,6 +160,7 @@ export default function AdminPage() {
                 </Table>
                 </CardContent>
             </Card>
+
             <Card className="rounded-[3rem] overflow-hidden shadow-xl border-black/5">
                 <CardHeader className="bg-secondary/30 p-8">
                     <CardTitle className="text-xl font-black tracking-tight text-foreground">Recent Withdrawals</CardTitle>
@@ -167,7 +179,8 @@ export default function AdminPage() {
                                 <TableRow key={w.id} className="border-border/5">
                                     <TableCell className="pl-8 py-5">
                                         <div className="font-black text-sm text-foreground">{w.paymentMethod}</div>
-                                        <div className="text-[9px] font-black text-foreground uppercase">{w.userId.substring(0, 8)}...</div>
+                                        {/* UPDATED: Showing Name instead of ID */}
+                                        <div className="text-[9px] font-black text-primary uppercase tracking-widest">SENDER: {getUserName(w.userId)}</div>
                                     </TableCell>
                                     <TableCell>
                                         <Badge variant={w.status === 'Pending' ? 'secondary' : 'default'} className="rounded-full text-[9px] uppercase font-black tracking-widest">
