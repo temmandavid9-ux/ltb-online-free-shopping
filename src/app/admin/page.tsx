@@ -33,21 +33,23 @@ export default function AdminPage() {
     setAssetCount(getUniqueAssetCount());
   }, []);
 
-  // 1. DATA FETCHING (Orders, Withdrawals, and now USERS for names)
+  // 1. FETCH ORDERS & WITHDRAWALS
   const ordersQuery = useMemoFirebase(() => isAdmin ? query(collection(firestore, 'orders'), orderBy('date', 'desc')) : null, [firestore, isAdmin]);
   const { data: ordersData, isLoading: areOrdersLoading } = useCollection<Order>(ordersQuery);
 
   const withdrawalsQuery = useMemoFirebase(() => isAdmin ? query(collection(firestore, 'withdrawals'), orderBy('date', 'desc')) : null, [firestore, isAdmin]);
   const { data: withdrawalsData, isLoading: areWithdrawalsLoading } = useCollection<Withdrawal>(withdrawalsQuery);
 
-  // FETCH USERS TO GET NAMES
+  // 2. FETCH USERS REGISTRY (To match IDs with Usernames)
   const usersQuery = useMemoFirebase(() => isAdmin ? query(collection(firestore, 'users')) : null, [firestore, isAdmin]);
   const { data: usersData, isLoading: areUsersLoading } = useCollection<any>(usersQuery);
 
-  // HELPER: Matches a ID to a Name
-  const getUserName = (userId: string) => {
-    const foundUser = usersData?.find(u => u.id === userId);
-    return foundUser?.username || foundUser?.displayName || userId.substring(0, 5);
+  // 3. HELPER: Look up name by comparing the 'id' field in the document
+  const getUserName = (idToFind: string) => {
+    if (!usersData) return idToFind.substring(0, 5);
+    // Finds the document where the internal 'id' field matches the order/withdrawal ID
+    const foundUser = usersData.find(u => u.id === idToFind);
+    return foundUser?.username || foundUser?.displayName || idToFind.substring(0, 5);
   };
 
   useEffect(() => {
@@ -62,13 +64,12 @@ export default function AdminPage() {
       }
   }, [isAdmin, isAdminLoading, isUserLoading, router]);
 
+  // Combined Loading State
   if (isUserLoading || isAdminLoading || areOrdersLoading || areWithdrawalsLoading || areUsersLoading) {
     return <div className="container text-center p-24 font-black uppercase tracking-widest text-foreground">{t('general.loading')}</div>;
   }
 
-  if (!isAdmin) {
-    return null;
-  }
+  if (!isAdmin) return null;
     
   const pendingOrders = ordersData?.filter(o => o.status === 'Pending').length || 0;
   const pendingWithdrawals = withdrawalsData?.filter(w => w.status === 'Pending').length || 0;
@@ -89,6 +90,7 @@ export default function AdminPage() {
         </Link>
       </div>
 
+      {/* Stats Cards */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
         <Card className="rounded-[2.5rem] shadow-xl border-primary/10 bg-primary/5">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -97,7 +99,6 @@ export default function AdminPage() {
           </CardHeader>
           <CardContent>
             <div className="text-4xl font-black text-foreground">{assetCount} Unique Items</div>
-            <p className="text-[9px] font-bold text-muted-foreground mt-1 uppercase">Deduplication Engine Active</p>
           </CardContent>
         </Card>
 
@@ -122,83 +123,81 @@ export default function AdminPage() {
         </Card>
       </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            <Card className="rounded-[3rem] overflow-hidden shadow-xl border-black/5">
-                <CardHeader className="bg-secondary/30 p-8">
-                    <CardTitle className="text-xl font-black tracking-tight text-foreground">Recent Orders</CardTitle>
-                </CardHeader>
-                <CardContent className="p-0">
-                <Table>
-                    <TableHeader>
-                        <TableRow className="border-none">
-                            <TableHead className="pl-8 h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Product</TableHead>
-                            <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Status</TableHead>
-                            <TableHead className="h-14 text-right pr-8 text-[10px] font-black uppercase tracking-widest text-foreground">Amount</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {recentOrders.length > 0 ? recentOrders.map(order => (
-                            <TableRow key={order.id} className="border-border/5">
-                                <TableCell className="pl-8 py-5">
-                                    <div className="font-black text-sm text-foreground">{order.product}</div>
-                                    {/* UPDATED: Showing Name instead of ID */}
-                                    <div className="text-[10px] font-black text-primary uppercase tracking-widest">USER: {getUserName(order.userId)}</div>
-                                </TableCell>
-                                <TableCell>
-                                    <Badge variant={order.status === 'Pending' ? 'secondary' : 'default'} className="rounded-full text-[9px] uppercase font-black tracking-widest">
-                                        {order.status}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell className="text-right pr-8 font-black text-sm text-foreground">${order.price.toLocaleString()}</TableCell>
-                            </TableRow>
-                        )) : (
-                            <TableRow>
-                                <TableCell colSpan={3} className="text-center py-12 text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">No Recent Orders</TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
-                </CardContent>
-            </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {/* Orders Table */}
+        <Card className="rounded-[3rem] overflow-hidden shadow-xl border-black/5">
+          <CardHeader className="bg-secondary/30 p-8">
+            <CardTitle className="text-xl font-black tracking-tight text-foreground">Recent Orders</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <Table>
+              <TableHeader>
+                <TableRow className="border-none">
+                  <TableHead className="pl-8 h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Product</TableHead>
+                  <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Status</TableHead>
+                  <TableHead className="h-14 text-right pr-8 text-[10px] font-black uppercase tracking-widest text-foreground">Amount</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {recentOrders.map(order => (
+                  <TableRow key={order.id} className="border-border/5">
+                    <TableCell className="pl-8 py-5">
+                      <div className="font-black text-sm text-foreground">{order.product}</div>
+                      {/* FIX: Using the username lookup */}
+                      <div className="text-[10px] font-black text-primary uppercase tracking-widest">
+                        REGISTRY: {getUserName(order.userId || order.id)}
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={order.status === 'Pending' ? 'secondary' : 'default'} className="rounded-full text-[9px] uppercase font-black tracking-widest">
+                        {order.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-right pr-8 font-black text-sm text-foreground">${order.price.toLocaleString()}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
 
-            <Card className="rounded-[3rem] overflow-hidden shadow-xl border-black/5">
-                <CardHeader className="bg-secondary/30 p-8">
-                    <CardTitle className="text-xl font-black tracking-tight text-foreground">Recent Withdrawals</CardTitle>
-                </CardHeader>
-                <CardContent className="p-0">
-                    <Table>
-                        <TableHeader>
-                            <TableRow className="border-none">
-                                <TableHead className="pl-8 h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Method</TableHead>
-                                <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Status</TableHead>
-                                <TableHead className="h-14 text-right pr-8 text-[10px] font-black uppercase tracking-widest text-foreground">Amount</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {recentWithdrawals.length > 0 ? recentWithdrawals.map(w => (
-                                <TableRow key={w.id} className="border-border/5">
-                                    <TableCell className="pl-8 py-5">
-                                        <div className="font-black text-sm text-foreground">{w.paymentMethod}</div>
-                                        {/* UPDATED: Showing Name instead of ID */}
-                                        <div className="text-[9px] font-black text-primary uppercase tracking-widest">SENDER: {getUserName(w.userId)}</div>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Badge variant={w.status === 'Pending' ? 'secondary' : 'default'} className="rounded-full text-[9px] uppercase font-black tracking-widest">
-                                            {w.status}
-                                        </Badge>
-                                    </TableCell>
-                                    <TableCell className="text-right pr-8 font-black text-sm text-foreground">${w.amount.toLocaleString()}</TableCell>
-                                </TableRow>
-                            )) : (
-                                <TableRow>
-                                    <TableCell colSpan={3} className="text-center py-12 text-[10px] font-black uppercase tracking-widest text-muted-foreground/40">No Recent Withdrawals</TableCell>
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </CardContent>
-            </Card>
-        </div>
+        {/* Withdrawals Table */}
+        <Card className="rounded-[3rem] overflow-hidden shadow-xl border-black/5">
+          <CardHeader className="bg-secondary/30 p-8">
+            <CardTitle className="text-xl font-black tracking-tight text-foreground">Recent Withdrawals</CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <Table>
+              <TableHeader>
+                <TableRow className="border-none">
+                  <TableHead className="pl-8 h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Method</TableHead>
+                  <TableHead className="h-14 text-[10px] font-black uppercase tracking-widest text-foreground">Status</TableHead>
+                  <TableHead className="h-14 text-right pr-8 text-[10px] font-black uppercase tracking-widest text-foreground">Amount</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {recentWithdrawals.map(w => (
+                  <TableRow key={w.id} className="border-border/5">
+                    <TableCell className="pl-8 py-5">
+                      <div className="font-black text-sm text-foreground">{w.paymentMethod}</div>
+                      {/* FIX: Using the username lookup */}
+                      <div className="text-[9px] font-black text-primary uppercase tracking-widest">
+                        SENDER: {getUserName(w.userId || w.id)}
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={w.status === 'Pending' ? 'secondary' : 'default'} className="rounded-full text-[9px] uppercase font-black tracking-widest">
+                        {w.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-right pr-8 font-black text-sm text-foreground">${w.amount.toLocaleString()}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
