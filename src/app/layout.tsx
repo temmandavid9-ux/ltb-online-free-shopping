@@ -11,6 +11,7 @@ import { LanguageProvider } from '@/context/LanguageContext';
 export const metadata: Metadata = {
   title: 'Less Talk Business - Professional Reward-Based Ecommerce Platform',
   description: 'A professional reward-based ecommerce web platform.',
+  manifest: '/manifest.json', // This connects your PWA manifest
 };
 
 export default function RootLayout({
