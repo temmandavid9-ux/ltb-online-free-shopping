@@ -1,0 +1,23 @@
+{
+  "name": "LTB SHOPPING",
+  "short_name": "LTB Shopping",
+  "description": "free online shopping",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#ef4444",
+  "icons": [
+    {
+      "src": "https://image2url.com/r2/default/images/1775654553011-acc53814-fcba-4dc0-b02a-3b2ce219cfca.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+     {
+      "src": "https://image2url.com/r2/default/images/1775654553011-acc53814-fcba-4dc0-b02a-3b2ce219cfca.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    }
+  ]
+}
