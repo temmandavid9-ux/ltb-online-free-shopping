@@ -186,7 +186,7 @@ export default function TaskList() {
   const channels = [
     { id: 0, title: 'YouTube @LTBLIVESPORTSTV', icon: Youtube, url: 'https://www.youtube.com/@LTBLIVESPORTSTV/playlists', desc: `Stage 1 (+0.33)`, status: userData.step1Status },
     { id: 1, title: 'Instagram @ltblivesports', icon: Instagram, url: 'https://www.instagram.com/ltblivesports/reels/', desc: `Stage 2 (+0.33)`, status: userData.step2Status },
-    { id: 2, title: 'Facebook Reels: ltbliveurielsport', icon: Facebook, url: 'https://www.facebook.com/ltbliveurielsport/reels/', desc: `Final Stage (+0.34)`, status: userData.step3Status }
+    { id: 2, title: 'Kick: ltblivesports', icon: Kick, url: 'https://kick.com/ltblivesports/videos/b4828303-1615-4c83-857c-2d94077b986c', desc: `Final Stage (+0.34)`, status: userData.step3Status }
   ];
 
   return (
