@@ -12,7 +12,7 @@ import type { UserProfile } from '@/lib/types';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { Youtube, Instagram, Facebook, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock, PlayCircle } from 'lucide-react';
+import { Youtube, Instagram, Kick, CheckCircle, Zap, Crown, Trophy, Lock, ExternalLink, ShieldCheck, Clock, PlayCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/context/LanguageContext';
 
